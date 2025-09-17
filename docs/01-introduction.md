@@ -12,7 +12,6 @@ lang:     en
 *High-performance computing (HPC) is the use of supercomputers and<br>computer clusters to solve advanced computation problems.*<br>
 − [Wikipedia](https://en.wikipedia.org/wiki/High-performance_computing)
 <br>
-<br>
 
 - Supercomputers enable solving computation problems that are too slow to solve on a standard computer
 - Application areas are everywhere

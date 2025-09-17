@@ -20,14 +20,13 @@ The slides are available [here](https://csc-training.github.io/high-level-gpu-pr
 | Time         | Topic |
 | ----         | ----- |
 | 09:15-09:30  | Welcome
-| 09:30-10:00  | Introduction to Parallel Computing
-| 10:00-11:00  | Mahti and LUMI Computing Platforms
-| 11:00-12:00  | C++ Refresher
+| 09:30-10:15  | Parallel Computing & GPUs
+| 10:15-11:00  | GPU execution model
+| 11:00-12:00  | GPU memory hierarchy C++ Refresher
 | 12:00-13:00  | Lunch break
-| 13:00-13:45  | Introduction to GPUs
-| 13:45-15:00  | GPU execution model
-| 15:00-15:30  | Coffee break
-| 15:30-16:30  | GPU memory hierarchy
+| 13:00-14:00  | Mahti and LUMI  Computing Platforms
+| 14:00-15:00  | Refresher of C++ concepts
+| 15:00-16:30  | MPI basics
 | 16:30-16:45  | Day 1 wrap-up
 
 ### Day 2, Wednesday 22.10

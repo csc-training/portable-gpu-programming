@@ -1,5 +1,5 @@
 ---
-title:    Parallel Programmin & GPUs
+title:    Parallel Programming & GPUs
 subtitle: Portable GPU Programming
 date:     November 2024
 lang:     en

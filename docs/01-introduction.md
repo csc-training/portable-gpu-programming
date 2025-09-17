@@ -5,7 +5,7 @@ date:     November 2024
 lang:     en
 ---
 
-# Introduction to GPUs {.section}
+# Parallel Programming & GPUs {.section}
 
 # High Performance Computing through the ages
 

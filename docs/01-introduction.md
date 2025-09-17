@@ -7,6 +7,24 @@ lang:     en
 
 # Parallel Programming & GPUs {.section}
 
+# Supercomputers 
+
+*High-performance computing (HPC) is the use of supercomputers and<br>computer clusters to solve advanced computation problems.*<br>
+− [Wikipedia](https://en.wikipedia.org/wiki/High-performance_computing)
+<br>
+<br>
+
+- Supercomputers enable solving computation problems that are too slow to solve on a standard computer
+- Application areas are everywhere
+  - Climate, weather, and earth sciences
+  - Chemistry and material science
+  - Particle physics and cosmology
+  - Life sciences and medicine
+  - Renewable energy and fusion research
+  - Engineering
+  - Large-scale AI
+  - ...
+
 # High Performance Computing through the ages
 
 

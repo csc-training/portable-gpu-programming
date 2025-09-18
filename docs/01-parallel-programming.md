@@ -210,7 +210,7 @@ Simple domains with different computational cost
 - Multiple kernels may run concurrently on same GPU
 
 
-# Supercomputer.{section}
+# Supercomputers {.section}
 
 
 

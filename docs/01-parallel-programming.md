@@ -5,10 +5,6 @@ date:     October 2024
 lang:     en
 ---
 
-# Parallel Programming & GPUs {.section}
-
-
-
 # Parallel computing concepts {.section}
 
 # Computing in parallel

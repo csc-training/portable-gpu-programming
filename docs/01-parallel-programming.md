@@ -213,6 +213,69 @@ Simple domains with different computational cost
 # Supercomputers {.section}
 
 
+# Anatomy of a supercomputer
+
+<!-- Copyright CSC -->
+![](img/cluster_diagram.svg){.center width=100%}
+
+
+# Current supercomputers
+
+<div class=column>
+- Large computer clusters
+- A lot of standard, high-end server hardware connected to each other
+- High-speed interconnect between compute nodes
+- Example: LUMI
+  - 2064 CPU nodes<br>(~260,000 CPU cores in total)
+  - 2978 GPU nodes<br>(~12,000 MI250X GPUs in total)
+</div>
+<div class=column>
+<center>
+![](img/lumi.jpg){.center width=100%}
+EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
+</center>
+</div>
+
+# Lumi
+
+ ![](img/lumi.png){.center width=50%}
+
+
+
+# GPUs are becoming the norm
+
+<center>
+![](img/top500_nov21.svg){.center width=65%}
+
+- Top500 supercomputers grouped by the accelator type (Nov 2021 list)
+</center>
+
+# GPUs are becoming the norm
+
+<center>
+![](img/top500_nov22.svg){.center width=65%}
+
+- Top500 supercomputers grouped by the accelator type (Nov 2022 list)
+</center>
+
+# GPUs are becoming the norm
+
+<center>
+![](img/top500_nov24.svg){.center width=65%}
+
+- Top500 supercomputers grouped by the accelator type (Nov 2024 list)
+</center>
+
+# High Performance Computing through the ages
+
+<div class="column">
+
+![](img/top_500.png){.center width=68%}
+</div>
+
+<div class="column"> 
+![](img/microprocessor-trend-data.png){.center width=100%}
+</div>
 
 
 # Summary

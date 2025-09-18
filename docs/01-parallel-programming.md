@@ -270,7 +270,7 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
 
 <div class="column">
 
-![](img/top_500.png){.center width=68%}
+![](img/top_500.png){.center width=65%}
 </div>
 
 <div class="column"> 

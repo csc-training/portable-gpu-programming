@@ -47,22 +47,23 @@ lang:     en
 # CPU vs. GPU
 
 
-![](img/CPU-vs-GPU.jpg){.center width=45%}
+! <span style=" font-size:0.5em;">image credits: CUDA Programming Guide</span> ](img/CPU-vs-GPU.jpg){.center width=45%}
 
 <div class="column">
     **CPU**
     
-    - general-purpose, optimized for serial tasks
+    - general-purpose, serial tasks
+    - few, but powerful cores (16–128)
 </div>
 
 <div class="column"> 
     **GPU**
     
     - specialized for parallel tasks
-    
+    - thousands of simpler cores    
 </div>
 
-#  Heterogeneous Programming Model
+#  Accelerator/GPU Programming Model
 
 - GPUs are co-processors to the CPU
 - CPU controls the work flow:

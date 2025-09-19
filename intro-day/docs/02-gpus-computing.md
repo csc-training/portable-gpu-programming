@@ -96,7 +96,7 @@ lang:     en
 <div class="column">
 **Easier, more limited**
 
-![](img/arrow.png){width=16% }
+![](img/arrow.png){width=20% }
 
 **More difficult, more opportunities**
 

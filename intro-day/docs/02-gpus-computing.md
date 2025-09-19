@@ -44,7 +44,7 @@ lang:     en
 
 **Scalability**: Can you scale the GPU software efficiently to several nodes?
 
-# CPU vs. GPU
+# Latency vs. Throughput
 
 
 <!-- ![<span style=" font-size:0.5em;">*Image credits: CUDA Programming Guide*</span> ](img/CPU-vs-GPU.jpg){.center width=45%} -->

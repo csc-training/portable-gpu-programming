@@ -49,7 +49,16 @@ lang:     en
 
 ![](img/CPU-vs-GPU.jpg){.center width=45%}
 
+<div class="column">
+    **CPU**
+    - general-purpose, optimized for serial tasks
+</div>
 
+<div class="column"> 
+    **GPU**
+    - specialized for parallel tasks
+    
+</div>
 
 #  Heterogeneous Programming Model
 

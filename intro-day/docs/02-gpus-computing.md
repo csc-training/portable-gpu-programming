@@ -49,31 +49,13 @@ lang:     en
 
 <!-- ![<span style=" font-size:0.5em;">*Image credits: CUDA Programming Guide*</span> ](img/CPU-vs-GPU.jpg){.center width=45%} -->
 
- ![](img/CPU-vs-GPU.jpg){.center width=45%}
-
-<!--
-<div style="text-align:center; font-size:0.5em;">
-   
-  <em>Image credits: CUDA Programming Guide</em>
-</div> -->
-
-<!-- 
-<div class="column"  style="width:40%;">
-    **CPU**
-
-- general-purpose, serial tasks
-- few, but powerful cores (16–128)
-- large cache, complex control logic
-- minimize latency
-
-</div> -->
 
 <div class="column" style="width:49%;">
   <strong>CPU</strong>
   ![](img/CPU.jpg){.center width=45%} 
-  <ul style="font-size:0.4em;">
-    <li><em>Image credits: CUDA Programming Guide</em></li>
-  </ul>
+  <div style="font-size:0.4em;">
+    <em>Image credits: CUDA Programming Guide</em>
+  </div>
   <ul style="font-size:0.8em;">
     <li>general-purpose, serial tasks</li>
     <li>few, but powerful cores (16–128)</li>

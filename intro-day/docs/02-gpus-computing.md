@@ -51,11 +51,13 @@ lang:     en
 
 <div class="column">
     **CPU**
+    
     - general-purpose, optimized for serial tasks
 </div>
 
 <div class="column"> 
     **GPU**
+    
     - specialized for parallel tasks
     
 </div>

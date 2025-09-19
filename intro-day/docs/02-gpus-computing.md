@@ -57,20 +57,22 @@ lang:     en
 
 <div class="column">
     **CPU**
-
+<small>
 - general-purpose, serial tasks
 - few, but powerful cores (16–128)
 - large cache, complex control logic
 - minimize latency
+</small>
 </div>
 
 <div class="column"> 
     **GPU**
-    
+<small>  
 - specialized for parallel tasks
 - thousands of simpler cores
 - very high memory bandwidth
 - hide latency
+</small>
 </div>
 
 #  Accelerator/GPU Programming Model

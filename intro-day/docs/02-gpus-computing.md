@@ -49,20 +49,7 @@ lang:     en
 
 ![](img/CPU-vs-GPU.jpg){.center width=45%}
 
-<div class="column">
-    - general-purpose, optimized for serial tasks
-    - few powerful cores (16–128)
-    - large cache, complex control logic
-    - minimize latency with fast cores and large caches
-</div>
 
-<div class="column"> 
-    - specialized for parallel tasks
-    - thousands of simpler cores
-    - very high memory bandwidth
-    - hide latency by switching between many threads
-    
-</div>
 
 #  Heterogeneous Programming Model
 

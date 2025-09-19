@@ -65,7 +65,7 @@ lang:     en
   </ul>
 </div>
 
-<div class="column" style="width:39%;">
+<div class="column" style="width:35%;">
   <strong>GPU</strong>
     
   ![](img/GPU.jpg){width=45%}

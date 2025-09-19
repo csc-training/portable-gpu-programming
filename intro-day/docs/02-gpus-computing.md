@@ -47,7 +47,8 @@ lang:     en
 # CPU vs. GPU
 
 
-![<span style=" font-size:0.5em;">image credits: CUDA Programming Guide</span> ](img/CPU-vs-GPU.jpg){.center width=45%}
+<!-- ![<span style=" font-size:0.5em;">image credits: CUDA Programming Guide</span> ](img/CPU-vs-GPU.jpg){.center width=45%} -->
+![](img/CPU-vs-GPU.jpg){.center width=45%}
 
 <div class="column">
     **CPU**

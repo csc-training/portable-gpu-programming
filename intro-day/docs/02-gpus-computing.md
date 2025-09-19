@@ -50,7 +50,7 @@ lang:     en
 <!-- ![<span style=" font-size:0.5em;">*Image credits: CUDA Programming Guide*</span> ](img/CPU-vs-GPU.jpg){.center width=45%} -->
 
 
-<div class="column" style="width:60%;">
+<div class="column" style="width:49%;">
   <strong>CPU</strong>
 
   ![](img/CPU.jpg){ width=45%} 
@@ -65,7 +65,7 @@ lang:     en
   </ul>
 </div>
 
-<div class="column" style="width:35%;">
+<div class="column" style="width:49%;">
   <strong>GPU</strong>
     
   ![](img/GPU.jpg){width=45%}

@@ -1,5 +1,5 @@
 ---
-title:    GPUs as Accelerators in Supercomputing
+title:    GPUs as Accelerators
 subtitle: Portable GPU Programming
 date:     October 2024
 lang:     en

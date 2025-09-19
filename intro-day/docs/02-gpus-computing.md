@@ -68,8 +68,12 @@ lang:     en
 
 </div> -->
 
-<div class="column" style="width:40%;">
+<div class="column" style="width:49%;">
   <strong>CPU</strong>
+  ![](img/CPU.jpg){.center width=45%} 
+  <ul style="font-size:0.4em;">
+    <li><em>Image credits: CUDA Programming Guide</em></li>
+  </ul>
   <ul style="font-size:0.8em;">
     <li>general-purpose, serial tasks</li>
     <li>few, but powerful cores (16–128)</li>
@@ -78,8 +82,12 @@ lang:     en
   </ul>
 </div>
 
-<div class="column" style="width:40%;">
+<div class="column" style="width:49%;">
   <strong>GPU</strong>
+  ![](img/GPU.jpg){.center width=45%}
+  <ul style="font-size:0.4em;">
+    <li><em>Image credits: CUDA Programming Guide</em></li>
+  </ul>
   <ul style="font-size:0.8em;">
     <li>specialized for parallel tasks</li>
     <li>thousands of simpler cores</li>

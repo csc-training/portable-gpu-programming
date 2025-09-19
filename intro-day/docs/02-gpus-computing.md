@@ -54,7 +54,7 @@ lang:     en
   <em>Image credits: CUDA Programming Guide</em>
 </div>
 
-
+<!-- 
 <div class="column"  style="width:40%;">
     **CPU**
 
@@ -63,8 +63,29 @@ lang:     en
 - large cache, complex control logic
 - minimize latency
 
+</div> -->
+
+<div class="column" style="width:40%;">
+  <strong>CPU</strong>
+  <ul style="font-size:0.8em;">
+    <li>general-purpose, serial tasks</li>
+    <li>few, but powerful cores (16–128)</li>
+    <li>large cache, complex control logic</li>
+    <li>minimize latency</li>
+  </ul>
 </div>
 
+<div class="column" style="width:40%;">
+  <strong>GPU</strong>
+  <ul style="font-size:0.8em;">
+    <li>specialized for parallel tasks</li>
+    <li>thousands of simpler cores</li>
+    <li>very high memory bandwidth</li>
+    <li>hide latency</li>
+  </ul>
+</div>
+
+<!--
 <div class="column" style="width:40%;"> 
     **GPU**
 
@@ -73,7 +94,7 @@ lang:     en
 - very high memory bandwidth
 - hide latency
 
-</div>
+</div> -->
 
 #  Accelerator/GPU Programming Model
 

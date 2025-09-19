@@ -47,20 +47,22 @@ lang:     en
 # CPU vs. GPU
 
 
-! <span style=" font-size:0.5em;">image credits: CUDA Programming Guide</span> ](img/CPU-vs-GPU.jpg){.center width=45%}
+! [<span style=" font-size:0.5em;">image credits: CUDA Programming Guide</span> ](img/CPU-vs-GPU.jpg){.center width=45%}
 
 <div class="column">
     **CPU**
     
     - general-purpose, serial tasks
     - few, but powerful cores (16–128)
+    - large cache, complex control logic
 </div>
 
 <div class="column"> 
     **GPU**
     
     - specialized for parallel tasks
-    - thousands of simpler cores    
+    - thousands of simpler cores
+    - very high memory bandwidth
 </div>
 
 #  Accelerator/GPU Programming Model

@@ -59,7 +59,7 @@ lang:     en
 - general-purpose, serial tasks
 - few, but powerful cores (16–128)
 - large cache, complex control logic
-- minimize latency with fast cores and large caches
+- minimize latency
 </div>
 
 <div class="column"> 
@@ -68,7 +68,7 @@ lang:     en
 - specialized for parallel tasks
 - thousands of simpler cores
 - very high memory bandwidth
-- hide latency by switching between many threads
+- hide latency
 </div>
 
 #  Accelerator/GPU Programming Model

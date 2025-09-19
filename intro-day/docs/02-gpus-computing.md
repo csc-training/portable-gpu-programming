@@ -52,7 +52,7 @@ lang:     en
 
 <div class="column" style="width:49%;">
   <strong>CPU</strong>
-  ![](img/CPU.jpg){.center width=45%} 
+  ![](img/CPU.jpg){ width=45%} 
   <div style="font-size:0.4em;">
     <em>Image credits: CUDA Programming Guide</em>
   </div>
@@ -66,10 +66,10 @@ lang:     en
 
 <div class="column" style="width:49%;">
   <strong>GPU</strong>
-  ![](img/GPU.jpg){.center width=45%}
-  <ul style="font-size:0.4em;">
-    <li><em>Image credits: CUDA Programming Guide</em></li>
-  </ul>
+  ![](img/GPU.jpg){width=45%}
+  <div style="font-size:0.4em;">
+    <em>Image credits: CUDA Programming Guide</em>
+  </div>
   <ul style="font-size:0.8em;">
     <li>specialized for parallel tasks</li>
     <li>thousands of simpler cores</li>

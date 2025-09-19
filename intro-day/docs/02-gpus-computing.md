@@ -49,7 +49,10 @@ lang:     en
 
 <!-- ![<span style=" font-size:0.5em;">Image credits: CUDA Programming Guide</span> ](img/CPU-vs-GPU.jpg){.center width=45%} -->
 ![](img/CPU-vs-GPU.jpg){.center width=45%}
-<span style=" font-size:0.5em;">*Image credits: CUDA Programming Guide*</span> {.center}
+<div style="font-size:0.5em;" class="center">
+  *Image credits: CUDA Programming Guide*
+</div>
+
 <div class="column">
     **CPU**
 

@@ -47,7 +47,7 @@ lang:     en
 # CPU vs. GPU
 
 
-![](img/CPU-vsGPU.jpg){.center width=65%}
+![](img/CPU-vs-GPU.jpg){.center width=45%}
 
 <div class="column">
     - general-purpose, optimized for serial tasks

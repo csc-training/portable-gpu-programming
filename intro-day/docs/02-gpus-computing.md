@@ -31,6 +31,8 @@ lang:     en
     - More FLOPS/Watt
 - Usually major rewrites of programs required
 
+<--!
+
 # GPU architecture
 <div class="column">
 - Designed for running tens of thousands of threads simultaneously on
@@ -44,6 +46,7 @@ lang:     en
 ![](img/mi100-architecture.png)
 <small>AMD Instinct MI100 architecture (source: AMD)</small>
 </div>
+-->
 
 # Challenges in using Accelerators/GPUs
 

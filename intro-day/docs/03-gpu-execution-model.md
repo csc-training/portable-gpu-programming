@@ -64,7 +64,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 <div class="column">
 
 
-![](img/work_item.png){.center width=3%}
+![](img/work_item.png){.center width=4%}
 
 <div align="center"><small>A thread is running on execution unit</small></div>
 
@@ -72,7 +72,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_lanet.png){.center width=18%} 
+![](img/amd_simd_lanet.png){.center width=24%} 
 
 <div align="center"><small>The smallest execution unit in a GPU.</small></div>
 </div>
@@ -91,7 +91,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 <div class="column">
 
 
-![](img/sub_group.png){.center width=18%}
+![](img/sub_group.png){.center width=22%}
 
 <div align="center"><small>Execution is done per warp / wavefront</small></div>
 

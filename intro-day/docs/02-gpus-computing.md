@@ -35,9 +35,7 @@ lang:     en
 
 #  Two strong oxen or 1024 chickens?
 
-
 <!-- ![<span style=" font-size:0.5em;">*Image credits: CUDA Programming Guide*</span> ](img/CPU-vs-GPU.jpg){.center width=45%} -->
-
 
 <div class="column" style="width:49%;">
   <strong>CPU</strong>

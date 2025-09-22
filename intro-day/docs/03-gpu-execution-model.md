@@ -100,13 +100,15 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div align="center"><small>Scheme of a SIMD unit in an AMD GPU</small></div>
 </div>
-<small>
-- GPU threads are grouped together in hardware level
-    - warp (NVIDIA, 32 threads), wavefront (AMD, 64 threads)
-- All members of the group execute the same instruction
-- In the case of branching, each branch is executed sequentially
-- Memory accesses are done per group
-</small>
+<ul>
+  <li><small>GPU threads are grouped together in hardware level
+    <ul>
+      <li><small>warp (NVIDIA, 32 threads), wavefront (AMD, 64 threads)</small></li>
+    </ul>
+  </small></li>
+  <li><small>All members of the group execute the same instruction</small></li>
+  <li><small>In the case of branching, each branch is executed seque
+
 
 
 # Thread blocks

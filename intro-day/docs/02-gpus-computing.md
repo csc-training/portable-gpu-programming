@@ -97,7 +97,7 @@ lang:     en
 1. Use existing GPU applications
 2. Use accelerated libraries
 3. Features in language standards
-    - C++ stdpar, Fortran `DO CONCURRENT`
+    - C++ `stdpar`, Fortran `DO CONCURRENT`
 4. Directive based methods
     - **OpenMP**, OpenACC
 5. High-level GPU programming

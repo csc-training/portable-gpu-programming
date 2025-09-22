@@ -1,7 +1,7 @@
 ---
 title:    Parallel Programming & Supercomputing
 subtitle: Portable GPU Programming
-date:     October 2024
+date:     October 2025
 lang:     en
 ---
 

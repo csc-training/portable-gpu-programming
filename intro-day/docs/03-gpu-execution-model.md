@@ -99,7 +99,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_unit.png){.center width=67%} 
+![](img/amd_simd_unit.png){.center width=68%} 
 
 <div align="center"><small>Scheme of a SIMD unit in an AMD GPU</small></div>
 </div>

@@ -69,23 +69,6 @@ lang:     en
   </ul>
 </div>
 
-<--!
-
-# GPU architecture
-<div class="column">
-- Designed for running tens of thousands of threads simultaneously on
-  thousands of cores
-- Very small penalty for switching threads
-- Running large amounts of threads hides memory access penalties
-- Very expensive to synchronize all threads
-</div>
-
-<div class="column">
-![](img/mi100-architecture.png)
-<small>AMD Instinct MI100 architecture (source: AMD)</small>
-</div>
--->
-
 # Challenges in using Accelerators/GPUs
 
 **Applicability**: Is your algorithm suitable for GPU?

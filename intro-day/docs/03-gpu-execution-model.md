@@ -120,44 +120,57 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/work_group.png){.center width=13%}
+![](img/work_group.png){.center width=18%}
 
 <div align="center"><small>Thread blocks</small></div>
 
 </div>
 
 <div class="column">
-![](img/CU2.png){.center width=13%}
+![](img/CU2.png){.center width=18%}
 
 <div align="center"><small>Compute Unit in an AMD GPU</small></div>
 </div>
-- Threads are grouped in blocks
-- Each block is executed in specific unit
-    - Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)
-- Maximum number of threads in  a block limited by hardware
-- Synchronization is possible within a block
-- Communication via local shared memory within a block
+
+<ul>
+  <li><small>Threads are grouped in blocks</small></li>
+  <li><small>Each block is executed in specific unit
+    <ul>
+      <li><small>Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)</small></li>
+    </ul>
+  </small></li>
+  <li><small>Maximum number of threads in a block limited by hardware</small></li>
+  <li><small>Synchronization is possible within a block</small></li>
+  <li><small>Communication via local shared memory within a block</small></li>
+</ul>
+
 
 # Grid of thread blocks
 
 <div class="column">
 
-![](img/Grid_threads.png){.center width=33%}
+![](img/Grid_threads.png){.center width=45%}
 
 <div align="center"><small>A grid of thread blocks executing the same **kernel**</small></div>
 
 </div>
 
 <div class="column">
-![](img/mi100-architecture.png){.center width=48%}
+![](img/mi100-architecture.png){.center width=64%}
 
 <div align="center"><small>AMD Instinct MI100 architecture (source: AMD)</small></div>
 </div>
 
-- Thread blocks are organized into a grid
-    - Total number of threads = number of blocks $\mathrm{\times}$ threads per block
-- In order to hide latencies, there should be more blocks than SMPs / CUs
-- No synchronization between blocks
+<ul>
+  <li><small>Thread blocks are organized into a grid
+    <ul>
+      <li><small>Total number of threads = number of blocks $\mathrm{\times}$ threads per block</small></li>
+    </ul>
+  </small></li>
+  <li><small>In order to hide latencies, there should be more blocks than SMPs / CUs</small></li>
+  <li><small>No synchronization between blocks</small></li>
+</ul>
+
 
 # Terminology with different vendors
 

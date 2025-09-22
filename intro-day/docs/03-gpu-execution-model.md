@@ -91,7 +91,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 <div class="column">
 
 
-![](img/sub_group.png){.center width=22%}
+![](img/sub_group.png){.center width=26%}
 
 <div align="center"><small>Execution is done per warp / wavefront</small></div>
 

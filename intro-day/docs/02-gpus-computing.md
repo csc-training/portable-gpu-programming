@@ -79,17 +79,6 @@ lang:     en
 
 **Scalability**: Can you scale the GPU software efficiently to several nodes?
 
-<!--
-<div class="column" style="width:40%;"> 
-    **GPU**
-
-- specialized for parallel tasks
-- thousands of simpler cores
-- very high memory bandwidth
-- hide latency
-
-</div> -->
-
 #  Accelerator/GPU Programming Model
 
 - GPUs are co-processors to the CPU
@@ -109,7 +98,7 @@ lang:     en
 2. Use accelerated libraries
 3. Features in language standards
 4. Directive based methods
-    - OpenMP, OpenACC
+    - **OpenMP**, OpenACC
 5. High-level GPU programming
     - **C++ stdpar**, **Kokkos**, **SYCL**, ...
 6. Use direct GPU programming

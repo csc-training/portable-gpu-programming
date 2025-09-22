@@ -100,6 +100,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div align="center"><small>Scheme of a SIMD unit in an AMD GPU</small></div>
 </div>
+
 <ul>
   <li><small>GPU threads are grouped together in hardware level
     <ul>
@@ -107,8 +108,9 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
     </ul>
   </small></li>
   <li><small>All members of the group execute the same instruction</small></li>
-  <li><small>In the case of branching, each branch is executed seque
-
+  <li><small>In the case of branching, each branch is executed sequentially</small></li>
+  <li><small>Memory accesses are done per group</small></li>
+</ul>
 
 
 # Thread blocks

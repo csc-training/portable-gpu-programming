@@ -59,24 +59,6 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 </div>
 
-
-# GPU architecture
-<div class="column">
-<small>
-- Designed for running tens of thousands of threads simultaneously on
-  thousands of cores  
-- Very small penalty for switching threads  
-- Running large amounts of threads hides memory access penalties  
-- Very expensive to synchronize all threads
-</small>
-</div>
-
-<div class="column">
-![](img/mi100-architecture.png)
-<small>AMD Instinct MI100 architecture (source: AMD)</small>
-</div>
-
-
 # GPU threads
 
 <div class="column">

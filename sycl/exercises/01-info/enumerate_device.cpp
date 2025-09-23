@@ -38,6 +38,7 @@ int main(int argc, char *argv[])
     sycl::property_list q_prof{property::queue::enable_profiling{}, sycl::property::queue::in_order{}};
     std::cout << "\nList Devices\n" << std::endl;
     // auto all_devices = sycl::device::get_devices(sycl::info::device_type::all);
+    // auto platforms = sycl::platform::get_platforms();
 
     std::cout << "\tChecking for CPUs\n" << std::endl;
     auto cpu_devices= sycl::device::get_devices(sycl::info::device_type::cpu);

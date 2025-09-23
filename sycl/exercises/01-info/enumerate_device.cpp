@@ -35,7 +35,7 @@ void ShowDevice(queue &q) {
 
 int main(int argc, char *argv[]) 
 {
-     sycl::property_list q_prof{property::queue::enable_profiling{}, sycl::property::queue::in_order{}};
+    sycl::property_list q_prof{property::queue::enable_profiling{}, sycl::property::queue::in_order{}};
     std::cout << "\nList Devices\n" << std::endl;
 
     std::cout << "\tChecking for CPUs\n" << std::endl;

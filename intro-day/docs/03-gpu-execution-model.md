@@ -112,7 +112,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
   </small></li>
   <li><small>All members of the group execute the same instruction</small></li>
   <li><small>In the case of branching, each branch is executed sequentially</small></li>
-  <li><small>Memory accesses are done per group</small></li>
+  <li><small>Memory accesses are done per warp/wavefront</small></li>
 </ul>
 
 

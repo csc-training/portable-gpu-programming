@@ -10,9 +10,9 @@ lang:     en
 # SYCL Programming Model 
 
  - Program runs on the CPU (host)
- - host initializes the devices, allocates the memory, and stages the host-device transfers
+ - Host initializes the devices, allocates the memory, and stages the host-device transfers
     - **Note!** CPU can also be a device
- - CPU launched the parallel code (kernel) ito be executed on a device by several threads
+ - Host launches the parallel code (kernel) ito be executed on a device by several threads
  - Code is written from the point of view of a single thread
     - each thread has a unique ID
 
@@ -30,9 +30,9 @@ lang:     en
 
 # SYCL Queues
 
- - SYCL class responsible for submitting commands
  - bridge between the host and the target device (**only one**)
  - associated with a SYCL device and a SYCL context
+ - SYCL class responsible for submitting commands
  - enable asynchronous execution
  - has an error-handling mechanism via an optional `exception_handler`
  - are **out-of-order** (default) or **in-order** (`{property::queue::in_order()}`)

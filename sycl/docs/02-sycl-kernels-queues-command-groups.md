@@ -1,11 +1,11 @@
 ---
-title:    SYCL Queues, Command Groups, Kernels
+title:    SYCL Fundamentals
 subtitle: Portable GPU Programming
 date:     October 2025
 lang:     en
 ---
 
-# Queues, Command Groups, Kernels{.section}
+# Setting Up the Device{.section}
 
 # SYCL Programming Model 
 
@@ -104,6 +104,18 @@ auto Q = queue { custom_selector {} };
   - **Memory Operations**: `memcpy()` , `fill()`, `copy()`, `memset()`
   - **Utilities**: `is_empty()`,  `get_device()`, `get_context()`
   - **Synchronizations**: `wait()`, `wait_and_throw()`
+
+# Data Management with Buffers and Accessors{.section}
+
+
+# SYCL Memory Models
+
+ - three memory-management abstractions in the SYCL standard:
+     - **buffer and accessor API**: a buffer encapsulate the data and accessors describe how you access that data
+     - **unified shared memory**: pointer-based approach, C/CUDA/HIP-like
+     - **images**: similar API to buffer types, but with extra functionality tailored for image processing (will not be discussed here)
+
+# Bufffers and Accessors I
 
 # Command Groups{.section}
 

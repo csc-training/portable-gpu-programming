@@ -9,7 +9,7 @@ lang:     en
 
 # SYCL Programming Model 
 
- - Program runs on the CPU (host)
+ - Program runs on one of the cores the CPU (host)
  - Host initializes the devices, allocates the memory, and stages the host-device transfers
     - **Note!** CPU can also be a device
  - Host launches the parallel code (kernel) ito be executed on a device by several threads

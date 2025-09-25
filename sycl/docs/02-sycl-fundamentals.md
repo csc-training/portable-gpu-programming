@@ -5,7 +5,7 @@ date:     October 2025
 lang:     en
 ---
 
-# Setting Up the Device{.section}
+# SYCL Fundamentals{.section}
 
 # SYCL Programming Model 
 
@@ -20,13 +20,13 @@ lang:     en
 
  - it is important to know which devices are available
  - SYCL provides methods for querying:
+    - `device::get_devices(sycl::info::device_type::<type>)` get a list off all devices
+        - `<type>` can be **all**, **cpu**, **gpu**
     - `platform::get_platforms()` gives a list of available platforms
     - `.get_devices()` gives a list of present devices in a specific platform
     - `.get_info<info::device:: <property> >()` gives info about specific property
         - can be applied to various classes
         - wide `sycl::info` namespace 
-
-# SYCL Queues{.section}
 
 # SYCL Queues
 
@@ -38,6 +38,25 @@ lang:     en
  - are **out-of-order** (default) or **in-order** (`{property::queue::in_order()}`)
  - encapsulates operations (e.g., kernel execution or memory transfers) using **command groups**
 
+
+# Explicit Way
+ - using `get_platforms()` and/or `get_devices` 
+```cpp
+  std::cout << "\tChecking for GPUs\n" << std::endl;
+
+  auto gpu_devices= sycl::device::get_devices(sycl::info::device_type::gpu);
+  auto n_gpus=size( gpu_devices );
+
+  std::cout << "\t\t There are "<< n_gpus << " GPUs\n"<< std::endl;
+  if(n_gpus>0){
+    queue q{gpu_devices[my_rank]};
+  }
+  else{
+    std::cout << "\t\t There are no GPUs found \n Existing"<< std::endl;
+    exit(1);
+  }
+``` 
+
 # Choosing the Device
 
   - `queue q();` targets the best device
@@ -46,6 +65,8 @@ lang:     en
     - `queue q(cpu_selector_v);` targets the best CPU
     - `queue q(gpu_selector_v);` targets the best GPU
     - `queue q(accelerator_selector_v);` targets the best accelerator
+  - User defined custom selector:
+    - `queue q(custom_selector{});` targets the accelerator based on users' rules
 
 # Custom Selector
 
@@ -71,32 +92,13 @@ public:
 };
 ``` 
 ```cpp
-auto Q = queue { custom_selector {} };
+auto q = queue { custom_selector {} };
 
   std::cout << "we are running on: "
-            << Q.get_device().get_info<info::device::vendor>() << " "
-            << Q.get_device().get_info<info::device::name>() << std::endl;
+            << q.get_device().get_info<info::device::vendor>() << " "
+            << q.get_device().get_info<info::device::name>() << std::endl;
 ```
 </small>
-
-# Explicit Way
- - using `get_platforms()` and/or `get_devices` 
-```cpp
-  std::cout << "\tChecking for GPUs\n" << std::endl;
-
-  auto gpu_devices= sycl::device::get_devices(sycl::info::device_type::gpu);
-  auto n_gpus=size( gpu_devices );
-
-  std::cout << "\t\t There are "<< n_gpus << " GPUs\n"<< std::endl;
-  if(n_gpus>0){
-    queue q{gpu_devices[my_rank]};
-  }
-  else{
-    std::cout << "\t\t There are no GPUs found \n Existing"<< std::endl;
-    exit(1);
-  }
-``` 
-
 
 # Queue Class Member Functions 
 
@@ -105,42 +107,59 @@ auto Q = queue { custom_selector {} };
   - **Utilities**: `is_empty()`,  `get_device()`, `get_context()`
   - **Synchronizations**: `wait()`, `wait_and_throw()`
 
-# Data Management with Buffers and Accessors{.section}
+
+# Command Groups
+
+ - created via `.submit()` member
+ - containers for operations to be executed 
+ - can have dependencies for ensuring desired order
+ - are executed *asynchronous* within specific **context** and **queue**
+<small>
+```cpp  
+  q.submit([&](handler &cgh) {
+  /* Command group function */ 
+  });
+// Some other code
+```
+</small>
 
 
 # SYCL Memory Models
 
  - three memory-management abstractions in the SYCL standard:
      - **buffer and accessor API**: a buffer encapsulate the data and accessors describe how you access that data
-     - **unified shared memory**: pointer-based approach, C/CUDA/HIP-like
      - **images**: similar API to buffer types, but with extra functionality tailored for image processing (will not be discussed here)
+     - **unified shared memory**: pointer-based approach, C/CUDA/HIP-like
 
-# Bufffers and Accessors I
 
-# Command Groups{.section}
+# Buffers and Accesors I
+ -  a **buffer** provides a high level abstract view of memory 
+ - support 1-, 2-, or 3-dimensional data
+ - dependencies between multiple kernels are implicitly handled
+ - does not own the memory, it’s only a *constrained view* into it
+ - **accessor** objects are used to access the data
+ - various access modes, *read_write*, *read_only*, or *write_only*
+ - can target local memory, **local_accessor**
+ - can have also **host_accessor**s
 
-# Command Groups
-
- - created via `.submit()` member
- - containers for operations to be executed 
- - give more control over executions than:
-    - `q.parallel_for(N, [=](id<1> i) { y[i] += a * x[i];});`
- - can have dependencies for ensuring desired order
- - are executed *asynchronous* within specific **context** and **queue**
-<small>
-```cpp  
-  q.submit([&](handler &cgh) {
-    auto x = x_buf.get_access<access::mode::read>(h);        
-    auto y = y_buf.get_access<access::mode::read_write>(h);  
-
-    h.parallel_for(N, [=](id<1> i) {
-      y[i] += a * x[i];
+# Buffers and Accesors II
+ 
+```cpp
+  std::vector<int> y(N, 1);
+ {
+    // Create buffers for data 
+    buffer<int, 1> a_buf(y.data(), range<1>(N));
+    q.submit([&](handler& cgh) {
+      accessor y_acc{a_buf, cgh, read_write}; // The encapsulated data is accessed via accessors
+      /* Work to be done on the device */
     });
-  });
-```
-</small>
+    host_accessor result{a_buf}; // host can access data also directly after buffer destruction
+    for (int i = 0; i < N; i++) {
+      assert(result[i] == 2);
+    }
+ }
+``` 
 
-#  Kernels{.section} 
 
 # Kernels
  - code to be executed in parallel
@@ -177,9 +196,6 @@ private:
 ```
 </small>
 
-
-
-#  Launching Kernels{.section}
 
 # Grid of Work-Items
 
@@ -235,40 +251,6 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
  - supports 1D, 2D, and 3D-grids
  - no control over the size of groups, no locality within kernels 
 
-
-# Parallel launch with **nd-range** I
-
-![](img/ndrange.jpg){.center width=100%}
-
-<small>https://link.springer.com/book/10.1007/978-1-4842-9691-2</small>
-
-# Parallel launch with **nd-range** II
-
- - enables low level performance tuning 
- - **nd_range** sets the global range and the local range 
- - iteration space is divided into work-groups
- - work-items within a work-group are scheduled on a single compute unit
- - **nd_item** enables to querying for work-group range and index.
-
-```cpp
-cgh.parallel_for(nd_range<1>(range<1>(N),range<1>(64)), [=](nd_item<1> item){
-  auto idx = item.get_global_id();
-  auto local_id = item.get_local_id();
-  y[idx] += a * x[idx];
-});
-```
-
-# Parallel launch with **nd-range** III
- - extra functionalities
-    - each work-group has work-group *local memory*
-        - faster to access than global memory
-        - can be used as programmable cache
-    - group-level *barriers* and *fences* to synchronize work-items within a group
-        - *barriers* force all work-items to reach a speciffic point before continuing
-        - *fences* ensures writes are visible to all work-items before proceeding
-    - group-level collectives, for communication, e.g. broadcasting, or computation, e.g. scans
-        - useful for reductions at group-level
- 
 
 # Summary
 

@@ -163,8 +163,6 @@ auto q = queue { custom_selector {} };
 # Kernels
  - code to be executed in parallel
  - written from the point of view of a work-item (gpu thread)
-    - each instance gets a unique `id` using the work-item index
-
 <div class="column">
  - lambda expressions
 ```cpp
@@ -178,6 +176,7 @@ auto q = queue { custom_selector {} };
  - function object (functors)
  <small>
 ```cpp 
+template <typename T>
 class AXPYFunctor {
 public:
   AXPYFunctor(float a, accessor<T> x, accessor<T> y): a(a), x(x),
@@ -188,9 +187,9 @@ public:
   }
 
 private:
-  float a;
-  accessor<T> x; 
-  accessor<T> y;
+  T a;
+  accessor<T, 1, sycl::access::mode::read> x; 
+  accessor<T, 1, sycl::access::mode::read_write> y;
 };
 ```
 </small>

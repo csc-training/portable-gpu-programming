@@ -147,14 +147,14 @@ auto q = queue { custom_selector {} };
   std::vector<int> y(N, 1);
  {
     // Create buffers for data 
-    buffer<int, 1> a_buf(y.data(), range<1>(N));
+    buffer<int, 1> y_buf(y.data(), range<1>(N));
     q.submit([&](handler& cgh) {
-      accessor y_acc{a_buf, cgh, read_write}; // The encapsulated data is accessed via accessors
+      accessor y{y_buf, cgh, read_write}; // The encapsulated data is accessed via accessors
       /* Work to be done on the device */
     });
-    host_accessor result{a_buf}; // host can access data also directly after buffer destruction
+    host_accessor result{y_buf}; // host can access data also directly after buffer destruction
     for (int i = 0; i < N; i++) {
-      assert(result[i] == 2);
+      assert(result[i] == 5);
     }
  }
 ``` 
@@ -272,22 +272,18 @@ private:
 
 int main() {
     constexpr size_t N = 8;
-    std::vector<int> hx(N, 1);
-    std::vector<int> hy(N, 2);
+    std::vector<int> hx(N, 1); std::vector<int> hy(N, 2);
     int a = 3;
 
     queue q;
     {
       buffer x_buf(hx); buffer y_buf(hy);
-
       q.submit([&](handler &cgh) {
         auto x = accessor{x_buf, cgh, read}; auto y = accessor{y_buf, cgh, read_write};
 
         AXPYFunctor<int> fun(a, x, y);
-
         cgh.parallel_for<class AxpyKernel>(range<1>(N), fun);
       });
-      
       host_accessor result{y_buf}; 
       for (int i = 0; i < N; i++) {
         assert(result[i] == 5);

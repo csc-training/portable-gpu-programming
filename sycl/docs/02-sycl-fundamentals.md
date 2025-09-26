@@ -306,13 +306,13 @@ int main() {
 
             cgh.parallel_for<class AxpyKernel>(range<1>(N), fun);
         });
-
-        host_accessor result{y_buf}; // Host accessor to read results
-        for (int i = 0; i < N; i++) {
-            assert(result[i] == 5); 
+        {
+           host_accessor result{y_buf}; // Host accessor to read results
+            for (int i = 0; i < N; i++) {
+            assert(result[i] == 5);}
         }
     }
-    // Results are availble on host after the buffer is destroyed
+    // Results are available on host after the buffer is destroyed
 }
 
 ``` 

@@ -41,16 +41,19 @@ lang:     en
 
 <small>
 ```cpp
-  std::vector<int> y(N, 1);
+  std::vector<int> y(N, 2), x(N, 1);
+  int a=3
 
   // Allocate device memory
+  int* d_x = malloc_device<int>(N, q); 
   int* d_y = malloc_device<int>(N, q); 
   // Copy data from host to device
+  q.memcpy(d_x, x.data(), N * sizeof(int)).wait(); 
   q.memcpy(d_y, y.data(), N * sizeof(int)).wait(); 
 
   q.submit([&](handler& cgh) {
     cgh.parallel_for(range<1>(N), [=](sid<1> id) {
-      d_y[id] += 1;
+      d_y[id] += a*x_d[i];
     });
   }).wait();
   // Copy results back to host
@@ -58,7 +61,7 @@ lang:     en
   
   // Verify the results
   for (int i = 0; i < N; i++) {
-    assert(y[i] == 2);
+    assert(y[i] == 5);
   }
 
   // Free the device memory

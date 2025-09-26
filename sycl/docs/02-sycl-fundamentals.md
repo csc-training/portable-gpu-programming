@@ -272,7 +272,6 @@ using namespace sycl;
 <div class="column">
 <small>
 ```cpp
-
 int main() {
     constexpr size_t N = 8;
     std::vector<int> hx(N, 1);

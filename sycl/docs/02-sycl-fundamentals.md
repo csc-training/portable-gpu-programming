@@ -287,7 +287,7 @@ int main() {
     }
     // Results are available on host after the buffer is destroyed
 }
-``` 
+```  
 </small>
 
 # AXPY in SYCL with Functor

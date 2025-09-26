@@ -264,14 +264,6 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
 #include <cassert>
 using namespace sycl;
 
-int main() {
-    constexpr size_t N = 8;
-    std::vector<int> hx(N, 1);
-    std::vector<int> hy(N, 2);
-    int a = 3;
-
-    queue q;
-
 ``` 
 </small>
 </div>
@@ -280,6 +272,14 @@ int main() {
 <div class="column">
 <small>
 ```cpp
+
+int main() {
+    constexpr size_t N = 8;
+    std::vector<int> hx(N, 1);
+    std::vector<int> hy(N, 2);
+    int a = 3;
+
+    queue q;
     {
         buffer x_buf(hx);
         buffer y_buf(hy);

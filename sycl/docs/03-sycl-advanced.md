@@ -19,7 +19,7 @@ lang:     en
     - management overhead at buffer creation and destruction
     - requires explicit accessor creation with a specified mode, even for trivial cases
     - unintended synchronizations and accessors deadlocks
-    - no fine-grained control over memory, difficult interoperability, challenging debugging
+    - no control over memory, difficult interoperability, challenging debugging
   
 # Unified Shared Memory (USM) I
 

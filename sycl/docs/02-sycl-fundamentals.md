@@ -176,7 +176,6 @@ auto q = queue { custom_selector {} };
  - function object (functors)
  <small>
 ```cpp 
-template <typename T>
 class AXPYFunctor {
 public:
   AXPYFunctor(float a, accessor<T> x, accessor<T> y): a(a), x(x),

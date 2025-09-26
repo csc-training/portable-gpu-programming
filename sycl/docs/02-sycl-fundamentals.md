@@ -251,48 +251,76 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
  - supports 1D, 2D, and 3D-grids
  - no control over the size of groups, no locality within kernels 
 
-# SAXPY in SYCL
+# SAXPY in SYCL with Functor
 
+
+<div class="column">
 <small>
 ```cpp
-/ ...
+#include <sycl/sycl.hpp>
+#include <vector>
+#include <iostream>
+#include <cassert>
+using namespace sycl;
+
 template <typename T>
 class AXPYFunctor {
 public:
-    AXPYFunctor(T a, accessor<T> x, accessor<T> y): a(a), x(x), y(y) {}
+    // Fixed constructor colon
+    AXPYFunctor(T a, accessor<T> x, accessor<T> y) : a(a), x(x), y(y) {}
 
     void operator()(id<1> i) const {
         y[i] += a * x[i];
     }
+
 private:
     T a;
     accessor<T> x;
     accessor<T> y;
 };
 
+``` 
+</small>
+</div>
+
+
+
+<div class="column">
+<small>
+```cpp
 int main() {
     constexpr size_t N = 8;
-    std::vector<int> hx(N, 1); std::vector<int> hy(N, 2);
+    std::vector<int> hx(N, 1);
+    std::vector<int> hy(N, 2);
     int a = 3;
 
     queue q;
     {
-      buffer x_buf(hx); buffer y_buf(hy);
-      q.submit([&](handler &cgh) {
-        auto x = accessor{x_buf, cgh, read}; auto y = accessor{y_buf, cgh, read_write};
+        buffer x_buf(hx);
+        buffer y_buf(hy);
 
-        AXPYFunctor<int> fun(a, x, y);
-        cgh.parallel_for<class AxpyKernel>(range<1>(N), fun);
-      });
-      host_accessor result{y_buf}; 
-      for (int i = 0; i < N; i++) {
-        assert(result[i] == 5);
-      }
-     }
-     // host can access data also directly after buffer destruction
+        q.submit([&](handler &cgh) {
+            auto x = accessor{x_buf, cgh, read};
+            auto y = accessor{y_buf, cgh, read_write};
+
+            AXPYFunctor<int> fun(a, x, y);
+
+            cgh.parallel_for<class AxpyKernel>(range<1>(N), fun);
+        });
+
+        // Host accessor to read results
+        host_accessor result{y_buf};
+        for (int i = 0; i < N; i++) {
+            
+            assert(result[i] == 5); 
+        }
+    }
+    // Results are aailble on host after the buffer is destroyed
 }
+
 ``` 
 </small>
+</div>
 
 # Summary
 

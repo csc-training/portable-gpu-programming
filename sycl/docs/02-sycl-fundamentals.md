@@ -263,12 +263,23 @@ using namespace sycl;
 
 int main() {
     constexpr size_t N = 8;
-    std::vector<int> hx(N, 1), hy(N, 2);
+    std::vector<int> hx(N, 1);
+    std::vector<int> hy(N, 2);
     int a = 3;
 
     queue q;
+
+``` 
+</small>
+</div>
+
+
+<div class="column">
+<small>
+```cpp
     {
-        buffer x_buf(hx); buffer y_buf(hy);
+        buffer x_buf(hx);
+        buffer y_buf(hy);
 
         q.submit([&](handler &cgh) {
             auto x = accessor{x_buf, cgh, read};
@@ -281,8 +292,7 @@ int main() {
         {
           host_accessor result{y_buf};
           for (int i = 0; i < N; i++) {
-            assert(result[i] == 5);
-         }
+            assert(result[i] == 5);}
         }
     }
     // Results are available on host after the buffer is destroyed

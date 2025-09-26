@@ -9,7 +9,7 @@ lang:     en
 
 # Unified Shared Memory (USM) I
 
-- pointer-based approach to C/C++/CUDA/HIP
+- pointer-based approach to C/CUDA/HIP
 - explicit allocation and  freeing of memory
 - explicit dependencies
 - explicit host-device transfers (unless using managaged)

@@ -373,9 +373,7 @@ int main() {
  - **queues** are bridges between host and devices
  - each queue maps to one device
  - work is enqued by submitting **command groups**
-    - give lots of flexibility
+ - data manegment via **bufffers* and **accessors**
  - parallel code (kernel)  is submitted as a lambda function or as a function operator
- - two methods to express the parallelism
-    - basic launching
-    - via **nd-range**
+ - basic parallelism 
 

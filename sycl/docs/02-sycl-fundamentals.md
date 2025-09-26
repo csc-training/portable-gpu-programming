@@ -251,6 +251,48 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
  - supports 1D, 2D, and 3D-grids
  - no control over the size of groups, no locality within kernels 
 
+
+# SAXPY in SYCL with Lambda
+<small>
+```cpp
+#include <sycl/sycl.hpp>
+#include <vector>
+#include <iostream>
+#include <cassert>
+using namespace sycl;
+
+int main() {
+    constexpr size_t N = 8;
+    std::vector<int> hx(N, 1);
+    std::vector<int> hy(N, 2);
+    int a = 3;
+
+    queue q;
+    {
+        buffer x_buf(hx);
+        buffer y_buf(hy);
+
+        q.submit([&](handler &cgh) {
+            auto x = accessor{x_buf, cgh, read};
+            auto y = accessor{y_buf, cgh, read_write};
+
+            cgh.parallel_for(range<1>(N), [=](id<1> i) {
+                y[i] += a * x[i];
+            });
+        });
+
+        {
+          host_accessor result{y_buf};
+          for (int i = 0; i < N; i++) {
+            assert(result[i] == 5);
+         }
+        }
+    }
+    // Results are available on host after the buffer is destroyed
+}
+``` 
+</small>
+
 # SAXPY in SYCL with Functor
 
 
@@ -285,7 +327,6 @@ private:
 </div>
 
 
-
 <div class="column">
 <small>
 ```cpp
@@ -307,8 +348,8 @@ int main() {
             cgh.parallel_for<class AxpyKernel>(range<1>(N), fun);
         });
         {
-           host_accessor result{y_buf}; // Host accessor to read results
-            for (int i = 0; i < N; i++) {
+           host_accessor result{y_buf}; 
+           for (int i = 0; i < N; i++) {
             assert(result[i] == 5);}
         }
     }

@@ -16,7 +16,7 @@ lang:     en
     - runtime tracks dependencies and schedules kernels correctly
     - portability
     - structured programs
-- **Disatvantages**
+- **Disadvantages**
     - low performance on host–device data trasnfers
     - management overhead at buffer creation and destruction
     - requires explicit accessor creation with a a specified mode, even for trivial cases

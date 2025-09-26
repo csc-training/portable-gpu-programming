@@ -187,8 +187,8 @@ public:
 
 private:
   T a;
-  accessor<T, 1, sycl::access::mode::read> x; 
-  accessor<T, 1, sycl::access::mode::read_write> y;
+  accessor<T> x; 
+  accessor<T> y;
 };
 ```
 </small>

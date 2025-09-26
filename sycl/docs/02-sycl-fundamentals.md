@@ -133,7 +133,7 @@ auto q = queue { custom_selector {} };
 
 
 # Buffers and Accesors I
- -  a **buffer** provides a high level abstract view of memory 
+ -  a **buffer** provides a high level abstract view of the data 
  - support 1-, 2-, or 3-dimensional data
  - dependencies between multiple kernels are implicitly handled
  - does not own the memory, it’s only a *constrained view* into it

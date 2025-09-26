@@ -37,7 +37,7 @@ lang:     en
 | malloc_shared	  | Dynamic migration  | Yes                 
 | malloc_host	    | Host  	           | Device can read     
 
-# `malloc_device`  
+# AXPY with `malloc_device`  
 
 <small>
 ```cpp

@@ -252,7 +252,7 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
  - no control over the size of groups, no locality within kernels 
 
 
-# SAXPY in SYCL with Lambda
+# AXPY in SYCL with Lambda
 <small>
 ```cpp
 #include <sycl/sycl.hpp>
@@ -290,7 +290,7 @@ int main() {
 ``` 
 </small>
 
-# SAXPY in SYCL with Functor
+# AXPY in SYCL with Functor
 
 
 <div class="column">

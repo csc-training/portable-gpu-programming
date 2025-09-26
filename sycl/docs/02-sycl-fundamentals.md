@@ -137,10 +137,9 @@ auto q = queue { custom_selector {} };
  - support 1-, 2-, or 3-dimensional data
  - dependencies between multiple kernels are implicitly handled
  - does not own the memory, it’s only a *constrained view* into it
- - **accessor** objects are used to access the data
+ - **accessor** objects are used to access the data on device
  - various access modes, *read_write*, *read_only*, or *write_only*
- - can target local memory, **local_accessor**
- - can have also **host_accessor**s
+ - **host_accessor** bjects are used to access the data on host
 
 # Buffers and Accesors II
  

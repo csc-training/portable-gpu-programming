@@ -144,17 +144,17 @@ auto q = queue { custom_selector {} };
 # Buffers and Accesors II
  
 ```cpp
-  std::vector<int> y(N, 1);
+  std::vector<int> hy(N, 1);
  {
     // Create buffers for data 
-    buffer<int, 1> y_buf(y.data(), range<1>(N));
+    buffer<int, 1> y_buf(hy.data(), range<1>(N));
     q.submit([&](handler& cgh) {
       accessor y{y_buf, cgh, read_write}; // The encapsulated data is accessed via accessors
-      /* Work to be done on the device */
+      /* Work to be done on the device. Increment each element by 1.*/
     });
     host_accessor result{y_buf}; // host can access data also directly after buffer destruction
     for (int i = 0; i < N; i++) {
-      assert(result[i] == 5);
+      assert(result[i] == 1);
     }
  }
 ``` 
@@ -263,14 +263,12 @@ using namespace sycl;
 
 int main() {
     constexpr size_t N = 8;
-    std::vector<int> hx(N, 1);
-    std::vector<int> hy(N, 2);
+    std::vector<int> hx(N, 1), hy(N, 2);
     int a = 3;
 
     queue q;
     {
-        buffer x_buf(hx);
-        buffer y_buf(hy);
+        buffer x_buf(hx); buffer y_buf(hy);
 
         q.submit([&](handler &cgh) {
             auto x = accessor{x_buf, cgh, read};
@@ -280,7 +278,6 @@ int main() {
                 y[i] += a * x[i];
             });
         });
-
         {
           host_accessor result{y_buf};
           for (int i = 0; i < N; i++) {

@@ -373,7 +373,7 @@ int main() {
  - **queues** are bridges between host and devices
  - each queue maps to one device
  - work is enqued by submitting **command groups**
- - data manegment via **bufffers** and **accessors**
+ - data management via **bufffers** and **accessors**
  - parallel code (kernel)  is submitted as a lambda function or as a functor
  - basic parallelism 
 

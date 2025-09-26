@@ -163,6 +163,7 @@ auto q = queue { custom_selector {} };
 # Kernels
  - code to be executed in parallel
  - written from the point of view of a work-item (gpu thread)
+   
 <div class="column">
  - lambda expressions
 ```cpp
@@ -193,6 +194,7 @@ private:
 ```
 </small>
 
+</div>
 
 # Grid of Work-Items
 

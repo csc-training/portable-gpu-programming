@@ -12,7 +12,7 @@ lang:     en
 - pointer-based approach to C/CUDA/HIP
 - explicit allocation and  freeing of memory
 - explicit dependencies
-- explicit host-device transfers (unless using managaged)
+- explicit host-device transfers (unless using managed)
 - explicit host-device synchronization 
 
 # Unified Shared Memory II

@@ -254,12 +254,8 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
 # SAXPY in SYCL
 
 <small>
-```
-#include <sycl/sycl.hpp>
-#include <vector>
-#include <iostream>
-using namespace sycl;
-
+```cpp
+/ ...
 template <typename T>
 class AXPYFunctor {
 public:
@@ -268,7 +264,6 @@ public:
     void operator()(id<1> i) const {
         y[i] += a * x[i];
     }
-
 private:
     T a;
     accessor<T> x;

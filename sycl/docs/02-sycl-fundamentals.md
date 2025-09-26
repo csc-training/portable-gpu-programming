@@ -119,7 +119,7 @@ auto q = queue { custom_selector {} };
   q.submit([&](handler &cgh) {
   /* Command group function */ 
   });
-// Some other code
+  // ...
 ```
 </small>
 

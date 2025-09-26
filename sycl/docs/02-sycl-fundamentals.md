@@ -12,7 +12,7 @@ lang:     en
  - Program runs on one of the cores the CPU (host)
  - Host initializes the devices, allocates the memory, and stages the host-device transfers
     - **Note!** CPU can also be a device
- - Host launches the parallel code (kernel) ito be executed on a device by several threads
+ - Host launches the parallel code (kernel) to be executed on a device by many threads
  - Code is written from the point of view of a single thread
     - each thread has a unique ID
 

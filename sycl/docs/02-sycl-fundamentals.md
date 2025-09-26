@@ -274,14 +274,12 @@ using namespace sycl;
 ```cpp
 int main() {
     constexpr size_t N = 8;
-    std::vector<int> hx(N, 1);
-    std::vector<int> hy(N, 2);
+    std::vector<int> hx(N, 1), hy(N, 2);
     int a = 3;
 
     queue q;
     {
-        buffer x_buf(hx);
-        buffer y_buf(hy);
+        buffer x_buf(hx); buffer y_buf(hy);
 
         q.submit([&](handler &cgh) {
             auto x = accessor{x_buf, cgh, read};

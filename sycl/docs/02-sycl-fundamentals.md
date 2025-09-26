@@ -253,6 +253,9 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
 
 
 # AXPY in SYCL with Lambda
+
+
+<div class="column">
 <small>
 ```cpp
 #include <sycl/sycl.hpp>
@@ -299,6 +302,7 @@ int main() {
 }
 ```  
 </small>
+</div>
 
 # AXPY in SYCL with Functor
 

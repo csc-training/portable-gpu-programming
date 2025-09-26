@@ -7,6 +7,25 @@ lang:     en
 
 # Advanced SYCL{.section}
 
+# Buffers and Accessors API 
+- **Advantages**
+    - automatic host–device data management
+    - clear access semantics
+    - explicit access modes (**read**, **write**, **read_write**) for safer kernel
+    - safe synchronization
+    - runtime tracks dependencies and schedules kernels correctly
+    - portability
+    - structured programs
+- **Disatvantages**
+    - low performance on host–device data trasnfers
+    - management overhead at buffer creation and destruction
+    - requires explicit accessor creation with a a specified mode, even for trivial cases
+    - unintended synchronizations and accessors deadlocks
+    - difficult interoperability
+    - challenging debugging
+    - no fine-grained control over memory
+ 
+  
 # Unified Shared Memory (USM) I
 
 - pointer-based approach to C/CUDA/HIP

@@ -290,8 +290,8 @@ int main() {
             });
         });
         {
-          host_accessor result{y_buf};
-          for (int i = 0; i < N; i++) {
+           host_accessor result{y_buf};
+           for (int i = 0; i < N; i++) {
             assert(result[i] == 5);}
         }
     }

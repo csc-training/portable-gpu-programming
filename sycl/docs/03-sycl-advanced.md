@@ -70,28 +70,28 @@ lang:     en
 </small>
 
 
-# `malloc_shared`
+# AXPY with `malloc_shared`
 
 <small>
 ```cpp
+    int a=3;
+    int* x = malloc_shared<int>(N, q);
     int* y = malloc_shared<int>(N, q);
     // Initialize from host
     for (int i = 0; i < N; i++) {
-        y[i] = 1;
+        x[i]=1; y[i] = 2; 
     }
 
     q.submit([&](handler& cgh) {
         cgh.parallel_for(range<1>(N), [=](id<1> idx) {
-            y[idx] += 1;
+            y[idx] += a*x[i];
         });
     }).wait();
 
     // No memcpy needed — host can read directly
     for (int i = 0; i < N; i++) {
-        assert(y[i] == 2);
-        std::cout << "y[" << i << "] = " << y[i] << "\n";
+        assert(y[i] == 5);
     }
-
     // Free the shared memory
     sycl::free(y, q);
 ```

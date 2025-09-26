@@ -1,11 +1,11 @@
 ---
-title:    Advance SYCL
+title:    Advanced SYCL
 subtitle: Portable GPU Programming
 date:     October 2025
 lang:     en
 ---
 
-# Advance SYCL{.section}
+# Advanced SYCL{.section}
 
 # Unified Shared Memory (USM) I
 

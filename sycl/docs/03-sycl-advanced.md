@@ -12,14 +12,12 @@ lang:     en
     - automatic host–device data management
     - clear access semantics
     - explicit access modes (**read**, **write**, **read_write**) for safer kernel
-    - safe synchronization
-    - runtime tracks dependencies and schedules kernels correctly
-    - portability
-    - structured programs
+    - safe synchronization, implicit dependencies
+    - portability,structured programs
 - **Disadvantages**
     - low performance on host–device data trasnfers
     - management overhead at buffer creation and destruction
-    - requires explicit accessor creation with a a specified mode, even for trivial cases
+    - requires explicit accessor creation with a specified mode, even for trivial cases
     - unintended synchronizations and accessors deadlocks
     - difficult interoperability
     - challenging debugging

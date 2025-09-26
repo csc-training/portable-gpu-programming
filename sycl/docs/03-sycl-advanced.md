@@ -17,6 +17,14 @@ lang:     en
 
 # Unified Shared Memory II
 
+| Function        | Location	         | Device Accessible
+------------------+--------------------+--------------------
+| malloc_device	  | Device 	           | Yes                 
+| malloc_shared	  | Dynamic migration  | Yes                 
+| malloc_host	    | Host  	           | Device can read     
+
+# `malloc_device`  
+
 <small>
 ```cpp
   std::vector<int> y(N, 1);
@@ -33,24 +41,45 @@ lang:     en
   }).wait();
   // Copy results back to host
   q.memcpy(y.data(), d_y, N * sizeof(int)).wait();
-
-  // Free the device memory
-  sycl::free(d_y, q);
   
   // Verify the results
   for (int i = 0; i < N; i++) {
     assert(y[i] == 2);
   }
+
+  // Free the device memory
+  sycl::free(d_y, q);
 ```
 </small>
 
-# Unified Shared Memory III
 
-| Function        | Location	         | Device Accessible
-------------------+--------------------+--------------------
-| malloc_device	  | Device 	           | Yes                 
-| malloc_shared	  | Dynamic migration  | Yes                 
-| malloc_host	    | Host  	           | Device can read     
+# `malloc_shared`
+
+<small>
+```cpp
+    int* y = malloc_shared<int>(N, q);
+    // Initialize from host
+    for (int i = 0; i < N; i++) {
+        y[i] = 1;
+    }
+
+    q.submit([&](handler& cgh) {
+        cgh.parallel_for(range<1>(N), [=](id<1> idx) {
+            y[idx] += 1;
+        });
+    }).wait();
+
+    // No memcpy needed — host can read directly
+    for (int i = 0; i < N; i++) {
+        assert(y[i] == 2);
+        std::cout << "y[" << i << "] = " << y[i] << "\n";
+    }
+
+    // Free the shared memory
+    sycl::free(y, q);
+```
+</small>
+
 
 # Parallel launch with **nd-range** I
 

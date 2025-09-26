@@ -13,16 +13,13 @@ lang:     en
     - clear access semantics
     - explicit access modes (**read**, **write**, **read_write**) for safer kernel
     - safe synchronization, implicit dependencies
-    - portability,structured programs
+    - portability, structured programs
 - **Disadvantages**
     - low performance on host–device data trasnfers
     - management overhead at buffer creation and destruction
     - requires explicit accessor creation with a specified mode, even for trivial cases
     - unintended synchronizations and accessors deadlocks
-    - difficult interoperability
-    - challenging debugging
-    - no fine-grained control over memory
- 
+    - no fine-grained control over memory, difficult interoperability, challenging debugging
   
 # Unified Shared Memory (USM) I
 

@@ -254,6 +254,7 @@ cgh.parallel_for(range<1>(N), [=](item<1> item){
 # SAXPY in SYCL
 
 <small>
+```
 #include <sycl/sycl.hpp>
 #include <vector>
 #include <iostream>
@@ -282,12 +283,10 @@ int main() {
 
     queue q;
     {
-      buffer x_buf(hx);
-      buffer y_buf(hy);
+      buffer x_buf(hx); buffer y_buf(hy);
 
       q.submit([&](handler &cgh) {
-        auto x = accessor{x_buf, cgh, read};
-        auto y = accessor{y_buf, cgh, read_write};
+        auto x = accessor{x_buf, cgh, read}; auto y = accessor{y_buf, cgh, read_write};
 
         AXPYFunctor<int> fun(a, x, y);
 
@@ -301,6 +300,7 @@ int main() {
      }
      // host can access data also directly after buffer destruction
 }
+``` 
 </small>
 
 # Summary

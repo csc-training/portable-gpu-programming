@@ -31,7 +31,7 @@ int write_array(const char *filename, const double *array, size_t count)
 
     // Write the array size
     fwrite(&count, sizeof(size_t), 1, file);
-    
+
     // Write the array data
     size_t written = fwrite(array, sizeof(double), count, file);
 

@@ -1,12 +1,10 @@
 #include <stdio.h>
 #include <stdlib.h>
-
-// Max number of elements printed
-#define PRINT_N 4
-void print_array(const char* name, const double* x, size_t n);
+#include "../print_array.h"
 
 int main(int argc, char *argv[])
 {
+    // Array size
     int n = 102400;
 
     if (argc > 1) {
@@ -51,18 +49,4 @@ int main(int argc, char *argv[])
     free(y);
     free(x);
     return 0;
-}
-
-
-void print_array(const char* name, const double* x, size_t n)
-{
-    printf("%s =", name);
-    for (size_t i = 0; i < n; i++) {
-        if (i < PRINT_N || i > n - 1 - PRINT_N) {
-            printf(" %8.4f", x[i]);
-        } else if (i == PRINT_N) {
-            printf(" ...");
-        }
-    }
-    printf("\n");
 }

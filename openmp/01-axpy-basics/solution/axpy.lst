@@ -17,62 +17,45 @@ Legend:
 ----------
 
  1.           #include <stdio.h>
- 2.           
- 3.           // Array size
- 4.           #ifndef N
- 5.           #define N 102400
- 6.           #endif
- 7.           
- 8.           // Max number of elements printed
- 9.           #define PRINT_N 4
-10.           void print_array(const char* name, const double* x, size_t n);
-11.           
-12.           int main(void)
-13.           {
-14.               printf("Using N = %d\n", N);
-15.           
-16.               double alpha, x[N], y[N];
-17.           
-18.               // Initialization of values
-19.               alpha = 3.0;
-20.               for (int i = 0; i < N; i++) {
-21.                   double frac = 1.0 / ((double) (N - 1));
-22.                   x[i] = i * frac;
-23.                   y[i] = i * frac * 100;
-24.               }
-25.           
-26.               // Print values
-27.               printf("Input:\n");
-28.               printf("a = %8.4f\n", alpha);
-29.               print_array("x", x, N);
-30.               print_array("y", y, N);
-31.           
-32.               // Calculate axpy
-33.   I 0--<> #pragma omp target teams distribute parallel for
-34. +   M---<     for (int i = 0; i < N; i++) {
-35.     M             y[i] += alpha * x[i];
-36.     M--->     }
-37.           
-38.               // Print values
-39.               printf("Output:\n");
-40.               print_array("y", y, N);
-41.               return 0;
-42.           }
-43.           
-44.           
-45.           void print_array(const char* name, const double* x, size_t n)
-46.           {
-47.               printf("%s =", name);
-48.               for (size_t i = 0; i < n; i++) {
-49.                   if (i < PRINT_N || i > n - 1 - PRINT_N) {
-50.                       printf(" %8.4f", x[i]);
-51.                   } else if (i == PRINT_N) {
-52.                       printf(" ...");
-53.                   }
-54.               }
-55.               printf("\n");
-56.           }
+ 2.           #include "../print_array.h"
+ 3.           
+ 4.           // Array size
+ 5.           #ifndef N
+ 6.           #define N 102400
+ 7.           #endif
+ 8.           
+ 9.           int main(void)
+10.           {
+11.               printf("Using N = %d\n", N);
+12.           
+13.               double alpha, x[N], y[N];
+14.           
+15.               // Initialization of values
+16.               alpha = 3.0;
+17.               for (int i = 0; i < N; i++) {
+18.                   double frac = 1.0 / ((double) (N - 1));
+19.                   x[i] = i * frac;
+20.                   y[i] = i * frac * 100;
+21.               }
+22.           
+23.               // Print values
+24.               printf("Input:\n");
+25.               printf("a = %8.4f\n", alpha);
+26.               print_array("x", x, N);
+27.               print_array("y", y, N);
+28.           
+29.               // Calculate axpy
+30.   I 0--<> #pragma omp target teams distribute parallel for
+31. +   M---<     for (int i = 0; i < N; i++) {
+32.     M             y[i] += alpha * x[i];
+33.     M--->     }
+34.           
+35.               // Print values
+36.               printf("Output:\n");
+37.               print_array("y", y, N);
+38.               return 0;
+39.           }
 
 ----------
 
-34. Outlined parallel region
+31. Outlined parallel region

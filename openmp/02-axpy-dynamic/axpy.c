@@ -9,11 +9,10 @@ int main(int argc, char *argv[])
 
     if (argc > 1) {
         n = atoi(argv[1]);
-    }
-
-    if (n < 1) {
-        printf("Size needs to be greater than zero.\n");
-        return 1;
+        if (n < 1) {
+            printf("Size needs to be greater than zero.\n");
+            return 1;
+        }
     }
 
     printf("Using n = %d\n", n);

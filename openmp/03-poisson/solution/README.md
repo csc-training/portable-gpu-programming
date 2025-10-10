@@ -41,11 +41,14 @@
            for (int j = 1; j < nx - 1; j++) {
    ```
 
-   0.6 seconds
+   0.60 seconds
 
    This is about 5 times faster than the serial CPU execution.
  
-4. Running the fastest GPU code with `./poisson.x 2048 1024`
-   takes 2.33 seconds whereas with serial CPU execution it takes 26.0 seconds,
-   so GPU is now 11 times faster.
+4. Example code is provided: `poisson-4.c` corresponding to the fastest parallelization above.
+   This code runs in 0.35 seconds, corresponding to 9x speed up to the serial CPU execution.
+
+5. Running the fastest GPU code with `./poisson.x 2048 1024`
+   takes 2.08 seconds whereas with serial CPU execution it takes 26.0 seconds,
+   so GPU is now 12 times faster.
    It seems that our problem is likely too small for a GPU.

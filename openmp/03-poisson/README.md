@@ -86,4 +86,20 @@ The [solution directory](solution/) contains a model solution and discussion on 
 3. Could you write the kernel launch pragmas (`target teams distribute parallel for`) in some other ways around the two loops?
    What kind of speed ups do you observe? Hint: try also `collapse(2)` clause.
 
-4. Increase the size of the system and compare the speed up to the serial CPU execution.
+4. Let's improve our timing. Basically, the very first kernel on GPU is always slow as the device needs to "wake up".
+   Insert a dummy kernel like below before the timing:
+
+   ```cpp
+   // Wake up the GPU (no data transfered back to host)
+   #pragma omp target teams distribute parallel for collapse(2) map(to: u[0:nx*ny]) map(to: unew[0:nx*ny])
+   for (int i = 1; i < ny - 1; i++) {
+       for (int j = 1; j < nx - 1; j++) {
+           int ind = i * nx + j;
+           u[ind] += unew[ind] * u[ind];  // This is just adding and multiplying zeroes
+       }
+   }
+   ```
+
+   What kind of timings do you get now?
+
+5. Increase the size of the system and compare the speed up to the serial CPU execution.

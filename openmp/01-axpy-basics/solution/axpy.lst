@@ -1,0 +1,67 @@
+Legend:
+
+  A - recognized idiom
+  D - deleted loop
+  I - callee inlined here
+  L - interleaved loop
+  M - multithreaded
+  P - peeled loop
+  S - distributed loop
+  U - completely unrolled loop
+  u - partially unrolled loop
+  V - vectorized loop
+  X - loop interchanged with enclosing loop
+  Z - versioned loop for LICM
+  + - additional messages below
+
+----------
+
+ 1.           #include <stdio.h>
+ 2.           #include "helper_functions.h"
+ 3.           
+ 4.           // Array size
+ 5.           #ifndef N
+ 6.           #define N 102400
+ 7.           #endif
+ 8.           
+ 9.           int main(void)
+10.           {
+11.               printf("Using N = %d\n", N);
+12.           
+13.               double alpha, x[N], y[N];
+14.           
+15.               // Initialization of values
+16.               alpha = 3.0;
+17.               for (int i = 0; i < N; i++) {
+18.                   double frac = 1.0 / ((double) (N - 1));
+19.                   x[i] = i * frac;
+20.                   y[i] = i * frac * 100;
+21.               }
+22.           
+23.               // Print values
+24.               printf("Input:\n");
+25.               printf("a = %8.4f\n", alpha);
+26.               print_array("x", x, N);
+27.               print_array("y", y, N);
+28.           
+29.               // Calculate axpy
+30. + I 0--<>     #pragma omp target teams distribute parallel for
+31. +   M---<     for (int i = 0; i < N; i++) {
+32. +   M             y[i] += alpha * x[i];
+33.     M--->     }
+34.           
+35.               // Print values
+36.               printf("Output:\n");
+37.               print_array("y", y, N);
+38.               return 0;
+39.           }
+
+----------
+
+30. loop not distributed: loop is not bottom tested
+30. loop not distributed: use -Rpass-analysis=loop-distribute for more info
+30. loop not vectorized
+
+31. Outlined parallel region
+
+32. hoisting bitcast

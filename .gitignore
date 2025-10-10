@@ -1,0 +1,11 @@
+*.x
+core
+*.bin
+# rocprof outputs
+*.copy_stats.csv
+*.db
+*.hip_stats.csv
+*.hsa_stats.csv
+*.json
+*.stats.csv
+*.sysinfo.txt

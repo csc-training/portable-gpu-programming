@@ -2,8 +2,10 @@
 
 ## Getting started
 
-- [First GPU kernel](01-axpy-basics/)
+- [First GPU kernel: axpy](01-axpy-basics/)
 
 ## Controlling data movement
 
-- [First GPU kernel revisited](02-axpy-dynamic/)
+- [The axpy kernel with dynamic arrays](02-axpy-dynamic/)
+- [Solving Poisson's equation with Jacobi iteration](03-poisson/)
+

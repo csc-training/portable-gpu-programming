@@ -43,7 +43,7 @@
    0.263 seconds
 
    This is about the same than the serial CPU execution.
- 
+
 4. Example code is provided: `poisson-4.c` corresponding to the last parallelization above.
    The second run takes 0.021 seconds, and the third run and further runs the same.
 

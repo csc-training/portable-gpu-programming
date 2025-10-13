@@ -21,5 +21,5 @@
 
    With this asynchronous code, the run time has reduced from 2.5 to 1.9 seconds,
    so the run time is the same is without I/O step. The remaining difference is
-   due to the final write after the 5000th iteration which is timed also
-   (a single write takes about 0.2 seconds).
+   mostly due to the final write after the 5000th iteration which is timed also
+   (a single write takes about 0.1-0.2 seconds).

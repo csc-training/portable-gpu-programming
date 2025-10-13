@@ -44,6 +44,7 @@ Install:
 
 ## AdaptiveCpp on Mahti
 
+### Spack Instructions  
 ```
 module purge
 git clone -c feature.manyFiles=true https://github.com/spack/spack.git
@@ -63,7 +64,33 @@ Edit the recipe var/spack/repos/builtin/packages/hipsycl/package.py. Add "-DWITH
 spack install hipsycl@24.06  %gcc@10.4.0 + cuda
 ```
 
+### Compile from source
 
+Setup the environment:
+```
+module load gcc/10.4.0
+module load cuda/12.6.0
+```
+
+First one has compile LLVM with nvidia support:
+```
+git clone https://github.com/llvm/llvm-project -b release/20.x
+cd llvm-project
+mkdir -p build
+cd build
+INSTALL_PREFIX=/projappl/project_2015315/apps/LLVM cmake  -DCMAKE_C_COMPILER=`which gcc` -DCMAKE_CXX_COMPILER=`which g++` -DCMAKE_BUILD_TYPE=Release -DCMAKE_INSTALL_PREFIX=$INSTALL_PREFIX -DLLVM_ENABLE_PROJECTS="clang;lld;openmp" -DLLVM_ENABLE_RUNTIMES=compiler-rt -DOPENMP_ENABLE_LIBOMPTARGET=OFF -DLLVM_ENABLE_ASSERTIONS=OFF -DLLVM_TARGETS_TO_BUILD="AMDGPU;NVPTX;X86" -DLLVM_INCLUDE_BENCHMARKS=0 -DLLVM_INCLUDE_EXAMPLES=0 -DLLVM_INCLUDE_TESTS=0 -DCMAKE_INSTALL_RPATH_USE_LINK_PATH=ON -DCMAKE_INSTALL_RPATH=$INSTALL_PREFIX/lib -DLLVM_ENABLE_OCAMLDOC=OFF -DLLVM_ENABLE_BINDINGS=OFF -DLLVM_TEMPORARILY_ALLOW_OLD_TOOLCHAIN=OFF -DLLVM_BUILD_LLVM_DYLIB=ON -DLLVM_ENABLE_DUMP=OFF ../llvm
+
+```
+The clang compiler provided by the LLVM is used to compile AdaptiveCpp:
+```
+git clone https://github.com/AdaptiveCpp/AdaptiveCpp.git
+cd AdaptiveCpp
+mkdir build
+cd build
+cmake  -DCMAKE_INSTALL_PREFIX=/projappl/project_2015315/apps/ACPP   -DWITH_CPU_BACKEND=ON -DWITH_CUDA_BACKEND=ON  -DWITH_ACCELERATED_CPU=ON -DWITH_SSCP_COMPILER=OFF  -DWITH_OPENCL_BACKEND=OFF -DWITH_LEVEL_ZERO_BACKEND=OFF  -DBOOST_ROOT=/appl/spack/v020/install-tree/gcc-10.4.0/boost-1.82.0-ystwi2 -DCLANG_EXECUTABLE_PATH=/projappl/project_2015315/apps/LLVM/bin/clang -DCLANG_INCLUDE_PATH=/projappl/project_2015315/apps/LLVM/include/ -DLLVM_DIR=/projappl/project_2015315/apps/LLVM/lib/cmake/llvm ..
+make -j
+make install
+``` 
 ## AdaptiveCpp on LUMI
 
 

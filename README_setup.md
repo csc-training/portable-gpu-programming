@@ -87,7 +87,7 @@ git clone https://github.com/AdaptiveCpp/AdaptiveCpp.git
 cd AdaptiveCpp
 mkdir build
 cd build
-cmake  -DCMAKE_INSTALL_PREFIX=/projappl/project_2015315/apps/ACPP   -DWITH_CPU_BACKEND=ON -DWITH_CUDA_BACKEND=ON  -DWITH_ACCELERATED_CPU=ON -DWITH_SSCP_COMPILER=OFF  -DWITH_OPENCL_BACKEND=OFF -DWITH_LEVEL_ZERO_BACKEND=OFF  -DBOOST_ROOT=/appl/spack/v020/install-tree/gcc-10.4.0/boost-1.82.0-ystwi2 -DCLANG_EXECUTABLE_PATH=/projappl/project_2015315/apps/LLVM/bin/clang -DCLANG_INCLUDE_PATH=/projappl/project_2015315/apps/LLVM/include/ -DLLVM_DIR=/projappl/project_2015315/apps/LLVM/lib/cmake/llvm ..
+cmake  -DCMAKE_INSTALL_PREFIX=/projappl/project_2015315/apps/ACPP    -DBOOST_ROOT=/appl/spack/v020/install-tree/gcc-10.4.0/boost-1.82.0-ystwi2 -DCLANG_EXECUTABLE_PATH=/projappl/project_2015315/apps/LLVM/bin/clang -DCLANG_INCLUDE_PATH=/projappl/project_2015315/apps/LLVM/include/ -DLLVM_DIR=/projappl/project_2015315/apps/LLVM/lib/cmake/llvm -DACPP_COMPILER_FEATURE_PROFILE=full .. 
 make -j
 make install
 ``` 

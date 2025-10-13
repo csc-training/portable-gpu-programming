@@ -3,21 +3,17 @@
 In this exercise we practise reduction operations.
 
 Thus far we have missed one important part from our Jacobi code: convergence check.
-In this exercise we add a converge check for every 10th iteration.
+In this exercise we add a converge check for every 100th iteration.
 
-The current code is not very efficient though as it is calculating the norm on CPU.
+The current code is not working, it's calculating the norm on CPU and with wrong data
+as all real data is on GPU.
 
 We need to fix this.
 
 The [solution directory](solution/) contains a model solution and discussion on the exercises below.
 
-### Exercise: Offload to GPU
+### Exercises
 
-1. Instead of calculating the norm on CPU, calculate it on GPU.
+1. Calculate the norm on GPU using reduction clause.
 
-   You can use the following sanity checks on command line:
-
-       diff u000000.bin u000100.bin  # These files should differ
-       diff u000500.bin u_end.bin  # These files should be the same (no output from diff)
-
-   You can also use the attached Jupyter notebook to visualize the data dumps to check that they make sense.
+2. Use profiler to gain insight on the code behavior and improve the code if needed.

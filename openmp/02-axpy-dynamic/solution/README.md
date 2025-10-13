@@ -34,7 +34,7 @@
        ACC:       allocate, copy to acc 'y[0:n]' (819200 bytes)
        ACC:       allocate, copy to acc 'x[0:n]' (819200 bytes)
        ACC: End transfer (to acc 1638400 bytes, to host 0 bytes)
-       ACC: Execute kernel __omp_offloading_73ac72ce_2c01b122_main_l39_cce$noloop$form blocks:400 threads:256 from axpy.c:39
+       ACC: Execute kernel __omp_offloading_73ac72ce_8d0035ae_main_l39_cce$noloop$form blocks:400 threads:256 from axpy.c:39
        ACC: Start transfer 2 items from axpy.c:39
        ACC:       free 'x[0:n]' (819200 bytes)
        ACC:       copy to host, free 'y[0:n]' (819200 bytes)

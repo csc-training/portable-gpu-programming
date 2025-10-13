@@ -7,7 +7,7 @@ the array size is not a compile time constant but instead read from a command li
 
 The code can be compiled for serial execution as before:
 
-    cc axpy.c -o axpy.x
+    cc -O3 axpy.c -o axpy.x
 
 Run the program on a single CPU core for a given array size (5 in this example):
 

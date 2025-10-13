@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 #include <omp.h>
-#include "../helper_functions.h"
+#include "helper_functions.h"
 
 int main(int argc, char *argv[])
 {

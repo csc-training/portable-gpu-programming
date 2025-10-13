@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "../print_array.h"
+#include "helper_functions.h"
 
 // Array size
 #ifndef N
@@ -27,7 +27,7 @@ int main(void)
     print_array("y", y, N);
 
     // Calculate axpy
-#pragma omp target teams distribute parallel for
+    #pragma omp target teams distribute parallel for
     for (int i = 0; i < N; i++) {
         y[i] += alpha * x[i];
     }

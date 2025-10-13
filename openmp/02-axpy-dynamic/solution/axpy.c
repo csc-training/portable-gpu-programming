@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "../print_array.h"
+#include "helper_functions.h"
 
 void run(const int n)
 {
@@ -25,7 +25,7 @@ void run(const int n)
     print_array("y", y, n);
 
     // Calculate axpy
-#pragma omp target teams distribute parallel for map(to: x[0:n]) map(tofrom: y[0:n])
+    #pragma omp target teams distribute parallel for map(to: x[0:n]) map(tofrom: y[0:n])
     for (int i = 0; i < n; i++) {
         y[i] += alpha * x[i];
     }

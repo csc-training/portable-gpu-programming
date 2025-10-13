@@ -1,5 +1,5 @@
 #include <stdio.h>
-#include "print_array.h"
+#include "helper_functions.h"
 
 // Array size
 #ifndef N

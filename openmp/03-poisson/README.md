@@ -50,7 +50,7 @@ The algorithm comprises of the following steps:
 Starting from the previous axpy code, we have now replaced the axpy calculation with the Jacobi iteration.
 We have added timing using `omp_get_wtime()`, so even the serial code needs to be compiled with `-fopenmp`:
 
-    cc -fopenmp poisson.c -o poisson.x
+    cc -O3 -fopenmp poisson.c -o poisson.x
 
 Run the program on a single CPU core for a an 1024x1024 array for 500 iterations:
 
@@ -60,7 +60,7 @@ Expected output:
 
     Using n = 1024, niter = 500
     u[512,512] = -120.808781
-    Time spent:  3.123 s
+    Time spent:  0.234 s
 
 We want to speed this up by utilizing GPU!
 
@@ -86,19 +86,12 @@ The [solution directory](solution/) contains a model solution and discussion on 
 3. Could you write the kernel launch pragmas (`target teams distribute parallel for`) in some other ways around the two loops?
    What kind of speed ups do you observe? Hint: try also `collapse(2)` clause.
 
-4. Let's improve our timing. Basically, the very first kernel on GPU is always slow as the device needs to "wake up".
-   Insert a dummy kernel like below before the timing:
+4. Let's improve our timing. Basically, the very first kernel execution on GPU is always slow as the device needs to "wake up".
+   Thus, when we are timing short executions like this one, the timings we see are misleading.
+   In real codes, the "wake up time" is negligible in comparison to the total execution time.
 
-   ```cpp
-   // Wake up the GPU (no data transfered back to host)
-   #pragma omp target teams distribute parallel for collapse(2) map(to: u[0:nx*ny]) map(to: unew[0:nx*ny])
-   for (int i = 1; i < ny - 1; i++) {
-       for (int j = 1; j < nx - 1; j++) {
-           int ind = i * nx + j;
-           u[ind] += unew[ind] * u[ind];  // This is just adding and multiplying zeroes
-       }
-   }
-   ```
+   Modify the code so that it runs the whole calculation three times (including all memory transfers).
+   Hint: you can do this conveniently in the `main()` function in the bottom of the source file.
 
    What kind of timings do you get now?
 

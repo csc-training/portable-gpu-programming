@@ -3,16 +3,15 @@
 ### Exercise: Offload to GPU
 
 1. Example code is provided: `poisson-1.c`.
-   This runs on GPU and gives correct result, but is slow (5.1 s).
+   This runs on GPU and gives correct result, but is slow (2.443 s).
 
 2. Example code is provided: `poisson-2.c`.
-   This is faster but still rather slow (4.4 s).
+   This is faster but still rather slow (1.743 s).
    The serial CPU execution is still faster.
 
 3. A few alternatives:
 
    `poisson-2.c`:
-
 
    ```cpp
    #pragma omp target teams distribute parallel for
@@ -20,7 +19,7 @@
            for (int j = 1; j < nx - 1; j++) {
    ```
 
-   4.4 seconds
+   1.743 seconds
 
    `poisson-3a.c`:
 
@@ -30,7 +29,7 @@
            for (int j = 1; j < nx - 1; j++) {
    ```
 
-   1.6 seconds
+   0.268 seconds
 
    `poisson-3b.c`:
 
@@ -41,14 +40,23 @@
            for (int j = 1; j < nx - 1; j++) {
    ```
 
-   0.60 seconds
+   0.260 seconds
 
-   This is about 5 times faster than the serial CPU execution.
+   This is about the same than the serial CPU execution.
  
 4. Example code is provided: `poisson-4.c` corresponding to the fastest parallelization above.
-   This code runs in 0.35 seconds, corresponding to 9x speed up to the serial CPU execution.
+   The second run takes 0.023 seconds, and the third run and further runs the same.
 
-5. Running the fastest GPU code with `./poisson.x 2048 1024`
-   takes 2.08 seconds whereas with serial CPU execution it takes 26.0 seconds,
-   so GPU is now 12 times faster.
-   It seems that our problem is likely too small for a GPU.
+   This corresponds to about 10x speed up to the serial CPU execution.
+
+5. Running the fastest GPU code with `./poisson.x 4096 1000`
+   takes 0.512 seconds whereas with serial CPU execution it takes 56.840 seconds,
+   so GPU is now 110 times faster.
+
+   This shows that the default system size is too small for GPU to see a proper benefit.
+
+   Note: we also see for this larger case that the first GPU run takes 0.782 seconds, so
+   about 0.2 seconds longer than the later runs (as in the smaller case above).
+   This shows that the "wake up time" becomes effectively amortized in real runs.
+
+   You are welcome to experiment with even larger sizes.

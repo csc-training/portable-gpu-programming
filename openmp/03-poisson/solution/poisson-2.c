@@ -2,31 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <omp.h>
-#include "../helper_functions.h"
+#include "helper_functions.h"
 
-int main(int argc, char *argv[])
+
+void run(const int n, const int niter)
 {
-    // Array size
-    int n = 1024;
-
-    // Number of iterations
-    int niter = 500;
-
-    if (argc > 2) {
-        niter = atoi(argv[2]);
-        if (niter < 1) {
-            printf("Number of iterations need to be greater than zero.\n");
-            return 1;
-        }
-    }
-    if (argc > 1) {
-        n = atoi(argv[1]);
-        if (n < 1) {
-            printf("Size needs to be greater than zero.\n");
-            return 1;
-        }
-    }
-
     printf("Using n = %d, niter = %d\n", n, niter);
 
     char filename[20];
@@ -58,7 +38,7 @@ int main(int argc, char *argv[])
     for (int it = 1; it < niter + 1; it++) {
 
         // Stencil update
-    #pragma omp target teams distribute parallel for
+        #pragma omp target teams distribute parallel for
         for (int i = 1; i < ny - 1; i++) {
             for (int j = 1; j < nx - 1; j++) {
                 int ind = i * nx + j;
@@ -91,3 +71,31 @@ int main(int argc, char *argv[])
     free(f);
 }
 
+
+int main(int argc, char *argv[])
+{
+    // Array size
+    int n = 1024;
+
+    // Number of iterations
+    int niter = 500;
+
+    if (argc > 2) {
+        niter = atoi(argv[2]);
+        if (niter < 1) {
+            printf("Number of iterations need to be greater than zero.\n");
+            return 1;
+        }
+    }
+    if (argc > 1) {
+        n = atoi(argv[1]);
+        if (n < 1) {
+            printf("Size needs to be greater than zero.\n");
+            return 1;
+        }
+    }
+
+    run(n, niter);
+
+    return 0;
+}

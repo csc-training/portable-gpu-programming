@@ -5,29 +5,8 @@
 #include "helper_functions.h"
 
 
-int main(int argc, char *argv[])
+void run(const int n, const int niter)
 {
-    // Array size
-    int n = 1024;
-
-    // Number of iterations
-    int niter = 500;
-
-    if (argc > 2) {
-        niter = atoi(argv[2]);
-        if (niter < 1) {
-            printf("Number of iterations need to be greater than zero.\n");
-            return 1;
-        }
-    }
-    if (argc > 1) {
-        n = atoi(argv[1]);
-        if (n < 1) {
-            printf("Size needs to be greater than zero.\n");
-            return 1;
-        }
-    }
-
     printf("Using n = %d, niter = %d\n", n, niter);
 
     char filename[20];
@@ -91,3 +70,31 @@ int main(int argc, char *argv[])
     free(f);
 }
 
+
+int main(int argc, char *argv[])
+{
+    // Array size
+    int n = 1024;
+
+    // Number of iterations
+    int niter = 500;
+
+    if (argc > 2) {
+        niter = atoi(argv[2]);
+        if (niter < 1) {
+            printf("Number of iterations need to be greater than zero.\n");
+            return 1;
+        }
+    }
+    if (argc > 1) {
+        n = atoi(argv[1]);
+        if (n < 1) {
+            printf("Size needs to be greater than zero.\n");
+            return 1;
+        }
+    }
+
+    run(n, niter);
+
+    return 0;
+}

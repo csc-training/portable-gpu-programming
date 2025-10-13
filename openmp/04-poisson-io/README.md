@@ -24,6 +24,6 @@ The [solution directory](solution/) contains a model solution and discussion on 
    You can use the following sanity checks on command line:
 
        diff u000000.bin u000100.bin  # These files should differ
-       diff u000500.bin u_end.bin  # These files should be the same (no output from diff)
+       diff u000500.bin u_end.bin    # These files should be the same (no output from diff)
 
    You can also use the attached Jupyter notebook to visualize the data dumps to check that they make sense.

@@ -2,31 +2,11 @@
 #include <stdlib.h>
 #include <string.h>
 #include <omp.h>
-#include "../helper_functions.h"
+#include "helper_functions.h"
 
-int main(int argc, char *argv[])
+
+void run(const int n, const int niter)
 {
-    // Array size
-    int n = 1024;
-
-    // Number of iterations
-    int niter = 500;
-
-    if (argc > 2) {
-        niter = atoi(argv[2]);
-        if (niter < 1) {
-            printf("Number of iterations need to be greater than zero.\n");
-            return 1;
-        }
-    }
-    if (argc > 1) {
-        n = atoi(argv[1]);
-        if (n < 1) {
-            printf("Size needs to be greater than zero.\n");
-            return 1;
-        }
-    }
-
     printf("Using n = %d, niter = %d\n", n, niter);
 
     char filename[20];
@@ -49,15 +29,6 @@ int main(int argc, char *argv[])
     write_array(filename, u, n2);
     write_array("f.bin", f, n2);
 
-    // Wake up the GPU (no data transfered back to host)
-#pragma omp target teams distribute parallel for collapse(2) map(to: u[0:nx*ny]) map(to: unew[0:nx*ny])
-    for (int i = 1; i < ny - 1; i++) {
-        for (int j = 1; j < nx - 1; j++) {
-            int ind = i * nx + j;
-            u[ind] += unew[ind] * u[ind];  // This is just adding and multiplying zeroes
-        }
-    }
-
     // Iterate
     double t0 = omp_get_wtime();
 
@@ -69,9 +40,9 @@ int main(int argc, char *argv[])
     for (int it = 1; it < niter + 1; it++) {
 
         // Stencil update
-    #pragma omp target teams distribute nowait depend(in: u) depend(out: unew)
+        #pragma omp target nowait depend(in: u) depend(out: unew)
+        #pragma omp teams distribute parallel for collapse(2)
         for (int i = 1; i < ny - 1; i++) {
-        #pragma omp parallel for
             for (int j = 1; j < nx - 1; j++) {
                 int ind = i * nx + j;
                 int ip = (i + 1) * nx + j;
@@ -100,6 +71,7 @@ int main(int argc, char *argv[])
             #pragma omp target update from(u[0:nx*ny])
             it_at_host = it;
         }
+
     }
 
     // Write data from the previous iteration
@@ -124,3 +96,35 @@ int main(int argc, char *argv[])
     free(f);
 }
 
+
+int main(int argc, char *argv[])
+{
+    // Array size
+    int n = 1024;
+
+    // Number of iterations
+    int niter = 500;
+
+    if (argc > 2) {
+        niter = atoi(argv[2]);
+        if (niter < 1) {
+            printf("Number of iterations need to be greater than zero.\n");
+            return 1;
+        }
+    }
+    if (argc > 1) {
+        n = atoi(argv[1]);
+        if (n < 1) {
+            printf("Size needs to be greater than zero.\n");
+            return 1;
+        }
+    }
+
+    for (int i = 0; i < 3; i++) {
+        printf("RUN %d\n", i);
+        run(n, niter);
+        fflush(stdout);
+    }
+
+    return 0;
+}

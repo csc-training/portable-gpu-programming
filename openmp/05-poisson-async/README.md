@@ -13,17 +13,13 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
 ### Exercise: Offload to GPU
 
-1. We have added a roctx timer to the `write_array()` function for measuring the time spent in this function.
+1. The `write_array()` helper function has timing capability with roctx library that can be enabled like this:
 
-   In order to compile this code, link to the roctx library:
+       cc -O3 -fopenmp poisson.c -DTRACE -lroctx64 -o poisson.x
 
-       cc -fopenmp poisson.c -lroctx64 -o poisson.x
-
-   And this is how you can run it with a profiler:
+   And this is how you can run it with a profiler (**always remove old files `rm results.*` before running again**):
 
        srun -p dev-g --nodes=1 --ntasks-per-node=1 --gpus-per-node=1 -t 0:10:00 rocprof --hip-trace --roctx-trace ./poisson.x
-
-   This creates a file `results.json`. Transfer this file to your computer, and open it in ui.perfetto.dev.
 
    You should see in the profile kernel launches, data transfers, host hip calls, and `write_array()` functions.
 

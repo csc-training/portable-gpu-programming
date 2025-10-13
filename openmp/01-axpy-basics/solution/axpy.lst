@@ -45,9 +45,9 @@ Legend:
 27.               print_array("y", y, N);
 28.           
 29.               // Calculate axpy
-30.   I 0--<> #pragma omp target teams distribute parallel for
+30. + I 0--<> #pragma omp target teams distribute parallel for
 31. +   M---<     for (int i = 0; i < N; i++) {
-32.     M             y[i] += alpha * x[i];
+32. +   M             y[i] += alpha * x[i];
 33.     M--->     }
 34.           
 35.               // Print values
@@ -58,4 +58,10 @@ Legend:
 
 ----------
 
+30. loop not distributed: loop is not bottom tested
+30. loop not distributed: use -Rpass-analysis=loop-distribute for more info
+30. loop not vectorized
+
 31. Outlined parallel region
+
+32. hoisting bitcast

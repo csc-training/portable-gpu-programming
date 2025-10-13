@@ -14,7 +14,7 @@ The provided code can be used as follows.
 
 Compile the code:
 
-    cc axpy.c -o axpy.x
+    cc -O3 axpy.c -o axpy.x
 
 Run the program on a single CPU core:
 
@@ -32,7 +32,7 @@ Expected output:
 
 Note that you can change the array size at compile time as follows:
 
-    cc -DN=5 axpy.c -o axpy.x
+    cc -O3 -DN=5 axpy.c -o axpy.x
 
 Expected output:
 
@@ -59,7 +59,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    Compile the code:
 
-       cc -fopenmp axpy.c -o axpy.x
+       cc -O3 -fopenmp axpy.c -o axpy.x
 
    Run the program on a single GPU:
 
@@ -92,7 +92,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
 4. Compile the code with diagnostics:
 
-       cc -fopenmp -fsave-loopmark axpy.c -o axpy.x
+       cc -O3 -fopenmp -fsave-loopmark axpy.c -o axpy.x
 
    This creates a file 'axpy.lst'. Examine its content.
 
@@ -115,7 +115,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    Then, compile the code as above, but now the target will be CPU threads due to the different environment:
 
-       cc -fopenmp axpy.c -o axpy.x
+       cc -O3 -fopenmp axpy.c -o axpy.x
 
    Run the program on a CPU partition with 4 threads:
 

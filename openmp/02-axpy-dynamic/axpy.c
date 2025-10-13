@@ -2,19 +2,8 @@
 #include <stdlib.h>
 #include "print_array.h"
 
-int main(int argc, char *argv[])
+void run(const int n)
 {
-    // Array size
-    int n = 102400;
-
-    if (argc > 1) {
-        n = atoi(argv[1]);
-        if (n < 1) {
-            printf("Size needs to be greater than zero.\n");
-            return 1;
-        }
-    }
-
     printf("Using n = %d\n", n);
 
     double alpha, *x, *y;
@@ -47,5 +36,23 @@ int main(int argc, char *argv[])
 
     free(y);
     free(x);
+}
+
+
+int main(int argc, char *argv[])
+{
+    // Array size
+    int n = 102400;
+
+    if (argc > 1) {
+        n = atoi(argv[1]);
+        if (n < 1) {
+            printf("Size needs to be greater than zero.\n");
+            return 1;
+        }
+    }
+
+    run(n);
+
     return 0;
 }

@@ -5,6 +5,9 @@ In this exercise we start looking on data mapping clauses.
 Starting from the solution of the previous exercise, we have now modified the code so that
 the array size is not a compile time constant but instead read from a command line argument.
 
+We have moved the `main()` function with all the command line argument parsing
+to the bottom of the file. The function `run()` in the top of the file is of most interest for us.
+
 The code can be compiled for serial execution as before:
 
     cc -O3 axpy.c -o axpy.x

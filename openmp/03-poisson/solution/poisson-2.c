@@ -80,17 +80,17 @@ int main(int argc, char *argv[])
     // Number of iterations
     int niter = 500;
 
-    if (argc > 2) {
-        niter = atoi(argv[2]);
-        if (niter < 1) {
-            printf("Number of iterations need to be greater than zero.\n");
-            return 1;
-        }
-    }
     if (argc > 1) {
         n = atoi(argv[1]);
         if (n < 1) {
             printf("Size needs to be greater than zero.\n");
+            return 1;
+        }
+    }
+    if (argc > 2) {
+        niter = atoi(argv[2]);
+        if (niter < 1) {
+            printf("Number of iterations need to be greater than zero.\n");
             return 1;
         }
     }

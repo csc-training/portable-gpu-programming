@@ -38,9 +38,8 @@ void run(const int n, const int niter)
     for (int it = 1; it < niter + 1; it++) {
 
         // Stencil update
-        #pragma omp target teams distribute
+        #pragma omp target teams distribute parallel for collapse(2)
         for (int i = 1; i < ny - 1; i++) {
-            #pragma omp parallel for
             for (int j = 1; j < nx - 1; j++) {
                 int ind = i * nx + j;
                 int ip = (i + 1) * nx + j;

@@ -40,7 +40,7 @@ void run(const int n, const int niter)
     for (int it = 1; it < niter + 1; it++) {
 
         // Stencil update
-        #pragma omp target nowait depend(in: u) depend(out: unew)
+        #pragma omp target nowait depend(in: u[0:nx*ny]) depend(out: unew[0:nx*ny])
         #pragma omp teams distribute parallel for collapse(2)
         for (int i = 1; i < ny - 1; i++) {
             for (int j = 1; j < nx - 1; j++) {
@@ -59,7 +59,7 @@ void run(const int n, const int niter)
         unew = tmp;
 
         // Write data
-        if (it % 100 == 0) {
+        if (it % 1000 == 0) {
             // Write data from the previous iteration
             if (it_at_host > 0) {
                 sprintf(filename, "u%06d.bin", it_at_host);
@@ -105,13 +105,9 @@ int main(int argc, char *argv[])
     // Number of iterations
     int niter = 500;
 
-    if (argc > 2) {
-        niter = atoi(argv[2]);
-        if (niter < 1) {
-            printf("Number of iterations need to be greater than zero.\n");
-            return 1;
-        }
-    }
+    // Number of repetitions
+    int nrep = 3;
+
     if (argc > 1) {
         n = atoi(argv[1]);
         if (n < 1) {
@@ -119,8 +115,22 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
+    if (argc > 2) {
+        niter = atoi(argv[2]);
+        if (niter < 1) {
+            printf("Number of iterations need to be greater than zero.\n");
+            return 1;
+        }
+    }
+    if (argc > 3) {
+        nrep = atoi(argv[3]);
+        if (nrep < 1) {
+            printf("Number of repetitions need to be greater than zero.\n");
+            return 1;
+        }
+    }
 
-    for (int i = 0; i < 3; i++) {
+    for (int i = 0; i < nrep; i++) {
         printf("RUN %d\n", i);
         run(n, niter);
         fflush(stdout);

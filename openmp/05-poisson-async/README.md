@@ -2,7 +2,7 @@
 
 In this exercise we practise asynchronous kernel execution.
 
-We start from the previous code that writes the array on every 100th iteration to the disk.
+We start from the previous code that writes the array on every 1000th iteration to the disk.
 
 The kernel launches are synchronous by default in OpenMP offload.
 This means that the host process is waiting for the GPU kernel to finish before it proceeds with the host code.
@@ -17,9 +17,14 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
        cc -O3 -fopenmp poisson.c -DTRACE -lroctx64 -o poisson.x
 
-   And this is how you can run it with a profiler (**always remove old files `rm results.*` before running again**):
+   And this is how you can run the code with a profiler (**always remove old outputs before running profiler!**):
 
-       srun -p dev-g --nodes=1 --ntasks-per-node=1 --gpus-per-node=1 -t 0:10:00 rocprof --hip-trace --roctx-trace ./poisson.x
+       rm results.*; srun -p dev-g --nodes=1 --ntasks-per-node=1 --gpus-per-node=1 -t 0:10:00 rocprof --hip-trace --roctx-trace ./poisson.x 4096 5000 1
+
+   Note: we run here a bigger case (4096) so that the kernel execution is not too fast (takes more time than kernel launch)
+   and we run only for one repetition to reduce the profile file size.
+
+   This creates a file `results.json`. Transfer this file to your computer and open it in ui.perfetto.dev.
 
    You should see in the profile kernel launches, data transfers, host hip calls, and `write_array()` functions.
 
@@ -30,7 +35,9 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    You can check the files by `diff`:
 
-       diff u000000.bin u000100.bin  # These files should differ
        diff u000100.bin u000100_old_file_from_synchronous_code.bin  # These files should be exactly the same
+       diff u000200.bin u000200_old_file_from_synchronous_code.bin  # These files should be exactly the same
+       ...
+       diff u000500.bin u000500_old_file_from_synchronous_code.bin  # These files should be exactly the same
 
    Do you get any speed up by overlapping computation and I/O?

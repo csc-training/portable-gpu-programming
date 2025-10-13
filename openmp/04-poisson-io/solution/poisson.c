@@ -56,7 +56,7 @@ void run(const int n, const int niter)
         unew = tmp;
 
         // Write data
-        if (it % 100 == 0) {
+        if (it % 1000 == 0) {
             #pragma omp target update from(u[0:nx*ny])
             sprintf(filename, "u%06d.bin", it);
             write_array(filename, u, n2);

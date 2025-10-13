@@ -57,7 +57,7 @@ void run(const int n, const int niter)
 
         // Write data
         // TODO: Fix me
-        if (it % 100 == 0) {
+        if (it % 1000 == 0) {
             sprintf(filename, "u%06d.bin", it);
             write_array(filename, u, n2);
         }

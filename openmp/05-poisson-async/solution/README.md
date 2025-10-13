@@ -18,3 +18,8 @@
    Note that `depend` clauses are needed for the correctness.
    Without them, the kernels from different iterations could execute in parallel
    on different streams.
+
+   With this asynchronous code, the run time has reduced from 2.5 to 1.9 seconds,
+   so the run time is the same is without I/O step. The remaining difference is
+   due to the final write after the 5000th iteration which is timed also
+   (a single write takes about 0.2 seconds).

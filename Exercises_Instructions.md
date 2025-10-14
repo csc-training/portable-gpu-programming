@@ -240,6 +240,7 @@ srun ./my_gpu_exe
 
 The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu`, while on Friday `...-fri`.
 On Mahti we have 1 gpu node reserved for us. 
+
 At any time , one can use `--partition=gputest`  without the reservation argument and with `--gres=gpu:a100:x` (`x=1,2,3,` or `4`).
 
 For multi-gpu applications one has to use `--gres=gpu:a100:x`, where `x` is the number of gpus matching the number of tasks per node.
@@ -262,8 +263,10 @@ srun ./my_gpu_exe
 ```
 On LUMI we have 6 gpu nodes reserved for us. 
 
-At any time , you can use `--partition=dev-g`  without the reservation argument.
+At any time , one can use `--partition=dev-g`  without the reservation argument.
+
 For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the number of gpus. 
+
 Other useful options for both Mahti and LUMI are `--nodes` and `--ntasks-per-node` which replace the `--ntasks`. 
 
 

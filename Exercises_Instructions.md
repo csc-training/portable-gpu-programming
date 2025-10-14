@@ -238,10 +238,11 @@ Example `job.sh`  using 1 GPU:
 srun ./my_gpu_exe
 ```
 
-The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu, while on Friday `...-fri`.
+The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu`, while on Friday `...-fri`.
 On Mahti we have 1 gpu node reserved for us. 
 At any time , one can use `--partition=gputest`  without the reservation argument and with `--gres=gpu:a100:x` (`x=1,2,3,` or `4`).
-For multi-gpu applications one has to use `--gres=gpu:a100:x`, where `x` is the number of gpus.
+
+For multi-gpu applications one has to use `--gres=gpu:a100:x`, where `x` is the number of gpus matching the number of tasks per node.
 ### Running GPU applications on LUMI
 
 Example `job.sh` using 1 GPU:

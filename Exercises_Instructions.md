@@ -265,8 +265,9 @@ On LUMI we have 6 gpu nodes reserved for us.
 
 At any time , one can use `--partition=dev-g`  without the reservation argument.
 
-For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the number of gpus. 
+For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the number of gpus per node. 
 
 Other useful options for both Mahti and LUMI are `--nodes` and `--ntasks-per-node` which replace the `--ntasks`. 
 
+**Unless required by the exercise onwe should always use 1 GPU!**
 

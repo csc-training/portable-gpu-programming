@@ -36,21 +36,21 @@ ssh  <username>@mahti.csc.fi
 
 ### Disk area
 
-The (computing and storage) resources can be accessed on supercomputers via project-based allocation system, where users are granted access based on the specific needs and goals of their projects. Running applications and storage area are directly linked ot this projects. For this event we have been granted access to the training `project_2012125` on Mahti and `project_462000752` on LUMI.
+The (computing and storage) resources can be accessed on supercomputers via project-based allocation system, where users are granted access based on the specific needs and goals of their projects. Running applications and storage area are directly linked ot this projects. For this event we have been granted access to the training `project_2012125` on Mahti and `project_462001074` on LUMI.
 
 All the exercises in the supercomputers have to be carried out in the **scratch** disk area. The name of the scratch directory can be queried with the commands `csc-workspaces` on Mahti and `lumi-workspaces` onLUMI. As the base directory is shared between members of the project, you should create your own
 directory:
 
 on Mahti
 ```
-cd /scratch/project_2012125
+cd /scratch/project_2015315
 mkdir -p $USER
 cd $USER
 ```
 
 on LUMI
 ```
-cd /scratch/project_462000752
+cd /scratch/project_462001074
 mkdir -p $USER
 cd $USER
 ```
@@ -227,7 +227,7 @@ Example `job.sh`  using 1 GPU:
 ```bash
 #!/bin/bash
 #SBATCH --job-name=example
-#SBATCH --account=project_2012125
+#SBATCH --account=project_2015315
 #SBATCH --partition=gpusmall
 #SBATCH --reservation=portgp-2025-tue # This changes every day to -wed, -thu and -fri, valid 09:00 to 17:00 
 #SBATCH --time=00:05:00

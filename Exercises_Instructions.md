@@ -139,12 +139,14 @@ Compile sycl code:
 
 Set up the environment:
     
-    module load craype-x86-trento craype-accel-amd-gfx90a rocm/6.0.3
-    export PATH=/projappl/project_462000752/ACPP/bin/:$PATH
-    export LD_LIBRARY_PATH=/appl/lumi/SW/LUMI-24.03/G/EB/Boost/1.83.0-cpeGNU-24.03/lib64/:$LD_LIBRARY_PATH
-    export LD_PRELOAD=/opt/rocm-6.0.3/llvm/lib/libomp.so
+    module load LUMI
+    module load partition/G
+    module load rocm/6.2.2
     export  HSA_XNACK=1 # enables managed memory
     export MPICH_GPU_SUPPORT_ENABLED=1                                # Needed for using GPU-aware MPI
+    export PATH=/projappl/project_462001074/apps/ACPP/bin:$PATH
+    export LD_LIBRARY_PATH=/appl/lumi/SW/LUMI-24.03/G/EB/Boost/1.83.0-cpeCray-24.03/lib64/
+    export LD_PRELOAD=/appl/lumi/SW/LUMI-24.03/G/EB/rocm/6.2.2/llvm/lib/libomp.so
 
 Compile sycl code:
 
@@ -170,44 +172,29 @@ $ mpicxx -showme
 We note that underneath `mpicxx` is calling `g++` with a lots of MPI related flags. We can obtain and use these programmatically with `mpicxx --showme:compile` and `mpicxx --showme:link`
 for compiling the SYCL+MPI codes:
 ```
-icpx -fuse-ld=lld -std=c++20 -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda -Xsycl-target-backend=nvptx64-nvidia-cuda --cuda-gpu-arch=sm_80 `mpicxx --showme:compile` `mpicxx --showme:link` <sycl_mpi_code>.cpp
-```
-or
-```
-module purge
-module use /scratch/project_2012125/cristian/spack/share/spack/modules/linux-rhel8-x86_64_v3/
-module load hipsycl/24.06.0-gcc-10.4.0-4nny2ja
-module load gcc/10.4.0
-module load openmpi/4.1.5-cuda
+export PATH=/projappl/project_2015315/apps/ACPP/bin/:$PATH
+export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
 export LD_LIBRARY_PATH=/appl/spack/v020/install-tree/gcc-8.5.0/gcc-10.4.0-2oazqj/lib64/:$LD_LIBRARY_PATH
-export LD_PRELOAD=/scratch/project_2012125/cristian/spack/opt/spack/linux-rhel8-x86_64_v3/gcc-10.4.0/llvm-18.1.8-bgdmsbegf2oymsvhmukkr22s2cjb4zxz/lib/libomp.so
+export LD_PRELOAD=/projappl/project_2015315/apps/LLVM/lib/x86_64-unknown-linux-gnu/libomp.so
 
 acpp -fuse-ld=lld -O3 -L/appl/spack/v020/install-tree/gcc-8.5.0/gcc-10.4.0-2oazqj/lib64/ --acpp-targets="omp.accelerated;cuda:sm_80" `mpicxx --showme:compile` `mpicxx --showme:link` <sycl_mpi_code>.cpp
 ```
 
 Similarly on LUMI. First we set up the environment and load the modules as indicated above
 ```bash
-source /projappl/project_462000752/intel/oneapi/setvars.sh --include-intel-llvm
-module load craype-x86-trento craype-accel-amd-gfx90a rocm/6.0.3
-export HSA_XNACK=1 # enables managed memory
-export MPICH_GPU_SUPPORT_ENABLED=1
+module load LUMI
+module load partition/G
+module load rocm/6.2.2
+export  HSA_XNACK=1 # enables managed memory
+export MPICH_GPU_SUPPORT_ENABLED=1                                # Needed for using GPU-aware MPI
 ```
 
-Now compile with intel compilers:
-```bash
-icpx -fuse-ld=lld -std=c++20 -O3 -fsycl -fsycl-targets=amdgcn-amd-amdhsa,spir64_x86_64 -Xsycl-target-backend=amdgcn-amd-amdhsa --offload-arch=gfx90a `CC --cray-print-opts=cflags` <sycl_mpi_code>.cpp `CC --cray-print-opts=libs`
+Now compile  with:
 ```
+export PATH=/projappl/project_462001074/apps/ACPP/bin:$PATH
+export LD_LIBRARY_PATH=/appl/lumi/SW/LUMI-24.03/G/EB/Boost/1.83.0-cpeCray-24.03/lib64/
+export LD_PRELOAD=/appl/lumi/SW/LUMI-24.03/G/EB/rocm/6.2.2/llvm/lib/libomp.so
 
-Or with AdaptiveCpp:
-```
-module load craype-x86-trento craype-accel-amd-gfx90a rocm/6.0.3
-export PATH=/projappl/project_462000752/ACPP/bin/:$PATH
-export LD_LIBRARY_PATH=/appl/lumi/SW/LUMI-24.03/G/EB/Boost/1.83.0-cpeGNU-24.03/lib64/:$LD_LIBRARY_PATH
-export LD_PRELOAD=/opt/rocm-6.0.3/llvm/lib/libomp.so
-export HSA_XNACK=1 # enables managed memory
-export MPICH_GPU_SUPPORT_ENABLED=1
-```
-```
 acpp -O3 --acpp-targets="omp.accelerated;hip:gfx90a" `CC --cray-print-opts=cflags` <sycl_mpi_code>.cpp `CC --cray-print-opts=libs`
 ```
 
@@ -225,56 +212,24 @@ You can check the status of your jobs with `squeue --me` and cancel possible han
 Alternatively to `sbatch`, you can submit directly to the batch job system with useful one-liners:
 
     # Mahti
-    srun --account=project_2012125 --partition=gputest --nodes=1 --ntasks-per-node=1 --cpus-per-task=1 --gres=gpu:a100:1 --time=00:05:00 ./my_gpu_exe
+    srun --account=project_2015315 --partition=gpusmall --reservation=portgp-2025-tue --ntasks=1 --cpus-per-task=1 --gres=gpu:a100:1 --time=00:05:00 ./my_gpu_exe
 
     # LUMI
-    srun --account=project_462000752 --partition=dev-g --nodes=1 --ntasks-per-node=1 --cpus-per-task=1 --gpus-per-node=1 --time=00:05:00 ./my_gpu_exe
+    srun --account=project_462001074 --partition=small-g --reservation=portgp-2025-tue  --ntasks=1 --cpus-per-task=1 --gpus-per-node=1 --time=00:05:00 ./my_gpu_exe
 
 The possible options here for `srun` are the same as in the job scripts below.
 
 **NOTE** Some exercises have additional instructions of how to run!
 
-### Useful environment variables
-
-Use [`SYCL_UR_TRACE`](https://intel.github.io/llvm-docs/EnvironmentVariables.html#sycl-pi-trace-options) to enable runtime tracing (e.g. device discovery):
-
-    export SYCL_UR_TRACE=1
-
-### Running on Mahti
-
-#### CPU applications
+### Running GPU applications on Mahti
 
 Example `job.sh`:
 ```bash
 #!/bin/bash
 #SBATCH --job-name=example
 #SBATCH --account=project_2012125
-#SBATCH --partition=medium
-#SBATCH --reservation=high_level_gpu_programming_medium_day_1 # This changes every day to _2 and _3, valid 09:00 to 17:00 
-#SBATCH --time=00:05:00
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1
-
-srun ./my_cpu_exe
-```
-
-The reservations `....medium_day_1` are valid on Wednesday, 09:00 to 17:00. On Thursday we will use `...medium_day_2` , while on Friday `...medium_day_3`.
-Outside the course hours, you can use `--partition=test` instead without the reservation argument.
-
-Some applications use MPI, in this case the number of node and number of tasks per node will have to be adjusted accordingly.
-
-#### GPU applications
-
-When running GPU programs, few changes need to made to the batch job
-script. The `partition` is now different, and one must also request explicitly a given number of GPUs per node. As an example, in order to use a
-single GPU with single MPI task and a single thread use example `job.sh`:
-```bash
-#!/bin/bash
-#SBATCH --job-name=example
-#SBATCH --account=project_2012125
 #SBATCH --partition=gpusmall
-#SBATCH --reservation=high_level_gpu_programming_gpumedium_day_1 # This changes every day to _2 and _3, valid 09:00 to 17:00 
+#SBATCH --reservation=portgp-2025-tue # This changes every day to -wed,-thu and -fri, valid 09:00 to 17:00 
 #SBATCH --time=00:05:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -283,37 +238,19 @@ single GPU with single MPI task and a single thread use example `job.sh`:
 
 srun ./my_gpu_exe
 ```
-The reservations `....medium_day_1` are valid on Wednesday, 09:00 to 17:00. On Thursday we will use `...medium_day_2` , while on Friday `...medium_day_3`.
-Outside the course hours, you can use `--partition=gputest` instead without the reservation argument.
+The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu, while on Friday `...-fri`.
+At any time , you can use `--partition=gputest` instead without the reservation argument.
 
-### Running on LUMI
-
-#### CPU applications
+### Running GPU applications on LUMI
 
 Example `job.sh`:
 
 ```bash
 #!/bin/bash
 #SBATCH --job-name=example
-#SBATCH --account=project_462000752
-#SBATCH --partition=small
-##SBATCH --reservation=GPUtraining_small
-#SBATCH --time=00:05:00
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
-#SBATCH --cpus-per-task=1
-
-srun ./my_cpu_exe
-```
-
-#### GPU applications
-
-```bash
-#!/bin/bash
-#SBATCH --job-name=example
-#SBATCH --account=project_462000752
+#SBATCH --account=project_462001074
 #SBATCH --partition=small-g
-#SBATCH --reservation=GPUtraining_small-g
+#SBATCH --reservation=portgp-2025-tue # This changes every day to -wed,-thu and -fri, valid 09:00 to 17:00 
 #SBATCH --time=00:05:00
 #SBATCH --nodes=1
 #SBATCH --ntasks-per-node=1
@@ -323,14 +260,3 @@ srun ./my_cpu_exe
 srun ./my_gpu_exe
 ```
 Similarly to Mahti, on LUMI we have 2 cpu nodes reservered for us, and as well 2 gpu nodes. 
-
-
-#### Container
-
-Running works as usual except that the code needs to be executed through the container:
-```bash
-#!/bin/bash
-...
-
-srun $CONTAINER_EXEC ./my_gpu_exe
-```

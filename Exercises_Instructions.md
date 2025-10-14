@@ -114,40 +114,6 @@ When we execute `module load cuda`, it will effectively modify the above environ
 
 SYCL is not part of the module system at the moment. The SYCL compilers were build for this training. We recommend that you use one of the two SYCL implementations.
 
-### Intel oneAPI compilers
-
-oneAPI is a collection of tool and library supporting a wide range of programming languange and parallel programming paradigms. It includes a SYCL implementation which supports all  Intel devices (CPUs, FPGAs, and GPUs) and has SYCL plug-ins for targeting Nvidia and AMD GPUs.
-
-#### oneAPI on Mahti
-
-Set up the environment:
-
-    source /projappl/project_2012125/intel/oneapi/setvars.sh --include-intel-llvm
-    module load gcc/10.4.0
-    module load cuda/12.6.1  # Needed for compiling to NVIDIA GPUs
-    module load  openmpi/4.1.5-cuda # Needed for using GPU-aware MPI
-
-Compile sycl code:
-
-    icpx -fuse-ld=lld -std=c++20 -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda,spir64_x86_64 -Xsycl-target-backend=nvptx64-nvidia-cuda --cuda-gpu-arch=sm_80 <sycl_code>.cpp
-
-Here `-fsycl` flag indicates that a sycl code is compiled and `-fsycl-targets` is used to instruct the compiler to generate optimized code for both CPU and GPU devices.
-
-#### oneAPI on LUMI
-
-Set up the environment:
-
-    source /projappl/project_462000752/intel/oneapi/setvars.sh --include-intel-llvm
-    module load craype-x86-trento craype-accel-amd-gfx90a rocm/6.0.3  # Needed for compiling to AMD GPUs
-    export  HSA_XNACK=1 # enables managed memory
-    export MPICH_GPU_SUPPORT_ENABLED=1                                # Needed for using GPU-aware MPI
-
-Compile sycl code:
-
-    icpx -fuse-ld=lld -std=c++20 -O3 -fsycl -fsycl-targets=amdgcn-amd-amdhsa,spir64_x86_64 -Xsycl-target-backend=amdgcn-amd-amdhsa --offload-arch=gfx90a <sycl_code>.cpp
-
-Here `-fsycl` flag indicates that a sycl code is compiled and `-fsycl-targets` is used to instruct the compiler to generate optimized code for both CPU and GPU devices.
-
 ### AdaptiveCpp
 
 This is another SYCL  implementation with support for many type of devices. No special set-up is needed, expect from loading the modules related to the backend (cuda or rocm).
@@ -159,9 +125,10 @@ Set up the environment:
     module load gcc/10.4.0
     module load cuda/12.6.1
     module load openmpi/4.1.5-cuda # Needed for using GPU-aware MPI
+    export PATH=/projappl/project_2015315/apps/ACPP/bin/:$PATH
     export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=/appl/spack/v020/install-tree/gcc-8.5.0/gcc-10.4.0-2oazqj/lib64/:$LD_LIBRARY_PATH
-    export export LD_PRELOAD=/projappl/project_2015315/apps/LLVM/lib/x86_64-unknown-linux-gnu/libomp.so
+    export LD_PRELOAD=/projappl/project_2015315/apps/LLVM/lib/x86_64-unknown-linux-gnu/libomp.so
     
 
 Compile sycl code:
@@ -182,42 +149,6 @@ Set up the environment:
 Compile sycl code:
 
     acpp -O3 --acpp-targets="omp.accelerated;hip:gfx90a" <sycl_code>.cpp
-
-### NVIDIA HPC on Mahti for stdpar
-
-Set up the environment:
-
-    ml purge
-    ml use /appl/opt/nvhpc/modulefiles
-    ml nvhpc-hpcx-cuda12/24.3
-    ml gcc/11.2.0
-    export PATH=/appl/spack/v017/install-tree/gcc-8.5.0/binutils-2.37-ed6z3n/bin:$PATH
-
-Compile stdpar code:
-
-    nvc++ -O4 -std=c++20 -stdpar=gpu -gpu=cc80 --gcc-toolchain=$(dirname $(which g++)) code.cpp
-
-### LUMI container with ROCm 6.2.4, hipstdpar, and AdaptiveCpp
-
-Set up the environment with container:
-
-    export CONTAINER_EXEC="singularity exec /projappl/project_462000752/rocm_6.2.4_stdpar_acpp.sif"
-    export HIPSTDPAR_PATH="/opt/rocm-6.2.4/include/thrust/system/hip/hipstdpar"
-    export SINGULARITY_BIND="/pfs,/scratch,/projappl,/project,/flash,/appl"
-    export SINGULARITYENV_LC_ALL=C
-    export HSA_XNACK=1  # needed for stdpar
-
-Compile stdpar code with hipcc:
-
-    $CONTAINER_EXEC hipcc -std=c++20 -O3 --hipstdpar --hipstdpar-path=$HIPSTDPAR_PATH --offload-arch=gfx90a:xnack+ code.cpp
-
-Compile stdpar code with acpp:
-
-    $CONTAINER_EXEC acpp -std=c++20 -O3 --acpp-stdpar --acpp-targets=hip:gfx90a -ltbb code.cpp
-
-Compile sycl code with acpp:
-
-    $CONTAINER_EXEC acpp -std=c++20 -O3 --acpp-targets=hip:gfx90a code.cpp
 
 ### MPI
 

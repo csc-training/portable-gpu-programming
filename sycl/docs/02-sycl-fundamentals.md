@@ -1,5 +1,5 @@
 ---
-title:    SYCL Fundamentals
+title:    Simple SYCL
 subtitle: Portable GPU Programming
 date:     October 2025
 lang:     en

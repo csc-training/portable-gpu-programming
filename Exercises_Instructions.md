@@ -157,7 +157,7 @@ This is another SYCL  implementation with support for many type of devices. No s
 Set up the environment:
 
     module load gcc/10.4.0
-    module load cuda/12.6.0
+    module load cuda/12.6.1
     module load openmpi/4.1.5-cuda # Needed for using GPU-aware MPI
     export LD_LIBRARY_PATH=$CUDA_HOME/lib64:$LD_LIBRARY_PATH
     export LD_LIBRARY_PATH=/appl/spack/v020/install-tree/gcc-8.5.0/gcc-10.4.0-2oazqj/lib64/:$LD_LIBRARY_PATH

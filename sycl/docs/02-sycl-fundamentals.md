@@ -5,7 +5,7 @@ date:     October 2025
 lang:     en
 ---
 
-# SYCL Fundamentals{.section}
+# Simple SYCL{.section}
 
 # SYCL Programming Model 
 

@@ -14,7 +14,10 @@
 
 - [Asynchronous kernel execution](05-poisson-async/)
 
-## Asynchronous kernel execution
+## Reduction
 
-- [Asynchronous kernel execution](05-poisson-async/)
+- [Reduction on GPU](06-poisson-reduction/)
 
+## Unified shared memory
+
+- [Jacobi iteration using unified shared memory](07-poisson-usm/)

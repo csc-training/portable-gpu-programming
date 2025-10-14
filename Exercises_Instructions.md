@@ -269,5 +269,5 @@ For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the 
 
 Other useful options for both Mahti and LUMI are `--nodes` and `--ntasks-per-node` which replace the `--ntasks`. 
 
-**Unless required by the exercise onwe should always use 1 GPU!**
+**Unless required by the exercise only should always use 1 GPU!**
 

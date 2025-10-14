@@ -5,7 +5,7 @@
 All course materials, slides and hands-out are available in the github repository. They can be downloaded with the command
 
 ```
-git clone https://github.com/csc-training/high-level-gpu-programming.git
+git clone https://github.com/csc-training/portable-gpu-programming.git
 ```
 
 If you have a GitHub account you can also **Fork** this repository and clone

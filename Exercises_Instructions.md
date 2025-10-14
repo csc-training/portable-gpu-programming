@@ -223,7 +223,7 @@ The possible options here for `srun` are the same as in the job scripts below.
 
 ### Running GPU applications on Mahti
 
-Example `job.sh`:
+Example `job.sh`  using 1 GPU:
 ```bash
 #!/bin/bash
 #SBATCH --job-name=example
@@ -231,19 +231,20 @@ Example `job.sh`:
 #SBATCH --partition=gpusmall
 #SBATCH --reservation=portgp-2025-tue # This changes every day to -wed,-thu and -fri, valid 09:00 to 17:00 
 #SBATCH --time=00:05:00
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --gres=gpu:a100:1
+#SBATCH --gres=gpu:a100_1g.5gb:1
 
 srun ./my_gpu_exe
 ```
-The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu, while on Friday `...-fri`.
-At any time , you can use `--partition=gputest` instead without the reservation argument.
 
+The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu, while on Friday `...-fri`.
+On Mahti we have 1 gpu node reserved for us. 
+At any time , one can use `--partition=gputest`  without the reservation argument with `--gres=gpu:a100:1` (or more than 1).
+For multi-gpu applications one has to use `--gres=gpu:a100:x`, where `x` is the number of gpus.
 ### Running GPU applications on LUMI
 
-Example `job.sh`:
+Example `job.sh` using 1 GPU:
 
 ```bash
 #!/bin/bash
@@ -252,11 +253,15 @@ Example `job.sh`:
 #SBATCH --partition=small-g
 #SBATCH --reservation=portgp-2025-tue # This changes every day to -wed,-thu and -fri, valid 09:00 to 17:00 
 #SBATCH --time=00:05:00
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=1
+#SBATCH --ntasks=1
 #SBATCH --cpus-per-task=1
-#SBATCH --gpus-per-node=1
+#SBATCH --gpus=1
 
 srun ./my_gpu_exe
 ```
-Similarly to Mahti, on LUMI we have 2 cpu nodes reservered for us, and as well 2 gpu nodes. 
+On LUMI we have 6 gpu nodes reserved for us. 
+
+At any time , you can use `--partition=dev-g`  without the reservation argument.
+For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the number of gpus. 
+
+

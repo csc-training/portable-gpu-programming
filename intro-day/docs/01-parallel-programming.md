@@ -151,7 +151,7 @@ Simple domains with different computational cost
 
 <br>
 <!-- Copyright CSC -->
-![](img/mandelbrot-domains.png){.center width=55%}
+![](img/mandelbrot-domains.png){.center width=50%}
 </div>
 
 

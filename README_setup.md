@@ -42,7 +42,7 @@ module load LUMI/24.03
 module load partition/G
 module load rocm/6.2.2
 ```
-Clone repository and Compile with both cpu and rocm support:
+Clone repository and Compile with both cpu and rocm support (the LLVM is provided by ROCM):
 ```
 git clone https://github.com/AdaptiveCpp/AdaptiveCpp.git
 cd AdaptiveCpp

@@ -143,7 +143,7 @@ Simple domains with similar computational cost
 
 <br>
 <!-- Copyright CSC -->
-![](img/eparallel.svg){.center width=70%}
+![](img/eparallel.svg){.center width=80%}
 </div>
 
 <div class=column>

@@ -55,4 +55,4 @@ make install
 
 ## Intel OneAPI on WSL:
 
-Please follow the instructions from this [Intel Page](https://www.intel.com/content/www/us/en/docs/oneapi/installation-guide-linux/2024-0/configure-wsl-2-for-gpu-workflows.html)
+Please follow the instructions from this [Intel Page](https://www.intel.com/content/www/us/en/docs/oneapi/installation-guide-linux/2024-0/configure-wsl-2-for-gpu-workflows.html).

@@ -275,9 +275,8 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
   - Competition over the same data can cause race conditions or deadlocks
   - Data distribution: local vs. global dependencies, load balance
 - Parallel programming models:
-  - The hardware target  affect the algorithm choice
   - Processes vs. Threads (include GPU programming model)
 - Parallel Programs run on Supecomputers
   - Nodes, Fast Interconect, Parallel Storage Servers
-  - LUMI: 2064 CPU nodes (~260k CPU cores), 2978 GPU nodes (~12k MI250X GPUs)
+  - LUMI: 2064 CPU nodes (~260k CPU cores), 2978 GPU nodes (~12k MI250X)
   - GPUs are becoming the norm 

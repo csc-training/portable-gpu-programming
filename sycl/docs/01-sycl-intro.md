@@ -24,7 +24,7 @@ lang:     en
  - **Productivity**: uses generic programming with templates and generic lambda functions.
 
 
- - **Portability**: it is a standard.
+ - **Portability**: it is a standard
 
 
  - **Performance**: implementations aim to optimize SYCL for specific hardware platforms
@@ -47,7 +47,7 @@ lang:     en
 
 # SYCL Implementations on Mahti and LUMI
 
-**Intel One API** + CodePlay Plug-ins for Nvidia and AMD:
+**Intel One API** ~~+ CodePlay Plug-ins for Nvidia and AMD~~:
 
   - CPUs, Intel GPUs, Intel FPGAs (via OpenCL or Level Zero)
   - ~~Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)~~
@@ -64,6 +64,6 @@ lang:     en
 
  - single, high-level, standard C++  programming model 
  - can target various heterogenous platforms in a single application
- - Portability, Productivity, Performance
+ - 3P: **Portability**, **Productivity**, **Performance**
  - SYCL implementations, specific adaptions 
- - SYCL on Mahti and LUMI: Intel OneAPi+CodePlay plug-ins, AdaptiveCpp
+ - SYCL on Mahti and LUMI: AdaptiveCpp

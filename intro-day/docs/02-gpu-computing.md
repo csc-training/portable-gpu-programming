@@ -7,7 +7,7 @@ lang:     en
 
 # Accelerators/GPUs {.section}
 
-# High Performance Computing through the ages
+# High Performance Computing through the Ages
 
 <div class="column">
 
@@ -33,7 +33,7 @@ lang:     en
 
 
 
-#  Tractor vs. 1024 chickens
+#  Tractor vs. 1024 Chickens
 
 <!-- ![<span style=" font-size:0.5em;">*Image credits: CUDA Programming Guide*</span> ](img/CPU-vs-GPU.jpg){.center width=45%} -->
 
@@ -67,7 +67,7 @@ lang:     en
   </ul>
 </div>
 
-# Challenges in using Accelerators/GPUs
+# Challenges in Using Accelerators/GPUs
 
 **Applicability**: Is your algorithm suitable for GPU?
 

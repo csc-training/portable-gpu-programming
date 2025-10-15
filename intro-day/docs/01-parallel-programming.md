@@ -277,7 +277,7 @@ Simple domains with different computational cost
   - Data distribution: local vs. global dependencies, load balance
 - Parallel programming models:
   - Processes vs. Threads (include GPU programming model)
-- Parallel Programs run on Supecomputers
+- Parallel Programs run on Supercomputers
   - Nodes, Fast Interconect, Parallel Storage Servers
   - LUMI: 2064 CPU nodes (~260k CPU cores), 2978 GPU nodes (~12k MI250X)
   - GPUs are becoming the norm 

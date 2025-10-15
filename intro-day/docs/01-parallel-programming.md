@@ -234,7 +234,7 @@ Simple domains with different computational cost
 <div class=column>
 <center>
 ![](img/lumi2.jpg){.center width=80%}
-EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
+<small> EuroHPC JU LUMI (HPE Cray EX) at CSC (2021–) </small>
 </center>
 </div>
 

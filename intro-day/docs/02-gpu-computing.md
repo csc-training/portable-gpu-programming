@@ -40,7 +40,7 @@ lang:     en
 <div class="column" style="width:49%;">
   <strong>CPU</strong>
 
-  ![](img/CPU.jpg){ width=45%} 
+  ![](img/CPU.jpg){ width=55%} 
   <div style="font-size:0.4em;">
     <em>Image credits: CUDA Programming Guide</em>
   </div>
@@ -55,7 +55,7 @@ lang:     en
 <div class="column" style="width:49%;">
   <strong>GPU</strong>
     
-  ![](img/GPU.jpg){width=45%}
+  ![](img/GPU.jpg){width=55%}
   <div style="font-size:0.4em;">
     <em>Image credits: CUDA Programming Guide</em>
   </div>

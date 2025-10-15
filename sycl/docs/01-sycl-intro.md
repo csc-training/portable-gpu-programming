@@ -50,7 +50,7 @@ lang:     en
 **Intel One API** + CodePlay Plug-ins for Nvidia and AMD:
 
   - CPUs, Intel GPUs, Intel FPGAs (via OpenCL or Level Zero)
-  - Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)
+  - ~~Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)~~
 
 **AdaptiveCpp** (former OpenSYCL, hipSYCL):
 

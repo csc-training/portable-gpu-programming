@@ -47,21 +47,16 @@ lang:     en
 
 # SYCL Implementations
 
-**Mahti and LUMI**
+- **Mahti and LUMI**
+   - **AdaptiveCpp** (former OpenSYCL, hipSYCL):
+     - CPUs (via OpenMP)
+     - Intel GPUs (via Level Zero) (**very limited support!**)
+     - Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)
 
-**AdaptiveCpp** (former OpenSYCL, hipSYCL):
-
-  - CPUs (via OpenMP)
-  - Intel GPUs (via Level Zero) (**very limited support!**)
-  - Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)
-
-**Intel GPUs**
-
-**Intel One API** ~~+ CodePlay Plug-ins for Nvidia and AMD~~:
-
-  - CPUs, Intel GPUs, Intel FPGAs (via OpenCL or Level Zero)
-  - ~~Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)~~
-
+- **Intel GPUs**
+  - **Intel One API** ~~+ CodePlay Plug-ins for Nvidia and AMD~~:
+    - CPUs, Intel GPUs, Intel FPGAs (via OpenCL or Level Zero)
+    - ~~Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)~~
 
 
 # Summary

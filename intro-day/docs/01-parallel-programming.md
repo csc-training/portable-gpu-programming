@@ -279,5 +279,5 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
   - Processes vs. Threads (include GPU programming model)
 - Parallel Programs run on Supecomputers
   - Nodes, Fast Interconect, Parallel Storage Servers
-  - LUMI: 2064 CPU nodes (~260,000 CPU cores), 2978 GPU nodes (~12,000 MI250X GPUs)
+  - LUMI: 2064 CPU nodes (~260k CPU cores), 2978 GPU nodes (~12k MI250X GPUs)
   - GPUs are becoming the norm 

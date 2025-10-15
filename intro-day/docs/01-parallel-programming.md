@@ -7,7 +7,7 @@ lang:     en
 
 # Parallel computing concepts {.section}
 
-# Computing in parallel
+# Computing in Parallel
 
 <div class=column>
 - Parallel computing
@@ -23,7 +23,7 @@ lang:     en
  ![](img/compp.svg){.center width=100%}
 </div>
 
-# Types of parallel problems
+# Types of Parallel Problems
 
 - Tightly coupled
     - Lots of interaction between subtasks
@@ -34,7 +34,7 @@ lang:     en
     - Example: Sequence alignment queries for multiple independent sequences in bioinformatics
 
 
-# Exposing parallelism: Data parallelism
+# Exposing Parallelism: Data Parallelism
 
 <div class=column>
 - Data parallelism
@@ -50,7 +50,7 @@ lang:     en
 </div>
 
 
-# Exposing parallelism: Tasking
+# Exposing Parallelism: Tasking
 
 - Task farm (main / worker)
 
@@ -63,9 +63,9 @@ lang:     en
 - There are normally more tasks than workers, and tasks are assigned dynamically
 
 
-# Parallel algorithms {.section}
+# Parallel Algorithms {.section}
 
-# What can be calculated in parallel?
+# Parallelizable Problems
 
 There needs to be independent computations<br><br>
 
@@ -98,7 +98,7 @@ Loop can be parallelized over `i`
 
 </div>
 
-# What happens when there is  competition over the same data?
+# Data Conflicts in Parallel Execution
 
 - Race condition
     - Two (or more) processes access shared data concurrently
@@ -111,7 +111,7 @@ Loop can be parallelized over `i`
     - System halts or stalls due to resource unavailability
 
 
-# Data distribution: local vs. global dependencies
+# Data Distribution: Local vs. Global Dependencies
 
 <div class=column>
 Local dependencies
@@ -136,7 +136,7 @@ Global dependencies
 
 - Number of communication events per process increases with number of execution units
 
-# Data distribution: load balance
+# Data Distribution: Load Balance
 
 <div class=column>
 Simple domains with similar computational cost
@@ -155,9 +155,9 @@ Simple domains with different computational cost
 </div>
 
 
-# Parallel programming models {.section}
+# Parallel Programming Models {.section}
 
-# Parallel programming models
+# Parallel Programming Models I
 
 - Parallel execution is based on threads or processes (or both) which run at the same time on different CPU cores
 - Processes
@@ -167,7 +167,7 @@ Simple domains with different computational cost
     - Interaction is based on shared memory, i.e. each thread can access directly other threads data
     - OpenMP, pthreads
 
-# Parallel programming models
+# Parallel Programming Models II
 
 <!-- Copyright CSC -->
  ![](img/processes-threads.svg){.center width=80%}
@@ -188,7 +188,7 @@ Simple domains with different computational cost
 
 </div>
 
-# GPU programming models
+<!-- # GPU Programming Models I
 
 - GPUs are co-processors to the CPU
 - CPU controls the work flow:
@@ -197,9 +197,9 @@ Simple domains with different computational cost
   - handles the data transfers between CPU and GPUs
 - GPU kernels run multiple threads
     - Typically much more threads than "GPU cores"
-- When using multiple GPUs, CPU runs typically multiple processes (MPI) or multiple threads (OpenMP)
+- When using multiple GPUs, CPU runs typically multiple processes (MPI) or multiple threads (OpenMP) -->
 
-# GPU programming models
+# GPU Programming Models
 
 ![](img/gpu-offload.svg){.center width=40%}
 <br>
@@ -213,13 +213,13 @@ Simple domains with different computational cost
 # Supercomputers {.section}
 
 
-# Anatomy of a supercomputer
+# Anatomy of a Supercomputer
 
 <!-- Copyright CSC -->
 ![](img/cluster_diagram.svg){.center width=100%}
 
 
-# Current supercomputers
+# Current Supercomputers
 
 <div class=column>
 - Large computer clusters
@@ -242,7 +242,7 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
 
 
 
-# GPUs are becoming the norm
+# GPUs: The New Default for Performance <!-- GPUs are becoming the norm -->
 
 <center>
 ![](img/top500_nov21.svg){.center width=65%}
@@ -250,7 +250,7 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
 - Top500 supercomputers grouped by the accelator type (Nov 2021 list)
 </center>
 
-# GPUs are becoming the norm
+# GPUs: The New Default for Performance <!-- GPUs are becoming the norm -->
 
 <center>
 ![](img/top500_nov22.svg){.center width=65%}
@@ -258,7 +258,7 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
 - Top500 supercomputers grouped by the accelator type (Nov 2022 list)
 </center>
 
-# GPUs are becoming the norm
+# GPUs: The New Default for Performance <!-- GPUs are becoming the norm -->
 
 <center>
 ![](img/top500_nov24.svg){.center width=65%}

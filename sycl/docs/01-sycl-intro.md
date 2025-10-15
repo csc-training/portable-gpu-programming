@@ -45,18 +45,22 @@ lang:     en
 ![https://www.khronos.org/blog/sycl-2020-what-do-you-need-to-know](img/2020-blog-sycl-03.jpg){.center width=75%}
 
 
-# SYCL Implementations on Mahti and LUMI
+# SYCL Implementations
 
-**Intel One API** ~~+ CodePlay Plug-ins for Nvidia and AMD~~:
-
-  - CPUs, Intel GPUs, Intel FPGAs (via OpenCL or Level Zero)
-  - ~~Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)~~
+**Mahti and LUMI**
 
 **AdaptiveCpp** (former OpenSYCL, hipSYCL):
 
   - CPUs (via OpenMP)
   - ~~Intel GPUs (via Level Zero)~~
   - Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)
+
+**Intel GPUs**
+
+**Intel One API** ~~+ CodePlay Plug-ins for Nvidia and AMD~~:
+
+  - CPUs, Intel GPUs, Intel FPGAs (via OpenCL or Level Zero)
+  - ~~Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)~~
 
 
 

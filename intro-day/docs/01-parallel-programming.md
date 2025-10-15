@@ -143,7 +143,7 @@ Simple domains with similar computational cost
 
 <br>
 <!-- Copyright CSC -->
-![](img/eparallel.svg){.center width=50%}
+![](img/eparallel.svg){.center width=60%}
 </div>
 
 <div class=column>
@@ -151,13 +151,13 @@ Simple domains with different computational cost
 
 <br>
 <!-- Copyright CSC -->
-![](img/mandelbrot-domains.png){.center width=40%}
+![](img/mandelbrot-domains.png){.center width=50%}
 </div>
 
 
 # Parallel Programming Models {.section}
 
-# Parallel Programming Models I
+<!-- # Parallel Programming Models I
 
 - Parallel execution is based on threads or processes (or both) which run at the same time on different CPU cores
 - Processes
@@ -165,9 +165,9 @@ Simple domains with different computational cost
     - MPI (Message passing interface)
 - Threads
     - Interaction is based on shared memory, i.e. each thread can access directly other threads data
-    - OpenMP, pthreads
+    - OpenMP, pthreads -->
 
-# Parallel Programming Models II
+# Parallel Programming Models
 
 <!-- Copyright CSC -->
  ![](img/processes-threads.svg){.center width=80%}
@@ -177,6 +177,7 @@ Simple domains with different computational cost
 - Independent execution units
 - MPI launches N processes at application startup
 - Works over multiple nodes
+- Data exchange via messages
 </div>
 <div class=column>
 
@@ -185,6 +186,7 @@ Simple domains with different computational cost
 - Threads share memory space
 - Threads are created and destroyed  (parallel regions)
 - Limited to a single node
+- Data visible by all threads
 
 </div>
 

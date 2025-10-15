@@ -227,9 +227,9 @@ Simple domains with different computational cost
 - Large computer clusters
 - A lot of standard, high-end server hardware connected to each other
 - High-speed interconnect between compute nodes
-- Example: LUMI
+<!-- - Example: LUMI
   - 2064 CPU nodes<br>(~260,000 CPU cores in total)
-  - 2978 GPU nodes<br>(~12,000 MI250X GPUs in total)
+  - 2978 GPU nodes<br>(~12,000 MI250X GPUs in total) -->
 </div>
 <div class=column>
 <center>
@@ -237,6 +237,8 @@ Simple domains with different computational cost
 EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
 </center>
 </div>
+- LUMI:
+  - 2064 CPU nodes (~260k CPU cores), 2978 GPU nodes (~12k MI250X GPUs)
 
 # Lumi
 

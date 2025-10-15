@@ -231,7 +231,7 @@ Simple domains with different computational cost
 </div>
 <div class=column>
 <center>
-![](img/lumi2.jpg){.center width=50%}
+![](img/lumi2.jpg){.center width=70%}
 EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
 </center>
 </div>
@@ -268,3 +268,19 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)
 
 
 # Summary
+
+- Parallel Computing: data is splitted in small independent parts
+  - Tightly coupled vs. Embarrassingly parallel
+  - Data Parallelism vs. Task Parallelism
+- Parallelization causes an extra cost not present in a serial program
+  - Competition over the same data can cause race conditions or deadlocks
+  - Data distribution: local vs. global dependencies
+  - Data distribution: load balance
+- Parallel programming models:
+  - The hardware target  affect the algorithm choice
+  - Processes vs. Threads
+      - GPU programming models are threads based
+- Parallel Programs run on Supecomputers
+  - Nodes, Fast Interconect, Parallel Storage Servers
+  - LUMI: 2064 CPU nodes (~260,000 CPU cores), 2978 GPU nodes (~12,000 MI250X GPUs)
+  - GPUs are becoming the norm 

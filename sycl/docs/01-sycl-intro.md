@@ -52,7 +52,7 @@ lang:     en
 **AdaptiveCpp** (former OpenSYCL, hipSYCL):
 
   - CPUs (via OpenMP)
-  - ~~Intel GPUs (via Level Zero)~~
+  - Intel GPUs (via Level Zero) (**very limited support!**)
   - Nvidia GPUs (via CUDA), AMD GPUs (via ROCM)
 
 **Intel GPUs**

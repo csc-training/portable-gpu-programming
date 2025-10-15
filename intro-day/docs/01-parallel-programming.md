@@ -238,30 +238,9 @@ Simple domains with different computational cost
 </center>
 </div>
 
-
-# Current Supercomputers
-
-- Large computer clusters
-- A lot of standard, high-end server hardware connected to each other
-- High-speed interconnect between compute nodes
-<div class=column>
-- Example: LUMI
-  - 2064 CPU nodes<br>(~260,000 CPU cores in total)
-  - 2978 GPU nodes<br>(~12,000 MI250X GPUs in total) 
-</div>
-<div class=column>
-<center>
-![](img/lumi2.jpg){.center width=50%}
-<small> EuroHPC JU LUMI (HPE Cray EX) at CSC (2021–) </small>
-</center>
-</div>
-
-
-
 # Lumi
 
  ![](img/lumi.png){.center width=50%}
-
 
 
 # GPUs: The New Default for Performance <!-- GPUs are becoming the norm -->

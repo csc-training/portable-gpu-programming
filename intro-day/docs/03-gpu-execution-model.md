@@ -78,11 +78,11 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 <div align="center"><small>The smallest execution unit in a GPU.</small></div>
 </div>
 
-- GPU threads are very light execution contexts.
-- Threads execute a stream of instructions running on different execution units
-- Each thread runs the same **kernel** (SIMT). 
-- Each thread processes different elements of the data (SIMD).
-- Much more threads than execution units
+- <small>GPU threads are very light execution contexts</small>
+- <small>Threads execute a stream of instructions running on different execution units</small>
+- <small>Each thread runs the same **kernel**</small>
+- <small>Each thread processes different elements of the data</small>
+- <small>Much more threads than execution units</small>
 
 # Warp / wavefront
 
@@ -101,11 +101,11 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div align="center"><small>Scheme of a SIMD unit in an AMD GPU</small></div>
 </div>
-- GPU threads are grouped together in hardware level
-    - warp (NVIDIA, 32 threads), wavefront (AMD, 64 threads)
-- All members of the group execute the same instruction
-- In the case of branching, each branch is executed sequentially
-- Memory accesses are done per warp/warpfront
+- <small>GPU threads are grouped together in hardware level</small>
+    - <small>warp (NVIDIA, 32 threads), wavefront (AMD, 64 threads)</small>
+- <small>All members of the group execute the same instruction</small>
+- <small>In the case of branching, each branch is executed sequentially</small>
+- <small>Memory accesses are done per warp/warpfront</small>
 
 # Thread blocks
 
@@ -122,12 +122,12 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div align="center"><small>Compute Unit in an AMD GPU</small></div>
 </div>
-- Threads are grouped in blocks
-- Each block is executed in specific unit
-    - Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)
-- Maximum number of threads in  a block limited by hardware
-- Synchronization is possible within a block
-- Communication via local shared memory within a block
+- <small>Threads are grouped in blocks</small>
+- <small>Each block is executed in specific unit</small>
+    - <small>Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)</small>
+- <small>Maximum number of threads in  a block limited by hardware</small>
+- <small>Synchronization is possible within a block</small>
+- <small>Communication via local shared memory within a block</small>
 
 # Grid of thread blocks
 
@@ -145,10 +145,10 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 <div align="center"><small>AMD Instinct MI100 architecture (source: AMD)</small></div>
 </div>
 
-- Thread blocks are organized into a grid
-    - Total number of threads = number of blocks $\mathrm{\times}$ threads per block
-- In order to hide latencies, there should be more blocks than SMPs / CUs
-- No synchronization between blocks
+- <small>Thread blocks are organized into a grid</small>
+    - <small>Total number of threads = number of blocks $\mathrm{\times}$ threads per block</small>
+- <small>In order to hide latencies, there should be more blocks than SMPs / CUs</small>
+- <small>No synchronization between blocks</small>
 
 # Terminology with different vendors
 

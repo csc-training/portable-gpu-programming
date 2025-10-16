@@ -64,8 +64,137 @@ nano prog.f90
 (`^` in nano's shortcuts refer to **Ctrl** key, *i.e.* in order to save file and exit editor press `Ctrl+X`)
 Also other popular editors such as emacs and vim are available.
 
+## Running applications in supercomputers
 
-## Compilation
+Programs need to be executed via the Slurm batch job system:
+
+    sbatch job.sh
+
+The `job.sh` file contains all the necessary information (number of nodes, tasks per node, cores per taks, number of gpus per node, etc.)  for the Slurm to execute the program.
+Example job scripts for Mahti and LUMI are provided below.
+The output will be by default in file `slurm-xxxxx.out`.
+You can check the status of your jobs with `squeue --me` and cancel possible hanging applications with `scancel JOBID`.
+
+Alternatively to `sbatch`, you can submit directly to the batch job system with useful one-liners:
+
+```
+# Mahti
+srun --account=project_2015315 --partition=gpusmall --reservation=portgp-2025-tue --ntasks=1 --cpus-per-task=1 --gres=gpu:a100:1 --time=00:05:00 ./my_gpu_exe
+```
+```
+# LUMI
+srun --account=project_462001074 --partition=small-g --reservation=portgp-2025-tue  --ntasks=1 --cpus-per-task=1 --gpus-per-node=1 --time=00:05:00 ./my_gpu_exe
+```
+The possible options here for `srun` are the same as in the job scripts below.
+
+**NOTE** Some exercises have additional instructions of how to run!
+
+### Running GPU applications on Mahti
+
+Example `job.sh`  using 1 GPU:
+```bash
+#!/bin/bash
+#SBATCH --job-name=example
+#SBATCH --account=project_2015315
+#SBATCH --partition=gpusmall
+#SBATCH --reservation=portgp-2025-tue # This changes every day to -wed, -thu and -fri, valid 09:00 to 17:00 
+#SBATCH --time=00:05:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --gres=gpu:a100_1g.5gb:1
+
+srun ./my_gpu_exe
+```
+
+The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu`, while on Friday `...-fri`.
+On Mahti we have 1 gpu node reserved for us. 
+
+At any time , one can use `--partition=gputest`  without the reservation argument and with `--gres=gpu:a100:x` (`x=1,2,3,` or `4`).
+
+For multi-gpu applications one has to use `--gres=gpu:a100:x`, where `x` is the number of gpus matching the number of tasks per node.
+
+### Running GPU applications on LUMI
+
+Example `job.sh` using 1 GPU:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=example
+#SBATCH --account=project_462001074
+#SBATCH --partition=small-g
+#SBATCH --reservation=portgp-2025-tue # This changes every day to -wed, -thu and -fri, valid 09:00 to 17:00 
+#SBATCH --time=00:05:00
+#SBATCH --ntasks=1
+#SBATCH --cpus-per-task=1
+#SBATCH --gpus=1
+
+srun ./my_gpu_exe
+```
+On LUMI we have 6 gpu nodes reserved for us. 
+
+At any time , one can use `--partition=dev-g`  without the reservation argument.
+
+For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the number of gpus per node. 
+
+Other useful options for both Mahti and LUMI are `--nodes` and `--ntasks-per-node` which replace the `--ntasks`. 
+
+**Unless required by the exercise only always use 1 GPU!**
+
+## Performance analysis tools
+
+You may use performance analysis tools to get a visual insight into host (CPU) - device (GPU) interaction, as well as
+look for potential performance issues.
+
+### Using rocprof and omnitrace in LUMI
+
+[rocprof](https://rocm.docs.amd.com/projects/rocprofiler/en/latest/index.html) is the standard AMD tool for getting a flat profile and trace about GPU activity. Simple usage:
+```
+module load rocm
+srun rocprof --hip-trace my_exe
+```
+Flat profile is by default in a file `results.stats.csv`, and the trace in a file `results.json`. The trace can be analyzed via a web
+browser in your local workstation as follows:
+
+1. In LUMI, find out the full path name of the `results.json`
+```
+realpath results.json
+```
+2. Copy the trace file to your workstation e.g. with `rsync` (you can copy-paste the output of the previous command):
+```
+rsync <username>@lumi.csc.fi:<full_path_to_results.json>
+```
+3. In your local workstation, go with a web browser to <https://ui.perfetto.dev>, click "Open trace file", and select the 
+`results.json` file. You can get a brief help about keyboard shortcuts and mouse controls by pressing `?` in Perfetto.
+
+See [rocprof documentation](https://rocm.docs.amd.com/projects/rocprofiler/en/latest/index.html) for more details.
+
+[Omnitrace](https://rocm.docs.amd.com/projects/omnitrace/en/docs-6.2.4/index.html) is another AMD tool that is able to provide 
+information also about CPU activities in addition to GPU. Omnitrace is not available by default, but user needs to install 
+it themself. For this course there is a ready to use installation, however, it won't be available after the course project finishes.
+
+Simple usage:
+```
+module use /scratch/project_462001074/modulefiles
+module load omnitrace
+srun ... omnitrace-sample -H false -- myexe # -H false disables unnecessary clutter, e.g. CPU frequencies for all 128 cores
+```
+By default, Omnitrace outputs goes to directory `omnitrace-myexe-output/time-stamp/`, where the file `perfetto-trace-xxxxx.proto`
+contains the actual trace. This file can be opened with Perfetto on local browser similar to above.
+
+Installing Omnitrace yourself is also very straightforward:
+```
+wget https://github.com/ROCm/omnitrace/releases/download/v1.13.0/omnitrace-1.13.0-opensuse-15.4-ROCm-60000-PAPI-OMPT-Python3.sh
+chmod u+x omnitrace-1.13.0-opensuse-15.4-ROCm-60000-PAPI-OMPT-Python3.sh
+./omnitrace-1.13.0-opensuse-15.4-ROCm-60000-PAPI-OMPT-Python3.sh --prefix=/some/path/to/install
+```
+
+### Using Nsight systems in Mahti
+
+
+
+
+
+## Using SYCL
 
 SYCL is not part of the module system at the moment. The SYCL compilers were build for this training. We recommend that you use one of the two SYCL implementations.
 
@@ -152,77 +281,4 @@ export LD_PRELOAD=/appl/lumi/SW/LUMI-24.03/G/EB/rocm/6.2.2/llvm/lib/libomp.so
 
 acpp -O3 --acpp-targets="omp.accelerated;hip:gfx90a" `CC --cray-print-opts=cflags` <sycl_mpi_code>.cpp `CC --cray-print-opts=libs`
 ```
-
-## Running applications in supercomputers
-
-Programs need to be executed via the batch job system:
-
-    sbatch job.sh
-
-The `job.sh` file contains all the necessary information (number of nodes, tasks per node, cores per taks, number of gpus per node, etc.)  for the `slurm` to execute the program.
-Example job scripts for Mahti and LUMI are provided below.
-The output will be by default in file `slurm-xxxxx.out`.
-You can check the status of your jobs with `squeue --me` and cancel possible hanging applications with `scancel JOBID`.
-
-Alternatively to `sbatch`, you can submit directly to the batch job system with useful one-liners:
-
-    # Mahti
-    srun --account=project_2015315 --partition=gpusmall --reservation=portgp-2025-tue --ntasks=1 --cpus-per-task=1 --gres=gpu:a100:1 --time=00:05:00 ./my_gpu_exe
-
-    # LUMI
-    srun --account=project_462001074 --partition=small-g --reservation=portgp-2025-tue  --ntasks=1 --cpus-per-task=1 --gpus-per-node=1 --time=00:05:00 ./my_gpu_exe
-
-The possible options here for `srun` are the same as in the job scripts below.
-
-**NOTE** Some exercises have additional instructions of how to run!
-
-### Running GPU applications on Mahti
-
-Example `job.sh`  using 1 GPU:
-```bash
-#!/bin/bash
-#SBATCH --job-name=example
-#SBATCH --account=project_2015315
-#SBATCH --partition=gpusmall
-#SBATCH --reservation=portgp-2025-tue # This changes every day to -wed, -thu and -fri, valid 09:00 to 17:00 
-#SBATCH --time=00:05:00
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
-#SBATCH --gres=gpu:a100_1g.5gb:1
-
-srun ./my_gpu_exe
-```
-
-The reservation `-tue` is valid on Tuesday, 09:00 to 17:00. On Wednesday we will use `...-wed`, on Thursday `...-thu`, while on Friday `...-fri`.
-On Mahti we have 1 gpu node reserved for us. 
-
-At any time , one can use `--partition=gputest`  without the reservation argument and with `--gres=gpu:a100:x` (`x=1,2,3,` or `4`).
-
-For multi-gpu applications one has to use `--gres=gpu:a100:x`, where `x` is the number of gpus matching the number of tasks per node.
-### Running GPU applications on LUMI
-
-Example `job.sh` using 1 GPU:
-
-```bash
-#!/bin/bash
-#SBATCH --job-name=example
-#SBATCH --account=project_462001074
-#SBATCH --partition=small-g
-#SBATCH --reservation=portgp-2025-tue # This changes every day to -wed, -thu and -fri, valid 09:00 to 17:00 
-#SBATCH --time=00:05:00
-#SBATCH --ntasks=1
-#SBATCH --cpus-per-task=1
-#SBATCH --gpus=1
-
-srun ./my_gpu_exe
-```
-On LUMI we have 6 gpu nodes reserved for us. 
-
-At any time , one can use `--partition=dev-g`  without the reservation argument.
-
-For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the number of gpus per node. 
-
-Other useful options for both Mahti and LUMI are `--nodes` and `--ntasks-per-node` which replace the `--ntasks`. 
-
-**Unless required by the exercise only always use 1 GPU!**
 

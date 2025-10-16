@@ -134,11 +134,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <ul>
   <li><small>Threads are grouped in blocks</small></li>
-  <li><small>Each block is executed in specific unit
-    <ul>
-      <li><small>Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)</small></li>
-    </ul>
-  </small></li>
+  <li><small>Each block is executed in specific unit: Streaming multiprocessor, SMP, (NVIDIA), compute unit, CU, (AMD)</small></li>
   <li><small>Maximum number of threads in a block limited by hardware</small></li>
   <li><small>Synchronization is possible within a block</small></li>
   <li><small>Communication via local shared memory within a block</small></li>

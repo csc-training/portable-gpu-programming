@@ -9,6 +9,7 @@
 #endif
 
 
+static
 void print_array(const char* name, const double* x, size_t n)
 {
     const size_t PRINT_N = 4; // Limit the print size
@@ -24,6 +25,7 @@ void print_array(const char* name, const double* x, size_t n)
 }
 
 
+static
 void create_input(double *f, int nx, int ny) {
     double cx = nx / 2.0;
     double cy = ny / 2.0;
@@ -45,6 +47,7 @@ void create_input(double *f, int nx, int ny) {
 }
 
 
+static
 int write_array(const char *filename, const double *array, size_t count)
 {
     roctxRangePush(__func__);

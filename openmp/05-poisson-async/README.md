@@ -24,12 +24,15 @@ The [solution directory](solution/) contains a model solution and discussion on 
    Note: we run here a bigger case (4096) so that the kernel execution is not too fast (takes more time than kernel launch)
    and we run only for one repetition to reduce the profile file size.
 
-   This creates a file `results.json`. Transfer this file to your computer and open it in ui.perfetto.dev.
+   This creates a file `results.json`. Transfer this file to your computer and open it in https://ui.perfetto.dev.
 
    You should see in the profile kernel launches, data transfers, host hip calls, and `write_array()` functions.
 
-2. Based on the knowledge learned from the profile, improve the code by utilizing asynchronous kernel launches to
-   overlap the `write_array()` function with GPU computation.
+2. Based on the knowledge learned from the profile, improve the code by utilizing asynchronous kernel launches.
+
+   First, add `nowait` clause with suitable `depend` clauses in the kernel to make the launch asynchronous.
+
+   Then, restructure the host code to allow the execution of `write_array()` function to overlap with GPU computation.
 
    Make sure that the results stay correct and that the files contain correct data too.
 

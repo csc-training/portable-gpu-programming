@@ -2,7 +2,7 @@
 
 In this exercise we start looking on data mapping clauses.
 
-Starting from the solution of the previous exercise, we have now modified the code so that
+Starting from the model solution of the previous exercise, we have now modified the code so that
 the array size is not a compile time constant but instead read from a command line argument.
 
 We have moved the `main()` function with all the command line argument parsing
@@ -38,5 +38,5 @@ The [solution directory](solution/) contains a model solution and discussion on 
    Code compiles fine, but it crashes during execution to memory access fault although
    the same pragma was working earlier. :(
 
-   Use runtime debugging environment variables to find the issue and then fix the code.
-
+   Use runtime debugging environment variables introduced in the previous exercise
+   (`CRAY_ACC_DEBUG` or `LIBOMPTARGET_INFO`) to find the issue and then fix the code.

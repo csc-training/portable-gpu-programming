@@ -94,26 +94,29 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
        cc -O3 -fopenmp -fsave-loopmark axpy.c -o axpy.x
 
-   This creates a file 'axpy.lst'. Examine its content.
+   This creates a file 'axpy.lst'.
+   Can you deduce from the file what was done for the axpy loop?
+
+   See [HPE Cray Clang C and C++ Quick Reference (17.0.1)](https://support.hpe.com/hpesc/public/docDisplay?docId=dp00004439en_us)
+   for further information.
 
 5. Try out what happens if you have an incorrect omp pragma. That is, if instead of
    `#pragma omp target teams distribute parallel for` you would have, e.g.,
    `#pragma omp target` or `#pragma omp target teams` etc.
 
    - Do you get correct results?
-   - Is the kernel launched with efficient configuration?
+   - Do you expect that the resulting number of blocks and threads per block give good performance?
 
 
 ### Exercise: Offload to CPU threads
 
-1. Compile your working code for CPU target. Cray compiler wrappers choose the offload target based on
-   the loaded modules that set specific environment variables.
-   Launch a **new terminal session** for CPU execution and load the following CPU modules:
+1. Launch a **new terminal session** for CPU execution and load the following CPU modules:
 
        ml LUMI/24.03
        ml partition/C
 
-   Then, compile the code as above, but now the target will be CPU threads due to the different environment:
+   Cray compiler wrappers choose the offload target based on the loaded modules that set specific environment variables,
+   so now with these modules loaded, the same compilation command will target CPU threads:
 
        cc -O3 -fopenmp axpy.c -o axpy.x
 
@@ -122,7 +125,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
        srun -p debug --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 -t 0:10:00 ./axpy.x
 
    How do we know now that the code is run with multiple threads?
-   You can set an environment variable display thread affinities:
+   You can set an environment variable to display thread affinities:
 
        export OMP_DISPLAY_AFFINITY=true
        srun -p debug --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 -t 0:10:00 ./axpy.x
@@ -139,7 +142,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
        ml partition/G
        ml rocm/6.0.3
 
-   Compile the code AMD Clang:
+   Compile the code with AMD Clang:
 
        amdclang -g -O3 -fopenmp --offload-arch=gfx90a axpy.c -o axpy.x
 

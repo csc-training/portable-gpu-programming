@@ -17,7 +17,7 @@ Legend:
 ----------
 
  1.           #include <stdio.h>
- 2.           #include "../print_array.h"
+ 2.           #include "helper_functions.h"
  3.           
  4.           // Array size
  5.           #ifndef N
@@ -45,7 +45,7 @@ Legend:
 27.               print_array("y", y, N);
 28.           
 29.               // Calculate axpy
-30. + I 0--<> #pragma omp target teams distribute parallel for
+30. + I 0--<>     #pragma omp target teams distribute parallel for
 31. +   M---<     for (int i = 0; i < N; i++) {
 32. +   M             y[i] += alpha * x[i];
 33.     M--->     }

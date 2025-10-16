@@ -120,9 +120,9 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/work_group.png){.center width=15%}
+![](img/work_group.png){.center width=16%}
 
-<div align="center"><small>Thread block</small></div>
+<div align="center"><small>Thread blocks</small></div>
 
 </div>
 
@@ -134,10 +134,11 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <ul>
   <li><small>Threads are grouped in blocks</small></li>
-  <li><small>Each block is executed in specific unit: 
+  <li><small>Each block is executed in specific unit
     <ul>
       <li><small>Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)</small></li>
     </ul>
+  </small></li>
   <li><small>Maximum number of threads in a block limited by hardware</small></li>
   <li><small>Synchronization is possible within a block</small></li>
   <li><small>Communication via local shared memory within a block</small></li>
@@ -207,6 +208,3 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
     - branching within a *warp / wavefront* should be avoided
 - Memory accesses are done per *warp / wavefront*
 - High-level frameworks aim to hide these low level details
-
-
-

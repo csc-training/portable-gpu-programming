@@ -24,14 +24,12 @@ seldom the only or even the best way to solve the problem.**
 Exercises can be carried out using the [LUMI](https://docs.lumi-supercomputer.eu/)  and/or  [Mahti](https://docs.csc.fi/computing/systems-mahti/) supercomputers.
  ![](docs/img/cluster_diagram.jpeg)
 
-LUMI can be accessed via ssh using the provided username and ssh key pair:
+In order to access the systems, you need to setup ssh keys, see [LUMI](https://docs.lumi-supercomputer.eu/firststeps/SSH-keys/) and [Mahti](https://docs.csc.fi/computing/connecting/ssh-keys/) documentation for details. Once you have set up SSH keys, use a command like below to connect over SSH:
 ```
-ssh -i <path-to-private-key> <username>@lumi.csc.fi
-```
-Mahti can be accessed via ssh using the provided username and CSC password:
+# Replace <username> with the name of your CSC user account and
+# <host> with "lumi" or "mahti"
 
-```
-ssh  <username>@mahti.csc.fi
+ssh <username>@<host>.csc.fi
 ```
 
 ### Disk area
@@ -66,49 +64,6 @@ nano prog.f90
 (`^` in nano's shortcuts refer to **Ctrl** key, *i.e.* in order to save file and exit editor press `Ctrl+X`)
 Also other popular editors such as emacs and vim are available.
 
-
-### Module environment
-Supercomputers have a large number of users with different needs for development environments and applications. _Environment modules_ offers a convenient solution for dynamically altering the user's environment to suit their specific needs. This method makes it easier to use various compiler suites and app versions, making work smoother. Plus, when you switch compiler modules, the system takes care of loading the right library versions, cutting down on mistakes and keeping everything running smoothly. Also, loading a module that's customized for a specific app sets up the environment perfectly with just one command, making it super easy for users to get their software up and running.
-
-This approach facilitates easier utilization of different compiler suites and application versions, enhancing workflow efficiency. Moreover, when changing compiler modules, the system automatically loads the correct versions of associated libraries, minimizing errors and ensuring seamless operation. Additionally, loading a module tailored to a specific application configures the environment correctly with a single command, simplifying the software setup process for users.
-
-#### Common module commands
-Below are the most commonly used module commands:
-
-```
-module load mod #Loads module **mod** in shell environment
-module unload mod #Remove module **mod** from environment
-module list #List loaded modules
-module avail #List all available modules
-module spider mod #Search for module **mod**
-module show mod # Get information about module **mod**
-```
-Check for example the default cuda module on Mahti:
-```
-$ module show cuda
---------------------------------------------------------------------------------------------------------------------------
-   /appl/spack/v017/modulefiles/linux-rhel8-x86_64/gcc/11.2.0/cuda/11.5.0.lua:
---------------------------------------------------------------------------------------------------------------------------
-whatis("Name : cuda")
-whatis("Version : 11.5.0")
-whatis("Target : zen2")
-whatis("Short description : CUDA is a parallel computing platform and programming model invented by NVIDIA. It enables dramatic increases in computing performance by harnessing the power of the graphics processing unit (GPU).")
-help([[CUDA is a parallel computing platform and programming model invented by
-NVIDIA. It enables dramatic increases in computing performance by
-harnessing the power of the graphics processing unit (GPU). Note: This
-package does not currently install the drivers necessary to run CUDA.
-These will need to be installed manually. See:
-https://docs.nvidia.com/cuda/ for details.]])
-prepend_path("CPATH","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/include")
-prepend_path("LIBRARY_PATH","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/lib64")
-prepend_path("LD_LIBRARY_PATH","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/lib64")
-prepend_path("PATH","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/bin")
-prepend_path("CMAKE_PREFIX_PATH","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/")
-setenv("CUDA_HOME","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb")
-setenv("CUDA_INSTALL_ROOT","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb")
-append_path("LIBRARY_PATH","/appl/spack/v017/install-tree/gcc-11.2.0/cuda-11.5.0-mg4ztb/lib64/stubs")
-```
-When we execute `module load cuda`, it will effectively modify the above environment variables. Now we can execute directly the cuda specifc commands such `nvcc` (cuda compiler)  or `nsys`(cuda profiler). 
 
 ## Compilation
 

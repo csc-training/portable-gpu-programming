@@ -157,7 +157,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 <thead>
 <tr class="row-odd"><th class="head"><p>NVIDIA</p></th>
 <th class="head"><p>AMD</p></th>
-<th class="head"><p>SYCL</p></th>
+<th class="head"><p>SYCL/Intel</p></th>
 </tr>
 </thead>
 <tbody>

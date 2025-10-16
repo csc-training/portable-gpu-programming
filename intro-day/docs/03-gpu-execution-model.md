@@ -127,7 +127,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 </div>
 
 <div class="column">
-![](img/CU2.png){.center width=18%}
+![](img/CU2.png){.center width=19%}
 
 <div align="center"><small>Compute Unit in an AMD GPU</small></div>
 </div>

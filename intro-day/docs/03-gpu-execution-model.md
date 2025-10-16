@@ -122,7 +122,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 ![](img/work_group.png){.center width=16%}
 
-<div align="center"><small>Thread blocks</small></div>
+<div align="center"><small>Thread block</small></div>
 
 </div>
 

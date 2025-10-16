@@ -5,7 +5,6 @@ date:     October 2025
 lang:     en
 ---
 
-
 # GPU Execution Model{.section}
 
 #  Heterogeneous Programming Model
@@ -59,12 +58,14 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 </div>
 
+
+
 # GPU threads
 
 <div class="column">
 
 
-![](img/work_item.png){.center width=4%}
+![](img/work_item.png){.center width=2%}
 
 <div align="center"><small>A thread is running on execution unit</small></div>
 
@@ -72,26 +73,23 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_lanet.png){.center width=24%} 
+![](img/amd_simd_lanet.png){.center width=12%} 
 
 <div align="center"><small>The smallest execution unit in a GPU.</small></div>
 </div>
 
-<ul>
-  <li><small>GPU threads are very light execution contexts.</small></li>
-  <li><small>Threads execute a stream of instructions running on different execution units</small></li>
-  <li><small>Each thread runs the same <strong>kernel</strong> (SIMT).</small></li>
-  <li><small>Each thread processes different elements of the data (SIMD).</small></li>
-  <li><small>Much more threads than execution units</small></li>
-</ul>
-
+- GPU threads are very light execution contexts.
+- Threads execute a stream of instructions running on different execution units
+- Each thread runs the same **kernel** (SIMT). 
+- Each thread processes different elements of the data (SIMD).
+- Much more threads than execution units
 
 # Warp / wavefront
 
 <div class="column">
 
 
-![](img/sub_group.png){.center width=20%}
+![](img/sub_group.png){.center width=15%}
 
 <div align="center"><small>Execution is done per warp / wavefront</small></div>
 
@@ -99,77 +97,58 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_unit.png){.center width=68%} 
+![](img/amd_simd_unit.png){.center width=55%} 
 
 <div align="center"><small>Scheme of a SIMD unit in an AMD GPU</small></div>
 </div>
-
-<ul>
-  <li><small>GPU threads are grouped together in hardware level
-    <ul>
-      <li><small>warp (NVIDIA, 32 threads), wavefront (AMD, 64 threads)</small></li>
-    </ul>
-  </small></li>
-  <li><small>All members of the group execute the same instruction</small></li>
-  <li><small>In the case of branching, each branch is executed sequentially</small></li>
-  <li><small>Memory accesses are done per warp/wavefront</small></li>
-</ul>
-
+- GPU threads are grouped together in hardware level
+    - warp (NVIDIA, 32 threads), wavefront (AMD, 64 threads)
+- All members of the group execute the same instruction
+- In the case of branching, each branch is executed sequentially
+- Memory accesses are done per warp/warpfront
 
 # Thread blocks
 
 <div class="column">
 
-![](img/work_group.png){.center width=16%}
+![](img/work_group.png){.center width=13%}
 
-<div align="center"><small>Thread block</small></div>
+<div align="center"><small>Thread blocks</small></div>
 
 </div>
 
 <div class="column">
-![](img/CU2.png){.center width=17%}
+![](img/CU2.png){.center width=13%}
 
 <div align="center"><small>Compute Unit in an AMD GPU</small></div>
 </div>
-
-<ul>
-  <li><small>Threads are grouped in blocks</small></li>
-  <li><small>Each block is executed in specific unit: 
-    <ul>
-      <li><small>Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)</small></li>
-    </ul>
-  <li><small>Maximum number of threads in a block limited by hardware</small></li>
-  <li><small>Synchronization is possible within a block</small></li>
-  <li><small>Communication via local shared memory within a block</small></li>
-</ul>
-
+- Threads are grouped in blocks
+- Each block is executed in specific unit
+    - Streaming multiprocessor, SMP (NVIDIA), compute unit, CU (AMD)
+- Maximum number of threads in  a block limited by hardware
+- Synchronization is possible within a block
+- Communication via local shared memory within a block
 
 # Grid of thread blocks
 
 <div class="column">
 
-![](img/Grid_threads.png){.center width=45%}
+![](img/Grid_threads.png){.center width=33%}
 
 <div align="center"><small>A grid of thread blocks executing the same **kernel**</small></div>
 
 </div>
 
 <div class="column">
-![](img/mi100-architecture.png){.center width=66%}
+![](img/mi100-architecture.png){.center width=48%}
 
 <div align="center"><small>AMD Instinct MI100 architecture (source: AMD)</small></div>
 </div>
 
-<ul>
-  <li><small>Thread blocks are organized into a grid
-    <ul>
-      <li><small>Total number of threads = number of blocks $\mathrm{\times}$ threads per block</small></li>
-    </ul>
-  </small></li>
-  <li><small>In order to hide latencies, there should be more blocks than SMPs / CUs</small></li>
-  <li><small>No synchronization between blocks</small></li>
-</ul>
-
+- Thread blocks are organized into a grid
+    - Total number of threads = number of blocks $\mathrm{\times}$ threads per block
+- In order to hide latencies, there should be more blocks than SMPs / CUs
+- No synchronization between blocks
 
 # Terminology with different vendors
 

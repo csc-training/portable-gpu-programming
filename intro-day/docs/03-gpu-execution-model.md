@@ -120,14 +120,14 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/work_group.png){.center width=18%}
+![](img/work_group.png){.center width=16%}
 
 <div align="center"><small>Thread block</small></div>
 
 </div>
 
 <div class="column">
-![](img/CU2.png){.center width=19%}
+![](img/CU2.png){.center width=17%}
 
 <div align="center"><small>Compute Unit in an AMD GPU</small></div>
 </div>

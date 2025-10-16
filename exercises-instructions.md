@@ -166,8 +166,6 @@ rsync <username>@lumi.csc.fi:<full_path_to_results.json>
 3. In your local workstation, go with a web browser to <https://ui.perfetto.dev>, click "Open trace file", and select the 
 `results.json` file. You can get a brief help about keyboard shortcuts and mouse controls by pressing `?` in Perfetto.
 
-See [rocprof documentation](https://rocm.docs.amd.com/projects/rocprofiler/en/latest/index.html) for more details.
-
 [Omnitrace](https://rocm.docs.amd.com/projects/omnitrace/en/docs-6.2.4/index.html) is another AMD tool that is able to provide 
 information also about CPU activities in addition to GPU. Omnitrace is not available by default, but user needs to install 
 it themself. For this course there is a ready to use installation, however, it won't be available after the course project finishes.
@@ -176,7 +174,7 @@ Simple usage:
 ```
 module use /scratch/project_462001074/modulefiles
 module load omnitrace
-srun ... omnitrace-sample -H false -- myexe # -H false disables unnecessary clutter, e.g. CPU frequencies for all 128 cores
+srun omnitrace-sample -H false -- myexe # -H false disables some unnecessary clutter
 ```
 By default, Omnitrace outputs goes to directory `omnitrace-myexe-output/time-stamp/`, where the file `perfetto-trace-xxxxx.proto`
 contains the actual trace. This file can be opened with Perfetto on local browser similar to above.
@@ -188,7 +186,22 @@ chmod u+x omnitrace-1.13.0-opensuse-15.4-ROCm-60000-PAPI-OMPT-Python3.sh
 ./omnitrace-1.13.0-opensuse-15.4-ROCm-60000-PAPI-OMPT-Python3.sh --prefix=/some/path/to/install
 ```
 
-### Using Nsight systems in Mahti
+### Using Nsight Systems in Mahti
+
+Simple usage:
+```
+module load gcc/10.4.0 cuda/12.6.1
+srun nsys profile my_exe
+```
+The GUI does not work properly in Mahti, so for the visual analysis one should install Nsight systems on a local workstation:
+<https://developer.nvidia.com/nsight-systems/get-started>
+
+The trace is by default in the file `report1.nsys-rep`, which can be copied to local workstation following similar steps as with
+`rocprof` above. Once copied, one can launch `nsys-ui` application and open the file.
+
+
+
+
 
 
 
@@ -280,5 +293,46 @@ export LD_LIBRARY_PATH=/appl/lumi/SW/LUMI-24.03/G/EB/Boost/1.83.0-cpeCray-24.03/
 export LD_PRELOAD=/appl/lumi/SW/LUMI-24.03/G/EB/rocm/6.2.2/llvm/lib/libomp.so
 
 acpp -O3 --acpp-targets="omp.accelerated;hip:gfx90a" `CC --cray-print-opts=cflags` <sycl_mpi_code>.cpp `CC --cray-print-opts=libs`
+```
+
+## Installing and using Kokkos
+
+### Mahti
+
+It is suggested that you work under the scratch directory:
+```
+cd /scratch/project_2015315/$USER
+git clone -b 4.7.01 https://github.com/kokkos/kokkos.git kokkos-src
+cd kokkos-src
+```
+
+Build and install a CPU version (OpenMP backend):
+```
+cmake -Bbuild-omp -DCMAKE_BUILD_TYPE=Release \
+      -DKokkos_ENABLE_OPENMP=ON \
+      -DKokkos_ARCH_NATIVE=ON
+cmake --build build-omp -j4
+cmake --install build-omp --prefix /scratch/project_2015315/$USER/kokkos-omp
+```
+
+Build and install a GPU version
+```
+module load gcc/10.4.0 cuda/12.6.1
+cmake -Bbuild-cuda -DCMAKE_BUILD_TYPE=Release \
+                   -DKokkos_ENABLE_CUDA=ON \
+                   -DKokkos_ARCH_AMPERE80=ON
+cmake --build build-cuda -j4
+cmake --install build-cuda --prefix /scratch/project_2015315/$USER/kokkos-cuda
+```
+
+Building an application with Kokkos OpenMP backend (for CPUs):
+```
+cmake -Bbuild-omp -DKokkos_ROOT=/scratch/project_2015315/$USER/kokkos-omp 
+...
+```
+Building an application with Kokkos CUDA backend (for GPUs):
+```
+cmake -Bbuild-cuda -DKokkos_ROOT=/scratch/project_2015315/$USER/kokkos-cuda
+...
 ```
 

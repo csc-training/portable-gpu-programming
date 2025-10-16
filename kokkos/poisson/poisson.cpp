@@ -68,11 +68,14 @@ int main(int argc, char** argv)
     std::swap(u, unew);
   }
 
+  auto unew_host = Kokkos::create_mirror_view(unew);
+  Kokkos::deep_copy(unew_host, unew);
+
   FILE *file = fopen("u.bin", "wb");
   size_t count = nx*ny;
   fwrite(&count, sizeof(size_t), 1, file);
   // Write the data
-  size_t written = fwrite(unew.data(), sizeof(double), count, file);
+  size_t written = fwrite(unew_host.data(), sizeof(double), count, file);
   fclose(file);
 
   // Check the result
@@ -86,7 +89,7 @@ int main(int argc, char** argv)
   mean /= ((nx - 1) * (ny - 1));
 
   int i = ny / 2, j = nx / 2;
-  std::cout << "Center u " << unew(i, j) << std::endl;
+  std::cout << "Center u " << unew_host(i, j) << std::endl;
   std::cout << "Mean u " << mean << std::endl;
 
   }

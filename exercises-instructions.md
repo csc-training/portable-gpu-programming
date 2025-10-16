@@ -309,8 +309,8 @@ cd kokkos-src
 Build and install a CPU version (OpenMP backend):
 ```
 cmake -Bbuild-omp -DCMAKE_BUILD_TYPE=Release \
-      -DKokkos_ENABLE_OPENMP=ON \
-      -DKokkos_ARCH_NATIVE=ON
+                  -DKokkos_ENABLE_OPENMP=ON \
+                  -DKokkos_ARCH_NATIVE=ON
 cmake --build build-omp -j4
 cmake --install build-omp --prefix /scratch/project_2015315/$USER/kokkos-omp
 ```
@@ -334,5 +334,54 @@ Building an application with Kokkos CUDA backend (for GPUs):
 ```
 cmake -Bbuild-cuda -DKokkos_ROOT=/scratch/project_2015315/$USER/kokkos-cuda
 ...
+```
+
+### LUMI
+
+It is suggested that you work under the scratch directory:
+```
+cd /scratch/project_462001074/$USER
+git clone -b 4.7.01 https://github.com/kokkos/kokkos.git kokkos-src
+cd kokkos-src
+```
+
+Build and install a CPU version (OpenMP backend):
+```
+cmake -Bbuild-omp -DCMAKE_BUILD_TYPE=Release \
+                  -DCMAKE_CXX_COMPILER=CC \
+                  -DKokkos_ENABLE_OPENMP=ON \
+                  -DKokkos_ARCH_NATIVE=ON
+cmake --build build-omp -j4
+cmake --install build-omp --prefix /scratch/project_462001074/$USER/kokkos-omp
+```
+
+Build and install a GPU version
+```
+module load rocm craype-accel-amd-gfx90a
+cmake -Bbuild-hip -DCMAKE_BUILD_TYPE=Release \
+                  -DCMAKE_CXX_COMPILER=hipcc \
+                  -DKokkos_ENABLE_HIP=ON \
+                  -DKokkos_ARCH_AMD_GFX90A=ON
+cmake --build build-hip -j4
+cmake --install build-hip --prefix /scratch/project_462001074/$USER/kokkos-hip
+```
+
+Building an application with Kokkos OpenMP backend (for CPUs):
+```
+cmake -Bbuild-omp -DKokkos_ROOT=/scratch/project_462001074/$USER/kokkos-omp \
+                  -DCMAKE_CXX_COMPILER=CC
+...
+```
+Building an application with Kokkos HIP backend (for GPUs):
+```
+cmake -Bbuild-hip -DKokkos_ROOT=/scratch/project_462001074/$USER/kokkos-hip \
+                  -DCMAKE_CXX_COMPILER=hipcc
+...
+```
+
+Note that GPU modules cannot be loaded when building with OpenMP 
+backends, *i.e.* if you want to move from HIP to OpenMP you must do
+```
+module unload rocm craype-accel-amd-gfx90a
 ```
 

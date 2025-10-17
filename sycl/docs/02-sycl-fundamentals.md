@@ -114,14 +114,13 @@ auto q = queue { custom_selector {} };
  - containers for operations to be executed 
  - can have dependencies for ensuring desired order
  - are executed *asynchronous* within specific **context** and **queue**
-<small>
+
 ```cpp  
   q.submit([&](handler &cgh) {
   /* Command group function */ 
   });
   // ...
 ```
-</small>
 
 
 # SYCL Memory Models

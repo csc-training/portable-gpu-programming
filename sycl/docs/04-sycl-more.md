@@ -168,7 +168,7 @@ lang:     en
  - wait for the task to complete:
     - `e.wait();` (could be also other ways)
  - extract the time:
-   - `auto t_submit = e.get_profiling_info<info::event_profiling::command_submit>();`
+   - <small>`auto t_submit = e.get_profiling_info<info::event_profiling::command_submit>();`</small>
 
 # Profiling with Events II
 

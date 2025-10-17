@@ -73,7 +73,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_lanet.png){.center width=28%} 
+![](img/amd_simd_lanet.png){.center width=34%} 
 
 <div align="center"><small>The smallest execution unit in a GPU.</small></div>
 </div>
@@ -97,7 +97,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_unit.png){.center width=66%} 
+![](img/amd_simd_unit.png){.center width=67%} 
 
 <div align="center"><small>Scheme of a SIMD unit in an AMD GPU</small></div>
 </div>

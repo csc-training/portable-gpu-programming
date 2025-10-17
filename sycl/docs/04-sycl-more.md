@@ -60,12 +60,9 @@ lang:     en
         });
       });
       // Use host_accessor to read back the results from Ybuff
-      host_accessor accY(Ybuff, sycl::read_only); // Read back data after kernel execution
-      std::cout << "First few elements of Y after operation:" << std::endl;
-      for (size_t i = 0; i < 10; ++i) {
-        std::cout << "Y[" << i << "] = " << accY[i] << std::endl;
-      }
-    }
+      host_accessor result{y_buf, read_only)}; // Read back data after kernel execution
+      for (int i = 0; i < N; i++) {
+        assert(result[i] == 5);}
 ``` 
 </small>
 
@@ -99,20 +96,20 @@ lang:     en
 <small>
 ```cpp
       // Allocate device memory for X and Y
-    int *x = malloc_device<int>(N, q);
-    int *x = malloc_device<int>(N, q);
+    int *d_x = malloc_device<int>(N, q);
+    int *d_y = malloc_device<int>(N, q);
 
     // Initialize X on the device using a kernel
     event init_X = q.submit([&](handler &cgh) {
         cgh.parallel_for(N, [=](id<1> i) {
-            x[i] = 1; 
+            d_x[i] = 1; 
         });
     });
 
     // Initialize Y on the device using a separate kernel
     event init_Y = q.submit([&](handler &cgh) {
         cgh.parallel_for(N, [=](id<1> i) {
-            y[i] = 2; 
+            d_y[i] = 2; 
         });
     });
 ```
@@ -134,16 +131,16 @@ lang:     en
     });
 
     // Copy results back to host, depending on add_event completion
-    float *host_Y_result = new float[N];
+    int *hy = new int[N];
     q.submit([&](handler &cgh) {
         cgh.depends_on(add_event); // Ensure add_event (final computation) is done first
-        cgh.memcpy(host_Y_result, Y, N * sizeof(float)); // Copy results back to host
+        cgh.memcpy(hy, d_y, N * sizeof(int)); // Copy results back to host
     }).wait(); // Wait for the memcpy to finish
 
     // Clean up
     delete[] host_Y_result;
-    free(x, q);
-    free(y, q);
+    free(d_x, q);
+    free(d_y, q);
 ``` 
 </small>
 

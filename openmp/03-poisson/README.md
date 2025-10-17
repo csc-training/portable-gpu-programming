@@ -55,7 +55,7 @@ We have added timing using `omp_get_wtime()`, so even the serial code needs to b
 
 Run the program on a single CPU core for a an 1024x1024 array for 500 iterations:
 
-    srun -p debug --nodes=1 --ntasks-per-node=1 --cpus-per-task=1 -t 0:10:00 ./axpy.x 1024 500
+    srun -p debug --nodes=1 --ntasks-per-node=1 --cpus-per-task=1 -t 0:10:00 ./poisson.x 1024 500
 
 Expected output:
 
@@ -70,7 +70,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
 ### Exercises
 
-1. Offload Jacobi iteration to GPU by inserting a suitable OpenMP target pragmas around the loop (see 'TODO 1' in the code).
+1. Offload Jacobi iteration to GPU by inserting a suitable OpenMP target directives around the loop (see 'TODO 1' in the code).
    Remember to include map clauses like in the previous exercise.
 
    Please ensure that the result remains correct.

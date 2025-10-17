@@ -12,9 +12,13 @@ where $\alpha$ is a scalar and $x$ and $y$ are vectors of the same size.
 
 The provided code can be used as follows.
 
-Compile the code:
+Compilation of the C version is done with `cc`:
 
     cc -O3 axpy.c -o axpy.x
+
+Compilation of Fortran version is done with `ftn`:
+
+    ftn -O3 helper_functions.F90 axpy.F90 -o axpy.x
 
 Run the program on a single CPU core:
 
@@ -33,6 +37,7 @@ Expected output:
 Note that you can change the array size at compile time as follows:
 
     cc -O3 -DN=5 axpy.c -o axpy.x
+    ftn -O3 -DN=5 helper_functions.F90 axpy.F90 -o axpy.x
 
 Expected output:
 
@@ -60,6 +65,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
    Compile the code:
 
        cc -O3 -fopenmp axpy.c -o axpy.x
+       ftn -O3 -fopenmp helper_functions.F90 axpy.F90 -o axpy.x
 
    Run the program on a single GPU. We allocate also 7 CPU cores per task as
    as every LUMI-G node has 7 CPU cores per a MI250X GCD. These CPU cores can be
@@ -95,11 +101,13 @@ The [solution directory](solution/) contains a model solution and discussion on 
 4. Compile the code with diagnostics:
 
        cc -O3 -fopenmp -fsave-loopmark axpy.c -o axpy.x
+       ftn -O3 -fopenmp -hlist=m helper_functions.F90 axpy.F90 -o axpy.x
 
    This creates a file 'axpy.lst'.
    Can you deduce from the file what was done for the axpy loop?
 
    See [HPE Cray Clang C and C++ Quick Reference (17.0.1)](https://support.hpe.com/hpesc/public/docDisplay?docId=dp00004439en_us)
+   and [ftn man pages](https://cpe.ext.hpe.com/docs/24.03/cce/man1/crayftn.1.html)
    for further information.
 
 5. Try out what happens if you have an incorrect omp pragma. That is, if instead of
@@ -121,6 +129,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
    so now with these modules loaded, the same compilation command will target CPU threads:
 
        cc -O3 -fopenmp axpy.c -o axpy.x
+       ftn -O3 -fopenmp helper_functions.F90 axpy.F90 -o axpy.x
 
    Run the program on a CPU partition with 4 threads:
 
@@ -167,6 +176,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    Try out also setting `LIBOMPTARGET_KERNEL_TRACE=1` or `LIBOMPTARGET_KERNEL_TRACE=2` instead of `LIBOMPTARGET_INFO` and examine the output
    (see [documentation](https://rocm.docs.amd.com/projects/llvm-project/en/latest/conceptual/openmp.html#environment-variables)).
+
 
 ### Bonus exercises: loop construct
 

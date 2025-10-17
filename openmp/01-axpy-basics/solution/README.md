@@ -9,7 +9,7 @@
        export CRAY_ACC_DEBUG=2
        srun -p dev-g --nodes=1 --ntasks-per-node=1 --cpus-per-task=7 --gpus-per-node=1 -t 0:10:00 ./axpy.x
 
-   Output:
+   Output from C version:
 
        ACC: Version 6.0 of HIP already initialized, runtime version 60032831
        ACC: Get Device 0
@@ -31,10 +31,34 @@
        Output:
        y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
 
+   Output from Fortran version:
+
+       ACC: Version 6.0 of HIP already initialized, runtime version 60032831
+       ACC: Get Device 0
+       ACC: Set Thread Context
+       ACC: Start transfer 2 items from axpy.F90:32
+       ACC:       allocate, copy to acc 'x(:)' (819200 bytes)
+       ACC:       allocate, copy to acc 'y(:)' (819200 bytes)
+       ACC: End transfer (to acc 1638400 bytes, to host 0 bytes)
+       ACC: Execute kernel axpy_$ck_L32_1 blocks:400 threads:256 async(auto) from axpy.F90:32
+       ACC: Wait async(auto) from axpy.F90:36
+       ACC: Start transfer 2 items from axpy.F90:36
+       ACC:       free 'x(:)' (819200 bytes)
+       ACC:       copy to host, free 'y(:)' (819200 bytes)
+       ACC: End transfer (to acc 0 bytes, to host 819200 bytes)
+       Using N = 102400
+       Input:
+       a =   3.0000
+       x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+       y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+       Output:
+       y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
+
    Here the debugging prints show memory allocations and transfers as well as the execution of
    the kernel using 400 blocks and 256 threads per block, that is, 102400 threads in total.
 
-3. Here is the output for `CRAY_ACC_DEBUG=1`:
+3. Now `CRAY_ACC_DEBUG=1`.
+   Output from C version:
 
        ACC: Transfer 2 items (to acc 1638400 bytes, to host 0 bytes) from axpy.c:30
        ACC: Execute kernel __omp_offloading_73ac72ce_2c01b06c_main_l30_cce$noloop$form from axpy.c:30
@@ -47,7 +71,22 @@
        Output:
        y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
 
-   And for `CRAY_ACC_DEBUG=3`:
+   Output from Fortran version:
+
+       ACC: Transfer 2 items (to acc 1638400 bytes, to host 0 bytes) from axpy.F90:32
+       ACC: Execute kernel axpy_$ck_L32_1 async(auto) from axpy.F90:32
+       ACC: Wait async(auto) from axpy.F90:36
+       ACC: Transfer 2 items (to acc 0 bytes, to host 819200 bytes) from axpy.F90:36
+       Using N = 102400
+       Input:
+       a =   3.0000
+       x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+       y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+       Output:
+       y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
+
+   Now `CRAY_ACC_DEBUG=3`.
+   Output from C version:
 
        ACC: Version 6.0 of HIP already initialized, runtime version 60032831
        ACC: __tgt_register_requires: flags = NONE
@@ -203,9 +242,131 @@
        Output:
        y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
 
+   Output from Fortran version:
+
+       ACC: Version 6.0 of HIP already initialized, runtime version 60032831
+       ACC: Get Device 0
+       ACC: Compute level 9.0
+       ACC: Device Name: AMD Instinct MI250X
+       ACC: Number of cus 110
+       ACC: Device name AMD Instinct MI250X
+       ACC: AMD GCN arch name: gfx90a:sramecc+:xnack-
+       ACC: Max shared memory 65536
+       ACC: Max thread blocks per cu 8
+       ACC: Max concurrent kernels 8
+       ACC: Async table size 8
+       ACC: Total GPU memory 68702699520
+       ACC: Available GPU memory 68625104896
+       ACC: Set Thread Context
+       ACC: Establish link bewteen libcrayacc and libcraymp
+       ACC:   libcrayacc interface v7
+       ACC:    libcraymp interface v7
+       ACC: Start transfer 2 items from axpy.F90:32
+       ACC:   flags:
+       ACC: 
+       ACC:   Trans 1
+       ACC:       Simple transfer of 'x(:)' (819200 bytes)
+       ACC:            host ptr 407e00
+       ACC:            acc  ptr 0
+       ACC:            flags: ALLOCATE COPY_HOST_TO_ACC ACQ_PRESENT REG_PRESENT IMPLICIT_MAP
+       ACC:            memory not found in present table
+       ACC:            allocate (819200 bytes)
+       ACC:              get new reusable memory, added entry
+       ACC:            new allocated ptr (1541dd600000)
+       ACC:            add to present table index 0: host 407e00 to 4cfe00, acc 1541dd600000
+       ACC:            copy host to acc (407e00 to 1541dd600000)
+       ACC:                internal copy host to acc (host 407e00 to acc 1541dd600000) size = 819200
+       ACC:            new acc ptr 1541dd600000
+       ACC: 
+       ACC:   Trans 2
+       ACC:       Simple transfer of 'y(:)' (819200 bytes)
+       ACC:            host ptr 4cffc0
+       ACC:            acc  ptr 0
+       ACC:            flags: ALLOCATE COPY_HOST_TO_ACC ACQ_PRESENT REG_PRESENT IMPLICIT_MAP
+       ACC:            memory not found in present table
+       ACC:            allocate (819200 bytes)
+       ACC:              get new reusable memory, added entry
+       ACC:            new allocated ptr (1541dd6c8000)
+       ACC:            add to present table index 1: host 4cffc0 to 597fc0, acc 1541dd6c8000
+       ACC:            copy host to acc (4cffc0 to 1541dd6c8000)
+       ACC:                internal copy host to acc (host 4cffc0 to acc 1541dd6c8000) size = 819200
+       ACC:            new acc ptr 1541dd6c8000
+       ACC: 
+       ACC: End transfer (to acc 1638400 bytes, to host 0 bytes)
+       ACC: 
+       ACC: Start kernel axpy_$ck_L32_1 async(auto) from axpy.F90:32
+       ACC:        flags: CACHE_MOD CACHE_FUNC AUTO_ASYNC
+       ACC:    mod cache:  0x5983c0
+       ACC: kernel cache:  0x5981c0
+       ACC:   async info:  0x1542df8c49d0
+       ACC:    arguments: GPU argument info
+       ACC:            param size:  16
+       ACC:         param pointer:  0x7ffe4bfccde0
+       ACC:       blocks:  400
+       ACC:      threads:  256
+       ACC:     event id:  0
+       ACC:    loading module data
+       ACC:    getting function axpy_$ck_L32_1
+       ACC:       stats threads=256 threadblocks per cu=1 shared=0 total shared=0
+       ACC:       prefer equal shared memory and L1 cache 
+       ACC:     kernel information
+       ACC:               num registers :        6
+       ACC:        max theads per block :      256
+       ACC:                 shared size :        0 bytes
+       ACC:                  const size :        0 bytes
+       ACC:                  local size :        0 bytes
+       ACC: 
+       ACC:     launching kernel new
+       ACC:     caching function
+       ACC:     caching module
+       ACC: End kernel
+       ACC: 
+       ACC: Start wait async(auto) from axpy.F90:36
+       ACC:   async_info: 0x1542df8c49d0
+       ACC:    Freeing delayed free for async(auto)
+       ACC: End wait
+       ACC: 
+       ACC: Start transfer 2 items from axpy.F90:36
+       ACC:   flags:
+       ACC: 
+       ACC:   Trans 1
+       ACC:       Simple transfer of 'x(:)' (819200 bytes)
+       ACC:            host ptr 407e00
+       ACC:            acc  ptr 1541dd600000
+       ACC:            flags: FREE REL_PRESENT REG_PRESENT IMPLICIT_MAP
+       ACC:            last release acc 1541dd600000 from present table index 0 (ref_count 1)
+       ACC:            last release of conditional present (acc 1541dd600000, base 1541dd600000)
+       ACC:            remove acc 1541dd600000 from present table index 0
+       ACC:            new acc ptr 0
+       ACC: 
+       ACC:   Trans 2
+       ACC:       Simple transfer of 'y(:)' (819200 bytes)
+       ACC:            host ptr 4cffc0
+       ACC:            acc  ptr 1541dd6c8000
+       ACC:            flags: COPY_ACC_TO_HOST FREE REL_PRESENT REG_PRESENT IMPLICIT_MAP
+       ACC:            last release acc 1541dd6c8000 from present table index 1 (ref_count 1)
+       ACC:            last release of conditional present (acc 1541dd6c8000, base 1541dd6c8000)
+       ACC:            copy acc to host (1541dd6c8000 to 4cffc0)
+       ACC:                interal copy acc to host (acc 1541dd6c8000 to host 4cffc0) size = 819200
+       ACC:            remove acc 1541dd6c8000 from present table index 1
+       ACC:            new acc ptr 0
+       ACC: 
+       ACC: End transfer (to acc 0 bytes, to host 819200 bytes)
+       ACC: 
+       ACC: __tgt_unregister_lib
+       ACC: Start executing pending destructors
+       Using N = 102400
+       Input:
+       a =   3.0000
+       x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+       y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+       Output:
+       y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
+
    `CRAY_ACC_DEBUG=2` gives a good balance for the amount of details for the purposes of this training.
 
-4. File axpy.lst is attached. The parallelized loop is marked in the output.
+4. Files `axpy_c.lst` and `axpy_f.lst` are attached for C and Fortran, respectively.
+   The parallelized loop is marked in the output.
 
 5. None of the other variations work expectedly. Either results are wrong (thread blocks are running for the same array indices instead of distributing the loop)
    or only a single thread might be used (very inefficient).
@@ -220,16 +381,16 @@
 
    Output:
 
-       CCE OMP: host nid002275 pid 158201 tid 158201 thread 0 affinity:  0-3
-       CCE OMP: host nid002275 pid 158201 tid 158201 thread 0 affinity:  0
-       CCE OMP: host nid002275 pid 158201 tid 158204 thread 3 affinity:  3
-       CCE OMP: host nid002275 pid 158201 tid 158202 thread 1 affinity:  1
-       CCE OMP: host nid002275 pid 158201 tid 158203 thread 2 affinity:  2
        Using N = 102400
        Input:
        a =   3.0000
        x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
        y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+       CCE OMP: host nid002275 pid 158201 tid 158201 thread 0 affinity:  0-3
+       CCE OMP: host nid002275 pid 158201 tid 158201 thread 0 affinity:  0
+       CCE OMP: host nid002275 pid 158201 tid 158204 thread 3 affinity:  3
+       CCE OMP: host nid002275 pid 158201 tid 158202 thread 1 affinity:  1
+       CCE OMP: host nid002275 pid 158201 tid 158203 thread 2 affinity:  2
        Output:
        y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
 

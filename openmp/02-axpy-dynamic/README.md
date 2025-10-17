@@ -11,6 +11,7 @@ to the bottom of the file. The function `run()` in the top of the file is of mos
 The code can be compiled for serial execution as before:
 
     cc -O3 axpy.c -o axpy.x
+    ftn -O3 helper_functions.F90 axpy.F90 -o axpy.x
 
 Run the program on a single CPU core for a given array size (5 in this example):
 
@@ -26,7 +27,7 @@ Expected output:
     Output:
     y =   0.0000  25.7500  51.5000  77.2500 103.0000
 
-The issue is that on GPU this code crashes now!
+The issue is that on GPU this code crashes now (well, the C version only)!
 
 The [solution directory](solution/) contains a model solution and discussion on the exercises below.
 
@@ -35,8 +36,8 @@ The [solution directory](solution/) contains a model solution and discussion on 
 1. Compile and run this code on GPUs like in the previous exercise.
    Remember to load the correct GPU modules and use `-fopenmp` compilation flag.
 
-   Code compiles fine, but it crashes during execution to memory access fault although
-   the same pragma was working earlier. :(
+   The C version crashes during execution to memory access fault although
+   the same directive was working earlier. Use a suitable map clause to fix the code
 
-   Use runtime debugging environment variables introduced in the previous exercise
-   (`CRAY_ACC_DEBUG` or `LIBOMPTARGET_INFO`) to find the issue and then fix the code.
+   The Fortran version works, but practice adding a correct map clause there too
+   (including the array dimensions).

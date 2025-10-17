@@ -1,0 +1,152 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S u m m a r y   R e p o r t
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+Compilation
+-----------
+File     : .../axpy.F90
+Compiled : 10/17/25  15:41:37
+Compiler : Version 17.0.1
+Ftnlx    : Version 17.0.1 
+Target   : x86-64
+Command  : ftn_driver.exe -hcpu=x86-trento -haccel=amdgcn-gfx90a -hnetwork=ofi
+           -hdynamic -D__CRAY_X86_TRENTO -D__CRAY_AMD_GFX90A
+           -D__CRAYXT_COMPUTE_LINUX_TARGET -O3 -fopenmp
+           -hlist=m helper_functions.F90 axpy.F90 -oaxpy.x
+           -I/opt/cray/pe/cce/17.0.1/cce-clang/x86_64/lib/clang/17/include
+           -I/opt/cray/pe/cce/17.0.1/cce/x86_64/include/craylibs -I/usr/include
+           -D__HIP_PLATFORM_AMD__
+           -I/opt/cray/pe/mpich/8.1.29/ofi/cray/17.0/include
+           -I/opt/cray/pe/libsci/24.03.0/CRAY/17.0/x86_64/include
+           -I/opt/rocm-6.0.3/include -I/opt/rocm-6.0.3/include/rocprofiler
+           -I/opt/rocm-6.0.3/include/roctracer
+           -I/opt/cray/xpmem/2.8.2-1.0_5.1__g84a27a5.shasta/include
+           -I/opt/cray/pe/dsmml/0.3.0/dsmml//include
+           -L/opt/cray/pe/mpich/8.1.29/ofi/cray/17.0/lib
+           -L/opt/cray/pe/mpich/8.1.29/gtl/lib
+           -L/opt/cray/pe/libsci/24.03.0/CRAY/17.0/x86_64/lib
+           -L/opt/rocm-6.0.3/lib -L/opt/rocm-6.0.3/lib/rocprofiler
+           -L/opt/rocm-6.0.3/lib/roctracer
+           -L/opt/cray/xpmem/2.8.2-1.0_5.1__g84a27a5.shasta/lib64
+           -L/opt/cray/pe/dsmml/0.3.0/dsmml//lib
+           -L/opt/cray/pe/cce/17.0.1/cce/x86_64/lib/pkgconfig/../ -lamdhip64
+           -lxpmem -ldl -lmpi_gtl_hsa -lquadmath -lcraymp -lcrayacc_amdgpu
+           -lopenacc -lmodules -lfi -lcraymath -lf -lu -lcsup -I/usr/include
+           -lpthread
+           -L/opt/cray/pe/cce/17.0.1/cce-clang/x86_64/lib/clang/17/lib/linux
+           -L/opt/cray/pe/cce/17.0.1/cce-clang/x86_64/lib/clang/17/lib/linux/../
+           ../../.. -lcsup -lm -lclang_rt.craypgo-x86_64
+           -lclang_rt.builtins-x86_64 -lc -lclang_rt.builtins-x86_64
+Program
+  Units  : AXPY
+
+ftnlx report
+------------
+Source   : .../axpy.F90
+Date     : 10/17/2025  15:41:38
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+                          S o u r c e   L i s t i n g
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+     %%%    L o o p m a r k   L e g e n d    %%%
+
+     Primary Loop Type        Modifiers
+     ------- ---- ----        ---------
+     A - Pattern matched      a - atomic memory operation
+                              b - blocked
+     C - Collapsed            c - conditional and/or computed
+     D - Deleted               
+     E - Cloned                
+     F - Flat - No calls      f - fused
+     G - Accelerated          g - partitioned
+     I - Inlined              i - interchanged
+     M - Multithreaded        m - partitioned
+                              n - non-blocking remote transfer
+                              p - partial
+     R - Rerolling            r - unrolled
+                              s - shortloop
+     V - Vectorized           w - unwound
+
+     + - More messages listed at end of listing
+     ------------------------------------------
+
+
+    1.              ! Array size
+    2.              #ifndef N
+    3.              #define N 102400
+    4.              #endif
+    5.              
+    6.              program axpy
+    7.                use helper_functions
+    8.                implicit none
+    9.                integer, parameter :: n = N
+   10.                real(8) :: alpha
+   11.                real(8), dimension(n) :: x, y
+   12.                integer :: i
+   13.                real(8) :: frac
+   14.              
+   15.                print '(A, I0)', "Using N = ", n
+   16.              
+   17.                ! Initialization
+   18.                alpha = 3.0d0
+   19.    Vr2-----<   do i = 1, n
+   20.    Vr2           frac = 1.0d0 / real(n - 1, kind=8)
+   21.    Vr2           x(i) = real(i - 1, kind=8) * frac
+   22.    Vr2           y(i) = real(i - 1, kind=8) * frac * 100.0d0
+   23.    Vr2----->   end do
+   24.              
+   25.                ! Print input values
+   26.                print '(A)', "Input:"
+   27.                print '(A, F8.4)', "a = ", alpha
+   28.                call print_array("x", x, n)
+   29.                call print_array("y", y, n)
+   30.              
+   31.                ! Calculate axpy
+   32.  + MG------<   !$omp target teams distribute parallel do
+   33.    MG gr2--<   do i = 1, n
+   34.    MG gr2        y(i) = y(i) + alpha * x(i)
+   35.    MG gr2-->   end do
+   36.    MG------>   !$omp end target teams distribute parallel do
+   37.              
+   38.                ! Print output values
+   39.                print '(A)', "Output:"
+   40.                call print_array("y", y, n)
+   41.              
+   42.              end program axpy
+
+ftn-6005 ftn: SCALAR AXPY, File = axpy.F90, Line = 19 
+  A loop starting at line 19 was unrolled 2 times.
+
+ftn-6204 ftn: VECTOR AXPY, File = axpy.F90, Line = 19 
+  A loop starting at line 19 was vectorized.
+
+ftn-6405 ftn: ACCEL AXPY, File = axpy.F90, Line = 32 
+  A region starting at line 32 and ending at line 36 was placed on the accelerator.
+
+ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 32 
+  A region starting at line 32 and ending at line 36 was multi-threaded.
+
+ftn-6418 ftn: ACCEL AXPY, File = axpy.F90, Line = 32 
+  If not already present: allocate memory and copy whole array "x" to accelerator, free at line 36 (acc_copyin).
+
+ftn-6416 ftn: ACCEL AXPY, File = axpy.F90, Line = 32 
+  If not already present: allocate memory and copy whole array "y" to accelerator, copy back at line 36 (acc_copy).
+
+ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 32 
+  A region starting at line 32 and ending at line 36 was multi-threaded.
+
+ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 32 
+  A region starting at line 32 and ending at line 36 was multi-threaded.
+
+ftn-6005 ftn: SCALAR AXPY, File = axpy.F90, Line = 33 
+  A loop starting at line 33 was unrolled 2 times.
+
+ftn-6430 ftn: ACCEL AXPY, File = axpy.F90, Line = 33 
+  A loop starting at line 33 was partitioned across the threadblocks and the 256 threads within a threadblock.
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

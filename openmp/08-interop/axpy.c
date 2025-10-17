@@ -32,7 +32,7 @@ void run(const int n)
 
     // Calculate axpy
     // TODO: This is broken. We need to map memory to/from GPU
-    //        and pass the device pointers to this function call.
+    //       and pass the device pointers to this function call.
     hipblasDaxpy(handle, n, &alpha, x, 1, y, 1);
 
     // Print output values

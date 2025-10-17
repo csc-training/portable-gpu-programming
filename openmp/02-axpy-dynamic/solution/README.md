@@ -7,7 +7,7 @@
        export CRAY_ACC_DEBUG=2
        srun -p dev-g --nodes=1 --ntasks-per-node=1 --cpus-per-task=7 --gpus-per-node=1 -t 0:10:00 ./axpy.x
 
-   This gives output:
+   This gives this output for C version:
 
        ACC: Version 6.0 of HIP already initialized, runtime version 60032831
        ACC: Get Device 0
@@ -50,3 +50,5 @@
    Note here that in contrast to the previous exercise, now the array x is not copied back to host after the kernel execution,
    because we defined it as 'to' in the map clause. Basically, there is no reason to copy it back as the GPU didn't write any new values to it.
 
+   For Fortran version, the equivalent map clause is `map(to: x(1:n)) map(tofrom: y(1:n))`.
+   Note that the compiler created this exactly same behavior by default.

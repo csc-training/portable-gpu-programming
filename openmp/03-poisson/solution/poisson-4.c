@@ -63,7 +63,7 @@ void run(const int n, const int niter)
     // Write final result
     int i = ny / 2, j = nx / 2;
     printf("u[%d,%d] = %f\n", i, j, u[i * nx + j]);
-    printf("Time spent: %6.3f s\n", t1 - t0);
+    printf("Time spent: %.3f s\n", t1 - t0);
     write_array("u_end.bin", u, n2);
 
     free(unew);

@@ -15,7 +15,7 @@ lang:     en
     - safe synchronization, implicit dependencies
     - portability, structured programs
 - **Disadvantages**
-    - low performance on host–device data trasnfers
+    - low performance on host–device data transfers
     - management overhead at buffer creation and destruction
     - requires explicit accessor creation with a specified mode, even for trivial cases
     - unintended synchronizations and accessors deadlocks

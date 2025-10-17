@@ -73,7 +73,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_lanet.png){.center width=16%} 
+![](img/amd_simd_lanet.png){.center width=17%} 
 
 <div align="center"><small>The smallest execution unit in a GPU.</small></div>
 </div>
@@ -97,7 +97,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_unit.png){.center width=56%} 
+![](img/amd_simd_unit.png){.center width=57%} 
 
 <div align="center"><small>Scheme of a SIMD unit in an AMD GPU</small></div>
 </div>
@@ -118,7 +118,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 </div>
 
 <div class="column">
-![](img/CU2.png){.center width=15%}
+![](img/CU2.png){.center width=16%}
 
 <div align="center"><small>Compute Unit in an AMD GPU</small></div>
 </div>
@@ -133,14 +133,14 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/Grid_threads.png){.center width=35%}
+![](img/Grid_threads.png){.center width=37%}
 
 <div align="center"><small>A grid of thread blocks executing the same **kernel**</small></div>
 
 </div>
 
 <div class="column">
-![](img/mi100-architecture.png){.center width=49%}
+![](img/mi100-architecture.png){.center width=51%}
 
 <div align="center"><small>AMD Instinct MI100 architecture (source: AMD)</small></div>
 </div>

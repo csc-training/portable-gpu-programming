@@ -213,7 +213,7 @@ private:
 </div>
 
 <div class="column">
-![](img/mi100-architecture.png){.center width=53%}
+![](img/mi100-architecture.png){.center width=54%}
 
 <div align="center"><small>AMD Instinct MI100 architecture (source: AMD)</small></div>
 </div>

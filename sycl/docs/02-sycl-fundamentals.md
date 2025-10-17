@@ -159,6 +159,7 @@ auto q = queue { custom_selector {} };
     for (int i = 0; i < N; i++) {
       assert(result[i] == 2);
     }
+    ... // host accessor should be destroyed at this point if gpu work follows 
  }
 ``` 
 

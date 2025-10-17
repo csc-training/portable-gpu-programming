@@ -1,0 +1,89 @@
+---
+title:  Kokkos C++ Performance Portability Ecosystem
+subtitle: Portable GPU Programming
+date: October 2025
+lang:     en
+---
+
+# Data parallelism in Kokkos {.section}
+
+# Learning objectives
+
+- How to program Kokkos
+- How to express data parallel patterns
+- Parallelizing simple loops and reductions
+
+# Programming Kokkos
+
+- Kokkos (like SYCL) utilizes heavily modern C++ features like lambdas/functors and templates
+- The Kokkos API is accessed through `Kokkos_Core.hpp` header file
+- Kokkos code starts with Kokkos initialization and ends with finalization
+<small>
+```
+Kokkos::initialize(argc, argv);
+{
+...
+}
+Kokkos::finalize();
+```
+</small>
+
+- Initialization parameters can be passed via `--kokkos-xxxx` command line arguments
+
+# Expressing parallelism
+
+- Data parallel patterns contain three concepts
+- Computational body, *.i.e.* unit of work
+- Iteration range which defines the total amount of work
+- Mapping of the work to execution resources
+
+```c++
+for (int i=0; i < N; i++) // Iteration range
+{
+  y[i] += a * x[i]; // computational body
+}
+```
+
+# Expressing parallelism in Kokkos
+
+- When using Kokkos, computational body is defined as functor (explicit or lambda)
+- Mapping of work is carried by the parallel dispatch operations of Kokkos
+- Parallel dispatch operations take as an argument the iteration range and the functor
+- Functor is called at each iteration step with the iteration index
+- Iteration steps are done in parallel, with no guarantee about the order they are executed
+
+# Parallel axpy with Kokkos
+
+<div class="column">
+Using an explicit functor
+```c++
+struct axpy {
+  double *_x, *_y;
+  const double _a;
+  axpy(double *x, double *y, double a) :
+    _x(x), _y(y), _a(a) {};
+  void operator()(const int i) const {
+    _y[i] += _a * _x[i];
+  }
+}
+
+Kokkos::parallel_for(N, axpy(x, y, a));
+```
+</div>
+
+<div class="column">
+Using a lambda expression
+```c++
+Kokkos::parallel_for(N,
+   [=] (const int i) {
+        y[i] += a * x[i];
+   });
+```
+</div>
+
+# Reductions
+
+
+# Summary
+
+

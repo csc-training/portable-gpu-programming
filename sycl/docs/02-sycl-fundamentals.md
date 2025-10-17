@@ -277,7 +277,7 @@ using namespace sycl;
 <small>
 ```cpp
 int main() {
-    constexpr size_t N = 8;
+    constexpr size_t N = 8192;
     std::vector<int> hx(N, 1), hy(N, 2);
     int a = 3;
 
@@ -343,7 +343,7 @@ private:
 <small>
 ```cpp
 int main() {
-    constexpr size_t N = 8;
+    constexpr size_t N = 8192;
     std::vector<int> hx(N, 1), hy(N, 2);
     int a = 3;
 

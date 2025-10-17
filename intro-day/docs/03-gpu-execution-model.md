@@ -73,7 +73,7 @@ GPU_K void axpy_(int n, double a, double *x, double *y, int id)
 
 <div class="column">
 
-![](img/amd_simd_lanet.png){.center width=32%} 
+![](img/amd_simd_lanet.png){.center width=31%} 
 
 <div align="center"><small>The smallest execution unit in a GPU.</small></div>
 </div>

@@ -164,7 +164,7 @@ lang:     en
  - the queue needs to be initialized for profiling:
     - `queue q{ gpu_selector{}, { property::queue::enable_profiling() } };`
  - submit the work:
-    - `auto e = Q.submit([&](handler &cgh){ /* body */});`
+    - `auto e = q.submit([&](handler &cgh){ /* body */});`
  - wait for the task to complete:
     - `e.wait();` (could be also other ways)
  - extract the time:

@@ -24,10 +24,10 @@ lang:     en
 <div class="column">
 <small>
 ```cpp
-    std::vector<int> hx(N),hy(N);
+    std::vector<int> hx(N),h_y(N);
     {
       buffer<int, 1> x_buf(hx.data(), sycl::range<1>(N)); 
-      buffer<int, 1> y_buf(hyt.data(), sycl::range<1>(N)); 
+      buffer<int, 1> y_buf(h_y.data(), sycl::range<1>(N)); 
       // Launch kernel 1 Initialize X
       q.submit([&](sycl::handler &cgh) {
         accessor x(x_buf, cgh, read_only);
@@ -131,14 +131,14 @@ lang:     en
     });
 
     // Copy results back to host, depending on add_event completion
-    int *hy = new int[N];
+    int *h_y = new int[N];
     q.submit([&](handler &cgh) {
         cgh.depends_on(add_event); // Ensure add_event (final computation) is done first
-        cgh.memcpy(hy, d_y, N * sizeof(int)); // Copy results back to host
+        cgh.memcpy(h_y, d_y, N * sizeof(int)); // Copy results back to host
     }).wait(); // Wait for the memcpy to finish
 
     // Clean up
-    delete[] host_Y_result;
+    delete[] h_y;
     free(d_x, q);
     free(d_y, q);
 ``` 

@@ -147,10 +147,12 @@ auto q = queue { custom_selector {} };
  {
     // Create buffers for data 
     buffer<int, 1> y_buf(hy.data(), range<1>(N));
+
     q.submit([&](handler& cgh) {
       accessor y{y_buf, cgh, read_write}; // The encapsulated data is accessed via accessors
       /* Work to be done on the device. Increment each element by 1.*/
     });
+
     host_accessor result{y_buf}; // host can access data also directly after buffer destruction
     for (int i = 0; i < N; i++) {
       assert(result[i] == 1);

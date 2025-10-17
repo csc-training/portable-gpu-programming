@@ -157,7 +157,7 @@ auto q = queue { custom_selector {} };
 
     host_accessor result{y_buf}; // host can access data also directly after buffer destruction
     for (int i = 0; i < N; i++) {
-      assert(result[i] == 1);
+      assert(result[i] == 2);
     }
  }
 ``` 

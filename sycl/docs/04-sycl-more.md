@@ -24,22 +24,22 @@ lang:     en
 <div class="column">
 <small>
 ```cpp
-    std::vector<float> Xhost(N),Yhost(N);
+    std::vector<int> hx(N),hy(N);
     {
-      buffer<float, 1> Xbuff(Xhost.data(), sycl::range<1>(N)); 
-      buffer<float, 1> Ybuff(Yhost.data(), sycl::range<1>(N)); 
+      buffer<int, 1> x_buf(hx.data(), sycl::range<1>(N)); 
+      buffer<int, 1> y_buf(hyt.data(), sycl::range<1>(N)); 
       // Launch kernel 1 Initialize X
-      q.submit([&](sycl::handler& h) {
-        auto accX = Xbuff.get_access<sycl::access::mode::write>(h);
+      q.submit([&](sycl::handler &cgh) {
+        accessor x(x_buf, cgh, read_only);
         h.parallel_for(N, [=](sycl::id<1> i) {
-            accX[i] = static_cast<float>(i); // Initialize X = 0, 1, 2, ...
+            x[i] = 1;
         });
       });
       // Launch kernel 2: Initialize Y
-      q.submit([&](sycl::handler& h) {
-        auto accY = Ybuff.get_access<sycl::access::mode::write>(h);
+      q.submit([&](sycl::handler &cgh) {
+        accessor y(y_buf, cgh, read_write);
         h.parallel_for(N, [=](sycl::id<1> i) {
-            accY[i] = static_cast<float>(2 * i); // Initialize Y = 0, 2, 4, 6, ...
+            y[i] = 2; 
         });
       }); 
 ``` 
@@ -53,10 +53,10 @@ lang:     en
 ```cpp      
       // Launch kernel 3: Perform Y = Y + a * X
       q.submit([&](sycl::handler& h) {
-        auto accX = Xbuff.get_access<sycl::access::mode::read>(h);
-        auto accY = Ybuff.get_access<sycl::access::mode::write>(h);
+        auto x = accessor{x_buf, cgh, read};
+        auto y = accessor{y_buf, cgh, read_write};
         h.parallel_for(N, [=](sycl::id<1> i) {
-            accY[i] += a * accX[i]; // Y = Y + a * X
+           y[i] += a * y[i]; // Y = Y + a * X
         });
       });
       // Use host_accessor to read back the results from Ybuff
@@ -99,20 +99,20 @@ lang:     en
 <small>
 ```cpp
       // Allocate device memory for X and Y
-    float *X = malloc_device<float>(N, q);
-    float *Y = malloc_device<float>(N, q);
+    int *x = malloc_device<int>(N, q);
+    int *x = malloc_device<int>(N, q);
 
     // Initialize X on the device using a kernel
     event init_X = q.submit([&](handler &cgh) {
         cgh.parallel_for(N, [=](id<1> i) {
-            X[i] = static_cast<float>(i); // Initialize X = i
+            x[i] = 1; 
         });
     });
 
     // Initialize Y on the device using a separate kernel
     event init_Y = q.submit([&](handler &cgh) {
         cgh.parallel_for(N, [=](id<1> i) {
-            Y[i] = static_cast<float>(i * 2); // Initialize Y = 2 * i
+            y[i] = 2; 
         });
     });
 ```
@@ -127,9 +127,9 @@ lang:     en
 
     // Perform Y = Y + a * X on the device after both initializations
     event add_event = q.submit([&](handler &cgh) {
-        cgh.depends_on({init_X, init_Y}); // Ensure Y is initialized first
+        cgh.depends_on({init_x, init_y}); // Ensure x,y are initialized first
         cgh.parallel_for(N, [=](id<1> i) {
-            Y[i] = Y[i] + a * X[i]; // Perform Y = Y + a * X
+            y[i] += a * x[i]; // Perform Y = Y + a * X
         });
     });
 
@@ -142,8 +142,8 @@ lang:     en
 
     // Clean up
     delete[] host_Y_result;
-    free(X, q);
-    free(Y, q);
+    free(x, q);
+    free(y, q);
 ``` 
 </small>
 
@@ -153,12 +153,12 @@ lang:     en
 
  - `q.wait();` pauses the execution until all operations in a queue completed
     - coarse synchonizations, not beneficial if only the results of some kernels are needed at the moment
- - synchronize on events,  `e.wait();` or `event::wait({e1, e2});`
-    - fine control
  - use buffers features:
-    - `host_accessor` will hold the execution until the actions are completed and the data is available to the host
     - put the buffers in a scope
       - when a buffer goes out of scope program  wait for all actions that use it to complete
+    - `host_accessor` will hold the execution until the actions are completed and the data is available to the host
+ - synchronize on events,  `e.wait();` or `event::wait({e1, e2});`
+    - fine control
 
 # Basic Profiling{.section}
 

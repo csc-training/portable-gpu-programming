@@ -24,9 +24,9 @@ lang:     en
 <div class="column">
 <small>
 ```cpp
-    std::vector<int> hx(N),h_y(N);
+    std::vector<int> h_x(N),h_y(N);
     {
-      buffer<int, 1> x_buf(hx.data(), sycl::range<1>(N)); 
+      buffer<int, 1> x_buf(h_x.data(), sycl::range<1>(N)); 
       buffer<int, 1> y_buf(h_y.data(), sycl::range<1>(N)); 
       // Launch kernel 1 Initialize X
       q.submit([&](sycl::handler &cgh) {

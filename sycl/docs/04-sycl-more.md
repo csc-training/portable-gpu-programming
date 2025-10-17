@@ -162,11 +162,11 @@ lang:     en
 #  Profiling with Events I
 
  - the queue needs to be initialized for profiling:
-    - `queue q{ gpu_selector{}, { property::queue::enable_profiling() } };`
+    - <small>`queue q{ gpu_selector{}, { property::queue::enable_profiling() } };`</small>
  - submit the work:
-    - `auto e = q.submit([&](handler &cgh){ /* body */});`
+    - <small>`auto e = q.submit([&](handler &cgh){ /* body */});`</small>
  - wait for the task to complete:
-    - `e.wait();` (could be also other ways)
+    - <small>`e.wait();`</small> (could be also other ways)
  - extract the time:
    - <small>`auto t_submit = e.get_profiling_info<info::event_profiling::command_submit>();`</small>
 

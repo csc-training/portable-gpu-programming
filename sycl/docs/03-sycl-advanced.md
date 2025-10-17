@@ -122,7 +122,7 @@ cgh.parallel_for(nd_range<1>(range<1>(N),range<1>(64)), [=](nd_item<1> item){
 
 # Parallel launch with **nd-range** III
  - extra functionalities
-    - each work-group has work-group *local memory*
+    - each work-group has work-group *local shared memory*
         - faster to access than global memory
         - can be used as programmable cache
     - group-level *barriers* and *fences* to synchronize work-items within a group
@@ -130,6 +130,13 @@ cgh.parallel_for(nd_range<1>(range<1>(N),range<1>(64)), [=](nd_item<1> item){
         - *fences* ensures writes are visible to all work-items before proceeding
     - group-level collectives, for communication, e.g. broadcasting, or computation, e.g. scans
         - useful for reductions at group-level
+
+# Local Shared Memory Usage 
+
+- multiple accesses of data withing the same block
+    - stencils, convolutions, N-body interactions, matrix-matrix multiplications, reductions
+- transform non-coalesced to coalesced accesses
+    -  matrix transposes, matrix-matrix multiplications,  
  
 # Summary
 

@@ -149,7 +149,7 @@ lang:     en
 # Synchronization with Host
 
  - `q.wait();` pauses the execution until all operations in a queue completed
-    - coarse synchonizations, not beneficial if only the results of some kernels are needed at the moment
+    - coarse synchronizations, not beneficial if only the results of some kernels are needed at the moment
  - use buffers features:
     - put the buffers in a scope
       - when a buffer goes out of scope program  wait for all actions that use it to complete

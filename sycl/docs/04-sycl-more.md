@@ -229,7 +229,7 @@ auto exception_handler = [] (exception_list exceptions) {
   });
 
   try {
-    queue.wait_and_throw();
+    q.wait_and_throw();
   } catch (exception const& e) {
     std::cout << "Caught synchronous SYCL exception:\n"
               << e.what() << std::endl;

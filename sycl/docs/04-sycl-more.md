@@ -221,7 +221,7 @@ auto exception_handler = [] (exception_list exceptions) {
 ```cpp
 
   int main() {
-  sycl::queue queue(default_selector_v, exception_handler);
+  sycl::queue q(default_selector_v, exception_handler);
 
   queue.submit([&] (handler& cgh) {
     auto range = nd_range<1>(range<1>(1), range<1>(10));

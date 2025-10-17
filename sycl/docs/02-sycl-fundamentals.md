@@ -138,7 +138,7 @@ auto q = queue { custom_selector {} };
  - does not own the memory, it’s only a *constrained view* into it
  - **accessor** objects are used to access the data on device
  - various access modes, *read_write*, *read_only*, or *write_only*
- - **host_accessor** bjects are used to access the data on host
+ - **host_accessor** objects are used to access the data on host
 
 # Buffers and Accesors II
  

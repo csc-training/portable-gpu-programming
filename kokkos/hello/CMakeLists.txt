@@ -2,7 +2,6 @@ cmake_minimum_required(VERSION 3.20)
 
 project(Hello LANGUAGES CXX)
 
-# include(../kokkos.cmake)
 include(../common.cmake)
 
 add_executable(hello hello.cpp)

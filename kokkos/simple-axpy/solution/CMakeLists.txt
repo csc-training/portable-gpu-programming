@@ -1,10 +1,13 @@
 cmake_minimum_required(VERSION 3.20)
 
-project(Exercise LANGUAGES CXX)
+project(AXPY LANGUAGES CXX)
 
-# include(../kokkos.cmake)
 include(../../common.cmake)
 
-add_executable(axpy axpy.cpp)
+add_executable(axpy-functor axpy-functor.cpp)
+add_executable(axpy-lambda axpy-lambda.cpp)
+add_executable(axpy-lambda-sharedspace axpy-lambda-sharedspace.cpp)
 
-target_link_libraries(axpy PRIVATE Kokkos::kokkos)
+target_link_libraries(axpy-functor PRIVATE Kokkos::kokkos)
+target_link_libraries(axpy-lambda PRIVATE Kokkos::kokkos)
+target_link_libraries(axpy-lambda-sharedspace PRIVATE Kokkos::kokkos)

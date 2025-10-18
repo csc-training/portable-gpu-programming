@@ -37,12 +37,12 @@ int main(int argc, char** argv)
     const double _a;
     axpy(double *x, double *y, double a) :
       _x(x), _y(y), _a(a) {};
-    void operator()(const int i) const {
+    KOKKOS_INLINE_FUNCTION void operator()(const int i) const {
       _y[i] += _a * _x[i];
     }
   };
 
-  Kokkos::parallel_for(N, axpy(x, y, a));
+  Kokkos::parallel_for(Kokkos::RangePolicy<>(0,N), axpy(x, y, a));
 
   std::cout << y[1] << " " << y[N-1] << std::endl;  
 
@@ -54,7 +54,7 @@ int main(int argc, char** argv)
 
   // axpy with lambda
   Kokkos::parallel_for(N,
-     [=] (const int i) {
+     KOKKOS_LAMBDA (const int i) {
           y[i] += a * x[i];
      });
 

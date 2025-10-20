@@ -238,10 +238,12 @@ Simple domains with different computational cost
 </center>
 </div>
 
+<!--
 # Lumi
 
  ![](img/lumi.png){.center width=50%}
 
+-->
 
 # GPUs: The New Default for Performance <!-- GPUs are becoming the norm -->
 

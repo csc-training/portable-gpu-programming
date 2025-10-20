@@ -1,7 +1,5 @@
 ## Solving 2D Poisson's equation with Jacobi iteration
 
-In this exercise we practise the data mapping clauses across multiple GPU kernels.
-
 Poisson's equation in 2D is
 
 $$

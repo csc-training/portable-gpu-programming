@@ -84,14 +84,14 @@ q.submit([&](handler& h) {
             });
 });
 ```
-This step is repeated, but in the second step the arrays are inverted so that we avoid a redundant data copy from **unew** variable to **u**:
+This step is repeated, but in the second step the accesors  are inverted so that we avoid a redundant data copy from **unew** variable to **u**:
 
 ```cpp
 q.submit([&](handler& h) {
       // Create accessors
       
-      accessor U(u, h, sycl::read_only);
-      accessor UNEW(unew, h, sycl::write_only);
+      accessor U(unew, h, sycl::read_only);
+      accessor UNEW(u, h, sycl::write_only);
 
       range<2> global_size(nx,ny);
       range<2> work_group_size(M,M);
@@ -105,10 +105,43 @@ q.submit([&](handler& h) {
                 int jp = i * ny + j + 1;
                 int jm = i * ny + j - 1;
                 if(i>0 && i<nx-1 && j>0 && j< ny-1){
-                    U[ind] = factor * (UNEW[ip] - 2.0 * UNEW[ind] + UNEW[im] +
-                                 UNEW[jp] - 2.0 * UNEW[ind] + UNEW[jm]);
+                    UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
+                                 U[jp] - 2.0 * U[ind] + U[jm]);
                 }         
             });
 });
 ```
-Note that a 2D grid is created and we can associate the `x` and `y` with the thread/work-item indeces `i` and `j`.   
+
+**Note that a 2D grid is created and we can associate the `x` and `y` with the thread/work-item indeces `i` and `j`, however the data itself is flattened. As a bonus exercise one can try to use 2D buffers and accessors.**
+
+## II. Measure time using events
+Basic profiling can be done by measuring the time spent in kernels and compare it to the total time spent doing the Jacobi Iterations (which include data transfers and other overheads). 
+Start from the [solution](j_simple_with_buffer.cpp) of the previuos task. 
+### Step I. Modify the Queue
+Change the queue to allow for profiling. This is done by defining a SYCL list of properties which is used to initialized the queue in addition to the device selector. 
+```
+//# Define queue with default device for offloading computation
+    sycl::property_list q_prof{property::queue::enable_profiling{}}; // enable profiling 
+    queue q{default_selector_v,q_prof}; // selects automatically the best device available
+```
+### Step II Add Events
+Kernel launchins return events. Both calls in one iteration are modified such as:
+```
+auto e=e = q.submit(...);
+```
+Time is measured when the kernel execution is completed:
+```
+kernel_duration += (e.get_profiling_info<info::event_profiling::command_end>() - e.get_profiling_info<info::event_profiling::command_start>());
+```
+The results are in nanoseconds!
+
+This timing only reflects the time spent in performing calculations on the device. If proper synchornization between host and device is done the total duration time can be measured using a library such as `std::chrono`.
+
+Before the Jacobi loop the time is recorded:
+```
+auto start = std::chrono::high_resolution_clock::now().time_since_epoch().count();
+```
+The total duration in nanoseconds is obtainied by calling:
+```
+auto duration = std::chrono::high_resolution_clock::now().time_since_epoch().count() - start;
+```

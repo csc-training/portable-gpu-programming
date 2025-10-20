@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     //# Define vectors for matrices
     const int nx=N, ny=N;
     const int niter=100;
-    const float factor =0.5;
+    const float factor =0.25;
     std::vector<float> matrix_u(nx*ny);
     std::vector<float> matrix_unew(nx*ny);
     
@@ -79,8 +79,9 @@ int main(int argc, char *argv[]) {
         //# Submit command groups to execute on device
         q.submit([&](handler &h){
             //# Create accessors to copy buffers to the device
-            auto U = u.get_access<access::mode::read>(h);
-             auto UNEW= unew.get_access<access::mode::write>(h);
+            accessor U(u, h, sycl::read_only);
+            accessor UNEW(unew, h, sycl::write_only);
+
 
              //# Define size for ND-Range and work-group size
              range<2> global_size(nx,ny);

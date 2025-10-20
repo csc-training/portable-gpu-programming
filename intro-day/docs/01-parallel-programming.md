@@ -98,7 +98,7 @@ Loop can be parallelized over `i`
 
 </div>
 
-# Data Conflicts in Parallel Execution
+<!-- # Data Conflicts in Parallel Execution
 
 - Race condition
     - Two (or more) processes access shared data concurrently
@@ -109,7 +109,7 @@ Loop can be parallelized over `i`
 - Deadlock
     - Two (or more) processes wait indefinitely for each other to release resources (or e.g. to send data)
     - System halts or stalls due to resource unavailability
-
+-->
 
 # Data Distribution: Local vs. Global Dependencies
 

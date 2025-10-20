@@ -53,4 +53,4 @@ srun nsys profile my_exe
 ```
 
 Output is in the file `report.nsys-rep` which can be opened with the `nsys-ui` GUI.
-For smoother operation we recommend to install Nsight Systems on your local workstation andcopy the `.nsys-rep` file there analysis. 
+For smoother operation we recommend to install Nsight Systems on your local workstation and copy the `.nsys-rep` file there analysis. 

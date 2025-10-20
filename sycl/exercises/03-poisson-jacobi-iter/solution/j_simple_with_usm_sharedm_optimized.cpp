@@ -46,7 +46,7 @@ int main(int argc, char *argv[]) {
     const int nx=N, ny=N;
     const int mx=M, my=M;
     const int niter=100;
-    const double factor =0.5;
+    const double factor =0.25;
 
     //# Define queue with default device for offloading computation
     sycl::property_list q_prof{property::queue::enable_profiling{}, sycl::property::queue::in_order{}};

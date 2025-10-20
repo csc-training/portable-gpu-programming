@@ -103,41 +103,9 @@ int main(int argc, char *argv[]) {
             });
         });
     }
-    
-    {
-        //# Create buffers for matrices
-        buffer<float, 1> u(matrix_u.data(), range<1>(nx*ny));
-        buffer<float, 1> unew(matrix_unew.data(), range<1>(nx*ny));
-        
-        //# Submit command groups to execute on device
-        q.submit([&](handler &h){
-            
-            //# Create accessors to copy buffers to the device
-            auto U = unew.get_access<access::mode::read>(h);
-            auto UNEW= u.get_access<access::mode::write>(h);
-            
-            //# Define size for ND-Range and work-group size
-            range<2> global_size(nx,ny);
-            range<2> work_group_size(M,M);
-
-            //# Parallel Compute 
-            h.parallel_for(nd_range<2>{global_size, work_group_size}, [=](nd_item<2> item){
-                const int i = item.get_global_id(0);
-                const int j = item.get_global_id(1);
-                int ind = i * ny + j;
-                int ip = (i + 1) * ny + j;
-                int im = (i - 1) * ny + j;
-                int jp = i * ny + j + 1;
-                int jm = i * ny + j - 1;
-                if(i>0 && i<nx-1 && j>0 && j< ny-1){
-                    UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
-                                 U[jp] - 2.0 * U[ind] + U[jm]);
-                } 
-            });
-        });
-    }
     q.wait();
-
+    
+    std::cout << "Warm up done!  \n";
     
     auto start = std::chrono::high_resolution_clock::now().time_since_epoch().count();
     event e;
@@ -152,9 +120,9 @@ int main(int argc, char *argv[]) {
             
             //# Submit command groups to execute on device            
             e = q.submit([&](handler &h){
-                //# Create accessors to copy buffers to the device
-                auto U = u.get_access<access::mode::read>(h);
-                auto UNEW= unew.get_access<access::mode::write>(h);
+                //# Create accessors to copy buffers to the device         
+                accessor U(u, h, sycl::read_only);
+                accessor UNEW(unew, h, sycl::write_only);
                 
                 //# Define size for ND-Range and work-group size
                 range<2> global_size(nx,ny);
@@ -186,9 +154,9 @@ int main(int argc, char *argv[]) {
             
             //# Submit command groups to execute on device
             e = q.submit([&](handler &h){
-                //# Create accessors to copy buffers to the device
-                auto U = unew.get_access<access::mode::read>(h);
-                auto UNEW= u.get_access<access::mode::write>(h);
+                //# Create accessors to copy buffers to the device       
+                accessor U(u, h, sycl::read_only);
+                accessor UNEW(unew, h, sycl::write_only);
                 
                 //# Define size for ND-Range and work-group size
                 range<2> global_size(nx,ny);
@@ -204,8 +172,8 @@ int main(int argc, char *argv[]) {
                     int jp = i * ny + j + 1;
                     int jm = i * ny + j - 1;
                     if(i>0 && i<nx-1 && j>0 && j< ny-1){
-                        UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
-                                 U[jp] - 2.0 * U[ind] + U[jm]);
+                        U[ind] = factor * (UNEW[ip] - 2.0 * UNEW[ind] + UNEW[im] +
+                                 UNEW[jp] - 2.0 * UNEW[ind] + UNEW[jm]);
                     } 
         
                 });

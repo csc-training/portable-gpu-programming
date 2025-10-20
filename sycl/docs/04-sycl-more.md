@@ -1,5 +1,5 @@
 ---
-title:  Further SYCL Features
+title:  Other SYCL Features
 subtitle: Portable GPU Programming 
 date:     October 2025
 lang:     en

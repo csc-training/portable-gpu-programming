@@ -99,7 +99,8 @@ Example `job.sh`  using 1 GPU:
 #SBATCH --partition=gpusmall
 #SBATCH --reservation=portgp-2025-tue # This changes every day to -wed, -thu and -fri, valid 09:00 to 17:00 
 #SBATCH --time=00:05:00
-#SBATCH --ntasks=1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
 #SBATCH --gres=gpu:a100_1g.5gb:1
 
@@ -124,19 +125,18 @@ Example `job.sh` using 1 GPU:
 #SBATCH --partition=small-g
 #SBATCH --reservation=portgp-2025-tue # This changes every day to -wed, -thu and -fri, valid 09:00 to 17:00 
 #SBATCH --time=00:05:00
-#SBATCH --ntasks=1
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=1
-#SBATCH --gpus=1
+#SBATCH --gpus-per-node=1
 
 srun ./my_gpu_exe
 ```
 On LUMI we have 6 gpu nodes reserved for us. 
 
-At any time , one can use `--partition=dev-g`  without the reservation argument.
+At any time , one can use `--partition=dev-g` or `--partition=small-g`  without the reservation argument.
 
 For multi-gpu applications one has to use `--gpus-per-node=x`, where `x` is the number of gpus per node. 
-
-Other useful options for both Mahti and LUMI are `--nodes` and `--ntasks-per-node` which replace the `--ntasks`. 
 
 **Unless required by the exercise only always use 1 GPU!**
 

@@ -63,7 +63,7 @@ The lectures in this repository are published under [CC-BY-SA license](https://c
 
 ## Exercises
 
-[General instructions](Exercises_Instructions.md)
+[General instructions](exercises_instructions.md)
 
 ### Kokkos
 - [Kokkos](/exercises/kokkos)

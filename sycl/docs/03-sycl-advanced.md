@@ -145,4 +145,4 @@ cgh.parallel_for(nd_range<1>(range<1>(N),range<1>(64)), [=](nd_item<1> item){
  - memory menagement using USM
  - kernel launch via **nd-range**
        - local shared memory
-       - block (work grgoup) level operations
+       - block (work group) level operations

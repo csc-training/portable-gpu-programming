@@ -155,8 +155,8 @@ int main(int argc, char *argv[]) {
             //# Submit command groups to execute on device
             e = q.submit([&](handler &h){
                 //# Create accessors to copy buffers to the device       
-                accessor U(u, h, sycl::read_only);
-                accessor UNEW(unew, h, sycl::write_only);
+                accessor U(unew, h, sycl::read_only);
+                accessor UNEW(u, h, sycl::write_only);
                 
                 //# Define size for ND-Range and work-group size
                 range<2> global_size(nx,ny);
@@ -172,8 +172,8 @@ int main(int argc, char *argv[]) {
                     int jp = i * ny + j + 1;
                     int jm = i * ny + j - 1;
                     if(i>0 && i<nx-1 && j>0 && j< ny-1){
-                        U[ind] = factor * (UNEW[ip] - 2.0 * UNEW[ind] + UNEW[im] +
-                                 UNEW[jp] - 2.0 * UNEW[ind] + UNEW[jm]);
+                        UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
+                                 U[jp] - 2.0 * U[ind] + U[jm]);
                     } 
         
                 });

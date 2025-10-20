@@ -41,7 +41,7 @@ where $$u_{i,j}^{(k)}$$ is the value of $$u$$ at grid point $$(i,j)$$ during the
 
 The algorithm comprises of the following steps:
 
-1. Initialize the grid with an initial guess $$u_{i,j}^{(0)}$$ (zeros in the example code).
+1. Initialize the grid with an initial guess $$u_{i,j}^{(0)}$$ .
 2. Iterate over all interior grid points and update $$u_{i,j}^{(k+1)}$$ using values from $$u^{(k)}$$.
 3. Repeat until the solution converges, i.e., the difference between successive iterations is below a chosen tolerance.
    In this exercise, we iterate for a fixed number of iterations for simplicity.

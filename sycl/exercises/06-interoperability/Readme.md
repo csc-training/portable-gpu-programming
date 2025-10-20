@@ -145,4 +145,4 @@ acpp -fuse-ld=lld -O3 -DCUBLAS -DACPP -I$CUDA_HOME/include/ -L$CUDA_HOME/lib64/ 
 ```
 
 
-The above commands and  were used for Mahti, as an exercise try to make the [code](gemm_mkl_cublas_usm.cpp) run on LUMI. All CUDA calls have  equivalents in HIP in which the prefix `cu` replaces with `hip`.
+The above commands and  were used for Mahti, as an exercise try to make the [code](gemm_mkl_cublas_usm.cpp) run on LUMI. Note that all CUDA calls have HIP equivalents—simply replace the *cu* prefix with *hip*. This will allow the code to run on AMD GPUs without changing the logic.

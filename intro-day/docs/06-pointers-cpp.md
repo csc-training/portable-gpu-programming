@@ -369,7 +369,7 @@ int main() {
 - Reusable, expressive, and efficient code
 
 
-# C++ Standard Parallellism {.section}
+# C++ Standard Parallelism {.section}
 
 # Introduction
 

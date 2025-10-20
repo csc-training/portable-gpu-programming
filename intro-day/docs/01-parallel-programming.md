@@ -136,10 +136,14 @@ Global dependencies
   $X_k = \sum_{n=0}^{N-1} x_n \exp(-i \frac{2\pi}{N}k \cdot n)$
 - Linear algebra: $C = A \times B$
 
+-->
   <!-- Copyright CSC -->
+<!--
+
   ![](img/matmul.png){.center width=50%}
 
 - Number of communication events per process increases with number of execution units
+
 -->
 
 # Data Distribution: Load Balance

@@ -178,6 +178,44 @@ The [solution directory](solution/) contains a model solution and discussion on 
    (see [documentation](https://rocm.docs.amd.com/projects/llvm-project/en/latest/conceptual/openmp.html#environment-variables)).
 
 
+### Bonus exercises: NVIDIA HPC compiler on Mahti
+
+1. Login to Mahti and load the nvhpc module:
+
+       ml purge
+       ml use /appl/opt/nvhpc/modulefiles
+       ml nvhpc-hpcx-cuda12/25.1
+
+   Compile the code (C or Fortran):
+
+       nvc -mp=gpu -gpu=cc80 axpy.c -o axpy.x
+       nvfortran -mp=gpu -gpu=cc80 helper_functions.F90 axpy.F90 -o axpy.x
+
+   Run the program on a single GPU:
+
+       srun -p gputest --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 --gres=gpu:a100:1 -t 0:10:00 ./axpy.x
+
+   The compiler creates code paths for both GPU and host threads, so the same executable
+   runs also on CPU-nodes. To ensure that you are running on GPU, set
+
+       export OMP_TARGET_OFFLOAD=MANDATORY
+
+   Runtime debug information is obtained with `NVCOMPILER_ACC_NOTIFY`
+   (see [documentation](https://docs.nvidia.com/hpc-sdk/archive/25.1/compilers/hpc-compilers-user-guide/index.html#using-openmp)).
+
+       export NVCOMPILER_ACC_NOTIFY=$((0x1 | 0x2))
+       srun -p gputest --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 --gres=gpu:a100:1 -t 0:10:00 ./axpy.x
+
+   Can you identify memory transfers and the number of blocks and threads per block used for the kernel execution on GPU?
+
+   Most verbose runtime debug information is obtained with `NVCOMPILER_ACC_NOTIFY=$((0x1F))`.
+
+   Add `-Minfo=mp` to obtain compiler diagnostics:
+
+       nvc -mp=gpu -gpu=cc80 -Minfo=mp axpy.c -o axpy.x
+       nvfortran -mp=gpu -gpu=cc80 -Minfo=mp helper_functions.F90 axpy.F90 -o axpy.x
+
+
 ### Bonus exercises: loop construct
 
 1. Try out the `target teams loop` construct. Note that it might not work with all compilers unless you split the pragma to two lines:

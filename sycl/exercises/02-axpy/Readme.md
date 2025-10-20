@@ -90,27 +90,7 @@ When a buffer is destroyed the host can access again the data to which the buffe
       }
 ```
 As long as the host accessor is valid, the data cannot be accessed by other means. When destroyed, the program can proceed with further host or device computations.
-
-## II. Memory management using Buffer and Accesors and `nd_range" Launching
-In the previous exercise was used a simple kernel launch with`range`, which lacks advanced features like local shared memory, in-work-group synchronization, or local indexing.
-
-Although  `axpy` doesn’t require these features, it’s a good exercise to learn the syntax.
-
-Starting from the [solution of the task I](solution/axpy_buffer_simplek.cpp) change the way the kernel is launched following:
-
-```cpp
-   h.parallel_for(sycl::nd_range<1>(sycl::range<1>(((N+local_size-1)/local_size)*local_size), sycl::range<1>(local_size)), [=](sycl::nd_item<1> item) {
-        auto idx=item.get_global_id(0);
-        if(idx<N){ //to avoid out of bounds access
-          y_acc[idx] = y_acc[idx] + a*x_acc[idx];
-        }
-      });
-```
-In the launching the programmer can define not only the number of work-items to execute the kernel, but also the size of the work-group. Both global and local coordinates of the work-item can be now obtained from the nd_item object (via `get_global_id()`, `get_global_linear_id()` and `get_local_id()`, `get_local_linear_id` methods).
-
-**Note** that `nd_range` requires that the total number of work-items to be divisible by the local size, so you may launch more work-items than `N`.
-
-## III. Memory management with Unified Shared Memory (`malloc_device()`) and Simple Launching
+## II. Memory management with Unified Shared Memory (`malloc_device()`) and Simple Launching
 This task uses USM for memory management, keeping the overall structure similar.
 
 Start from the skeleton code  [`axpy.cpp`](axpy.cpp). Look for the **//TODO** lines.
@@ -144,7 +124,7 @@ This is done similarly to taks I
       });
     }).wait();
 ``` 
-In this case `.wait()`  method pauses the prorgam until the the operation is 
+In this case `.wait()`  method pauses the prorgam until the the operation is  completed
 ### Step 5: Access the results on the host
 When using USM and `malloc_device` the transfer from device to host needs to be explicitely coded. The same method `memcopy()` is used:
 
@@ -154,11 +134,30 @@ When using USM and `malloc_device` the transfer from device to host needs to be 
 Now the destination is the host pointer (first argument), while the source (second argument) is the device pointer.
 Again the `.wait()` method is needed to pause the program execution. This way it is guaranteed that the next step is not executed before all data from device is transfered.
 
+## III. Memory management using Buffer and Accesors and `nd_range" Launching
+In the previous exercise was used a simple kernel launch with`range`, which lacks advanced features like local shared memory, in-work-group synchronization, or local indexing.
+
+Although  `axpy` doesn’t require these features, it’s a good exercise to learn the syntax.
+
+Starting from the [solution of the task I](solution/axpy_buffer_simplek.cpp) change the way the kernel is launched following:
+
+```cpp
+   h.parallel_for(sycl::nd_range<1>(sycl::range<1>(((N+local_size-1)/local_size)*local_size), sycl::range<1>(local_size)), [=](sycl::nd_item<1> item) {
+        auto idx=item.get_global_id(0);
+        if(idx<N){ //to avoid out of bounds access
+          y_acc[idx] = y_acc[idx] + a*x_acc[idx];
+        }
+      });
+```
+In the launching the programmer can define not only the number of work-items to execute the kernel, but also the size of the work-group. Both global and local coordinates of the work-item can be now obtained from the nd_item object (via `get_global_id()`, `get_global_linear_id()` and `get_local_id()`, `get_local_linear_id` methods).
+
+**Note** that `nd_range` requires that the total number of work-items to be divisible by the local size, so you may launch more work-items than `N`.
+
 ## IV. Memory management with Unified Shared Memory (`malloc_device()`) and `nd_range` Launching
 
 Starting from the [solution of the previous task](solution/axpy_usm_device_simplek.cpp) change the kernel launching to use `nd_range`, similar to Task II.
 
-## V & VI. Memory management with Unified Shared Memory (`malloc_shared()`) and `simple` Launching
+## V & VI. Memory management with Unified Shared Memory (`malloc_shared()`) and `simple` Launching and and `nd_range` Launching
 The `malloc_device()` function allocates memory pinned to the device, inaccessible to the host directly. To simplify programming, SYCL provides `malloc_shared()`, which allows automatic migration of memory between host and device.
 
 Start from the skeleton [`axpy.cpp`](axpy.cpp), the solution of [Task III](solution/axpy_usm_device_simplek.cpp), or [Task IV](solution

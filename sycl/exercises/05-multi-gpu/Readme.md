@@ -27,10 +27,20 @@ for(unsigned n = 0; n < num_devices; n++) {
   q[n].wait();
 }
 ```
+The [first multi-gpu example](sycl-usm-vector-sum.cpp) demonstrates how a large problem can be split into two parts and processed using two devices.
+
 
 It is common for data computed on one GPU to be required by another. In this scenario, device-to-device transfers are highly efficient, as they occur within the same node and leverage the high-speed interconnect. When using USM it is alowed to perform memory transfers between different devices using the `memcpy` method. To copy data from a GPU pointer `dA_1` associated with the device 1 to the pointer `dA_0` associated with device 0 one can use:
 ```
 q0.memcpy(dA_0, dA_1, sizeof(int)*N);
 ```
 Becasue SYCL is high-level sits on top of CUDA or HIP the performance will depend on the implementation. If we are lucky the specific very fast features are used and the maximum speed is achieved. 
-The [first multi-gpu example]() comapres 
+The [second multi-gpu example](sycl-usm-p2pcopy.cpp) compares the bandwidth of direct device-to-device transfers to the bandwidth obtained when copying data first to host memory and then to the other device.
+
+# One GPU per Process
+This case is, in many ways, much simpler. Apart from communication with other tasks, the application is written as if it uses a single GPU.
+
+Communication between devices is handled using the MPI library. It is important to try to direct GPU to GPU communication and avoid extra transfers to the host. 
+
+The [last example](sycl-usm-device-ping-pong.cpp) demonstrates how direct GPU-to-GPU communication is performed and compares the bandwidth to the case where transfers are staged through host memory.
+

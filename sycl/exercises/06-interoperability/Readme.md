@@ -144,5 +144,9 @@ icpx -std=c++17 -fuse-ld=lld -O3 -fsycl -fsycl-targets=spir64_x86_64 -I$MKLROOT/
 acpp -fuse-ld=lld -O3 -DCUBLAS -DACPP -I$CUDA_HOME/include/ -L$CUDA_HOME/lib64/ -lcublas -lcudart -lcuda gemm_mkl_cublas_usm.cpp
 ```
 
-
+#### AdaptiveCpp with `hipBLas`
 The above commands and  were used for Mahti, as an exercise try to make the [code](gemm_mkl_cublas_usm.cpp) run on LUMI. Note that all CUDA calls have HIP equivalents—simply replace the *cu* prefix with *hip*. This will allow the code to run on AMD GPUs without changing the logic.
+Fro compilation might use:
+```
+acpp -fuse-ld=lld -O3 -DHIP -DACPP -I$ROCM_PATH/include/ -L$ROCM_PATH/lib/ -lhipblas -lhipruntime gemm_mkl_cublas_usm.cpp
+```

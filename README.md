@@ -30,8 +30,7 @@ The slides are available [here](https://csc-training.github.io/portable-gpu-prog
 | 09:15-12:00  | SYCL I (with exercises)
 | 12:00-13:00  | Lunch break
 | 13:00-15:00  | SYCL II (with exercises)
-| 15:00-15:30  | Coffee break
-| 15:30-16:30  | SYCL III (with exercises)
+| 15:00-16:30  | SYCL III (with exercises)
 | 16:30-16:45  | Day 2 wrap-up
 
 ### Day 3, Thursday 23.10
@@ -41,8 +40,7 @@ The slides are available [here](https://csc-training.github.io/portable-gpu-prog
 | 09:15-12:00  | Kokkos I (with exercises)
 | 12:00-13:00  | Lunch break
 | 13:00-15:00  | Kokkos II (with exercises)
-| 15:00-15:30  | Coffee break
-| 15:30-16:30  | Kokkos III (with exercises)
+| 15:00-16:30  | Kokkos III (with exercises)
 | 16:30-16:45  | Day 3 wrap-up
 
 ### Day 4, Friday 24.10
@@ -52,8 +50,7 @@ The slides are available [here](https://csc-training.github.io/portable-gpu-prog
 | 09:15-12:00  | OpenMP offload I (with exercises)
 | 12:00-13:00  | Lunch break
 | 13:00-15:00  | OpenMP offload II (with exercises)
-| 15:00-15:30  | Coffee break
-| 15:30-16:30  | OpenMP offload III (with exercises)
+| 15:00-16:30  | OpenMP offload III (with exercises)
 | 16:30-16:45  | Day 4 wrap-up & closing
 
 The lectures in this repository are published under [CC-BY-SA license](https://creativecommons.org/licenses/by-nc/4.0/). Some of the lectures and exercises are based on Intel copyrighted work and they have their own license ([MIT](https://spdx.org/licenses/MIT.html)).

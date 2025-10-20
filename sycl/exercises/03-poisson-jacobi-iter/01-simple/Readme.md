@@ -29,12 +29,12 @@ Start by defining a **queue**  and selecting the appropriate device selector. SY
 Alternatively it is possible to use the procedure from the [previous exercise](../01-info/enumerate_device.cpp). This the recommended when the application needs to detect multiple GPUs and assign devices according to MPI rank or OpenMP thread index.
 
 ### Step 2: Create Buffers
-Create buffers to encapsulate the data. For a one-dimensional array of integers of length `N`, with pointer `P`, a buffer can be constructed as follows:
+Create buffers to encapsulate the data. One buffer is for the present iterations and one for the next one 
 
 ```cpp
-    sycl::buffer<int, 1> x_buf(P, sycl::range<1>(N));
+    buffer<float, 1> u(matrix_u.data(), range<1>(nx*ny)); 
+    buffer<float, 1> unew(matrix_unew.data(), range<1>(nx*ny));
 ```
-Use the appropriate data type. 
 
 
 ### Step 3: Create Accessors
@@ -44,10 +44,12 @@ Two ways to create accessors:
 
 ```cpp
    sycl::accessor x_acc{x_buf, h, read_write};
+   
 ```
 or  
 ```cpp
-   auto a_acc = sycl::accessor{a_buf, h, sycl::read_write};
+   accessor U(u, h, sycl::read_only);
+   accessor UNEW(unew, h, sycl::write_only);
 ```
 **Important**  Use appropriate access modes for your data:
  - **Input Buffers:** Use `sycl::read_only` / `sycl::access::mode::read` to avoid unnecessary device-to-host data transfers.
@@ -55,16 +57,58 @@ or
  - **Input/Ouput Buffers:** Use `sycl::read_write` / `sycl::access::mode::read_write`  for data both read and modified during computation.
 
 
-### Step 4: Submit the Task using Basic Submission
+### Step 4: Submit the Task using `nd_range` Launching
 Once accessors are ready, submit the task to the device using .parallel_for():
 ```cpp
 q.submit([&](handler& h) {
       // Create accessors
-      accessor x_acc(x_buf, h, read_only);
-      accessor y_acc(y_buf, h, read_write);
+      
+      accessor U(u, h, sycl::read_only);
+      accessor UNEW(unew, h, sycl::write_only);
 
-      h.parallel_for(range<1>(N), [=](id<1> i) {
-        y_acc[i] = a * x_acc[i] +  y_acc[i];
-      });
-    });
+      range<2> global_size(nx,ny);
+      range<2> work_group_size(M,M);
+
+      h.parallel_for(nd_range<2>{global_size, work_group_size}, [=](nd_item<2> item){
+                const int i = item.get_global_id(0);
+                const int j = item.get_global_id(1);
+                int ind = i * ny + j;
+                int ip = (i + 1) * ny + j;
+                int im = (i - 1) * ny + j;
+                int jp = i * ny + j + 1;
+                int jm = i * ny + j - 1;
+                if(i>0 && i<nx-1 && j>0 && j< ny-1){
+                    UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
+                                 U[jp] - 2.0 * U[ind] + U[jm]);
+                }         
+            });
+});
 ```
+This step is repeated, but in the second step the arrays are inverted so that we avoid a redundant data copy from **unew** variable to **u**:
+
+```cpp
+q.submit([&](handler& h) {
+      // Create accessors
+      
+      accessor U(u, h, sycl::read_only);
+      accessor UNEW(unew, h, sycl::write_only);
+
+      range<2> global_size(nx,ny);
+      range<2> work_group_size(M,M);
+
+      h.parallel_for(nd_range<2>{global_size, work_group_size}, [=](nd_item<2> item){
+                const int i = item.get_global_id(0);
+                const int j = item.get_global_id(1);
+                int ind = i * ny + j;
+                int ip = (i + 1) * ny + j;
+                int im = (i - 1) * ny + j;
+                int jp = i * ny + j + 1;
+                int jm = i * ny + j - 1;
+                if(i>0 && i<nx-1 && j>0 && j< ny-1){
+                    U[ind] = factor * (UNEW[ip] - 2.0 * UNEW[ind] + UNEW[im] +
+                                 UNEW[jp] - 2.0 * UNEW[ind] + UNEW[jm]);
+                }         
+            });
+});
+```
+Note that a 2D grid is created and we can associate the `x` and `y` with the thread/work-item indeces `i` and `j`.   

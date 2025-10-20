@@ -142,11 +142,7 @@ cgh.parallel_for(nd_range<1>(range<1>(N),range<1>(64)), [=](nd_item<1> item){
 
 # Summary
 
- - **queues** are bridges between host and devices
- - each queue maps to one device
- - work is enqued by submitting **command groups**
-    - give lots of flexibil_ity
- - parallel code (kernel)  is submitted as a lambda function or as a function operator
- - two methods to express the parallel_ism
-    - basic launching
-    - via **nd-range**
+ - memory menagement using USM
+ - kernel launch via **nd-range**
+       - local shared memory
+       - block (work grgoup) level operations

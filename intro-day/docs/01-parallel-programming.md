@@ -23,6 +23,7 @@ lang:     en
  ![](img/compp.svg){.center width=100%}
 </div>
 
+<-- 
 # Types of Parallel Problems
 
 - Tightly coupled
@@ -32,7 +33,7 @@ lang:     en
 - Embarrassingly parallel
     - Very little (or no) interaction between subtasks
     - Example: Sequence alignment queries for multiple independent sequences in bioinformatics
-
+-->
 
 # Exposing Parallelism: Data Parallelism
 
@@ -63,7 +64,9 @@ lang:     en
 - There are normally more tasks than workers, and tasks are assigned dynamically
 
 
+<-- 
 # Parallel Algorithms {.section}
+-->
 
 # Parallelizable Problems
 
@@ -111,6 +114,7 @@ Loop can be parallelized over `i`
     - System halts or stalls due to resource unavailability
 -->
 
+<-- 
 # Data Distribution: Local vs. Global Dependencies
 
 <div class=column>
@@ -135,6 +139,7 @@ Global dependencies
   ![](img/matmul.png){.center width=50%}
 
 - Number of communication events per process increases with number of execution units
+-->
 
 # Data Distribution: Load Balance
 

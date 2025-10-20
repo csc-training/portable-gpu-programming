@@ -246,7 +246,7 @@ The exercise is to reduce this data movement.  This can be done by usingg the bu
         }
     }
 ```
-Now the buffers  are not desotryed until the Jacobi iterations are finished and the only accessors created are on the device. So no data transfer occurs. 
+Now the buffers  are not destroyed until the Jacobi iterations are finished and the only accessors created are on the device. So no data transfer occurs. 
 Same effect can be achieved using USM either using `malloc_device` or `malloc_shared`. The data is only moved to the device at the beginning of the application and only moved back at the end. 
 
 
@@ -257,3 +257,105 @@ On LUMI `rocm` is used as a backend. We can use `rocprof` to obtained similar in
 rocprof --stats --hip-trace --hsa-trace ./j_simple_buffer -n 16000
 ```
 The `rocprof` results are saved in a set of files `resutls.<...>.csv` 
+Your task is to optimized the code and then run and compare **rocprof** results for both cases.
+
+## IV. Local Shared Memory Optimization 
+
+Local shared memory is a very fast on-chip memory which can be used as a user programmable chache. It can be used to reduce reading the same data from the gloabl memory or can be used to make uncoalesced accesses coalesced. 
+
+In this exercise the reads and writes are coalesced, but each point read five times from the global memory. While the modern GPUs, have very advanced caching some benefits can be obtained by preloading the data on each the work-group works into the local shared memory and then used those values for the calculations. 
+
+### Step 1: Use `nd_range` launching
+
+Local shared memory can be used only when the kernels are launched using the advance method `nd_range`. First define somewher on the host sie the local sizes and the global sizes. The global sizes need to be diviable by the local sizes:
+```
+range<2> local_size(M, M);
+range<2> global_size(((nx + M - 1)/M)*M, ((ny + M - 1)/M)*M);
+nd_range<2> r(global_size, local_size);
+```
+Then the kernel launch is doen using the `nd_range` and `nd_item` options:
+```
+h.parallel_for(r, [=](nd_item<2> item){ ...
+```
+Note that now both local and global indeces can be obtained from the `nd_item`:
+```
+int global_i = item.get_global_id(0);
+int global_j = item.get_global_id(1);
+
+int local_i = item.get_local_id(0) + 1;
+int local_j = item.get_local_id(1) + 1;
+```
+With this the code should run the same as before, by default the local size  of the work-group is `16x16`, but different size can be used by using `-m` argument.
+### Step 2. Preload the tile into local shared memory
+A tile of size `(M+2)x(M+2)` created on the locoal_shared memory. This is done in the command group:
+```
+local_accessor<float, 2> tile(range<2>(M+2, M+2), h);
+```
+Then inside the kernel this is filled with a tiled conresponding to the indeces `(i,j)` the current work-group. Also the adjecent columns and rows need to be saved. 
+```
+if(global_i < nx && global_j < ny)
+   tile[local_i][local_j] = U[global_i * ny + global_j];
+
+if(item.get_local_id(0) == 0 && global_i > 0)
+   tile[0][local_j] = U[(global_i-1)*ny + global_j];
+if(item.get_local_id(0) == local_size[0]-1 && global_i < nx-1)
+   tile[M+1][local_j] = U[(global_i+1)*ny + global_j];
+if(item.get_local_id(1) == 0 && global_j > 0)
+   tile[local_i][0] = U[global_i*ny + global_j-1];
+if(item.get_local_id(1) == local_size[1]-1 && global_j < ny-1)
+   tile[local_i][M+1] = U[global_i*ny + global_j+1];
+```
+
+After this local synchronization is needed to be sure that all data has been save into the lcoal variable:
+```
+item.barrier(access::fence_space::local_space);
+```
+Finally the next values of the field can be computed:
+```
+if(global_i > 0 && global_i < nx-1 && global_j > 0 && global_j < ny-1){
+   UNEW[global_i * ny + global_j] =
+         factor * (tile[local_i+1][local_j] - 2.0 * tile[local_i][local_j] + tile[local_i-1][local_j] +
+         tile[local_i][local_j+1] - 2.0 * tile[local_i][local_j] + tile[local_i][local_j-1]);
+}
+```
+Putting all this together:
+```
+e = q.submit([&](handler &h){
+   accessor U(u, h, read_only);
+   accessor UNEW(unew, h, write_only);
+
+   //Local_accessor
+   local_accessor<float, 2> tile(range<2>(M+2, M+2), h);
+
+   h.parallel_for(r, [=](nd_item<2> item){
+       int global_i = item.get_global_id(0);
+       int global_j = item.get_global_id(1);
+
+       int local_i = item.get_local_id(0) + 1;
+       int local_j = item.get_local_id(1) + 1;
+
+       if(global_i < nx && global_j < ny)
+            tile[local_i][local_j] = U[global_i * ny + global_j];
+
+       if(item.get_local_id(0) == 0 && global_i > 0)
+            tile[0][local_j] = U[(global_i-1)*ny + global_j];
+       if(item.get_local_id(0) == local_size[0]-1 && global_i < nx-1)
+            tile[M+1][local_j] = U[(global_i+1)*ny + global_j];
+       if(item.get_local_id(1) == 0 && global_j > 0)
+            tile[local_i][0] = U[global_i*ny + global_j-1];
+       if(item.get_local_id(1) == local_size[1]-1 && global_j < ny-1)
+            tile[local_i][M+1] = U[global_i*ny + global_j+1];
+
+       item.barrier(access::fence_space::local_space);
+
+       if(global_i > 0 && global_i < nx-1 && global_j > 0 && global_j < ny-1){
+           UNEW[global_i * ny + global_j] =
+               factor * (tile[local_i+1][local_j] - 2.0f * tile[local_i][local_j] + tile[local_i-1][local_j] +
+                         tile[local_i][local_j+1] - 2.0f * tile[local_i][local_j] + tile[local_i][local_j-1]);
+       }
+  });
+});
+q.wait();
+```
+Now the code can be compiled and execute again and it should be running faster then before. While the speed up is not an order of magnitude in this case it can it still significant. 
+

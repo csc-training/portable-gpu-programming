@@ -3,3 +3,4 @@ title: Portable GPU Programming
 modules:
   - intro-day
   - sycl
+  - openmp

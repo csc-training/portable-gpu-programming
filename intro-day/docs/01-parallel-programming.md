@@ -114,7 +114,8 @@ Loop can be parallelized over `i`
     - System halts or stalls due to resource unavailability
 -->
 
-<-- 
+<!--
+
 # Data Distribution: Local vs. Global Dependencies
 
 <div class=column>

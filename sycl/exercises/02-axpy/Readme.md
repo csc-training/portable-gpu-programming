@@ -114,7 +114,7 @@ The transfer of the data is submitted to a specific queue:
 ```
 The `memcpy()` method is needed to transfer data from host to device. The first argument is the destination pointer, the second the source pointer, and finally the size of the data in bytes. This operation is asynchronous. Hence `.wait()`. This method pauses the program execution until the operation is completed. Otherwise a subsequent operation submitted to the same queue might start before the data is transfered to the GPU.
 
-### Step 4: Submit the Task using Basic Submission
+### Step 4: Submit the Task using Simple Launching
 This is done similarly to taks I
 ```cpp
     q.submit([&](handler& h) {
@@ -124,7 +124,7 @@ This is done similarly to taks I
       });
     }).wait();
 ``` 
-In this case `.wait()`  method pauses the prorgam until the the operation is  completed
+In this case `.wait()`  method pauses the program until the the operation is  completed
 ### Step 5: Access the results on the host
 When using USM and `malloc_device` the transfer from device to host needs to be explicitely coded. The same method `memcopy()` is used:
 
@@ -134,7 +134,7 @@ When using USM and `malloc_device` the transfer from device to host needs to be 
 Now the destination is the host pointer (first argument), while the source (second argument) is the device pointer.
 Again the `.wait()` method is needed to pause the program execution. This way it is guaranteed that the next step is not executed before all data from device is transfered.
 
-## III. Memory management using Buffer and Accesors and `nd_range" Launching
+## III. Memory management using Buffer and Accesors and `nd_range` Launching
 In the previous exercise was used a simple kernel launch with`range`, which lacks advanced features like local shared memory, in-work-group synchronization, or local indexing.
 
 Although  `axpy` doesn’t require these features, it’s a good exercise to learn the syntax.

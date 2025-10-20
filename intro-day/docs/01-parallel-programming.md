@@ -23,17 +23,6 @@ lang:     en
  ![](img/compp.svg){.center width=100%}
 </div>
 
-<-- 
-# Types of Parallel Problems
-
-- Tightly coupled
-    - Lots of interaction between subtasks
-    - Example: Weather simulation
-    - Low latency, high speed interconnect is essential
-- Embarrassingly parallel
-    - Very little (or no) interaction between subtasks
-    - Example: Sequence alignment queries for multiple independent sequences in bioinformatics
--->
 
 # Exposing Parallelism: Data Parallelism
 
@@ -64,9 +53,6 @@ lang:     en
 - There are normally more tasks than workers, and tasks are assigned dynamically
 
 
-<-- 
-# Parallel Algorithms {.section}
--->
 
 # Parallelizable Problems
 
@@ -101,51 +87,6 @@ Loop can be parallelized over `i`
 
 </div>
 
-<!-- # Data Conflicts in Parallel Execution
-
-- Race condition
-    - Two (or more) processes access shared data concurrently
-    - The final outcome depends on the sequence or timing of execution
-    - Unpredictable and often leads to bugs
-    - Example: Two threads incrementing the same counter simultaneously might overwrite each other’s result
-
-- Deadlock
-    - Two (or more) processes wait indefinitely for each other to release resources (or e.g. to send data)
-    - System halts or stalls due to resource unavailability
--->
-
-<!--
-
-# Data Distribution: Local vs. Global Dependencies
-
-<div class=column>
-Local dependencies
-
-- Stencils: 
-  ```
-  v[i,j] = u[i-1, j] + u[i+1, j] + u[i, j-1] ...
-  ```
-- Finite element methods
-- Particle based methods with short range interactions
-- Number of communications per process remains constant
-</div>
-<div class=column>
-Global dependencies
-
-- Fourier transform 
-  $X_k = \sum_{n=0}^{N-1} x_n \exp(-i \frac{2\pi}{N}k \cdot n)$
-- Linear algebra: $C = A \times B$
-
--->
-  <!-- Copyright CSC -->
-<!--
-
-  ![](img/matmul.png){.center width=50%}
-
-- Number of communication events per process increases with number of execution units
-
--->
-
 # Data Distribution: Load Balance
 
 <div class=column>
@@ -164,18 +105,7 @@ Simple domains with different computational cost
 ![](img/mandelbrot-domains.png){.center width=49%}
 </div>
 
-
 # Parallel Programming Models {.section}
-
-<!-- # Parallel Programming Models I
-
-- Parallel execution is based on threads or processes (or both) which run at the same time on different CPU cores
-- Processes
-    - Interaction is based on exchanging messages between processes
-    - MPI (Message passing interface)
-- Threads
-    - Interaction is based on shared memory, i.e. each thread can access directly other threads data
-    - OpenMP, pthreads -->
 
 # Parallel Programming Models
 
@@ -199,17 +129,6 @@ Simple domains with different computational cost
 - Data visible by all threads
 
 </div>
-
-<!-- # GPU Programming Models I
-
-- GPUs are co-processors to the CPU
-- CPU controls the work flow:
-  - *offloads* computations to GPU by launching *kernels*
-  - allocates and deallocates the memory on GPUs
-  - handles the data transfers between CPU and GPUs
-- GPU kernels run multiple threads
-    - Typically much more threads than "GPU cores"
-- When using multiple GPUs, CPU runs typically multiple processes (MPI) or multiple threads (OpenMP) -->
 
 # GPU Programming Models
 
@@ -248,13 +167,6 @@ Simple domains with different computational cost
 </center>
 </div>
 
-<!--
-# Lumi
-
- ![](img/lumi.png){.center width=50%}
-
--->
-
 # GPUs: The New Default for Performance <!-- GPUs are becoming the norm -->
 
 <center>
@@ -283,10 +195,9 @@ Simple domains with different computational cost
 # Summary
 
 - Parallel Computing: data is splitted in small independent parts
-  - Tightly coupled vs. Embarrassingly parallel, Data  vs. Task Parallelism
+  -Data  vs. Task Parallelism
 - Parallelization causes an extra cost not present in a serial program
-  - Competition over the same data can cause race conditions or deadlocks
-  - Data distribution: local vs. global dependencies, load balance
+  - Data distribution: load balance
 - Parallel programming models:
   - Processes vs. Threads (include GPU programming model)
 - Parallel Programs run on Supercomputers

@@ -86,17 +86,13 @@ Create buffers to encapsulate the data. One buffer is for the present iterations
 ### Step 3: Create Accessors
 Accessors provide access to buffer data and must be created inside command groups on the device.
 
-Two ways to create accessors:
+Create accessors:
 
-```cpp
-   sycl::accessor x_acc{x_buf, h, read_write};
-   
-```
-or  
 ```cpp
    accessor U(u, h, sycl::read_only);
    accessor UNEW(unew, h, sycl::write_only);
 ```
+
 **Important**  Use appropriate access modes for your data:
  - **Input Buffers:** Use `sycl::read_only` / `sycl::access::mode::read` to avoid unnecessary device-to-host data transfers.
  - **Output Buffers:** Use `sycl::write_only`/ `sycl::access::mode::write` to avoid unnecessary host-to-device data transfers.
@@ -130,7 +126,7 @@ q.submit([&](handler& h) {
             });
 });
 ```
-This step is repeated, but in the second step the accesors  are inverted so that we avoid a redundant data copy from **unew** variable to **u**:
+This step is repeated, but in the second step the accesors  are inverted so that a redundant data copy, from **unew** variable to **u**, is avoided:
 
 ```cpp
 q.submit([&](handler& h) {
@@ -227,7 +223,34 @@ CUDA Memory Operation Statistics (by size):
 We note in the upper table that a lot of time (around 62 s) is spent executing cuda memory copy operations, while the lower panel we note that we had 606 memory operations with more more than 600 GB of data moved around. This is 15x more than the whole memory of the A100 GPU. We can conclude that whole data was moved every iteration. 
 
 
-The exercise is to reduce this data movement. The [solution](solution/) shows a way to solve this problem using unified shared memory (USM) or with buffers and accessors API. But you can try to experiment with moving the buffer declaration outside of the loop over iterations. Use the application timings and also the profilers to get the needed information. You can use Mahti or LUMI for this. 
+The exercise is to reduce this data movement.  This can be done by usingg the bufffers scope outside of the Jacobi iteration loop:
+
+```
+{
+
+        buffer<float, 1> u(matrix_u.data(), range<1>(nx*ny));
+        buffer<float, 1> unew(matrix_unew.data(), range<1>(nx*ny));
+        
+        for(int iter=0;iter<niter; iter++)
+        { 
+            e = q.submit([&](handler &h){
+               ...});
+            q.wait();
+            kernel_duration += (e.get_profiling_info<info::event_profiling::command_end>() - e.get_profiling_info<info::event_profiling::command_start>());
+
+            //# Submit command groups to execute on device
+            e = q.submit([&](handler &h){
+               ...});
+            q.wait();
+            kernel_duration += (e.get_profiling_info<info::event_profiling::command_end>() - e.get_profiling_info<info::event_profiling::command_start>());
+        }
+    }
+```
+Now the buffers  are not desotryed until the Jacobi iterations are finished and the only accessors created are on the device. So no data transfer occurs. 
+Same effect can be achieved using USM either using `malloc_device` or `malloc_shared`. The data is only moved to the device at the beginning of the application and only moved back at the end. 
+
+
+The [solution](solution/j_simple_with_usm_sharedm_optimized.cpp) shows a way to solve this problem using unified shared memory (USM), while  [solution](solution/j_simple_with_buffer_optimized_events.cpp) with buffers and accessors API. But you can try to experiment with moving the buffer declaration outside of the loop over iterations. Use the application timings and also the profilers to get the needed information. You can use Mahti or LUMI for this. 
 
 On LUMI `rocm` is used as a backend. We can use `rocprof` to obtained similar information to the one given by `nsys` using:
 ```

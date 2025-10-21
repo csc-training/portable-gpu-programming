@@ -61,7 +61,7 @@ lang:     en
 
 # Summary
 
- - single, high-level, standard C++  programming model 
+ - single source, high-level, standard C++  programming model 
  - can target various heterogenous platforms in a single application
      - CPUs, GPUs (Intel, ~~Nvidia, AMD~~), FPGAs, ...
  - 3P: **Portability**, **Productivity**, **Performance**

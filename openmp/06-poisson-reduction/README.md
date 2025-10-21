@@ -2,7 +2,7 @@
 
 In this exercise we practise reduction operations.
 
-Thus far we have missed one important part from our Jacobi code: convergence check.
+Thus far we have missed one important part from our Poisson code: convergence check.
 In this exercise we have add a converge check for every 100th iteration
 to the model solution of the previous exercise.
 

@@ -2,7 +2,7 @@
 
 In this exercise we practise the use of unified shared memory in OpenMP.
 
-We try axpy and Jacobi codes from previous exercises with unified shared memory.
+We try axpy and Poisson codes from previous exercises with unified shared memory.
 
 The sample codes here are the latest model codes for both cases, with
 `#pragma omp requires unified_shared_memory` inserted at the top of the files.
@@ -27,7 +27,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
    Remove all data mapping statments from the USM version of the code. Does it still run?
    What happened with the previous version of the code with out USM?
 
-### Exercises for Jacobi
+### Exercises for Poisson
 
 1. Try compiling and running the code.
 

@@ -33,7 +33,7 @@
    Note the prints about unified memory. Data is not transferred by the OpenMP runtime but
    it takes place via the page migration mechanism under the hood.
 
-### Exercises for Jacobi
+### Exercises for Poisson
 
 1. Running the provided code without changes with default settings:
 

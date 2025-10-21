@@ -19,7 +19,7 @@ The slides are available [here](https://csc-training.github.io/portable-gpu-prog
 | 10:00-10:20  | GPU memory hierarchy
 | 10:40-12:00  | Mahti and LUMI  Computing Platforms & Profiling
 | 12:00-13:00  | Lunch break
-| 13:00-15:00  | Refresher of C++
+| 13:00-14:05  | Refresher of C++
 | 15:00-16:30  | MPI basics
 | 16:30-16:45  | Day 1 wrap-up
 

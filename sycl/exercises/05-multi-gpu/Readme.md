@@ -42,6 +42,5 @@ This case is, in many ways, much simpler. Apart from communication with other ta
 
 Communication between devices is handled using the MPI library. It is important to try to direct GPU to GPU communication and avoid extra transfers to the host. 
 
-The [last example](sycl-usm-device-ping-pong.cpp) demonstrates how direct GPU-to-GPU communication is performed and compares the bandwidth to the case where transfers are staged through host memory.
-<small>The example requires GPU-aware MPI to work properly</small>
+The [last example](sycl-usm-device-ping-pong.cpp) demonstrates how direct GPU-to-GPU communication is performed and compares the bandwidth to the case where transfers are staged through host memory. Nothe that this example requires GPU-aware MPI to work properly.
 

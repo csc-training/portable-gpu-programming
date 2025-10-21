@@ -105,8 +105,6 @@ int main(int argc, char *argv[]) {
     std::cout << "Warm up done!  \n";
     
     auto start = std::chrono::high_resolution_clock::now().time_since_epoch().count();
-    event e;
-    auto kernel_duration=0.0;
 
     for(int iter=0;iter<niter; iter++)
     {       
@@ -115,7 +113,7 @@ int main(int argc, char *argv[]) {
             
             
             //# Submit command groups to execute on device            
-            e = q.submit([&](handler &h){
+            q.submit([&](handler &h){
                 //# TODO Create accessors to copy buffers to the device         
                 
                 
@@ -143,7 +141,7 @@ int main(int argc, char *argv[]) {
             
             
             //# Submit command groups to execute on device
-            e = q.submit([&](handler &h){
+            q.submit([&](handler &h){
                 //# TODO Create accessors to copy buffers to the device       
                 
                 
@@ -166,6 +164,9 @@ int main(int argc, char *argv[]) {
            });
         }
     }
+    
+    auto duration = std::chrono::high_resolution_clock::now().time_since_epoch().count() - start;
+    std::cout << "Compute Duration      : " << duration / 1e+9 << " seconds\n";
 
     //# Print Output
     if (PRINT_OUTPUT_MATRIX){

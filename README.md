@@ -70,9 +70,3 @@ The lectures in this repository are published under [CC-BY-SA license](https://c
 ### [Kokkos](kokkos)
 ### [OpenMP](openmp)
 
-### Multi-GPU programming with MPI
-- [MPI send and receive demo](exercises/sycl/08-mpi)
-- [Parallel calculation of π with multiple GPU](exercises/sycl/11-pi/)
-
-### SYCL interoperability
-- [SYCL and 3rd party libraries](exercises/sycl/09-interoperability/)

@@ -6,8 +6,6 @@
 // SPDX-License-Identifier: MIT
 // =============================================================
 //
-// If you are lucky you make this https://github.com/oneapi-src/oneMKL work
-//
 
 #include <sycl/sycl.hpp>
 #include <ctime>

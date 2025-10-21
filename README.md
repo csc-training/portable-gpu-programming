@@ -68,22 +68,7 @@ The lectures in this repository are published under [CC-BY-SA license](https://c
 ### [Intro Day](intro-day)
 ### [SYCL](sycl/exercises)
 ### [Kokkos](kokkos)
-### [OpenMP](
-
- Essentials
-- [Hello World](/exercises/sycl/00-hello/)
-- [Getting Device Info](/exercises/sycl/01-info/)
-- [Vector Addition](/exercises/sycl/02-vector_add)
-
- Advanced Features
-- [Dependencies](exercises/sycl/03-axpy/)
-- [Basic Profiling](exercises/sycl/12-basic-profiling)
-- [Error Handling](exercises/sycl/13-error-handling/)
-
-### SYCL Memory Optimizations
-- [Jacobi Iterations](exercises/sycl/07-jacobi)
-- [Dense matrix matrix multiplication](exercises/sycl/04-matrix-matrix-mul)
-- [Reductions](exercises/sycl/06-reduction-direct) (Optional)
+### [OpenMP](openmp)
 
 ### Multi-GPU programming with MPI
 - [MPI send and receive demo](exercises/sycl/08-mpi)

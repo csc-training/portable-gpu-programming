@@ -1,6 +1,6 @@
 ---
 title:    Memory Hierarchy and Memory Accesses in GPUs
-subtitle: Portable GPU Programming
+event: Portable GPU Programming
 date:     October 2025
 lang:     en
 ---

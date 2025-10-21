@@ -11,7 +11,7 @@ exercise [Using modules](using-modules).
 #SBATCH ...
 ...
 
-srun rocprof --hip-trace poisson
+srun rocprof --hip-trace ./poisson
 ```
 
 2. Copy the output `result.json` to your local workstation:
@@ -35,7 +35,7 @@ srun rocprof --hip-trace poisson
 
 module use /scratch/project_462001074/modulefiles
 module load omnitrace
-srun omnitrace-sample -H false -- poisson
+srun omnitrace-sample -H false -- ./poisson
 ```
 
 By default, Omnitrace outputs goes to directory `omnitrace-myexe-output/time-stamp/`, where the file `perfetto-trace-xxxxx.proto`
@@ -49,7 +49,7 @@ Run the application with
 #SBATCH ...
 ...
 
-srun nsys profile my_exe
+srun nsys profile ./poisson
 ```
 
 Output is in the file `report.nsys-rep` which can be opened with the `nsys-ui` GUI.

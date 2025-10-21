@@ -307,6 +307,8 @@ c = func3(4);  // 6
 
 ```
 
+- Demo: `lambdas.cpp`
+
 # Lambda expressions cont'd
 
 ```cpp
@@ -326,6 +328,8 @@ func5(4);  // a = 4, b = -4
 
 ```
 
+- Demo: `lambdas.cpp`
+
 # Lambda expressions cont'd
 
 ```cpp
@@ -340,6 +344,9 @@ a = b = 0;
 c = func6(4);  // 8
 
 ```
+
+- Demo: `lambdas.cpp`
+
 
 # Error handling
 

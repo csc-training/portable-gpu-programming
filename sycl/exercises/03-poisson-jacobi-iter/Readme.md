@@ -141,7 +141,7 @@ q.submit([&](handler& h) {
 
 ## II. Measure time using events
 Basic profiling can be done by measuring the time spent in kernels and compare it to the total time spent doing the Jacobi Iterations (which include data transfers and other overheads). 
-Start from the [solution](j_simple_with_buffer.cpp) of the previuos task. 
+Start from the [solution](solution/j_simple_with_buffer.cpp) of the previuos task. 
 ### Step I: Modify the Queue
 Change the queue to allow for profiling. This is done by defining a SYCL list of properties which is used to initialized the queue in addition to the device selector. 
 ```

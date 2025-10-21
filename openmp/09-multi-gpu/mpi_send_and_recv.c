@@ -38,7 +38,8 @@ int main(int argc, char *argv[])
             MPI_Send(data, N, MPI_DOUBLE, 1, 123, MPI_COMM_WORLD);
         }
 
-        printf("Rank %d sent\n", rank);
+        #pragma omp target update from(data[0:N])
+        printf("Rank %d sent %f .. %f\n", rank, data[0], data[N-1]);
 
     } else if (rank == 1) {
         // Receive with rank 1

@@ -65,15 +65,17 @@ The lectures in this repository are published under [CC-BY-SA license](https://c
 
 [General instructions](exercises_instructions.md)
 
-### Kokkos
-- [Kokkos](/exercises/kokkos)
+### [Intro Day](intro-day)
+### [SYCL](sycl/exercises)
+### [Kokkos](kokkos)
+### [OpenMP](
 
-### SYCL Essentials
+ Essentials
 - [Hello World](/exercises/sycl/00-hello/)
 - [Getting Device Info](/exercises/sycl/01-info/)
 - [Vector Addition](/exercises/sycl/02-vector_add)
 
-### SYCL Advanced Features
+ Advanced Features
 - [Dependencies](exercises/sycl/03-axpy/)
 - [Basic Profiling](exercises/sycl/12-basic-profiling)
 - [Error Handling](exercises/sycl/13-error-handling/)

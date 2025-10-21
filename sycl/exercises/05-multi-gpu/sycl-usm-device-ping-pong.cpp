@@ -1,13 +1,4 @@
-// AdaptiveCpp compilation with cpu & nvidia targets: syclcc -O3 --hipsycl-targets="omp;cuda:sm_80" <code>.cpp 
-// AdaptiveCpp compilation with cpu & amd targets:    syclcc -O3 --hipsycl-targets="omp;hip:gfx90a" <code>.cpp 
-// OneAPI with cpu & nvidia targets:clang++ -std=c++17 -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda,spir64_x86_64 -Xsycl-target-backend=nvptx64-nvidia-cuda --cuda-gpu-arch=sm_80  <code>.cpp 
-// OneAPI with cpu & amd targets:      icpx -std=c++17 -O3 -fsycl -fsycl-targets=amdgcn-amd-amdhsa,spir64_x86_64 -Xsycl-target-backend=amdgcn-amd-amdhsa  --offload-arch=gfx90a  <code>.cpp 
-
-// Compilation with mpi
-// export  MPI_flags=-I/appl/spack/v017/install-tree/gcc-11.2.0/openmpi-4.1.2-bylozw/include -I/appl/spack/v017/install-tree/gcc-11.2.0/openmpi-4.1.2-bylozw/include/openmpi -I/appl/spack/syslibs/include -pthread -L/appl/spack/v017/install-tree/gcc-11.2.0/openmpi-4.1.2-bylozw/lib -L/appl/spack/syslibs/lib -Wl,-rpath,/appl/spack/v017/install-tree/gcc-8.5.0/gcc-11.2.0-zshp2k/lib/gcc/x86_64-pc-linux-gnu/11.2.0 -Wl,-rpath,/appl/spack/v017/install-tree/gcc-8.5.0/gcc-11.2.0-zshp2k/lib64 -Wl,-rpath -Wl,/appl/spack/v017/install-tree/gcc-11.2.0/openmpi-4.1.2-bylozw/lib -Wl,-rpath -Wl,/appl/spack/syslibs/lib -lmpi
-// clang++ $MPI_flags    -std=c++17 -O3 -fsycl -fsycl-targets=nvptx64-nvidia-cuda,spir64_x86_64 -Xsycl-target-backend=nvptx64-nvidia-cuda --cuda-gpu-arch=sm_80 pp_with_usm.cpp 
 // This is a port of a CUDA code written for the CUDA training at CSC https://github.com/csc-training/CUDA
-// For the compilation check also the instructions for the latest way.
 #include <cassert>
 #include <iostream>
 #include <numeric>

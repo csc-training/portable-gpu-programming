@@ -23,16 +23,17 @@ lang:   en
   - CPUs only
   - FPGAs
 - Standard defines both C/C++ and Fortran bindings
+  - <https://www.openmp.org/specifications/>
 
-# Directive languages and performances
+# Directive languages and performance
 
 - "Write once, run everywhere"
   - It is true that you get portability
-  - It is *not* necessarily true that you get *performance* portability
+  - It is *not necessarily* true that you get *performance* portability
 
-- It is possible to optimize a code for performance on the GPU!
+- It is possible to optimize a code for performance on the GPU
   - Many optimisations will increase the performance also on the CPU
-  - A highly optimised code will most likely be slower on the CPU
+  - A highly optimised code will likely be slower on the CPU
 
 # OpenMP vs. OpenACC
 
@@ -46,13 +47,14 @@ lang:   en
 # OpenMP vs. CUDA/HIP
 
 - Why OpenMP and not CUDA/HIP?
-  - Less code to start shifting work to GPUs
+  - Less code to start utilizing GPU acceleration
   - Simple things are possibly simpler
-  - Same code can be compiled to CPU and GPU versions easily
+  - Same code can be compiled for CPU and GPU targets
 - Why CUDA/HIP and not OpenMP?
   - Can access all the features of the GPU hardware
-  - Better control and assurance the code will work as intended
+  - Better control and assurance that the code will work as intended
   - More optimization possibilities
+
 
 # OpenMP execution model {.section}
 
@@ -68,8 +70,7 @@ lang:   en
 
 <div class="column">
 - Program runs on the host CPU
-- Host offloads compute-intensive regions (*kernels*) and related data
-  to the GPU
+- Host offloads compute-intensive regions (*kernels*) and related data to the GPU
 - Compute kernels are executed by the GPU
 </div>
 
@@ -82,10 +83,9 @@ lang:   en
 
 <div class="column">
 - If host memory is separate from device memory
-    - host manages memory of the device
-    - host copies data to/from the device
-- When memories are not separate, no copies are needed (difference is
-  transparent to the user)
+  - Host manages memory of the device
+  - Host copies data to/from the device
+- When memories are not separate, no copies are needed (difference is transparent to the user)
 </div>
 
 <div class="column">
@@ -100,6 +100,7 @@ lang:   en
 - OpenMP `target` construct specifies a region to be executed on GPU
   - Initially, runs with a single thread
 - By default, execution in the host continues only after target region is finished
+  - We'll have a look on asynchronous execution later today
 - May trigger implicit data movements between the host and the device
 
 <div class=column>
@@ -119,17 +120,17 @@ lang:   en
 ```
 </div>
 
-# Parallelism-Generation vs Work-Distribution Constructs
+# Constructs that Generate Parallelism vs Distribute Work
 
-- OpenMP `teams`, `parallel`, and `simd` constructs create parallelism
+- Target construct does not create any parallelism, so additional constructs are needed
+- OpenMP `teams` and `parallel` constructs *create parallelism*
   - For example, `parallel` creates multiple threads (that do the same computation by default)
-- OpenMP `distribute` and `for`/`do` distribute the work so that the parallel teams and threads do different work
-  - For example, `for`/`do` assign different threads to different loop iterations (so that the computation work is divided)
+- OpenMP `distribute` and `for`/`do` constructs *distribute work* so that the created teams and threads do different work
+  - For example, `for`/`do` assign different threads to different loop iterations (so that the computation work is distributed)
 
 # Teams construct
 
 <div class=column>
-- Target construct does not create any parallelism, so additional constructs are needed
 - A `teams` construct creates a league of teams
   - Number of teams is implementation dependent
   - Initially, a single thread in each team executes the following structured block
@@ -143,7 +144,8 @@ lang:   en
 
 <div class=column>
 - No synchronization between teams is possible
-- Probable mapping: team corresponds to a "thread block" / "workgroup" and runs within streaming multiprocessor / compute unit
+- Probable mapping to hardware
+  - Team &rarr; thread block, runs on a streaming multiprocessor (SM) / on a compute unit (CU)
 </div>
 
 <div class=column>
@@ -161,9 +163,8 @@ lang:   en
 
 <div class=column>
 - Threads within a team can synchronize
-- Number of teams and threads can be queried with the following API functions:
-  - `omp_get_num_teams()`
-  - `omp_get_num_threads()`
+- Probable mapping to hardware
+  - Thread &rarr; thread, runs on a core of SM / on a lane of a SIMD unit of CU
 </div>
 
 <div class=column>
@@ -195,6 +196,8 @@ lang:   en
 ```
 </div>
 
+- Useful API functions: `omp_get_team_num()`, `omp_get_thread_num()`, `omp_get_num_teams()`, `omp_get_num_threads()`
+
 
 # League of multi-threaded teams
 
@@ -204,7 +207,7 @@ lang:   en
 # Worksharing in the accelerator
 
 - The `teams` and `parallel` constructs create teams and threads, however, all the threads are still executing the same code
-- The `distribute` construct distributes loop iterations over the teams
+- The `distribute` construct distributes loop iterations over teams
 - The `for` / `do` construct distributes loop iterations over threads
 
 
@@ -232,7 +235,7 @@ for (int i = 0; i < N; i++)
 do i = 1, N
   !$omp parallel
   !$omp do
-  do j = 1, N
+  do j = 1, M
     ...
   end do
   !$omp end do
@@ -338,7 +341,7 @@ end do
 
 # Summary
 
-- OpenMP enables directive-based programming of accelerators with C/C++ and Fortran
+- OpenMP enables directive-based programming of GPUs and other accelerators with C/C++ and Fortran
 - Host--device model
   - Host offloads computations to the device
 - Host and device may have separate memories

@@ -24,6 +24,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
    as before:
 
        cc -O3 -fopenmp mpi_send_and_recv.c -o mpi_send_and_recv.x
+       ftn -O3 -fopenmp mpi_send_and_recv.F90 -o mpi_send_and_recv.x
 
    For running, we need to enable GPU-aware MPI and then run with two tasks:
 

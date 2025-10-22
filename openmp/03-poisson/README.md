@@ -80,7 +80,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
 2. Enable `CRAY_ACC_DEBUG=2` and examine the memory transfers during the execution.
    Insert separate data transfer clauses to ensure that there is no unnecessary copying back and forth between
-   the CPU and GPU memories.
+   the CPU and GPU memories (see 'TODO 2' in the code).
 
    What is the speed up you get now?
 

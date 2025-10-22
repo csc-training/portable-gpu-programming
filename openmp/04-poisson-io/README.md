@@ -12,6 +12,14 @@ if (it % 1000 == 0) {
 }
 ```
 
+```fortranfree
+! Write data
+if (mod(it, 1000) == 0) then
+    write(filename, '(A,I6.6,A)') 'u', it, '.bin'
+    call write_array(filename, u)
+end if
+```
+
 The problem is that this doesn't work as all the data is only on GPU.
 Let's fix this!
 

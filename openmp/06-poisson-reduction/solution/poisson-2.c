@@ -88,7 +88,7 @@ void run(const int n, const int niter, const double normmax)
         // Write data
         if (it % 1000 == 0) {
             // Copy data to host
-            #pragma omp target update from(u[0:nx*ny]) depend(inout: write_flag)
+            #pragma omp target update from(u[0:nx*ny]) depend(in: u[0:nx*ny]) depend(inout: write_flag)
 
             // Write in a separate host thread
             #pragma omp task firstprivate(it, u) depend(inout: write_flag)

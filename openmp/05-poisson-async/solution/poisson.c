@@ -68,7 +68,7 @@ void run(const int n, const int niter)
             }
 
             // Copy data from this iteration to host, but delay writing
-            #pragma omp target update from(u[0:nx*ny])
+            #pragma omp target update from(u[0:nx*ny]) depend(in: u[0:nx*ny])
             it_at_host = it;
         }
 

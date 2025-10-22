@@ -15,8 +15,8 @@ if (it % 1000 == 0) {
 ```fortranfree
 ! Write data
 if (mod(it, 1000) == 0) then
-    write(filename, '(A,I6.6,A)') 'u', it, '.bin'
-    call write_array(filename, u)
+  write(filename, '(A,I6.6,A)') 'u', it, '.bin'
+  call write_array(filename, u)
 end if
 ```
 
@@ -38,6 +38,8 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
        python3 compare.py u000000.bin u001000.bin  # These files should differ
        python3 compare.py u005000.bin u_end.bin    # These files should be the same
+
+   Note that the files created with C and Fortran versions of the code are not comparable with each other.
 
    You can also use the attached Jupyter notebook to visualize the data dumps to check that they make sense.
    Steps to launch Jupyter notebook on LUMI web interface:

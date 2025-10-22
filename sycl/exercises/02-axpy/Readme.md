@@ -30,7 +30,7 @@ Alternatively it is possible to use the procedure from the [previous exercise](.
 Create buffers to encapsulate the data. For a one-dimensional array of integers of length `N`, with pointer `P`, a buffer can be constructed as follows:
 
 ```cpp
-    sycl::buffer<int, 1> x_buf(P, sycl::range<1>(N));
+    sycl::buffer<int, 1> x_buf(P.data, sycl::range<1>(N));
 ```
 Use the appropriate data type. 
 

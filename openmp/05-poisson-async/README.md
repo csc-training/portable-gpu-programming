@@ -20,7 +20,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    And this is how you can run the code with a profiler (**always remove old outputs before running profiler!**):
 
-       rm results.*; srun -p dev-g --nodes=1 --ntasks-per-node=1 --cpus-per-task=7 --gpus-per-node=1 -t 0:10:00 rocprof --hip-trace --roctx-trace ./poisson.x 4096 5000 1
+       rm results.*; CRAY_ACC_FORCE_EARLY_INIT=1 srun -p dev-g --nodes=1 --ntasks-per-node=1 --cpus-per-task=7 --gpus-per-node=1 -t 0:10:00 rocprof --hip-trace --roctx-trace ./poisson.x 4096 5000 1
 
    Note: we run here a bigger case (4096) so that the kernel execution is not too fast (takes more time than kernel launch)
    and we run only for one repetition to reduce the profile file size.

@@ -7,11 +7,11 @@ program pointers
 
   allocate(x(n))
 
-  print '(A, Z0)', "address of x in host: ", transfer(c_loc(x(1)), int(0, kind=c_intptr_t))
+  print '(A, Z16)', "address of x in host: ", transfer(c_loc(x(1)), int(0, kind=c_intptr_t))
 
   !$omp target data map(to: x(1:n))
   !$omp target data use_device_addr(x)
-  print '(A, Z0)', "address of x in dev:  ", transfer(c_loc(x(1)), int(0, kind=c_intptr_t))
+  print '(A, Z16)', "address of x in dev:  ", transfer(c_loc(x(1)), int(0, kind=c_intptr_t))
   !$omp end target data
   !$omp end target data
 

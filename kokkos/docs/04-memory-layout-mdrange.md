@@ -147,4 +147,14 @@ parallel_for(Kokkos::MDRangePolicy<Kokkos::Rank<3>>({1, 1, 1,}, {nx -1, ny -1 , 
 
 - Lambda needs to be provided with the same number of iterations indeces than the rank of MDRange
 
+# Summary
 
+- Memory access pattern may have large impack on performance
+    - *cached* for CPUs
+    - *coalesced* for GPUs
+- In Kokkos obtains performance portable memory access in combination of execution space dependent
+  execution policies and memory space dependent layouts for multidimensional arrays
+    - LayoutRight for CPUs
+    - LayoutLeft for GPUs
+- Mirror views provide portable approach for deep copies between possibly different memory layouts
+- Nested loops can be iterated with MdRangePolicy

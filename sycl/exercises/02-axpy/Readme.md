@@ -222,7 +222,7 @@ or
  ```cpp
     auto event_axpy=q.parallel_for(range{N},{event_x, event_y}, [=](id<1> idx) { Y[idx] += a * X[idx]; });
 ```
-When using `malloc_device()` a CPU to GPU tranfer is needed. This as well can depend on specific events:
+When using `malloc_device()` a GPU to CPU tranfer is needed. This as well can depend on specific events:
 ```
 auto memcpy_event = q.submit([&](handler& h) {
   h.depends_on(event_axpy);   // Make memcpy wait for event_axpy

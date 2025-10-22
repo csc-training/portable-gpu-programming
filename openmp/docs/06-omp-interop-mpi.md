@@ -26,12 +26,20 @@ lang:   en
 - Device data pointers can be used to interoperate with libraries and
   other programming techniques available for accelerator devices
 
-# Data construct: `use_device_ptr`
+# Data constructs: `use_device_ptr` and `use_device_addr`
 
-`omp target data use_device_ptr(var-list)`
-  : `-`{.ghost}
+**`omp target data use_device_ptr(var-list)`**
 
 - Within the construct, all the pointer variables in `var-list` correspond to the device addresses
+- Use in C or for `c_ptr` in Fortran
+
+**`omp target data use_device_addr(var-list)`**
+
+- Similar construct for non-pointer variables
+- Use for arrays in Fortran
+
+- See detailed description in the OpenMP standard
+
 
 # Example: MPI
 
@@ -61,7 +69,7 @@ real(8), allocatable :: data(:)
 !$omp target data map(to: data(1:N))
 ...
 
-!$omp target data use_device_ptr(data)
+!$omp target data use_device_addr(data)
 
 call MPI_Send(data, N, MPI_DOUBLE_PRECISION, &
               1, 123, MPI_COMM_WORLD, ierr)

@@ -35,7 +35,7 @@ subroutine run(n)
 
   ! Calculate axpy
   !$omp target data map(to: x(1:n)) map(tofrom: y(1:n))
-  !$omp target data use_device_ptr(x, y)
+  !$omp target data use_device_addr(x, y)
   call hipblasDaxpy(handle, n, alpha, x, 1, y, 1)
   !$omp end target data
   !$omp end target data

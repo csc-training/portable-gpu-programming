@@ -242,7 +242,7 @@ Set up the environment:
     export  HSA_XNACK=1 # enables managed memory
     export MPICH_GPU_SUPPORT_ENABLED=1                                # Needed for using GPU-aware MPI
     export PATH=/projappl/project_462001074/apps/ACPP/bin:$PATH
-    export LD_LIBRARY_PATH=/appl/lumi/SW/LUMI-24.03/G/EB/Boost/1.83.0-cpeCray-24.03/lib64/
+    export LD_LIBRARY_PATH=/appl/lumi/SW/LUMI-24.03/G/EB/Boost/1.83.0-cpeCray-24.03/lib64/:$LD_LIBRARY_PATH
     export LD_PRELOAD=/appl/lumi/SW/LUMI-24.03/G/EB/rocm/6.2.2/llvm/lib/libomp.so
 
 Compile sycl code:

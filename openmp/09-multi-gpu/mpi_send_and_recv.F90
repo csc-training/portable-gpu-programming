@@ -33,7 +33,7 @@ program mpi_send_and_recv
     !$omp end target teams distribute parallel do
 
     ! Send data from device
-    !$omp target data use_device_ptr(data)
+    !$omp target data use_device_addr(data)
     call MPI_Send(data, N, MPI_DOUBLE_PRECISION, 1, 123, MPI_COMM_WORLD, ierr)
     !$omp end target data
 
@@ -43,7 +43,7 @@ program mpi_send_and_recv
   else if (rank == 1) then
 
     ! Receive data to device
-    !$omp target data use_device_ptr(data)
+    !$omp target data use_device_addr(data)
     call MPI_Recv(data, N, MPI_DOUBLE_PRECISION, 0, 123, MPI_COMM_WORLD, MPI_STATUS_IGNORE, ierr)
     !$omp end target data
 

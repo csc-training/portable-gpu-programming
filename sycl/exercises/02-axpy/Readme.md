@@ -165,7 +165,7 @@ Start from the skeleton [`axpy.cpp`](axpy.cpp), the solution of [Task III](solut
 
 Declare new pointers using `malloc_shared()` such as:
 ```cpp
-    int* x_shared = sycl::malloc_device<int>(N, q);
+    int* x_shared = sycl::malloc_shared<int>(N, q);
 ```
 Then initialize the `x_shared` and `y_shared` using host. 
 

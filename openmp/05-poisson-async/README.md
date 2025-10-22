@@ -37,11 +37,11 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    Make sure that the results stay correct and that the files contain correct data too.
 
-   You can check the files by `diff`:
+   You can check that the files are the same within numerical accuracy:
 
-       diff u000100.bin u000100_old_file_from_synchronous_code.bin  # These files should be exactly the same
-       diff u000200.bin u000200_old_file_from_synchronous_code.bin  # These files should be exactly the same
+       python3 compare.py u001000.bin u001000_old_file_from_synchronous_code.bin
+       python3 compare.py u002000.bin u002000_old_file_from_synchronous_code.bin
        ...
-       diff u000500.bin u000500_old_file_from_synchronous_code.bin  # These files should be exactly the same
+       python3 compare.py u005000.bin u005000_old_file_from_synchronous_code.bin
 
    Do you get any speed up by overlapping computation and I/O?

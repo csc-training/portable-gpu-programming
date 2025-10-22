@@ -1,6 +1,42 @@
 module helper_functions
+  use, intrinsic :: iso_c_binding
   implicit none
+
+#ifdef TRACE
+  interface
+#else
   contains
+#endif
+
+#ifdef TRACE
+  function c_roctxRangePush(message) result(level) bind(C, name="roctxRangePushA")
+#else
+  function c_roctxRangePush(message) result(level)
+#endif
+    import :: c_int, c_char
+    character(kind=c_char), intent(in) :: message(*)
+    integer(c_int) :: level
+#ifndef TRACE
+    level = 0
+#endif
+  end function c_roctxRangePush
+
+#ifdef TRACE
+  function c_roctxRangePop() result(level) bind(C, name="roctxRangePop")
+#else
+  function c_roctxRangePop() result(level)
+#endif
+    import :: c_int
+    integer(c_int) :: level
+#ifndef TRACE
+    level = 0
+#endif
+  end function c_roctxRangePop
+
+#ifdef TRACE
+  end interface
+  contains
+#endif
 
   subroutine print_array(name, x)
     character(len=*), intent(in) :: name
@@ -52,12 +88,16 @@ module helper_functions
     real(8), intent(in) :: array(:, :)
     integer, intent(out), optional :: ierr
     integer :: unit, ios, local_err
+    integer(c_int) :: level
+
+    level = c_roctxRangePush(c_char_"write_array")
 
     open(newunit=unit, file=filename, form='unformatted', access='stream', status='replace', action='write', iostat=ios)
     if (ios /= 0) then
       print *, "Failed to open file"
       local_err = 1
       if (present(ierr)) ierr = local_err
+      level = c_roctxRangePop()
       return
     end if
 
@@ -73,6 +113,7 @@ module helper_functions
     end if
 
     if (present(ierr)) ierr = local_err
+    level = c_roctxRangePop()
   end subroutine write_array
 
 end module helper_functions

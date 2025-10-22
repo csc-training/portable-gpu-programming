@@ -4,7 +4,7 @@ subroutine run(n, niter)
   implicit none
   integer, intent(in) :: n, niter
   integer(kind=8) :: nx, ny
-  integer :: i, j, it
+  integer :: i, j, it, it_at_host
   real(8), allocatable :: f(:,:), u(:,:), unew(:,:), tmp(:,:)
   real(8) :: h2, t0, t1
   character(len=20) :: filename
@@ -30,17 +30,21 @@ subroutine run(n, niter)
   ! Iterate
   t0 = omp_get_wtime()
 
+  it_at_host = 0
+
   !$omp target data map(to: f(1:ny,1:nx)) map(tofrom: u(1:ny,1:nx)) map(to: unew(1:ny,1:nx))
   do it = 1, niter
 
     ! Stencil update
-    !$omp target teams distribute parallel do collapse(2)
+    !$omp target nowait depend(in: u(1:ny,1:nx)) depend(out: unew(1:ny,1:nx))
+    !$omp teams distribute parallel do collapse(2)
     do j = 2, nx - 1
       do i = 2, ny - 1
         unew(i,j) = 0.25 * (u(i+1,j) + u(i-1,j) + u(i,j+1) + u(i,j-1) - h2 * f(i,j))
       end do
     end do
-    !$omp end target teams distribute parallel do
+    !$omp end teams distribute parallel do
+    !$omp end target
 
     ! Swap the arrays
     call move_alloc(u, tmp)
@@ -48,13 +52,29 @@ subroutine run(n, niter)
     call move_alloc(tmp, unew)
 
     ! Write data
-    ! TODO: Fix me
     if (mod(it, 1000) == 0) then
-      write(filename, '(A,I6.6,A)') 'u', it, '.bin'
-      call write_array(filename, u)
+      ! Write data from the previous iteration
+      if (it_at_host > 0) then
+        write(filename, '(A,I6.6,A)') 'u', it_at_host, '.bin'
+        call write_array(filename, u)
+        it_at_host = 0
+      end if
+
+      ! Copy data from this iteration to host, but delay writing
+      !$omp target update from(u(1:ny,1:nx)) depend(in: u(1:ny,1:nx))
+      it_at_host = it
     end if
 
   end do
+
+  ! Write data from the previous iteration
+  if (it_at_host > 0) then
+    write(filename, '(A,I6.6,A)') 'u', it_at_host, '.bin'
+    call write_array(filename, u)
+    it_at_host = 0
+  end if
+
+  ! implicit wait at the end of the data clause
   !$omp end target data
 
   t1 = omp_get_wtime()

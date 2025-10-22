@@ -16,6 +16,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 1. The `write_array()` helper function has timing capability with roctx library that can be enabled like this:
 
        cc -O3 -fopenmp poisson.c -DTRACE -lroctx64 -o poisson.x
+       ftn -O3 -fopenmp helper_functions.F90 poisson.F90 -DTRACE -lroctx64 -o poisson.x
 
    And this is how you can run the code with a profiler (**always remove old outputs before running profiler!**):
 

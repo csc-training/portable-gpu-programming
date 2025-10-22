@@ -31,11 +31,11 @@ The slides are available [here](https://csc-training.github.io/portable-gpu-prog
 | 09:15-09:30  | Introduction to SYCL
 | 09:30-10:00  | Simple SYCL
 | 10:25-11:00  | SYCL Exercises 
-| 11:00-11:30  | Advanced SYCL
-| 11:30-12:00  | SYCL Exercises 
-| 11:30-12:00  | Other SYCL Features
+| 11:00-11:20  | Advanced SYCL
+| 11:20-12:00  | SYCL Exercises 
 | 12:00-13:00  | Lunch break
-| 13:00-14:00  | SYCL Exercises
+| 13:00-13:30  | Other SYCL Features
+| 13:30-14:00  | SYCL Exercises
 | 14:00-15:00  | Memory Optimizations
 | 15:00-15:45  | SYCL and MPI 
 | 15:45-16:30  | Interoperability

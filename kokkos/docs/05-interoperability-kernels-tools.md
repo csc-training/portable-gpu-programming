@@ -179,3 +179,26 @@ kp_reader nid002275-210818.dat
 - Custom implementations for special cases
 - Kokkos tools provides utilities for debugging and profiling
     - Used via `KOKKOS_TOOLS_LIBS` environment variable
+
+# Further topics {.section}
+
+# Further topics
+
+- Kokkos has a lot of features not discussed during this course
+- Asynchronous execution
+- Atomic operations
+- Hierarchical parallelism
+    - Create thread teams and parallelize also within the teams
+    - "scratch memory" within a team
+- Algorithms (random numbers, sorting, std algorithms, ...) 
+- Task graphs
+- ...
+- See <https://kokkos.org/kokkos-core-wiki> for more details
+
+# Summary
+
+- Kokkos is a performance portable C++ programming ecosystem supporting various hardware architectures
+    - OpenMP, CUDA, HIP, ... backends
+- Kokkos abstracts the hardware into execution and memory spaces
+- Kokkos provides a multidimensional array data structure View that can reside on different memory spaces
+- Kokkos provides parallel dispatch operations that execute computational kernels in execution spaces

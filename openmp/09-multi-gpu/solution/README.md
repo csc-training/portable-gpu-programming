@@ -1,6 +1,6 @@
 ## Discussion
 
-### Exercises
+### Exercises for LUMI and Mahti
 
 1. No code changes needed. Output:
 
@@ -9,4 +9,4 @@
        Hello from MPI rank 0/2 with GPU 0/2
        Rank 0 sent 42.000000 .. 42.000000
 
-   If `MPICH_GPU_SUPPORT_ENABLED` is not set, you'll see `Bus error`.
+   For LUMI: If `MPICH_GPU_SUPPORT_ENABLED` is not set, you'll see `Bus error`.

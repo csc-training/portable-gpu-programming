@@ -16,7 +16,7 @@ The demo code demonstrates both of these aspects.
 
 The [solution directory](solution/) contains a model solution and discussion on the exercises below.
 
-### Exercises
+### Exercises for LUMI
 
 1. Study, compile, and run the demo code.
 
@@ -30,3 +30,19 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
        export MPICH_GPU_SUPPORT_ENABLED=1
        srun -p dev-g --nodes=1 --ntasks-per-node=2 --cpus-per-task=7 --gpus-per-node=2 -t 0:10:00 ./mpi_send_and_recv.x
+
+### Exercises for Mahti
+
+1. Load the nvhpc module. Then, the code can be compiled with the mpi wrappers:
+
+       mpicc -O3 -mp=gpu -gpu=cc80 mpi_send_and_recv.c -o mpi_send_and_recv.x
+       mpif90 -O3 -mp=gpu -gpu=cc80 mpi_send_and_recv.F90 -o mpi_send_and_recv.x
+
+   For running, we can request two GPUs like this:
+
+       srun -p gpusmall --nodes=1 --ntasks-per-node=2 --cpus-per-task=4 --gres=gpu:a100:2 -t 0:10:00 ./mpi_send_and_recv.x
+
+   Note that you need full A100 GPUs; the MIGs (`a100_1g.5gb`) do now work expectedly with MPI.
+   Alternatively, you can request only a single GPU but two MPI tasks, in which case both tasks are using the same GPU:
+
+       srun -p gpusmall --nodes=1 --ntasks-per-node=2 --cpus-per-task=2 --gres=gpu:a100_1g.5gb:1 -t 0:10:00 ./mpi_send_and_recv.x

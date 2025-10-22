@@ -36,9 +36,9 @@ The slides are available [here](https://csc-training.github.io/portable-gpu-prog
 | 11:30-12:00  | Other SYCL Features
 | 12:00-13:00  | Lunch break
 | 13:00-14:00  | SYCL Exercises and Breaks
-| 14:10-15:00  | SYCL and MPI 
-| 15:00-15:30  | Break
-| 15:30-15:30  | Interoperability
+| 14:00-15:00  | Memory Optimizations
+| 15:00-15:45  | SYCL and MPI and Breaks
+| 15:45-16:30  | Interoperability
 | 16:30-16:45  | Day 2 wrap-up
 
 ### Day 3, Thursday 23.10

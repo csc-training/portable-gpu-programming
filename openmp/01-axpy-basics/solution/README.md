@@ -620,8 +620,8 @@
 
    Compiling with diagnostics:
 
-       nvc -mp=gpu -gpu=cc80 -Minfo=mp axpy.c -o axpy.x
-       nvfortran -mp=gpu -gpu=cc80 -Minfo=mp helper_functions.F90 axpy.F90 -o axpy.x
+       nvc -O3 -mp=gpu -gpu=cc80 -Minfo=mp axpy.c -o axpy.x
+       nvfortran -O3 -mp=gpu -gpu=cc80 -Minfo=mp helper_functions.F90 axpy.F90 -o axpy.x
 
    Output for C:
 

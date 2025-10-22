@@ -188,12 +188,16 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    Compile the code (C or Fortran):
 
-       nvc -mp=gpu -gpu=cc80 axpy.c -o axpy.x
-       nvfortran -mp=gpu -gpu=cc80 helper_functions.F90 axpy.F90 -o axpy.x
+       nvc -O3 -mp=gpu -gpu=cc80 axpy.c -o axpy.x
+       nvfortran -O3 -mp=gpu -gpu=cc80 helper_functions.F90 axpy.F90 -o axpy.x
 
    Run the program on a single GPU:
 
        srun -p gputest --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 --gres=gpu:a100:1 -t 0:10:00 ./axpy.x
+
+   Run the program on a single MIG (a slice of a full GPU):
+
+       srun -p gpusmall --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 --gres=gpu:a100_1g.5gb:1 -t 0:10:00 ./axpy.x
 
    The compiler creates code paths for both GPU and host threads, so the same executable
    runs also on CPU-nodes. To ensure that you are running on GPU, set
@@ -205,6 +209,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
        export NVCOMPILER_ACC_NOTIFY=$((0x1 | 0x2))
        srun -p gputest --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 --gres=gpu:a100:1 -t 0:10:00 ./axpy.x
+       srun -p gpusmall --nodes=1 --ntasks-per-node=1 --cpus-per-task=4 --gres=gpu:a100_1g.5gb:1 -t 0:10:00 ./axpy.x
 
    Can you identify memory transfers and the number of blocks and threads per block used for the kernel execution on GPU?
 
@@ -212,8 +217,8 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    Add `-Minfo=mp` to obtain compiler diagnostics:
 
-       nvc -mp=gpu -gpu=cc80 -Minfo=mp axpy.c -o axpy.x
-       nvfortran -mp=gpu -gpu=cc80 -Minfo=mp helper_functions.F90 axpy.F90 -o axpy.x
+       nvc -O3 -mp=gpu -gpu=cc80 -Minfo=mp axpy.c -o axpy.x
+       nvfortran -O3 -mp=gpu -gpu=cc80 -Minfo=mp helper_functions.F90 axpy.F90 -o axpy.x
 
 
 ### Bonus exercises: loop construct

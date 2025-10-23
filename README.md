@@ -55,11 +55,10 @@ The slides are available [here](https://csc-training.github.io/portable-gpu-prog
 
 | Time         | Topic |
 | ----         | ----- |
-| 09:15-12:00  | OpenMP offload I (with exercises)
+| 09:15-12:00  | OpenMP offload (with exercises)
 | 12:00-13:00  | Lunch break
-| 13:00-15:00  | OpenMP offload II (with exercises)
-| 15:00-16:30  | OpenMP offload III (with exercises)
-| 16:30-16:45  | Day 4 wrap-up & closing
+| 13:00-16:00  | OpenMP offload (with exercises)
+| 16:00-16:45  | Portable GPU programming frameworks wrap-up
 
 The lectures in this repository are published under [CC-BY-SA license](https://creativecommons.org/licenses/by-nc/4.0/). Some of the lectures and exercises are based on Intel copyrighted work and they have their own license ([MIT](https://spdx.org/licenses/MIT.html)).
 

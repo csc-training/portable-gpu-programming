@@ -1,0 +1,2 @@
+# Redcution by SYCL Functions
+A set of a reductions example using built-in SYCL functions. There are example of gloabal reductions also block (work-group) level.

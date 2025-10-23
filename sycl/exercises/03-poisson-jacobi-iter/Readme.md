@@ -120,8 +120,8 @@ q.submit([&](handler& h) {
                 int jp = i * ny + j + 1;
                 int jm = i * ny + j - 1;
                 if(i>0 && i<nx-1 && j>0 && j< ny-1){
-                    UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
-                                 U[jp] - 2.0 * U[ind] + U[jm]);
+                    UNEW[ind] = factor * (U[ip] + U[im] +
+                                          U[jp] + U[jm]);
                 }         
             });
 });
@@ -314,8 +314,8 @@ Finally the next values of the field can be computed:
 ```
 if(global_i > 0 && global_i < nx-1 && global_j > 0 && global_j < ny-1){
    UNEW[global_i * ny + global_j] =
-         factor * (tile[local_i+1][local_j] - 2.0 * tile[local_i][local_j] + tile[local_i-1][local_j] +
-         tile[local_i][local_j+1] - 2.0 * tile[local_i][local_j] + tile[local_i][local_j-1]);
+         factor * (tile[local_i+1][local_j] + tile[local_i-1][local_j] +
+                   tile[local_i][local_j+1] + tile[local_i][local_j-1]);
 }
 ```
 Putting all this together:
@@ -350,8 +350,8 @@ e = q.submit([&](handler &h){
 
        if(global_i > 0 && global_i < nx-1 && global_j > 0 && global_j < ny-1){
            UNEW[global_i * ny + global_j] =
-               factor * (tile[local_i+1][local_j] - 2.0f * tile[local_i][local_j] + tile[local_i-1][local_j] +
-                         tile[local_i][local_j+1] - 2.0f * tile[local_i][local_j] + tile[local_i][local_j-1]);
+               factor * (tile[local_i+1][local_j] + tile[local_i-1][local_j] +
+                         tile[local_i][local_j+1]  + tile[local_i][local_j-1]);
        }
   });
 });

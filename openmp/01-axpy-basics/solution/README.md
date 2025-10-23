@@ -637,9 +637,3 @@
             31, !$omp target teams distribute parallel do
                 31, Generating "nvkernel_MAIN__F1L31_2" GPU kernel
             31, Generating implicit map(tofrom:y(:),x(:))
-
-
-### Bonus exercises: loop construct
-
-1. Cray compiler requires splitting the pragma to two lines.
-   AMD Clang and NVIDIA HPC work with one-liner.

@@ -219,11 +219,3 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
        nvc -O3 -mp=gpu -gpu=cc80 -Minfo=mp axpy.c -o axpy.x
        nvfortran -O3 -mp=gpu -gpu=cc80 -Minfo=mp helper_functions.F90 axpy.F90 -o axpy.x
-
-
-### Bonus exercises: loop construct
-
-1. Try out the `target teams loop` construct. Note that it might not work with all compilers unless you split the pragma to two lines:
-
-       #pragma omp target teams
-       #pragma omp loop

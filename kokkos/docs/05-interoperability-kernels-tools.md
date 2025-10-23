@@ -190,9 +190,13 @@ kp_reader nid002275-210818.dat
 - Hierarchical parallelism
     - Create thread teams and parallelize also within the teams
     - "scratch memory" within a team
+
+# Further topics
+
 - Algorithms (random numbers, sorting, std algorithms, ...) 
 - Task graphs
 - ...
+
 - See <https://kokkos.org/kokkos-core-wiki> for more details
 
 # Summary

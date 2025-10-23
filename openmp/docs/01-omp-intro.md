@@ -19,26 +19,26 @@ lang:   en
   to parallelize and offload specific code regions to the GPU
   - If compiled without OpenMP, directives are ignored
 - The same code can be compiled and run on various systems
-  - NVIDIA GPUs, AMD GPUs, Intel GPUs, ...
-  - CPUs only
-  - FPGAs
-- Standard defines both C/C++ and Fortran bindings
+  - NVIDIA GPUs, AMD GPUs, Intel GPUs, FPGAs, ...
+  - CPUs only (threading, vectorization)
+- OpenMP is a standard with both C/C++ and Fortran bindings
   - <https://www.openmp.org/specifications/>
+  - See especially the OpenMP Examples documents!
 
 # Directive languages and performance
 
 - "Write once, run everywhere"
-  - It is true that you get portability
+  - It is true that you can get portability
   - It is *not necessarily* true that you get *performance* portability
 
 - It is possible to optimize a code for performance on the GPU
-  - Many optimisations will increase the performance also on the CPU
-  - A highly optimised code will likely be slower on the CPU
+  - Many optimisations will likely increase the performance also on the CPU
+  - A highly optimised code will possibly be slower on the CPU
 
 # OpenMP vs. OpenACC
 
 - OpenACC is very similar compiler directive based approach for GPU programming
-  - Open standard, however, NVIDIA major driver
+  - Open standard, NVIDIA major driver
 - Why OpenMP and not OpenACC?
   - OpenMP is likely to have a more extensive platform and compiler support
   - Currently, OpenACC support in AMD GPUs is limited (supported only for Fortran on LUMI)
@@ -54,6 +54,9 @@ lang:   en
   - Can access all the features of the GPU hardware
   - Better control and assurance that the code will work as intended
   - More optimization possibilities
+- Note! It's possible to use **both** OpenMP and CUDA/HIP in an application
+  - Example: the bulk of the code accelerated with OpenMP,
+    performance critical parts optimized with CUDA/HIP
 
 
 # OpenMP execution model {.section}
@@ -198,6 +201,8 @@ lang:   en
 
 - Useful API functions: `omp_get_team_num()`, `omp_get_thread_num()`, `omp_get_num_teams()`, `omp_get_num_threads()`
 
+- Demo: `hello.c`
+
 
 # League of multi-threaded teams
 
@@ -247,6 +252,7 @@ end do
 ```
 </div>
 
+- Demo: `hello.c`
 
 # Controlling number of teams and threads
 
@@ -255,6 +261,7 @@ end do
   - May improve performance in some cases
   - Performance is most likely not portable
 
+<div class=column>
 ```c++
 #pragma omp target
 #pragma omp teams num_teams(32)
@@ -263,6 +270,20 @@ end do
   // code executed in device
 }
 ```
+</div>
+
+<div class=column>
+```fortranfree
+!$omp target
+!$omp teams num_teams(32)
+!$omp parallel num_threads(128)
+  ! code executed in device
+!$omp end parallel
+!$omp end teams
+!$omp end target
+```
+</div>
+
 
 # Composite directives
 
@@ -291,6 +312,37 @@ end do
 ```
 </div>
 
+# Collapsing loops
+
+- The `collapse` clause can be used to combine nested loops to a single large loop
+
+<div class=column>
+```c++
+#pragma omp target
+#pragma omp teams distribute parallel for \
+            collapse(2)
+for (int i = 0; i < N; i++)
+  for (int j = 0; j < M; j++) {
+    ...
+  }
+```
+</div>
+
+<div class=column>
+```fortranfree
+!$omp target
+!$omp teams distribute parallel do &
+!$omp collapse(2)
+do i = 1, N
+  do j = 1, M
+    ...
+  end do
+end do
+!$omp teams distribute parallel do
+!$omp end target
+```
+</div>
+
 
 # Loop construct
 
@@ -298,10 +350,11 @@ end do
 - Leaves more freedom to the implementation to do the work division
   - Tells the compiler/runtime only that the loop iterations are
     independent and can be executed in parallel
+- Check that the compiler gives expected performance!
 
 <div class=column>
 ```c++
-#pragma omp target
+#pragma omp target teams
 #pragma omp loop
 for (int i = 0; i < N; i++) {
   p[i] = v1[i] * v2[i]
@@ -311,13 +364,13 @@ for (int i = 0; i < N; i++) {
 
 <div class=column>
 ```fortranfree
-!$omp target
+!$omp target teams
 !$omp loop
 do i = 1, N
   p(i) = v1(i) * v2(i)
 end do
 !$omp end loop
-!$omp end target
+!$omp end target teams
 ```
 </div>
 

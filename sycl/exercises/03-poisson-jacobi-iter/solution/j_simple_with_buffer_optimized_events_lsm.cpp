@@ -41,7 +41,7 @@ int main(int argc, char *argv[]) {
     //# Define vectors for matrices
     const int nx=N, ny=N;
     const int niter=100;
-    const float factor =0.25;
+    const float factor =0.0001;
     std::vector<float> matrix_u(nx*ny);
     std::vector<float> matrix_unew(nx*ny);
     

@@ -85,7 +85,7 @@ void run(const int n, const int niter)
   double elapsed_seconds = 1.0e-3 * duration.count();
 
   int i = ny / 2, j = nx / 2;
-  printf("u[%d,%d] = %f\n", i, j, u[idx(i, j)]);
+  printf("u[%d,%d] = %f\n", i, j, unew[idx(i, j)]);
   printf("Mean u = %f\n", mean);
   printf("Time spent: %6.3f s\n", elapsed_seconds);
 

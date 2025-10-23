@@ -162,7 +162,7 @@ lang:     en
 #  Profiling with Events I
 
  - the queue needs to be initialized for profiling:
-    - <small>`queue q{ gpu_selector{}, { property::queue::enable_profiling() } };`</small>
+    - <small>`queue q{ gpu_selector, { property::queue::enable_profiling() } };`</small>
  - submit the work:
     - <small>`auto e = q.submit([&](handler &cgh){ /* body */});`</small>
  - wait for the task to complete:

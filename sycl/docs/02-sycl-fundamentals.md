@@ -178,7 +178,7 @@ auto q = queue { custom_selector {} };
 </div>
 
 <div class="column">
- - function object (functors)
+ - function object (functors) <span style="color:red"> ! </span>
  <small>
 ```cpp 
 template <typename T>

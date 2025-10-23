@@ -77,3 +77,5 @@ Expected output:
    CPU cores / threads, does the performance improve when using more threads?
 
 5. Compare the performance to serial version as well as the difference between OpenMP and GPU versions. 
+
+6. Try to specify the layout explicitly as LayoutLeft and LayoutRight, and investigate how that affects performance both on OpenMP and device (CUDA/HIP)

@@ -349,7 +349,7 @@ int main() {
 
     queue q;
     {
-        buffer x_buf(hx); buffer y_buf(hy);
+        buffer x_buf(hx.data); buffer y_buf(hy.data);
 
         q.submit([&](handler &cgh) {
             auto x = accessor{x_buf, cgh, read};

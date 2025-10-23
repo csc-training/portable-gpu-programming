@@ -35,8 +35,7 @@ or ready to use module
 ```
 ml use /scratch/project_2015315/modulefiles
 ml kokkos/cuda
-
+```
    - NVIDIA A100 GPUs do not support automatic data migration for memory allocated with `malloc`.
    - In next lecture we look how to manage memory in portable way with Kokkos
-```
 

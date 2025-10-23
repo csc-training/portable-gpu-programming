@@ -30,14 +30,14 @@ lang:     en
       buffer<int, 1> y_buf(h_y.data(), sycl::range<1>(N)); 
       // Launch kernel 1 Initialize X
       q.submit([&](sycl::handler &cgh) {
-        accessor x(x_buf, cgh, read_only);
+        accessor x(x_buf, cgh, write_only);
         h.parallel_for(N, [=](sycl::id<1> i) {
             x[i] = 1;
         });
       });
       // Launch kernel 2: Initialize Y
       q.submit([&](sycl::handler &cgh) {
-        accessor y(y_buf, cgh, read_write);
+        accessor y(y_buf, cgh, write_only);
         h.parallel_for(N, [=](sycl::id<1> i) {
             y[i] = 2; 
         });
@@ -53,7 +53,7 @@ lang:     en
 ```cpp      
       // Launch kernel 3: Perform Y = Y + a * X
       q.submit([&](sycl::handler& h) {
-        auto x = accessor{x_buf, cgh, read};
+        auto x = accessor{x_buf, cgh, read_only};
         auto y = accessor{y_buf, cgh, read_write};
         h.parallel_for(N, [=](sycl::id<1> i) {
            y[i] += a * y[i]; // Y = Y + a * X

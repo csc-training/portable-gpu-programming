@@ -15,7 +15,7 @@ We note that when doing reductions the order of the iterations is not important 
 
 At the block level we still have to perform a reduction in an efficient way. Doing it serially means that we are not using all GPU cores (roughly 97% of the computing capacity is wasted). Doing it naively parallel using **atomics**, but on the shared memory is also not a good option. Going back back to the fact the reduction operations are commutative and associative we can set each thread to "reduce" two elements of the local part of the array. 
 
-<img src="../../../docs/img/Reduction.png"  height="500" >
+<img src="img/Reduction.png"  height="500" >
 
 Shared memory can be used to store the partial "reductions" as shown below in the code:
 

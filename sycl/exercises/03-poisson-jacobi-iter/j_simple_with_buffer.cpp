@@ -129,8 +129,8 @@ int main(int argc, char *argv[]) {
                    int jp = i * ny + j + 1;
                    int jm = i * ny + j - 1;
                    if(i>0 && i<nx-1 && j>0 && j< ny-1){
-                    UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
-                                 U[jp] - 2.0 * U[ind] + U[jm]);
+                    UNEW[ind] = factor * (U[ip] + U[im] +
+                                          U[jp] + U[jm]);
                 }         
             });
          });
@@ -157,8 +157,8 @@ int main(int argc, char *argv[]) {
                    int jp = i * ny + j + 1;
                    int jm = i * ny + j - 1;
                    if(i>0 && i<nx-1 && j>0 && j< ny-1){
-                    UNEW[ind] = factor * (U[ip] - 2.0 * U[ind] + U[im] +
-                                 U[jp] - 2.0 * U[ind] + U[jm]);
+                    UNEW[ind] = factor * (U[ip] + U[im] +
+                                          U[jp] + U[jm]);
                 }         
               });
            });

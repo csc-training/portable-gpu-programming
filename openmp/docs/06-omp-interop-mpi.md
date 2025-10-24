@@ -31,7 +31,7 @@ lang:   en
 **`omp target data use_device_ptr(var-list)`**
 
 - Within the construct, all the pointer variables in `var-list` correspond to the device addresses
-- Use in C or for `c_ptr` in Fortran
+- Use in C for pointer or in Fortran for `c_ptr`
 
 **`omp target data use_device_addr(var-list)`**
 

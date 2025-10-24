@@ -29,7 +29,7 @@ lang:   en
 
 # Motivation for optimizing data movement
 
-- When dealing with an accelerator GPU device attached to a PCIe bus, **optimizing data movement** is often **essential** to achieve good performance
+- When dealing with an accelerator GPU device attached to a bus, **optimizing data movement** is often **essential** to achieve good performance
 - The four key steps in porting to high-performance accelerated code
   1. Identify parallelism
   2. Express parallelism

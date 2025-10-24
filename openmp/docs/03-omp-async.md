@@ -68,10 +68,10 @@ lang:   en
 
 - If the kernels are sufficiently small, the device might execute multiple of them simultaneously
 - This is not desired for all workloads, so one needs to order them by using `depend` clause
-  - `depend(in: x[1:n])`: the target region will read from `x`
-  - `depend(out: x[1:n])`: the target region will write to `x`
-  - `depend(inout: x[1:n])`: the target region will read from and write to `x`
-- OpenMP runtime will execute the kernels in such an order so that `x` is not read from before the kernel writing to it has finished
+  - `depend(in: x[0:n])`: the target region will read from `x`
+  - `depend(out: x[0:n])`: the target region will write to `x`
+  - `depend(inout: x[0:n])`: the target region will read from and write to `x`
+- OpenMP runtime will execute the kernels in such an order that `x` is not read from before the kernel writing to it has finished
 
 # Example
 
@@ -121,8 +121,6 @@ lang:   en
 ```
 </div>
 
-``
-
 # Combining with OpenMP tasks
 
 - The target regions and their dependencies can be combined with OpenMP tasks
@@ -132,4 +130,4 @@ lang:   en
 
 - In OpenMP offload, device execution is synchronous with host by default
 - Asynchronous execution is possible, but requires explicit synchronization
-  and more care with correct order of execution
+  and more care with the correct order of execution

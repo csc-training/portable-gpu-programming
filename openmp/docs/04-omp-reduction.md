@@ -79,7 +79,7 @@ lang:   en
 </div>
 
 
-# Example: reduction
+# Example
 
 <div class=column>
 ```c++
@@ -100,7 +100,7 @@ for (int i = 0; i < n; i++) {
 </div>
 <div class=column>
 ```fortranfree
-integer :: n
+integer :: n = 1000
 real(8) :: sum = 0.0
 real(8), dimension(n, n) :: x, y
 ! some code to initialise x and y

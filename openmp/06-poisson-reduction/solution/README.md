@@ -23,3 +23,9 @@
 
    Note the use of `write_flag` to ensure that the next set of data is not copied from
    GPU before the previous write has finished.
+
+   Note that in Fortran, the equivalent code `poisson-2.F90` is not achieving the
+   same performance as the C version due to `firstprivate(u)` creating a copy of
+   the array data, which is waited for until the execution can continue.
+   A modified code `poisson-3.F90` shows how Fortran pointers could be used
+   to achieve a copy of a pointer in `firstprivate(u)` similar to the C pointer.

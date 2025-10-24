@@ -58,14 +58,14 @@ void run(const int n, const int niter)
     std::swap(u, unew);
   }
 
-  auto unew_host = Kokkos::create_mirror_view(unew);
-  Kokkos::deep_copy(unew_host, unew);
+  auto u_host = Kokkos::create_mirror_view(u);
+  Kokkos::deep_copy(u_host, u);
 
   FILE *file = fopen("u.bin", "wb");
   size_t count = nx*ny;
   fwrite(&count, sizeof(size_t), 1, file);
   // Write the data
-  size_t written = fwrite(unew_host.data(), sizeof(double), count, file);
+  size_t written = fwrite(u_host.data(), sizeof(double), count, file);
   fclose(file);
 
   // Check the result
@@ -73,7 +73,7 @@ void run(const int n, const int niter)
   Kokkos::parallel_reduce("reduce",
     Kokkos::MDRangePolicy<Kokkos::Rank<2> >({1, 1}, {nx-1, ny-1}),
         KOKKOS_LAMBDA(const int i, const int j, double& mean) {
-           mean += unew(i,j);
+           mean += u(i,j);
         }, mean);
 
   mean /= ((nx - 1) * (ny - 1));
@@ -82,7 +82,7 @@ void run(const int n, const int niter)
   double elapsed_seconds = t1 - t0;
 
   int i = ny / 2, j = nx / 2;
-  printf("u[%d,%d] = %f\n", i, j, unew_host(i, j));
+  printf("u[%d,%d] = %f\n", i, j, u_host(i, j));
   printf("Mean u = %f\n", mean);
   printf("Time spent: %6.3f s\n", elapsed_seconds);
 

@@ -8,7 +8,7 @@
 struct Idx {
   int _nx;
   Idx(int nx) : _nx(nx) {};
-  int operator()(const int i, const int j) const {return i * _nx + j;}
+  inline int operator()(const int i, const int j) const {return i * _nx + j;}
 };
 
 // Initialize 2d array with Gaussian
@@ -66,26 +66,26 @@ void run(const int n, const int niter)
   size_t count = nx*ny;
   fwrite(&count, sizeof(size_t), 1, file);
   // Write the data
-  size_t written = fwrite(unew.data(), sizeof(double), count, file);
+  size_t written = fwrite(u.data(), sizeof(double), count, file);
   fclose(file);
-
-  auto t1 = Clock::now();
 
   // Check the result
   double mean = 0.0;
     for (int i=1; i < nx-1; i++)
       for (int j=1; j < ny-1; j++) 
         {
-           mean += unew[idx(i,j)];
+           mean += u[idx(i,j)];
         }
 
   mean /= ((nx - 1) * (ny - 1));
 
+  auto t1 = Clock::now();
   auto duration = std::chrono::duration_cast<std::chrono::milliseconds>(t1 - t0);
   double elapsed_seconds = 1.0e-3 * duration.count();
 
+
   int i = ny / 2, j = nx / 2;
-  printf("u[%d,%d] = %f\n", i, j, unew[idx(i, j)]);
+  printf("u[%d,%d] = %f\n", i, j, u[idx(i, j)]);
   printf("Mean u = %f\n", mean);
   printf("Time spent: %6.3f s\n", elapsed_seconds);
 

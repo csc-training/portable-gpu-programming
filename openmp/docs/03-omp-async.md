@@ -123,8 +123,51 @@ lang:   en
 
 # Combining with OpenMP tasks
 
-- The target regions and their dependencies can be combined with OpenMP tasks
-  - Not covered in detail here, but see an example code in exercises
+<div class=column>
+```c++
+#pragma omp parallel  // Create host threads
+#pragma omp single
+{
+  #pragma omp target nowait depend(...)
+  { ... }
+
+  #pragma omp target nowait depend(...)
+  { ... }
+
+  #pragma omp task depend(...)
+  { ... }
+
+  // Wait all kernels and host tasks to finish
+  #pragma omp taskwait
+
+} // end of host threads
+```
+</div>
+
+<div class=column>
+```fortranfree
+!$omp parallel  ! Create host threads
+!$omp single
+  !$omp target nowait depend(...)
+    ...
+  !$omp end target
+
+  !$omp target nowait depend(...)
+    ...
+  !$omp end target
+
+  !$omp task depend(...)
+    ...
+  !$omp end task
+
+  ! Wait all kernels and host tasks to finish
+  !$omp taskwait
+!$omp end single
+!$omp end parallel
+```
+</div>
+
+
 
 # Summary
 

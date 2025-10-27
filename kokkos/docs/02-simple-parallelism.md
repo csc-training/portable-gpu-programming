@@ -57,9 +57,11 @@ for (int i=0; i < N; i++) // Iteration range
 <div class="column">
 Using an explicit functor
 ```c++
-struct axpy {
-  double *_x, *_y;
+class axpy {
+  const double *_x, 
+  double *_y;
   const double _a;
+public:
   axpy(double *x, double *y, double a) :
     _x(x), _y(y), _a(a) {};
   void operator()(const int i) const {
@@ -95,9 +97,11 @@ Kokkos::parallel_for(N,
 <div class="column">
 Using an explicit functor
 ```c++
-struct axpy {
-  double *_x, *_y;
+class axpy {
+  const double *_x, 
+  double *_y;
   const double _a;
+public:
   axpy(double *x, double *y, double a) :
     _x(x), _y(y), _a(a) {};
   KOKKOS_INLINE_FUNCTION

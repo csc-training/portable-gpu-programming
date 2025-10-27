@@ -134,9 +134,9 @@ Kokkos::deep_copy(a, b);  // copy contents of b into a
 #  Specifying Memory Space
 
 ```c++
-Kokkos::View<double**> b("h_b", n);
-Kokkos::View<double**, Kokkos::HostSpace> h_b("h_b", n);
-Kokkos::View<double**, Kokkos::SharedSpace> s_b("s_b", n);
+Kokkos::View<double**> b("b", n, m);
+Kokkos::View<double**, Kokkos::HostSpace> h_b("h_b", n, m);
+Kokkos::View<double**, Kokkos::SharedSpace> s_b("s_b", n, m);
 ```
 - Assignments between incompatible device and host memory spaces are not possible
 ```c++
@@ -154,5 +154,5 @@ Kokkos::deep_copy(h_b, b) // Works even if b is in device (CUDA or HIP) space
 - Parallel code runs on default or user specified execution space
 - Kokkos provides a View data structure for multidimensional arrays
 - The data in View is stored on default or user specified memory space
-- Kokkos never copies the data between Views implicitly, but user needs to use `deep_copy()`
-  function
+- Kokkos never copies the data between Views implicitly, but user needs to use 
+  `deep_copy()` function

@@ -48,12 +48,12 @@ parallel_for(N, KOKKOS_LAMBDA (const int idx) {...})
 
 - Example: matrix vector product $y(j) = \sum_i A(j, i) * x(i)$
 ```c++
-Kokkos::View<double**> A("A", N, M);
-Kokkos::View<double*> y("y", N), x("x), M);
+Kokkos::View<double**> A("A", n, m);
+Kokkos::View<double*> y("y", n), x("x), m);
 
-parallel_for("Ax", N, KOKKOS_LAMBDA (const int j) {
+parallel_for("Ax", n, KOKKOS_LAMBDA (const int j) {
   y(j) = 0;
-  for (int i=0, i < M; i++) {
+  for (int i=0, i < m; i++) {
     y(j) += A(j, i) * x(i);
   });
 ```
@@ -152,9 +152,10 @@ parallel_for(Kokkos::MDRangePolicy<Kokkos::Rank<3>>({1, 1, 1,}, {nx -1, ny -1 , 
 - Memory access pattern may have large impack on performance
     - *cached* for CPUs
     - *coalesced* for GPUs
-- In Kokkos obtains performance portable memory access in combination of execution space dependent
-  execution policies and memory space dependent layouts for multidimensional arrays
+- Kokkos provides performance portable memory access by having different execution policy 
+  and default memory layout for CPUs and GPUs
     - LayoutRight for CPUs
     - LayoutLeft for GPUs
-- Mirror views provide portable approach for deep copies between possibly different memory layouts
+- Mirror views provide portable approach for deep copies between memory spaces that
+  may have different default layouts
 - Nested loops can be iterated with MdRangePolicy

@@ -1,5 +1,5 @@
 ---
-title:  Kokkos C++ Performance Portability Ecosystem
+title: Interoperability, Kernels and Tools
 event: Portable GPU Programming 2025
 date: October 2025
 lang:     en

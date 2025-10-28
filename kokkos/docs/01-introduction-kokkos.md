@@ -1,11 +1,9 @@
 ---
-title:  Kokkos C++ Performance Portability Ecosystem
+title:  Introduction to Kokkos Performance Portability Ecosystem
 subtitle: Portable GPU Programming
 date: October 2025
 lang:     en
 ---
-
-# Introduction to Kokkos {.section}
 
 # Learning objectives
 
@@ -19,6 +17,8 @@ lang:     en
 - Lectures: <br>  <https://github.com/kokkos/kokkos-tutorials/wiki/Kokkos-Lecture-Series>
 - Wiki with API reference: <https://kokkos.org/kokkos-core-wiki/>
 - Slack: <https://kokkosteam.slack.com>
+
+# Introduction to Kokkos {.section}
 
 # Current supercomputer landscape
 

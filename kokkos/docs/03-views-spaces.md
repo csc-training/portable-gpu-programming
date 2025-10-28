@@ -1,11 +1,9 @@
 ---
-title:  Kokkos C++ Performance Portability Ecosystem
+title: Spaces and Views 
 event: Portable GPU Programming 2025
 date: October 2025
 lang:     en
 ---
-
-# Spaces and Views {.section}
 
 # Learning objectives
 

@@ -1,11 +1,9 @@
 ---
-title:  Kokkos C++ Performance Portability Ecosystem
+title:  Data parallel patterns in
 subtitle: Portable GPU Programming
 date: October 2025
 lang:     en
 ---
-
-# Data parallelism in Kokkos {.section}
 
 # Learning objectives
 

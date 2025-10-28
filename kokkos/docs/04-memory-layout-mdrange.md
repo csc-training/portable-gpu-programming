@@ -1,11 +1,9 @@
 ---
-title:  Kokkos C++ Performance Portability Ecosystem
+title: Performance portable memory access patterns 
 event: Portable GPU Programming 2025
 date: October 2025
 lang:     en
 ---
-
-# Memory layout of View {.section}
 
 # Learning objectives
 

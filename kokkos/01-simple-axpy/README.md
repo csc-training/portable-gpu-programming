@@ -6,14 +6,14 @@ corresponding Kokkos parallel operation and the computational body by
 functors. Make two versions, one with an explicit functor and one with a lambda function.
 
 1. Build and run the code in LUMI with OpenMP backend. You can use your own Kokkos installation
-or ready to use module
+or use the module
 ```
 ml use /scratch/project_462001074/modulefile
 ml kokkos/omp
 ```
 
 2. Build and run the code in LUMI with HIP backend. You can use your own Kokkos installation
-or ready to use module
+or use the module
 ```
 ml use /scratch/project_462001074/modulefile
 ml kokkos/hip
@@ -24,14 +24,14 @@ ml kokkos/hip
    - Try to set `export HSA_XNACK=1` before running the code, does it work now?
 
 3. Build and run the code in Mahti with OpenMP backend. You can use your own Kokkos installation
-or ready to use module
+or use the module
 ```
 ml use /scratch/project_2015315/modulefiles
 ml kokkos/omp
 ```
 
 4. Build and run the code in Mahti with cuda backend. You can use your own Kokkos installation
-or ready to use module
+or use the module
 ```
 ml use /scratch/project_2015315/modulefiles
 ml kokkos/cuda

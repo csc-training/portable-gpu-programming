@@ -3,7 +3,7 @@
 The code [dot-product.cpp](dotp-product.cpp) implements the simple dot product
 $x \cdot y = \sum_i x[i] * y[i]$ in standard C/C++. Replace the `for` loops by
 corresponding Kokkos parallel operation and the computational body by
-lambda (or explicit functor).
+lambda function.
 
 1. Build and run the code in LUMI with OpenMP backend. You can use your own Kokkos installation
 or ready to use module

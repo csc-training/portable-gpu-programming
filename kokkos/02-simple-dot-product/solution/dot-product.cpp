@@ -2,47 +2,35 @@
 #include <iostream>
 #include <cmath>
 
-template <typename T>
-T dot_product(const T *x, const T *y, size_t N) 
-{
-  T result = 0.0;
-  Kokkos::parallel_reduce(N,
-    KOKKOS_LAMBDA (const size_t i, T &local_result) {
-    local_result += x[i] * y[i];
-  }, result);
-  return result;
-}
-
-template <typename T>
-void init(T x, T y, size_t N) 
-{
-  Kokkos::parallel_for(N,
-    KOKKOS_LAMBDA (const size_t i) {
-    x[i] = cos(i * 1.2);
-    y[i] = sin(i * -1.12);
-  });
-}
-
 int main(int argc, char** argv)
 {
   Kokkos::initialize(argc, argv);
 
-  using fp_type = double;
-
   constexpr size_t N = 100;
 
-  fp_type *x = (fp_type *) malloc(N * sizeof(fp_type));
-  fp_type *y = (fp_type *) malloc(N * sizeof(fp_type));
+  double *x = (double *) malloc(N * sizeof(double));
+  double *y = (double *) malloc(N * sizeof(double));
 
-  init(x, y, N);
+  // Initialize x and y
+  Kokkos::parallel_for(N,
+    KOKKOS_LAMBDA (const size_t i) {
+    x[i] = cos(i * 2*M_PI / (N-1) );
+    y[i] = sin(i * 2*M_PI / (N-1) );
+  });
+ 
   std::cout << "First and last elements before dot product: " << std::endl
             << "x: " << x[0] << "," << x[N-1] << std::endl
             << "y: " << y[0] << "," << y[N-1] << std::endl;
 
-  auto result = dot_product(x, y, N);
+  // Perform dot product
+  double result = 0.0;
+  Kokkos::parallel_reduce(N,
+    KOKKOS_LAMBDA (const size_t i, double &local_result) {
+    local_result += x[i] * y[i];
+  }, result);
 
   // Check results
-  std::cout << "Result (should be 6.78105): " << result << std::endl;
+  std::cout << "Result (should be 0): " << result << std::endl;
 
   Kokkos::finalize();
 }

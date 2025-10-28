@@ -1,62 +1,46 @@
 #include <Kokkos_Core.hpp>
 #include <iostream>
 
-template <typename T1, typename T2>
-void axpy(T1 x, T1 y, T2 a, size_t N) 
-{
-  Kokkos::parallel_for(N,
-     KOKKOS_LAMBDA (const size_t i) {
-          y(i) += a * x(i);
-     });
-}
-
-template <typename T>
-void init(T x, T y, size_t N) 
-{
-  Kokkos::parallel_for(N,
-    KOKKOS_LAMBDA (const size_t i) {
-      x(i) = (i + 1) * 2.4;
-      y(i) = (i + 1) * -1.2;
-    });
-}
-
 int main(int argc, char** argv)
 {
   Kokkos::initialize(argc, argv);
-  {
 
-  using fp_type = double;
-
-  const fp_type a = 0.5;
+  const double a = 0.5;
   constexpr size_t N = 100;
 
-  Kokkos::View<fp_type [N]> x("x");
-  Kokkos::View<fp_type [N]> y("y");
+  Kokkos::View<double *> x("x", N);
+  Kokkos::View<double *> y("x", N);
 
-  Kokkos::View<fp_type [N], Kokkos::HostSpace> h_x("host x");
-  Kokkos::View<fp_type [N], Kokkos::HostSpace> h_y("host y");
+  Kokkos::View<double *, Kokkos::HostSpace> h_x("x", N);
+  Kokkos::View<double *, Kokkos::HostSpace> h_y("y", N);
 
-  init(x, y, N);
+  // Initialize x and y
+  Kokkos::parallel_for(N,
+    KOKKOS_LAMBDA (const size_t i) {
+      x[i] = (i + 1) * 2.4;
+      y[i] = (i + 1) * -1.2;
+    });
 
-  // Copy data to host for printing
+  // copy to host for printing
   Kokkos::deep_copy(h_x, x);
   Kokkos::deep_copy(h_y, y);
-  Kokkos::fence();
 
   std::cout << "First and last elements before axpy: " << std::endl 
-            << "x: " << h_x[0] << "," << h_x[N-1] << std::endl
-            << "y: " << h_y[0] << "," << h_y[N-1] << std::endl;  
+            << "x: " << x[0] << "," << x[N-1] << std::endl
+            << "y: " << y[0] << "," << y[N-1] << std::endl;  
 
-  axpy(x, y, a, N);
+  // Apply axpy operation
+  Kokkos::parallel_for(N,
+     KOKKOS_LAMBDA (const size_t i) {
+          y[i] += a * x[i];
+     });
 
-  // Copy data to host for printing
+  // copy to host for printing
   Kokkos::deep_copy(h_y, y);
-  Kokkos::fence();
 
   // Check results
   std::cout << "First and last element (both should be zero):" << std::endl 
-            << h_y[0] << "," << h_y[N-1] << std::endl;  
+            << y[0] << "," << y[N-1] << std::endl;  
 
-  }
   Kokkos::finalize();
 }

@@ -3,7 +3,7 @@
 The code [axpy.cpp](axpy.cpp) implements the basic "axpy" operation:
 $y = a \times x + y$ in standard C/C++. Replace the `for` loops by
 corresponding Kokkos parallel operation and the computational body by
-functors. Make two versions, one with an explicit functor and one with a lambda function.
+lambda function.
 
 1. Build and run the code in LUMI with OpenMP backend. You can use your own Kokkos installation
 or use the module

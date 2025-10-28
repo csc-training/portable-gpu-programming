@@ -1,7 +1,7 @@
 #include <iostream>
 
-template <typename T1, typename T2>
-void axpy(T1 x, T1 y, T2 a, size_t N) 
+template <typename T>
+void axpy(const T *x, T *y, const T a, size_t N) 
 {
   for (size_t i = 0; i < N; i++) 
   {
@@ -10,7 +10,7 @@ void axpy(T1 x, T1 y, T2 a, size_t N)
 }
 
 template <typename T>
-void init(T x, T y, size_t N) 
+void init(T *x, T *y, size_t N) 
 {
   for (size_t i = 0; i < N; i++) 
   {

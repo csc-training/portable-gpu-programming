@@ -1,8 +1,8 @@
 #include <Kokkos_Core.hpp>
 #include <iostream>
 
-template <typename T1, typename T2>
-void axpy(T1 x, T1 y, T2 a, size_t N) 
+template <typename T>
+void axpy(const T *x, T *y, const T a, size_t N) 
 {
   Kokkos::parallel_for(N,
      KOKKOS_LAMBDA (const size_t i) {

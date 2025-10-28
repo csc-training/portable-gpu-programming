@@ -2,26 +2,29 @@
 #include <iostream>
 
 // With CUDA (compiler) functor needs to be defined in different scope than parallel dispatch
-template <typename T1, typename T2>
-struct AxpyFunctor {
-    T1 _x, _y;
-    const T2 _a;
-    AxpyFunctor(T1 x, T1 y, T2 a) :
+template <typename T>
+class AxpyFunctor {
+    const T *_x;
+    T *_y;
+    const T _a;
+  public:
+    AxpyFunctor(const T *x, T *y, T a) :
       _x(x), _y(y), _a(a) {};
     KOKKOS_INLINE_FUNCTION void operator()(const int i) const {
       _y[i] += _a * _x[i];
     }
 };
 
-template <typename T1, typename T2>
-void axpy(T1 x, T1 y, T2 a, size_t N) 
+template <typename T>
+void axpy(const T *x, T *y, const T a, size_t N) 
 {
   Kokkos::parallel_for(N, AxpyFunctor(x, y, a));
 }
 
 template <typename T>
-struct InitFunctor {
+class InitFunctor {
     T _x, _y;
+  public:
     InitFunctor(T x, T y) : _x(x), _y(y) {};
     KOKKOS_INLINE_FUNCTION void operator()(const size_t i) const {
       _x[i] = (i + 1) * 2.4;

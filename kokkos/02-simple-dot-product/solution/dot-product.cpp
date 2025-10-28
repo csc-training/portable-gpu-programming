@@ -3,11 +3,11 @@
 #include <cmath>
 
 template <typename T>
-double dot_product(T x, T y, size_t N) 
+T dot_product(const T *x, const T *y, size_t N) 
 {
-  double result = 0.0;
+  T result = 0.0;
   Kokkos::parallel_reduce(N,
-    KOKKOS_LAMBDA (const size_t i, double &local_result) {
+    KOKKOS_LAMBDA (const size_t i, T &local_result) {
     local_result += x[i] * y[i];
   }, result);
   return result;

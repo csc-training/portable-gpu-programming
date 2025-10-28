@@ -2,9 +2,9 @@
 #include <cmath>
 
 template <typename T>
-double dot_product(T x, T y, size_t N) 
+T dot_product(const T *x, const T *y, size_t N) 
 {
-  double result = 0.0;
+  T result = 0.0;
   for (size_t i = 0; i < N; i++) 
   {
     result += x[i] * y[i];
@@ -13,7 +13,7 @@ double dot_product(T x, T y, size_t N)
 }
 
 template <typename T>
-void init(T x, T y, size_t N) 
+void init(T *x, T *y, size_t N) 
 {
   for (size_t i = 0; i < N; i++) 
   {

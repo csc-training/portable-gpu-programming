@@ -1,0 +1,16 @@
+channels:
+  - conda-forge
+dependencies:
+  - jupyter
+  - jupyterlab
+  - nbclassic
+  - python=3.12
+  - ipykernel
+  - scipy
+  - nglview
+  - matplotlib
+  - pandas
+  - matplotlib-scalebar
+  - numpy
+  - ipywidgets
+  - ipympl

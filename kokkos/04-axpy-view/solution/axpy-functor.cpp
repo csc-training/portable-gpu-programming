@@ -25,6 +25,16 @@ class AxpyFunctor {
     }
 };
 
+// The same template programming techniques are used for defining a function
+// that takes Views as arguments
+template <typename DT, typename... DP>
+void axpy(Kokkos::View<DT, DP...> x, Kokkos::View<DT, DP...> y, 
+          typename Kokkos::ViewTraits<DT, DP...>::const_value_type a) 
+{
+  int N = x.extent(0);
+  Kokkos::parallel_for(N, AxpyFunctor(x, y, a));
+}
+
 int main(int argc, char** argv)
 {
   Kokkos::initialize(argc, argv);
@@ -55,7 +65,7 @@ int main(int argc, char** argv)
             << "y: " << h_y[0] << "," << h_y[N-1] << std::endl;  
 
   // Apply axpy operation
-  Kokkos::parallel_for(N, AxpyFunctor(x, y, a));
+  axpy(x, y, a);
 
   // Copy data to host for printing
   Kokkos::deep_copy(h_y, y);

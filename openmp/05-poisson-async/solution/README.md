@@ -29,3 +29,7 @@ SPDX-License-Identifier: CC-BY-4.0
    so the run time is the same as without the I/O step. The remaining difference is
    mostly due to the final write after the 5000th iteration which is included in timing
    (a single write takes about 0.1-0.2 seconds).
+
+   Note that the provided code relies on separate memory allocations for `u` on
+   the host and device to overlap the computation and I/O. Thus, it doesn't work correctly
+   when using host (CPU threads) as the offload target.

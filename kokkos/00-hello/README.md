@@ -6,7 +6,10 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Building and running Kokkos programs
 
-## Installing Kokkos
+In this exercise you can practice how to build and install Kokkos, and how to build
+applications utilizing Kokkos.
+
+## Task: installing Kokkos
 
 Start by installing Kokkos at least on one system and with the one backend along following
 instructions in [installing-using.md](../installing-using.md). It is strongly suggested to try
@@ -26,7 +29,7 @@ module use /scratch/project_2015315/modulefiles
 module load kokkos/omp # or module load kokkos/cuda
 ```
 
-## Building Kokkos applications
+## Task: building Kokkos applications
 
 Build the [hello.cpp](hello.cpp) code with the provided `CMakeList.txt`.
 Try to test HIP and CUDA backends, as well as OpenMP backend (on either of the
@@ -46,7 +49,7 @@ cmake -Bbuild-omp -DCMAKE_CXX_COMPILER=CC  # add -DKokkos_ROOT if not using modu
 cmake --build build-omp
 ```
 
-## Running the application
+## Task: running the application
 
 The hello program here only initializes and finalizes Kokkos, but providing
 `--kokkos-print-configuration` command line option you see information about the

@@ -6,9 +6,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Dot product with Kokkos parallel dispatch
 
-The code [dot-product.cpp](dotp-product.cpp) implements the simple dot product
-$x \cdot y = \sum_i x[i] * y[i]$ in standard C/C++. Replace the `for` loops by
-corresponding Kokkos parallel operation and the computational body by
+In this exercise you can practice implementing the simple dot product
+$x \cdot y = \sum_i x[i] * y[i]$ in parallel using Kokkos. In order to focus only on
+parallel dispatch, the proper way to manage memory with Kokkos is not considered yet.
+
+## Tasks
+
+The code [dot-product.cpp](dot-product.cpp) implements dot product in standard C/C++. 
+Replace the `for` loops by corresponding Kokkos parallel operation and the computational body by
 lambda function.
 
 1. Build and run the code in LUMI with OpenMP backend. You can use your own Kokkos installation

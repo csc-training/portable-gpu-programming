@@ -6,6 +6,11 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Matrix multiplication with Kokkos kernels
 
+In this exercise you can practice how to use Kokkos kernels, as an example
+we use standard matrix-matrix product.
+
+## Tasks
+
 Write a program that calculates the general matrix-matrix product
 $C = \alpha * A * B + \beta C$ using the BLAS3 function gemm from Kokkos
 kernels.

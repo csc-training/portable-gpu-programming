@@ -4,11 +4,14 @@ SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-## Message exchange with Kokkos
+# Message exchange with Kokkos
 
+In this exercise you practice how to perform MPI communication to/from Kokkos Views.
 
 This exercise should be done only in LUMI as course reservation in Mahti allows only single GPU
 runs.
+
+## Tasks
 
 Port the [exchange.cpp](exchange.cpp) code to Kokkos, *i.e.* use Kokkos Views for
 message and buffer data structures.

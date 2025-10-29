@@ -6,8 +6,13 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Using Kokkos with MPI
 
+In this exercise you can practice building and running a program combining Kokkos
+and MPI. You will also see how Kokkos is mapping MPI tasks to GPUs.
+
 This exercise should be done only in LUMI as course reservation in Mahti allows only single GPU
 runs.
+
+## Tasks
 
 Build the [hello.cpp](hello.cpp) code with the provided `CMakeList.txt` using the HIP backend.
 Run the program on two nodes with two tasks and two GPUs on each node i.e.

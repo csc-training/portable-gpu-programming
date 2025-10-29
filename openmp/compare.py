@@ -1,3 +1,7 @@
+# SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+#
+# SPDX-License-Identifier: MIT
+
 import argparse
 import numpy as np
 

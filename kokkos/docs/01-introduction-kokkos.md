@@ -5,10 +5,9 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 ---
-title:  Introduction to Kokkos Performance Portability Ecosystem
-subtitle: Portable GPU Programming
-date: October 2025
-lang:     en
+title: Introduction to Kokkos Performance Portability Ecosystem
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Learning objectives

@@ -7,8 +7,7 @@ SPDX-License-Identifier: CC-BY-4.0
 ---
 title: Interoperability, Kernels and Tools
 event: Portable GPU Programming 2025
-date: October 2025
-lang:     en
+lang:  en
 ---
 
 # Interoperability with libraries and other frameworks {.section}

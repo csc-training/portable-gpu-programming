@@ -7,7 +7,6 @@ SPDX-License-Identifier: CC-BY-4.0
 ---
 title: Spaces and Views 
 event: Portable GPU Programming 2025
-date: October 2025
 lang:     en
 ---
 

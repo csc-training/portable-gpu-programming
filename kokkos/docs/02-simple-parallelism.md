@@ -5,10 +5,9 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 ---
-title:  Data parallel patterns in Kokkos
-subtitle: Portable GPU Programming
-date: October 2025
-lang:     en
+title: Data parallel patterns in Kokkos
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Learning objectives

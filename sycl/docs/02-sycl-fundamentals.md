@@ -1,10 +1,10 @@
 ---
-title: Simple SYCL
+title: High-Level SYCL
 event: Portable GPU Programming 2025
 lang:  en
 ---
 
-# Simple SYCL{.section}
+# High-Level SYCL{.section}
 
 # SYCL Programming Model 
 

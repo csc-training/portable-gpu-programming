@@ -1,8 +1,7 @@
 ---
-title:    Simple SYCL
-event: Portable GPU Programming
-date:     October 2025
-lang:     en
+title: Simple SYCL
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Simple SYCL{.section}

@@ -1,8 +1,7 @@
 ---
-title:  Other SYCL Features
-event: Portable GPU Programming 
-date:     October 2025
-lang:     en
+title: Other SYCL Features
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # SYCL Dependencies{.section}

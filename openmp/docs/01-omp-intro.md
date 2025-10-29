@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 ---
 title:  Introduction to OpenMP offload
 event:  Portable GPU Programming 2025
@@ -131,29 +137,14 @@ lang:   en
 - OpenMP `distribute` and `for`/`do` constructs *distribute work* so that the created teams and threads do different work
   - For example, `for`/`do` assign different threads to different loop iterations (so that the computation work is distributed)
 
-# Teams construct
+# Creating teams
 
-<div class=column>
 - A `teams` construct creates a league of teams
   - Number of teams is implementation dependent
   - Initially, a single thread in each team executes the following structured block
-</div>
-
-<div class=column>
-![ <span style=" font-size:0.5em;"></span> ](img/team.png){width=65%}
-</div>
-
-# Teams construct
-
-<div class=column>
 - No synchronization between teams is possible
 - Probable mapping to hardware
   - Team &rarr; thread block, runs on a streaming multiprocessor (SM) / on a compute unit (CU)
-</div>
-
-<div class=column>
-![ <span style=" font-size:0.5em;"></span> ](img/team.png){width=65%}
-</div>
 
 # Creating threads within a team
 
@@ -161,18 +152,14 @@ lang:   en
 - A `parallel` construct within a `teams` region creates threads within each team
   - Number of threads per team is implementation dependent
   - With N teams and M threads per team there will be N x M threads in total
-
-# Creating threads within a team
-
-<div class=column>
 - Threads within a team can synchronize
 - Probable mapping to hardware
   - Thread &rarr; thread, runs on a core of SM / on a lane of a SIMD unit of CU
-</div>
 
-<div class=column>
-![ <span style=" font-size:0.5em;"></span> ](img/thread.png){width=65%}
-</div>
+# League of multi-threaded teams
+
+![](img/teams.png){.center width=80%}
+
 
 # Creating teams and threads
 
@@ -202,11 +189,6 @@ lang:   en
 - Useful API functions: `omp_get_team_num()`, `omp_get_thread_num()`, `omp_get_num_teams()`, `omp_get_num_threads()`
 
 - Demo: `hello.c`
-
-
-# League of multi-threaded teams
-
-![](img/teams.png){.center width=80%}
 
 
 # Worksharing in the accelerator

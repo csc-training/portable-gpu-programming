@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 ## Using unified shared memory
 
 In this exercise we practise the use of unified shared memory in OpenMP.

@@ -1,3 +1,7 @@
+! SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+!
+! SPDX-License-Identifier: MIT
+
 module hipblas_bindings
   use, intrinsic :: iso_c_binding
   implicit none

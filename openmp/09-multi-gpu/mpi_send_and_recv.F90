@@ -1,3 +1,7 @@
+! SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+!
+! SPDX-License-Identifier: MIT
+
 program mpi_send_and_recv
   use mpi
   ! use mpi_f08 ! does not work on LUMI!

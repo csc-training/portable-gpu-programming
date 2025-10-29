@@ -10,7 +10,7 @@ In this exercise we practice calling external GPU libraries from OpenMP offload.
 
 The issue of calling external libraries boils down to the question how to get
 the correct device pointer so that it can be passed to the library call.
-OpenMP provides a clause for this: `use_device_ptr`.
+OpenMP provides a clause for this: `use_device_ptr` / `use_device_addr`.
 
 As the GPU libraries have often C interface, the Fortran case is a bit more
 involved and requires the use of `iso_c_binding`.
@@ -21,7 +21,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 ### Exercises: Examine the array locations
 
 1. The code 'pointers' prints the address of an array
-   in the host context and in the device context using `use_device_ptr`.
+   in the host context and in the device context using `use_device_ptr` / `use_device_addr`.
 
    Compile and run the code on GPU and study the output.
 

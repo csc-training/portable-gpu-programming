@@ -1,8 +1,7 @@
 ---
-title:    Using LUMI and Mahti supercomputers 
-subtitle: Portable GPU Programming
-date:     October 2025
-lang:     en
+title: Using LUMI and Mahti supercomputers
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 

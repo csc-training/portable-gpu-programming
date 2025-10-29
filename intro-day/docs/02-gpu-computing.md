@@ -1,8 +1,7 @@
 ---
-title:    GPUs as Accelerators
-event: Portable GPU Programming
-date:     October 2025
-lang:     en
+title: GPUs as Accelerators
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Accelerators/GPUs {.section}

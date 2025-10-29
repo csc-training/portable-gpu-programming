@@ -1,8 +1,7 @@
 ---
-title:    Introduction to MPI
-subtitle: Portable GPU Programming
-date:     October 2025
-lang:     en
+title: Introduction to MPI
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Outline

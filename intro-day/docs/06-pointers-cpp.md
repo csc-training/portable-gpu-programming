@@ -1,8 +1,7 @@
 ---
-title:    Getting started with C++
-subtitle: Portable GPU Programming
-date:     October 2025
-lang:     en
+title: Getting started with C++
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Outline

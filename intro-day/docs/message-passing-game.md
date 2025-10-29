@@ -1,8 +1,7 @@
 ---
-title:    Message passing game
-subtitle: Portable GPU Programming
-date:     October 2025
-lang:     en
+title: Message passing game
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Message passing game

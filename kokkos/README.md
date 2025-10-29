@@ -6,14 +6,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Kokkos exercises
 
-## Installing and simple usage
+## Installing and using Kokkos
 
 - [Hello world](00-hello)
 
-## Simple parallel dispatch
+## Parallel dispatch
 
-- [axpy](01-simple-axpy)
-- [Dot product](02-simple-dot-product)
+- [axpy](01-parallel-axpy)
+- [Dot product](02-parallel-dot-product)
 
 ## Kokkos Views
 

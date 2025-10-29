@@ -1,10 +1,10 @@
 ---
-title: Advanced SYCL
+title: Low-Level SYCL
 event: Portable GPU Programming 2025
 lang:  en
 ---
 
-# Advanced SYCL{.section}
+# Low-Level SYCL{.section}
 
 # Buffers and Accessors API 
 - **Advantages**

@@ -5,9 +5,9 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 ---
-title:  Introduction to OpenMP offload
-event:  Portable GPU Programming 2025
-lang:   en
+title: Introduction to OpenMP offload
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Outline

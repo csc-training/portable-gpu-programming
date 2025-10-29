@@ -5,9 +5,9 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 ---
-title:  Asynchronous kernel execution
-event:  Portable GPU Programming 2025
-lang:   en
+title: Asynchronous kernel execution
+event: Portable GPU Programming 2025
+lang:  en
 ---
 
 # Outline

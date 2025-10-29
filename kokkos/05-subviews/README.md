@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2024 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Subviews
 
 In the exercise you can play with subviews. The skeleton code `subviews.cpp` contains

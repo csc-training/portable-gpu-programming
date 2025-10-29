@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Solving two dimensional heat equation with Kokkos
 
 The repository https://github.com/cschpc/heat-equation contains various implementations

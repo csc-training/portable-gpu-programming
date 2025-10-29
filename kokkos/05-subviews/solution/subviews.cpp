@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2024 CSC - IT Center for Science Ltd. <www.csc.fi>
+//
+// SPDX-License-Identifier: MIT
+
 #include <Kokkos_Core.hpp>
 #include <iostream>
 

@@ -196,6 +196,8 @@ lang:  en
 - The `teams` and `parallel` constructs create teams and threads, however, all the threads are still executing the same code
 - The `distribute` construct distributes loop iterations over teams
 - The `for` / `do` construct distributes loop iterations over threads
+- Note! The `distribute` and `for` / `do` assume that the loop iterations are independent
+  - Compiler does not check if that is the case; it's the programmer's responsibility
 
 
 # Worksharing in the accelerator

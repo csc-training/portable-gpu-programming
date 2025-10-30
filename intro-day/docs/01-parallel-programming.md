@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021-2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 ---
 title: Parallel Programming & Supercomputing
 event: Portable GPU Programming 2025
@@ -18,10 +24,9 @@ lang:  en
 
 </div>
 <div class=column>
-<!-- Copyright CSC -->
- ![](img/compp.svg){.center width=100%}
-</div>
 
+![](img/compp.svg){.center width=100%}
+</div>
 
 # Exposing Parallelism: Data Parallelism
 
@@ -33,7 +38,6 @@ lang:  en
 </div>
 <div class=column>
 
-<!-- Copyright CSC -->
  ![](img/eparallel.svg){.center width=80%}
 
 </div>
@@ -43,7 +47,6 @@ lang:  en
 
 - Task farm (main / worker)
 
-<!-- Copyright CSC -->
  ![](img/farm.svg){.center width=60%}
 
 <br>
@@ -92,7 +95,6 @@ Loop can be parallelized over `i`
 Simple domains with similar computational cost
 
 <br>
-<!-- Copyright CSC -->
 ![](img/eparallel.svg){.center width=95%}
 </div>
 
@@ -100,7 +102,6 @@ Simple domains with similar computational cost
 Simple domains with different computational cost
 
 <br>
-<!-- Copyright CSC -->
 ![](img/mandelbrot-domains.png){.center width=49%}
 </div>
 
@@ -108,7 +109,6 @@ Simple domains with different computational cost
 
 # Parallel Programming Models
 
-<!-- Copyright CSC -->
  ![](img/processes-threads.svg){.center width=80%}
 <div class=column>
 **MPI: Processes**
@@ -145,7 +145,6 @@ Simple domains with different computational cost
 
 # Anatomy of a Supercomputer
 
-<!-- Copyright CSC -->
 ![](img/cluster_diagram.svg){.center width=100%}
 
 

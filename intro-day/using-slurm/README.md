@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Trying out Slurm
 
 Look into to the provided Slurm batch job scripts [job_lumi.sh](job_lumi.sh) / [job_mahti.sh](job_mahti.sh)

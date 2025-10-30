@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2019 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 ## Hello World with MPI
 
 1. Compile the provided [hello.cpp](hello.cpp) (or [hello.f90](hello.f90) with the proper MPI wrapper:

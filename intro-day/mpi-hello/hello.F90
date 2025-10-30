@@ -1,3 +1,7 @@
+! SPDX-FileCopyrightText: 2019 CSC - IT Center for Science Ltd. <www.csc.fi>
+!
+! SPDX-License-Identifier: MIT
+
 program hello
   use mpi_f08
   implicit none

@@ -14,10 +14,10 @@ module helper_functions
 
 #ifdef TRACE
   function c_roctxRangePush(message) result(level) bind(C, name="roctxRangePushA")
+    import :: c_int, c_char
 #else
   function c_roctxRangePush(message) result(level)
 #endif
-    import :: c_int, c_char
     character(kind=c_char), intent(in) :: message(*)
     integer(c_int) :: level
 #ifndef TRACE
@@ -27,10 +27,10 @@ module helper_functions
 
 #ifdef TRACE
   function c_roctxRangePop() result(level) bind(C, name="roctxRangePop")
+    import :: c_int
 #else
   function c_roctxRangePop() result(level)
 #endif
-    import :: c_int
     integer(c_int) :: level
 #ifndef TRACE
     level = 0

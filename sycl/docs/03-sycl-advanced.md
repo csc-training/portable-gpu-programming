@@ -47,16 +47,16 @@ lang:  en
   int* d_x = malloc_device<int>(N, q); 
   int* d_y = malloc_device<int>(N, q); 
   // Copy data from host to device
-  q.memcpy(d_x, h_x.data(), N * sizeof(int)).wait(); 
-  q.memcpy(d_y, h_y.data(), N * sizeof(int)).wait(); 
+  q.memcpy(d_x, h_x.data(), N * sizeof(int)); q.wait(); 
+  q.memcpy(d_y, h_y.data(), N * sizeof(int)); qwait(); 
 
   q.submit([&](handler& cgh) {
     cgh.parallel_for(range<1>(N), [=](sid<1> id) {
       d_y[id] += a*x_d[i];
     });
-  }).wait();
+  }); q.wait();
   // Copy results back to host
-  q.memcpy(h_y.data(), d_y, N * sizeof(int)).wait();
+  q.memcpy(h_y.data(), d_y, N * sizeof(int)); q.wait();
   
   // Verify the results
   for (int i = 0; i < N; i++) {
@@ -85,7 +85,7 @@ lang:  en
         cgh.parallel_for(range<1>(N), [=](id<1> idx) {
             y[idx] += a*x[i];
         });
-    }).wait();
+    }); q.wait();
 
     // No memcpy needed — host can read directly
     for (int i = 0; i < N; i++) {

@@ -207,12 +207,13 @@ lang:  en
 #pragma omp target
 #pragma omp teams
 #pragma omp distribute
-for (int i = 0; i < N; i++)
+for (int i = 0; i < N; i++) {
   #pragma omp parallel
   #pragma omp for
   for (int j = 0; j < M; j++) {
     ...
   }
+}
 ```
 </div>
 

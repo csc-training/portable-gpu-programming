@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## Getting started
 
-- [First GPU kernel: axpy](01-axpy-basics/)
+- [First GPU kernel: axpy](01-axpy/)
 
 ## Controlling data movement
 

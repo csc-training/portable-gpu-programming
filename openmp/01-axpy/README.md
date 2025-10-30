@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## First GPU kernel: axpy
 
-In this exercise we practise the basics of OpenMP offload and runtime debugging by using a code performing the axpy operation.
+In this exercise we practise the first steps of OpenMP offload and runtime debugging by using a code performing the axpy operation.
 
 The axpy operation is a fundamental linear algebra operation defined as
 

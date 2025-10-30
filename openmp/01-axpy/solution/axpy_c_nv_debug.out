@@ -1,0 +1,12 @@
+upload CUDA data  file=axpy.c function=main line=33 device=0 threadid=1 variable=y[:] bytes=819200
+upload CUDA data  file=axpy.c function=main line=33 device=0 threadid=1 variable=x[:] bytes=819200
+launch CUDA kernel file=axpy.c function=main line=33 device=0 host-threadid=0 num_teams=0 thread_limit=0 kernelname=nvkernel_main_F1L33_2 grid=<<<800,1,1>>> block=<<<128,1,1>>> shmem=0b
+download CUDA data  file=axpy.c function=main line=39 device=0 threadid=1 variable=x[:] bytes=819200
+download CUDA data  file=axpy.c function=main line=39 device=0 threadid=1 variable=y[:] bytes=819200
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

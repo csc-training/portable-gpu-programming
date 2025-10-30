@@ -1,0 +1,6 @@
+helper_functions.F90:
+axpy.F90:
+axpy:
+     35, !$omp target teams distribute parallel do
+         35, Generating "nvkernel_MAIN__F1L35_2" GPU kernel
+     35, Generating implicit map(tofrom:y(:),x(:)) 

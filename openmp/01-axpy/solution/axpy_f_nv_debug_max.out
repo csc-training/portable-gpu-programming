@@ -1,0 +1,31 @@
+Enter enter data construct file=axpy.F90 function=axpy line=35 device=0 threadid=1
+create CUDA data  bytes=819200 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+alloc  CUDA data  devaddr=0x7fff0b2fa000 bytes=819200 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+create CUDA data  bytes=128 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+alloc  CUDA data  devaddr=0x7fff0b3c2000 bytes=512 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+upload CUDA data  file=axpy.F90 function=axpy line=35 device=0 threadid=1 variable=descriptor bytes=128
+upload CUDA data  file=axpy.F90 function=axpy line=35 device=0 threadid=1 variable=y(:) bytes=819200
+create CUDA data  bytes=819200 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+alloc  CUDA data  devaddr=0x7fff0b800000 bytes=819200 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+create CUDA data  bytes=128 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+alloc  CUDA data  devaddr=0x7fff0b3c2200 bytes=512 file=axpy.F90 function=axpy line=35 device=0 threadid=1
+upload CUDA data  file=axpy.F90 function=axpy line=35 device=0 threadid=1 variable=descriptor bytes=128
+upload CUDA data  file=axpy.F90 function=axpy line=35 device=0 threadid=1 variable=x(:) bytes=819200
+Leave enter data axpy.F90 axpy:35 device=0 threadid=1
+launch CUDA kernel file=axpy.F90 function=axpy line=35 device=0 host-threadid=0 num_teams=0 thread_limit=0 kernelname=nvkernel_MAIN__F1L35_2_ grid=<<<800,1,1>>> block=<<<128,1,1>>> shmem=0b
+Enter exit data construct file=axpy.F90 function=axpy line=35 device=0 threadid=1
+download CUDA data  file=axpy.F90 function=axpy line=39 device=0 threadid=1 variable=x(:) bytes=819200
+delete CUDA data  devaddr=0x7fff0b800000 bytes=819200 file=axpy.F90 function=axpy line=39 device=0 threadid=1
+delete CUDA data  devaddr=0x7fff0b3c2200 bytes=512 file=axpy.F90 function=axpy line=39 device=0 threadid=1
+download CUDA data  file=axpy.F90 function=axpy line=39 device=0 threadid=1 variable=y(:) bytes=819200
+delete CUDA data  devaddr=0x7fff0b2fa000 bytes=819200 file=axpy.F90 function=axpy line=39 device=0 threadid=1
+delete CUDA data  devaddr=0x7fff0b3c2000 bytes=512 file=axpy.F90 function=axpy line=39 device=0 threadid=1
+Implicit wait  file=axpy.F90 function=axpy line=39 device=0 threadid=1 queue=acc_async_sync
+Leave exit data axpy.F90 axpy:39 device=0 threadid=1
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

@@ -1,0 +1,5 @@
+main:
+     33, #omp target teams distribute parallel for
+         33, Generating "nvkernel_main_F1L33_2" GPU kernel
+         37, Loop parallelized across teams and threads(128), schedule(static)
+     33, Generating implicit map(tofrom:y[:],x[:]) 

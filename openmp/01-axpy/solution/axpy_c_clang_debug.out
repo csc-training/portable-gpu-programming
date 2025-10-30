@@ -1,0 +1,13 @@
+Libomptarget device 0 info: Copying data from host to device, HstPtr=0x00007ffcda6ff1f0, TgtPtr=0x000014b353020000, Size=819200, Name=y
+Libomptarget device 0 info: Copying data from host to device, HstPtr=0x00007ffcda7c71f0, TgtPtr=0x000014b3530e8000, Size=819200, Name=x
+"PluginInterface" device 0 info: Launching kernel __omp_offloading_54bbb604_3f00535c_main_l36 with 400 blocks and 256 threads in SPMD mode
+AMDGPU device 0 info: #Args: 3 Teams x Thrds:  400x 256 (MaxFlatWorkGroupSize: 256) LDS Usage: 9784B #SGPRs/VGPRs: 106/54 #SGPR/VGPR Spills: 38/0 Tripcount: 102400
+Libomptarget device 0 info: Copying data from device to host, TgtPtr=0x000014b3530e8000, HstPtr=0x00007ffcda7c71f0, Size=819200, Name=x
+Libomptarget device 0 info: Copying data from device to host, TgtPtr=0x000014b353020000, HstPtr=0x00007ffcda6ff1f0, Size=819200, Name=y
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

@@ -1,0 +1,46 @@
+Libomptarget device 0 info: Entering OpenMP kernel at axpy.c:36:5 with 3 arguments:
+Libomptarget device 0 info: tofrom(y)[819200] (implicit)
+Libomptarget device 0 info: firstprivate(alpha)[8] (implicit)
+Libomptarget device 0 info: tofrom(x)[819200] (implicit)
+Libomptarget device 0 info: Creating new map entry with HstPtrBase=0x00007ffc56260f90, HstPtrBegin=0x00007ffc56260f90, TgtPtrBegin=0x000015143d420000, Size=819200, DynRefCount=1, HoldRefCount=0, Name=y
+Libomptarget device 0 info: Copying data from host to device, HstPtr=0x00007ffc56260f90, TgtPtr=0x000015143d420000, Size=819200, Name=y
+Libomptarget device 0 info: Creating new map entry with HstPtrBase=0x00007ffc56328f90, HstPtrBegin=0x00007ffc56328f90, TgtPtrBegin=0x000015143d4e8000, Size=819200, DynRefCount=1, HoldRefCount=0, Name=x
+Libomptarget device 0 info: Copying data from host to device, HstPtr=0x00007ffc56328f90, TgtPtr=0x000015143d4e8000, Size=819200, Name=x
+Libomptarget device 0 info: Mapping exists with HstPtrBegin=0x00007ffc56260f90, TgtPtrBegin=0x000015143d420000, Size=819200, DynRefCount=1 (update suppressed), HoldRefCount=0
+Libomptarget device 0 info: Mapping exists with HstPtrBegin=0x00007ffc56328f90, TgtPtrBegin=0x000015143d4e8000, Size=819200, DynRefCount=1 (update suppressed), HoldRefCount=0
+"PluginInterface" device 0 info: Launching kernel __omp_offloading_54bbb604_3f00535c_main_l36 with 400 blocks and 256 threads in SPMD mode
+DEVID:  0 SGN:2 ConstWGSize:256  args: 3 teamsXthrds:( 400X 256) reqd:(   0X   0) lds_usage:9784B sgpr_count:106 vgpr_count:54 sgpr_spill_count:38 vgpr_spill_count:0 tripcount:102400 rpc:1 n:__omp_offloading_54bbb604_3f00535c_main_l36
+AMDGPU device 0 info: #Args: 3 Teams x Thrds:  400x 256 (MaxFlatWorkGroupSize: 256) LDS Usage: 9784B #SGPRs/VGPRs: 106/54 #SGPR/VGPR Spills: 38/0 Tripcount: 102400
+Libomptarget device 0 info: Mapping exists with HstPtrBegin=0x00007ffc56328f90, TgtPtrBegin=0x000015143d4e8000, Size=819200, DynRefCount=0 (decremented, delayed deletion), HoldRefCount=0
+Libomptarget device 0 info: Copying data from device to host, TgtPtr=0x000015143d4e8000, HstPtr=0x00007ffc56328f90, Size=819200, Name=x
+Libomptarget device 0 info: Mapping exists with HstPtrBegin=0x00007ffc56260f90, TgtPtrBegin=0x000015143d420000, Size=819200, DynRefCount=0 (decremented, delayed deletion), HoldRefCount=0
+Libomptarget device 0 info: Copying data from device to host, TgtPtr=0x000015143d420000, HstPtr=0x00007ffc56260f90, Size=819200, Name=y
+Libomptarget device 0 info: Removing map entry with HstPtrBegin=0x00007ffc56328f90, TgtPtrBegin=0x000015143d4e8000, Size=819200, Name=x
+Libomptarget device 0 info: Removing map entry with HstPtrBegin=0x00007ffc56260f90, TgtPtrBegin=0x000015143d420000, Size=819200, Name=y
+Call         __tgt_rtl_number_of_devices:        0us              4 )
+Call         __tgt_rtl_number_of_devices:        0us              0 )
+Call         __tgt_rtl_number_of_devices:        0us              1 )
+Call            __tgt_rtl_has_apu_device:        0us              0 )
+Call         __tgt_rtl_has_gfx90a_device:        0us              0 )
+Call            __tgt_rtl_has_apu_device:    29177us              0 )
+Call         __tgt_rtl_has_gfx90a_device:    27184us              1 )
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Call             __tgt_rtl_init_requires:        0us              1 (             1)
+Call               __tgt_rtl_init_device:    16055us              0 (             0)
+Call               __tgt_rtl_load_binary:     1813us 0x0000003edbc0 (             0, 0x0000003f0330)
+Call                __tgt_rtl_data_alloc:        2us 0x15143d420000 (             0,         819200, 0x7ffc56260f90)
+Call         __tgt_rtl_data_submit_async:      309us              0 (             0, 0x15143d420000, 0x7ffc56260f90,         819200, 0x7ffc56260e40)
+Call                __tgt_rtl_data_alloc:        4us 0x15143d4e8000 (             0,         819200, 0x7ffc56328f90)
+Call         __tgt_rtl_data_submit_async:      365us              0 (             0, 0x15143d4e8000, 0x7ffc56328f90,         819200, 0x7ffc56260e40)
+Call             __tgt_rtl_launch_kernel:     3823us              0 (             0, 0x0000003edc30, 0x000000438090, 0x000000437a70,              3,              0,              0,         102400, 0x7ffc56260e40)
+Call       __tgt_rtl_data_retrieve_async:      256us              0 (             0, 0x7ffc56328f90, 0x15143d4e8000,         819200, 0x7ffc56260e40)
+Call       __tgt_rtl_data_retrieve_async:      279us              0 (             0, 0x7ffc56260f90, 0x15143d420000,         819200, 0x7ffc56260e40)
+Call               __tgt_rtl_synchronize:       94us              0 (             0, 0x7ffc56260e40)
+Call               __tgt_rtl_data_delete:        1us              0 (             0, 0x15143d4e8000)
+Call               __tgt_rtl_data_delete:        0us              0 (             0, 0x15143d420000)
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

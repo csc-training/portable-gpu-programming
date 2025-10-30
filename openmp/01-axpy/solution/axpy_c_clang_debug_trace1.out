@@ -1,0 +1,8 @@
+DEVID:  0 SGN:2 ConstWGSize:256  args: 3 teamsXthrds:( 400X 256) reqd:(   0X   0) lds_usage:9784B sgpr_count:106 vgpr_count:54 sgpr_spill_count:38 vgpr_spill_count:0 tripcount:102400 rpc:1 n:__omp_offloading_54bbb604_3f00535c_main_l36
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

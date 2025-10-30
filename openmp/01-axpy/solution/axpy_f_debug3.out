@@ -1,0 +1,118 @@
+ACC: Version 6.0 of HIP already initialized, runtime version 60032831
+ACC: Get Device 0
+ACC: Compute level 9.0
+ACC: Device Name: AMD Instinct MI250X
+ACC: Number of cus 110
+ACC: Device name AMD Instinct MI250X
+ACC: AMD GCN arch name: gfx90a:sramecc+:xnack-
+ACC: Max shared memory 65536
+ACC: Max thread blocks per cu 8
+ACC: Max concurrent kernels 8
+ACC: Async table size 8
+ACC: Total GPU memory 68702699520
+ACC: Available GPU memory 68625104896
+ACC: Set Thread Context
+ACC: Establish link bewteen libcrayacc and libcraymp
+ACC:   libcrayacc interface v7
+ACC:    libcraymp interface v7
+ACC: Start transfer 2 items from axpy.F90:35
+ACC:   flags:
+ACC: 
+ACC:   Trans 1
+ACC:       Simple transfer of 'x(:)' (819200 bytes)
+ACC:            host ptr 408f40
+ACC:            acc  ptr 0
+ACC:            flags: ALLOCATE COPY_HOST_TO_ACC ACQ_PRESENT REG_PRESENT IMPLICIT_MAP
+ACC:            memory not found in present table
+ACC:            allocate (819200 bytes)
+ACC:              get new reusable memory, added entry
+ACC:            new allocated ptr (14751b600000)
+ACC:            add to present table index 0: host 408f40 to 4d0f40, acc 14751b600000
+ACC:            copy host to acc (408f40 to 14751b600000)
+ACC:                internal copy host to acc (host 408f40 to acc 14751b600000) size = 819200
+ACC:            new acc ptr 14751b600000
+ACC: 
+ACC:   Trans 2
+ACC:       Simple transfer of 'y(:)' (819200 bytes)
+ACC:            host ptr 4d1100
+ACC:            acc  ptr 0
+ACC:            flags: ALLOCATE COPY_HOST_TO_ACC ACQ_PRESENT REG_PRESENT IMPLICIT_MAP
+ACC:            memory not found in present table
+ACC:            allocate (819200 bytes)
+ACC:              get new reusable memory, added entry
+ACC:            new allocated ptr (14751b6c8000)
+ACC:            add to present table index 1: host 4d1100 to 599100, acc 14751b6c8000
+ACC:            copy host to acc (4d1100 to 14751b6c8000)
+ACC:                internal copy host to acc (host 4d1100 to acc 14751b6c8000) size = 819200
+ACC:            new acc ptr 14751b6c8000
+ACC: 
+ACC: End transfer (to acc 1638400 bytes, to host 0 bytes)
+ACC: 
+ACC: Start kernel axpy_$ck_L35_1 async(auto) from axpy.F90:35
+ACC:        flags: CACHE_MOD CACHE_FUNC AUTO_ASYNC
+ACC:    mod cache:  0x599500
+ACC: kernel cache:  0x599300
+ACC:   async info:  0x1476218229d0
+ACC:    arguments: GPU argument info
+ACC:            param size:  16
+ACC:         param pointer:  0x7ffc256b1d80
+ACC:       blocks:  400
+ACC:      threads:  256
+ACC:     event id:  0
+ACC:    loading module data
+ACC:    getting function axpy_$ck_L35_1
+ACC:       stats threads=256 threadblocks per cu=1 shared=0 total shared=0
+ACC:       prefer equal shared memory and L1 cache 
+ACC:     kernel information
+ACC:               num registers :        6
+ACC:        max theads per block :      256
+ACC:                 shared size :        0 bytes
+ACC:                  const size :        0 bytes
+ACC:                  local size :        0 bytes
+ACC: 
+ACC:     launching kernel new
+ACC:     caching function
+ACC:     caching module
+ACC: End kernel
+ACC: 
+ACC: Start wait async(auto) from axpy.F90:39
+ACC:   async_info: 0x1476218229d0
+ACC:    Freeing delayed free for async(auto)
+ACC: End wait
+ACC: 
+ACC: Start transfer 2 items from axpy.F90:39
+ACC:   flags:
+ACC: 
+ACC:   Trans 1
+ACC:       Simple transfer of 'x(:)' (819200 bytes)
+ACC:            host ptr 408f40
+ACC:            acc  ptr 14751b600000
+ACC:            flags: FREE REL_PRESENT REG_PRESENT IMPLICIT_MAP
+ACC:            last release acc 14751b600000 from present table index 0 (ref_count 1)
+ACC:            last release of conditional present (acc 14751b600000, base 14751b600000)
+ACC:            remove acc 14751b600000 from present table index 0
+ACC:            new acc ptr 0
+ACC: 
+ACC:   Trans 2
+ACC:       Simple transfer of 'y(:)' (819200 bytes)
+ACC:            host ptr 4d1100
+ACC:            acc  ptr 14751b6c8000
+ACC:            flags: COPY_ACC_TO_HOST FREE REL_PRESENT REG_PRESENT IMPLICIT_MAP
+ACC:            last release acc 14751b6c8000 from present table index 1 (ref_count 1)
+ACC:            last release of conditional present (acc 14751b6c8000, base 14751b6c8000)
+ACC:            copy acc to host (14751b6c8000 to 4d1100)
+ACC:                interal copy acc to host (acc 14751b6c8000 to host 4d1100) size = 819200
+ACC:            remove acc 14751b6c8000 from present table index 1
+ACC:            new acc ptr 0
+ACC: 
+ACC: End transfer (to acc 0 bytes, to host 819200 bytes)
+ACC: 
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000
+ACC: __tgt_unregister_lib
+ACC: Start executing pending destructors

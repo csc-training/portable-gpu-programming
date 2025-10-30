@@ -4,8 +4,8 @@
 
 Compilation
 -----------
-File     : .../axpy.F90
-Compiled : 10/17/25  15:41:37
+File     : axpy.F90
+Compiled : 10/30/25  09:37:57
 Compiler : Version 17.0.1
 Ftnlx    : Version 17.0.1 
 Target   : x86-64
@@ -42,8 +42,8 @@ Program
 
 ftnlx report
 ------------
-Source   : .../axpy.F90
-Date     : 10/17/2025  15:41:38
+Source   : axpy.F90
+Date     : 10/30/2025  09:37:57
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -74,78 +74,90 @@ Date     : 10/17/2025  15:41:38
      ------------------------------------------
 
 
-    1.              ! Array size
-    2.              #ifndef N
-    3.              #define N 102400
-    4.              #endif
-    5.              
-    6.              program axpy
-    7.                use helper_functions
-    8.                implicit none
-    9.                integer, parameter :: n = N
-   10.                real(8) :: alpha
-   11.                real(8), dimension(n) :: x, y
-   12.                integer :: i
-   13.                real(8) :: frac
-   14.              
-   15.                print '(A, I0)', "Using N = ", n
-   16.              
-   17.                ! Initialization
-   18.                alpha = 3.0d0
-   19.    Vr2-----<   do i = 1, n
-   20.    Vr2           frac = 1.0d0 / real(n - 1, kind=8)
-   21.    Vr2           x(i) = real(i - 1, kind=8) * frac
-   22.    Vr2           y(i) = real(i - 1, kind=8) * frac * 100.0d0
-   23.    Vr2----->   end do
-   24.              
-   25.                ! Print input values
-   26.                print '(A)', "Input:"
-   27.                print '(A, F8.4)', "a = ", alpha
-   28.                call print_array("x", x, n)
-   29.                call print_array("y", y, n)
-   30.              
-   31.                ! Calculate axpy
-   32.  + MG------<   !$omp target teams distribute parallel do
-   33.    MG gr2--<   do i = 1, n
-   34.    MG gr2        y(i) = y(i) + alpha * x(i)
-   35.    MG gr2-->   end do
-   36.    MG------>   !$omp end target teams distribute parallel do
-   37.              
-   38.                ! Print output values
-   39.                print '(A)', "Output:"
-   40.                call print_array("y", y, n)
-   41.              
-   42.              end program axpy
+    1.              ! SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+    2.              !
+    3.              ! SPDX-License-Identifier: MIT
+    4.              
+    5.              ! Array size
+    6.              #ifndef N
+    7.              #define N 102400
+    8.              #endif
+    9.              
+   10.              program axpy
+   11.                use helper_functions
+   12.                implicit none
+   13.                real(8) :: alpha
+   14.                real(8), dimension(N) :: x, y
+   15.                integer :: i
+   16.                real(8) :: frac
+   17.              
+   18.                print '(A, I0)', "Using N = ", N
+   19.              
+   20.                ! Initialization
+   21.                alpha = 3.0d0
+   22.    Vr2-----<   do i = 1, N
+   23.    Vr2           frac = 1.0d0 / real(N - 1, kind=8)
+   24.    Vr2           x(i) = real(i - 1, kind=8) * frac
+   25.    Vr2           y(i) = real(i - 1, kind=8) * frac * 100.0d0
+   26.    Vr2----->   end do
+   27.              
+   28.                ! Print input values
+   29.                print '(A)', "Input:"
+   30.                print '(A, F8.4)', "a = ", alpha
+   31.  +             call print_array("x", x)
+   32.  +             call print_array("y", y)
+   33.              
+   34.                ! Calculate axpy
+   35.  + MG------<   !$omp target teams distribute parallel do
+   36.    MG gr2--<   do i = 1, N
+   37.    MG gr2        y(i) = y(i) + alpha * x(i)
+   38.    MG gr2-->   end do
+   39.    MG------>   !$omp end target teams distribute parallel do
+   40.              
+   41.                ! Print output values
+   42.                print '(A)', "Output:"
+   43.  +             call print_array("y", y)
+   44.              
+   45.              end program axpy
 
-ftn-6005 ftn: SCALAR AXPY, File = axpy.F90, Line = 19 
-  A loop starting at line 19 was unrolled 2 times.
+ftn-6005 ftn: SCALAR AXPY, File = axpy.F90, Line = 22 
+  A loop starting at line 22 was unrolled 2 times.
 
-ftn-6204 ftn: VECTOR AXPY, File = axpy.F90, Line = 19 
-  A loop starting at line 19 was vectorized.
+ftn-6204 ftn: VECTOR AXPY, File = axpy.F90, Line = 22 
+  A loop starting at line 22 was vectorized.
 
-ftn-6405 ftn: ACCEL AXPY, File = axpy.F90, Line = 32 
-  A region starting at line 32 and ending at line 36 was placed on the accelerator.
+ftn-3171 ftn: IPA AXPY, File = axpy.F90, Line = 31 
+  "print_array"(helper_functions.F90:45) was not inlined because it is not in the body of a loop.
 
-ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 32 
-  A region starting at line 32 and ending at line 36 was multi-threaded.
+ftn-3171 ftn: IPA AXPY, File = axpy.F90, Line = 32 
+  "print_array"(helper_functions.F90:45) was not inlined because it is not in the body of a loop.
 
-ftn-6418 ftn: ACCEL AXPY, File = axpy.F90, Line = 32 
-  If not already present: allocate memory and copy whole array "x" to accelerator, free at line 36 (acc_copyin).
+ftn-6405 ftn: ACCEL AXPY, File = axpy.F90, Line = 35 
+  A region starting at line 35 and ending at line 39 was placed on the accelerator.
 
-ftn-6416 ftn: ACCEL AXPY, File = axpy.F90, Line = 32 
-  If not already present: allocate memory and copy whole array "y" to accelerator, copy back at line 36 (acc_copy).
+ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 35 
+  A region starting at line 35 and ending at line 39 was multi-threaded.
 
-ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 32 
-  A region starting at line 32 and ending at line 36 was multi-threaded.
+ftn-6418 ftn: ACCEL AXPY, File = axpy.F90, Line = 35 
+  If not already present: allocate memory and copy whole array "x" to accelerator, free at line 39 (acc_copyin).
 
-ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 32 
-  A region starting at line 32 and ending at line 36 was multi-threaded.
+ftn-6416 ftn: ACCEL AXPY, File = axpy.F90, Line = 35 
+  If not already present: allocate memory and copy whole array "y" to accelerator, copy back at line 39 (acc_copy).
 
-ftn-6005 ftn: SCALAR AXPY, File = axpy.F90, Line = 33 
-  A loop starting at line 33 was unrolled 2 times.
+ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 35 
+  A region starting at line 35 and ending at line 39 was multi-threaded.
 
-ftn-6430 ftn: ACCEL AXPY, File = axpy.F90, Line = 33 
-  A loop starting at line 33 was partitioned across the threadblocks and the 256 threads within a threadblock.
+ftn-6823 ftn: THREAD AXPY, File = axpy.F90, Line = 35 
+  A region starting at line 35 and ending at line 39 was multi-threaded.
+
+ftn-6005 ftn: SCALAR AXPY, File = axpy.F90, Line = 36 
+  A loop starting at line 36 was unrolled 2 times.
+
+ftn-6430 ftn: ACCEL AXPY, File = axpy.F90, Line = 36 
+  A loop starting at line 36 was partitioned across the threadblocks and the 256 threads within a threadblock.
+
+ftn-3171 ftn: IPA AXPY, File = axpy.F90, Line = 43 
+  "print_array"(helper_functions.F90:45) was not inlined because it is not in the body of a loop.
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

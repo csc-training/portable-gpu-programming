@@ -1,0 +1,10 @@
+ACC: Transfer 2 items (to acc 1638400 bytes, to host 0 bytes) from axpy.c:36
+ACC: Execute kernel __omp_offloading_54bbb604_3f00535c_main_l36_cce$noloop$form from axpy.c:36
+ACC: Transfer 2 items (to acc 0 bytes, to host 1638400 bytes) from axpy.c:36
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

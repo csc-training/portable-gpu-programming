@@ -1,0 +1,20 @@
+ACC: Version 6.0 of HIP already initialized, runtime version 60032831
+ACC: Get Device 0
+ACC: Set Thread Context
+ACC: Start transfer 2 items from axpy.F90:35
+ACC:       allocate, copy to acc 'x(:)' (819200 bytes)
+ACC:       allocate, copy to acc 'y(:)' (819200 bytes)
+ACC: End transfer (to acc 1638400 bytes, to host 0 bytes)
+ACC: Execute kernel axpy_$ck_L35_1 blocks:400 threads:256 async(auto) from axpy.F90:35
+ACC: Wait async(auto) from axpy.F90:39
+ACC: Start transfer 2 items from axpy.F90:39
+ACC:       free 'x(:)' (819200 bytes)
+ACC:       copy to host, free 'y(:)' (819200 bytes)
+ACC: End transfer (to acc 0 bytes, to host 819200 bytes)
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

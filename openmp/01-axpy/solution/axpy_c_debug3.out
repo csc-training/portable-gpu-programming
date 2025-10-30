@@ -1,0 +1,153 @@
+ACC: Version 6.0 of HIP already initialized, runtime version 60032831
+ACC: __tgt_register_requires: flags = NONE
+ACC: __tgt_register_lib
+ACC:   NumDeviceImages=1
+ACC:   Device Images:
+ACC:   Image location: 0x2010f8 - 0x202c00
+ACC:   Processing valid image
+ACC:   NumEntries=1
+ACC:   Image entries:
+ACC:   __omp_offloading_54bbb604_3f00535c_main_l36
+ACC:     {
+ACC:         addr=0x201020
+ACC:         size=0
+ACC:         flags=0
+ACC:     }
+ACC:   NumHostEntries=1
+ACC:   Host entries:
+ACC:   __omp_offloading_54bbb604_3f00535c_main_l36
+ACC:     {
+ACC:         addr=0x201020
+ACC:         size=0
+ACC:         flags=0
+ACC:     }
+ACC: __tgt_target_kernel(device_id=-1, host_ptr=0x201020, arg_num=3, nowait=0)
+ACC: __internal_tgt_target_teams(device_id=-1, host_ptr=0x201020, arg_num=3, num_teams=0, thread_limit=0)
+ACC: Get Device 0
+ACC: Compute level 9.0
+ACC: Device Name: AMD Instinct MI250X
+ACC: Number of cus 110
+ACC: Device name AMD Instinct MI250X
+ACC: AMD GCN arch name: gfx90a:sramecc+:xnack-
+ACC: Max shared memory 65536
+ACC: Max thread blocks per cu 8
+ACC: Max concurrent kernels 8
+ACC: Async table size 8
+ACC: Total GPU memory 68702699520
+ACC: Available GPU memory 68625104896
+ACC: Set Thread Context
+ACC: Establish link bewteen libcrayacc and libcraymp
+ACC:   libcrayacc interface v7
+ACC:    libcraymp interface v7
+ACC:    loading module data
+ACC: __internal_tgt_target_teams(device_id=-1, host_ptr=0x201020, arg_num=3, num_teams=400, thread_limit=256)
+ACC:   [0] 0x7ffecc9bf500 base 0x7ffecc9bf500 begin 0x7ffecc9bf500 : 819200 bytes type=0x223 (TO FROM TARGET_PARAM IMPLICIT) name (y)
+ACC:   [1] 0x4008000000000000 base 0x4008000000000000 begin 0x4008000000000000 : 8 bytes type=0x320 (TARGET_PARAM LITERAL IMPLICIT) name (alpha)
+ACC:   [2] 0x7ffecca87500 base 0x7ffecca87500 begin 0x7ffecca87500 : 819200 bytes type=0x223 (TO FROM TARGET_PARAM IMPLICIT) name (x)
+ACC: Start transfer 2 items from axpy.c:36
+ACC:   flags:
+ACC: 
+ACC:   Trans 1
+ACC:       Simple transfer of 'y' (819200 bytes)
+ACC:            host ptr 7ffecc9bf500
+ACC:            acc  ptr 0
+ACC:            flags: ALLOCATE COPY_HOST_TO_ACC ACQ_PRESENT REG_PRESENT
+ACC:            memory not found in present table
+ACC:            allocate (819200 bytes)
+ACC:              get new reusable memory, added entry
+ACC:            new allocated ptr (15364e400000)
+ACC:            add to present table index 0: host 7ffecc9bf500 to 7ffecca87500, acc 15364e400000
+ACC:            copy host to acc (7ffecc9bf500 to 15364e400000)
+ACC:                internal copy host to acc (host 7ffecc9bf500 to acc 15364e400000) size = 819200
+ACC:            new acc ptr 15364e400000
+ACC: 
+ACC:   Trans 2
+ACC:       Simple transfer of 'x' (819200 bytes)
+ACC:            host ptr 7ffecca87500
+ACC:            acc  ptr 0
+ACC:            flags: ALLOCATE COPY_HOST_TO_ACC ACQ_PRESENT REG_PRESENT
+ACC:            memory not found in present table
+ACC:            allocate (819200 bytes)
+ACC:              get new reusable memory, added entry
+ACC:            new allocated ptr (15364e4c8000)
+ACC:            add to present table index 1: host 7ffecca87500 to 7ffeccb4f500, acc 15364e4c8000
+ACC:            copy host to acc (7ffecca87500 to 15364e4c8000)
+ACC:                internal copy host to acc (host 7ffecca87500 to acc 15364e4c8000) size = 819200
+ACC:            new acc ptr 15364e4c8000
+ACC: 
+ACC: End transfer (to acc 1638400 bytes, to host 0 bytes)
+ACC: 
+ACC: Kernel Arguments
+ACC: 0: 23322985234432 ptr 0x15364e400000 (offset=0)
+ACC: 1: 4613937818241073152 ptr 0x4008000000000000 (offset=0)
+ACC: 2: 23322986053632 ptr 0x15364e4c8000 (offset=0)
+ACC: Start kernel __omp_offloading_54bbb604_3f00535c_main_l36_cce$noloop$form from axpy.c:36
+ACC:        flags: CACHE_MOD CACHE_FUNC
+ACC:    mod cache:  0x411cd8
+ACC: kernel cache:  0x412988
+ACC:   async info:  (nil)
+ACC:    arguments: GPU argument info
+ACC:            param size:  24
+ACC:         param pointer:  0xf4a260
+ACC:       blocks:  400
+ACC:      threads:  256
+ACC:     event id:  0
+ACC:    using cached module
+ACC:    getting function __omp_offloading_54bbb604_3f00535c_main_l36_cce$noloop$form
+ACC:       stats threads=1024 threadblocks per cu=4 shared=0 total shared=0
+ACC:       prefer equal shared memory and L1 cache 
+ACC:     kernel information
+ACC:               num registers :        8
+ACC:        max theads per block :     1024
+ACC:                 shared size :        0 bytes
+ACC:                  const size :        0 bytes
+ACC:                  local size :        0 bytes
+ACC: 
+ACC:     launching kernel new
+ACC:     synchronize
+ACC:     caching function
+ACC: End kernel
+ACC: 
+ACC:   [0] 0x7ffecca87500 base 0x7ffecca87500 begin 0x7ffecca87500 : 819200 bytes type=0x223 (TO FROM TARGET_PARAM IMPLICIT) name (x)
+ACC:   [1] 0x4008000000000000 base 0x4008000000000000 begin 0x4008000000000000 : 8 bytes type=0x320 (TARGET_PARAM LITERAL IMPLICIT) name (alpha)
+ACC:   [2] 0x7ffecc9bf500 base 0x7ffecc9bf500 begin 0x7ffecc9bf500 : 819200 bytes type=0x223 (TO FROM TARGET_PARAM IMPLICIT) name (y)
+ACC: Start transfer 2 items from axpy.c:36
+ACC:   flags:
+ACC: 
+ACC:   Trans 1
+ACC:       Simple transfer of 'x' (819200 bytes)
+ACC:            host ptr 7ffecca87500
+ACC:            acc  ptr 0
+ACC:            flags: COPY_ACC_TO_HOST FREE REL_PRESENT REG_PRESENT INIT_ACC_PTR IGNORE_ABSENT
+ACC:            host region 7ffecca87500 to 7ffeccb4f500 found in present table index 1 (ref count 1)
+ACC:            last release acc 15364e4c8000 from present table index 1 (ref_count 1)
+ACC:            last release of conditional present (acc 15364e4c8000, base 15364e4c8000)
+ACC:            copy acc to host (15364e4c8000 to 7ffecca87500)
+ACC:                interal copy acc to host (acc 15364e4c8000 to host 7ffecca87500) size = 819200
+ACC:            remove acc 15364e4c8000 from present table index 1
+ACC:            new acc ptr 0
+ACC: 
+ACC:   Trans 2
+ACC:       Simple transfer of 'y' (819200 bytes)
+ACC:            host ptr 7ffecc9bf500
+ACC:            acc  ptr 0
+ACC:            flags: COPY_ACC_TO_HOST FREE REL_PRESENT REG_PRESENT INIT_ACC_PTR IGNORE_ABSENT
+ACC:            host region 7ffecc9bf500 to 7ffecca87500 found in present table index 0 (ref count 1)
+ACC:            last release acc 15364e400000 from present table index 0 (ref_count 1)
+ACC:            last release of conditional present (acc 15364e400000, base 15364e400000)
+ACC:            copy acc to host (15364e400000 to 7ffecc9bf500)
+ACC:                interal copy acc to host (acc 15364e400000 to host 7ffecc9bf500) size = 819200
+ACC:            remove acc 15364e400000 from present table index 0
+ACC:            new acc ptr 0
+ACC: 
+ACC: End transfer (to acc 0 bytes, to host 1638400 bytes)
+ACC: 
+ACC: __tgt_unregister_lib
+ACC: Start executing pending destructors
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

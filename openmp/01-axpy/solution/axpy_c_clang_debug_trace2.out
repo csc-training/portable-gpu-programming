@@ -1,0 +1,27 @@
+Call         __tgt_rtl_number_of_devices:        0us              4 )
+Call         __tgt_rtl_number_of_devices:        0us              0 )
+Call         __tgt_rtl_number_of_devices:        0us              1 )
+Call            __tgt_rtl_has_apu_device:        0us              0 )
+Call         __tgt_rtl_has_gfx90a_device:        0us              0 )
+Call            __tgt_rtl_has_apu_device:    50251us              0 )
+Call         __tgt_rtl_has_gfx90a_device:    27512us              1 )
+Call             __tgt_rtl_init_requires:        0us              1 (             1)
+Call               __tgt_rtl_init_device:    16322us              0 (             0)
+Call               __tgt_rtl_load_binary:     1866us 0x0000003ecbc0 (             0, 0x0000003ef330)
+Call                __tgt_rtl_data_alloc:        2us 0x146ad6020000 (             0,         819200, 0x7fff5e683670)
+Call         __tgt_rtl_data_submit_async:      303us              0 (             0, 0x146ad6020000, 0x7fff5e683670,         819200, 0x7fff5e683520)
+Call                __tgt_rtl_data_alloc:        6us 0x146ad60e8000 (             0,         819200, 0x7fff5e74b670)
+Call         __tgt_rtl_data_submit_async:      341us              0 (             0, 0x146ad60e8000, 0x7fff5e74b670,         819200, 0x7fff5e683520)
+Call             __tgt_rtl_launch_kernel:     3933us              0 (             0, 0x0000003ecc30, 0x000000438040, 0x000000437a20,              3,              0,              0,         102400, 0x7fff5e683520)
+Call       __tgt_rtl_data_retrieve_async:      255us              0 (             0, 0x7fff5e74b670, 0x146ad60e8000,         819200, 0x7fff5e683520)
+Call       __tgt_rtl_data_retrieve_async:      289us              0 (             0, 0x7fff5e683670, 0x146ad6020000,         819200, 0x7fff5e683520)
+Call               __tgt_rtl_synchronize:       92us              0 (             0, 0x7fff5e683520)
+Call               __tgt_rtl_data_delete:        1us              0 (             0, 0x146ad60e8000)
+Call               __tgt_rtl_data_delete:        0us              0 (             0, 0x146ad6020000)
+Using N = 102400
+Input:
+a =   3.0000
+x =   0.0000   0.0000   0.0000   0.0000 ...   1.0000   1.0000   1.0000   1.0000
+y =   0.0000   0.0010   0.0020   0.0029 ...  99.9971  99.9980  99.9990 100.0000
+Output:
+y =   0.0000   0.0010   0.0020   0.0030 ... 102.9970 102.9980 102.9990 103.0000

@@ -16,52 +16,58 @@ Legend:
 
 ----------
 
- 1.           #include <stdio.h>
- 2.           #include "helper_functions.h"
- 3.           
- 4.           // Array size
- 5.           #ifndef N
- 6.           #define N 102400
- 7.           #endif
- 8.           
- 9.           int main(void)
-10.           {
-11.               printf("Using N = %d\n", N);
-12.           
-13.               double alpha, x[N], y[N];
+ 1.           /*
+ 2.            * SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+ 3.            *
+ 4.            * SPDX-License-Identifier: MIT
+ 5.            */
+ 6.           
+ 7.           #include <stdio.h>
+ 8.           #include "helper_functions.h"
+ 9.           
+10.           // Array size
+11.           #ifndef N
+12.           #define N 102400
+13.           #endif
 14.           
-15.               // Initialization of values
-16.               alpha = 3.0;
-17.               for (int i = 0; i < N; i++) {
-18.                   double frac = 1.0 / ((double) (N - 1));
-19.                   x[i] = i * frac;
-20.                   y[i] = i * frac * 100;
-21.               }
-22.           
-23.               // Print values
-24.               printf("Input:\n");
-25.               printf("a = %8.4f\n", alpha);
-26.               print_array("x", x, N);
-27.               print_array("y", y, N);
+15.           int main(void)
+16.           {
+17.               printf("Using N = %d\n", N);
+18.           
+19.               double alpha, x[N], y[N];
+20.           
+21.               // Initialization
+22.               alpha = 3.0;
+23.               for (int i = 0; i < N; i++) {
+24.                   double frac = 1.0 / ((double) (N - 1));
+25.                   x[i] = i * frac;
+26.                   y[i] = i * frac * 100;
+27.               }
 28.           
-29.               // Calculate axpy
-30. + I 0--<>     #pragma omp target teams distribute parallel for
-31. +   M---<     for (int i = 0; i < N; i++) {
-32. +   M             y[i] += alpha * x[i];
-33.     M--->     }
+29.               // Print input values
+30.               printf("Input:\n");
+31.               printf("a = %8.4f\n", alpha);
+32.               print_array("x", x, N);
+33.               print_array("y", y, N);
 34.           
-35.               // Print values
-36.               printf("Output:\n");
-37.               print_array("y", y, N);
-38.               return 0;
-39.           }
+35.               // Calculate axpy
+36. + I 0--<>     #pragma omp target teams distribute parallel for
+37. +   M---<     for (int i = 0; i < N; i++) {
+38. +   M             y[i] += alpha * x[i];
+39.     M--->     }
+40.           
+41.               // Print output values
+42.               printf("Output:\n");
+43.               print_array("y", y, N);
+44.               return 0;
+45.           }
 
 ----------
 
-30. loop not distributed: loop is not bottom tested
-30. loop not distributed: use -Rpass-analysis=loop-distribute for more info
-30. loop not vectorized
+36. loop not distributed: loop is not bottom tested
+36. loop not distributed: use -Rpass-analysis=loop-distribute for more info
+36. loop not vectorized
 
-31. Outlined parallel region
+37. Outlined parallel region
 
-32. hoisting bitcast
+38. hoisting bitcast

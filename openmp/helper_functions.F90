@@ -98,7 +98,7 @@ module helper_functions
 
     open(newunit=unit, file=filename, form='unformatted', access='stream', status='replace', action='write', iostat=ios)
     if (ios /= 0) then
-      print *, "Failed to open file"
+      write(0,*) "Failed to open file"
       local_err = 1
       if (present(ierr)) ierr = local_err
       level = c_roctxRangePop()
@@ -106,11 +106,11 @@ module helper_functions
     end if
 
     write(unit) size(array, kind=8)
-    write(unit) array
+    write(unit, iostat=ios) array
     close(unit)
 
     if (ios /= 0) then
-      print *, "Failed to write all elements to file"
+      write(0,*) "Failed to write all elements to file"
       local_err = 2
     else
       local_err = 0

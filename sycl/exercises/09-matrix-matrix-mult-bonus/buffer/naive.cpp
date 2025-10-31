@@ -1,11 +1,7 @@
-//==============================================================
-// Matrix Multiplication: DPC++ Basic Parallel Kernel
-//==============================================================
 // Copyright © 2021 Intel Corporation
+// SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
 //
 // SPDX-License-Identifier: MIT
-// =============================================================
-
 
 #include <sycl/sycl.hpp>
 #include <ctime>

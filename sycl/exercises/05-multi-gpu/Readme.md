@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Multi-GPU 
 Typically, GPU-based supercomputers comprise between 2 and 8 devices per node. Various strategies can be employed for multi-GPU computing, such as assigning one device per MPI task or enabling a single MPI task to control multiple devices, depending on the application design. In all cases, selecting the right device and ensuring efficient communication between devices are essential for achieving high performance.
 

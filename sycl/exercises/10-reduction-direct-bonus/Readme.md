@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Memory Optimization III
 
 We saw in the [previous exercise](../04-matrix-matrix-mul/) how local share memory can be used to improve the performance by reducing the amount of extra memory operations and by improving the access pattern. This codes show another way to use the local share memory for reductions.

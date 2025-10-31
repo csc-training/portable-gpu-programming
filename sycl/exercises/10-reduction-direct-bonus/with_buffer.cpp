@@ -1,4 +1,6 @@
 // Copyright (C) 2023 Intel Corporation
+// SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+//
 // SPDX-License-Identifier: MIT
 
 #include <iostream>

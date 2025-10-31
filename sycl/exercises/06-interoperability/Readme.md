@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Using 3rd party libraries. 
 Third-party libraries are essential for GPU programming, offering optimized functions and algorithms tailored for specific tasks while abstracting low-level hardware details. This abstraction enables developers to focus on algorithm design and application development, enhancing productivity and efficiency.
 

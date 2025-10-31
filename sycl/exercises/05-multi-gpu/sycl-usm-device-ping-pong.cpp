@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+//
+// SPDX-License-Identifier: MIT
+
 // This is a port of a CUDA code written for the CUDA training at CSC https://github.com/csc-training/CUDA
 #include <cassert>
 #include <iostream>

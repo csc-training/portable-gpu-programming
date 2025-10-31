@@ -1,11 +1,6 @@
-//==============================================================
-// Matrix Multiplication: MKL, CUBLAS
-//==============================================================
-// This code built using snippets of code from Intel trainings
+// SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
 //
 // SPDX-License-Identifier: MIT
-// =============================================================
-//
 
 #include <sycl/sycl.hpp>
 #include <ctime>

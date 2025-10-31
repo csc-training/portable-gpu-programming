@@ -1,3 +1,7 @@
+// SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+//
+// SPDX-License-Identifier: MIT
+
 // We use built-in sycl::reduction mechanism in this example.
 // The manual implementation of the reduction kernel can be found in folder 06-reduction
 // This works with oneAPI, but not with AdaptiveCpp (it uses non-standard iplementation)

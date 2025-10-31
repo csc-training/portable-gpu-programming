@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # MPI send and receive with GPUs
 
 Here are example codes with MPI + {SYCL} for two MPI tasks.

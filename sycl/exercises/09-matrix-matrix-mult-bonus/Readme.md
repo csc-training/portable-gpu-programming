@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Memory Optimization II
 
 In the previous [exercise](../07-jacobi/) we saw that having bad data management can have huge impact on the performance. But once we optimized the data movement between CPU and GPU we also need to make sure that it is efficiently access when executing the kernels.

@@ -1,3 +1,9 @@
+<!--
+SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
+
+SPDX-License-Identifier: CC-BY-4.0
+-->
+
 # Parallel calculation of π
 Starting from the mpi example of computing [`pi`](https://github.com/csc-training/mpi-introduction/edit/main/parallel-pi/solution/pi.cpp) and using this [Intel example](https://www.intel.com/content/www/us/en/developer/articles/technical/compile-and-run-mpi-programs-using-dpcpp-language.html) construct a code which computes the value of `pi` using 2 or more gpus, with 1 GPU device per MPI task.
 

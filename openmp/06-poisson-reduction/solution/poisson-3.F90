@@ -10,7 +10,6 @@ subroutine run(n, niter, normmax)
   real(8), intent(in) :: normmax
   integer(kind=8) :: nx, ny
   integer :: i, j, it, write_flag
-  real(8), allocatable, target :: f_(:,:), u_(:,:), unew_(:,:)
   real(8), pointer :: f(:,:), u(:,:), unew(:,:), tmp(:,:)
   real(8) :: h2, t0, t1, norm2max, norm2, diff
   character(len=20) :: filename
@@ -22,11 +21,9 @@ subroutine run(n, niter, normmax)
   h2 = 1.0
   norm2max = normmax * normmax
 
-  allocate(f_(ny, nx), u_(ny, nx), unew_(ny, nx))
-
-  f => f_
-  u => u_
-  unew => unew_
+  allocate(f(ny, nx))
+  allocate(u(ny, nx))
+  allocate(unew(ny, nx))
 
   ! Initialize arrays
   call create_input(f)
@@ -118,7 +115,9 @@ subroutine run(n, niter, normmax)
     "Time spent: ", t1 - t0, " s"
   call write_array("u_end.bin", u)
 
-  deallocate(f_, u_, unew_)
+  deallocate(unew)
+  deallocate(u)
+  deallocate(f)
 end subroutine run
 
 

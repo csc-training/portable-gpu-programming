@@ -118,6 +118,7 @@ end subroutine run
 
 
 program main
+  use iso_fortran_env, only: output_unit
   implicit none
   integer :: n, niter, nrep, i, iostat
   real(8) :: normmax
@@ -167,5 +168,6 @@ program main
     print '(A, I0)', &
       "RUN ", i
     call run(n, niter, normmax)
+    call flush(output_unit)
   end do
 end program main

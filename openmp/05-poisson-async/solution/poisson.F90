@@ -97,6 +97,7 @@ end subroutine run
 
 
 program main
+  use iso_fortran_env, only: output_unit
   implicit none
   integer :: n, niter, nrep, i, iostat
   character(len=32) :: arg
@@ -136,5 +137,6 @@ program main
     print '(A, I0)', &
       "RUN ", i
     call run(n, niter)
+    call flush(output_unit)
   end do
 end program main

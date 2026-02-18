@@ -27,7 +27,7 @@ int main() {
   // Copy data from host to device
   q.memcpy(d_x, x.data(), N * sizeof(int)); 
   q.wait();
-  q.memcpy(d_y, y.data(), N * sizeof(int))); q
+  q.memcpy(d_y, y.data(), N * sizeof(int))); 
   q.wait();
   
   // Submit the kernel to the queue

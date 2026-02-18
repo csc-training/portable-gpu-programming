@@ -47,7 +47,8 @@ int main() {
   q.wait();
 
   // Copy result back to host
-  q.memcpy(y.data(), d_y, N * sizeof(int)).wait();
+  q.memcpy(y.data(), d_y, N * sizeof(int));
+  q.wait();
 
   // Free device memory
   free(d_x, q);

@@ -43,7 +43,8 @@ int main() {
       d_y[i] = a * d_x[i] + d_y[i];
     }
     });
-  }).wait();
+  }); 
+  q.wait();
 
   // Copy result back to host
   q.memcpy(y.data(), d_y, N * sizeof(int)).wait();

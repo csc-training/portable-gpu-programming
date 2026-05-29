@@ -4,82 +4,67 @@ SPDX-FileCopyrightText: 2021 CSC - IT Center for Science Ltd. <www.csc.fi>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-# Portable GPU Programming
+# CSC Training: Portable GPU Programming
 
-Course material for the CSC course "Portable GPU Programming". The course is
-part of the EuroCC training activities at CSC.
+This is the material repository for the Portable GPU Programming training organized by [CSC - IT Center for Science](https://csc.fi/en/).
+
+## Practical information
+
+The practical information is in the [wiki](../../wiki).
 
 ## Presentation slides
 
-The slides are available [here](https://csc-training.github.io/portable-gpu-programming/).
-
-## Agenda
-
-### Day 1, Tuesday 21.10
-
-| Time         | Topic |
-| ----         | ----- |
-| 09:00-09:15  | Welcome
-| 09:15-09:45  | Parallel Computing & Supercomputers
-| 09:50-10:00  | Intro & GPU execution model
-| 10:00-10:20  | GPU memory hierarchy
-| 10:40-12:00  | Mahti and LUMI  Computing Platforms & Profiling
-| 12:00-13:00  | Lunch break
-| 13:00-14:10  | Refresher of C++
-| 14:30-15:20  | MPI basics
-| 15:20-16:30  | Break and Exercises
-| 16:30-16:45  | Day 1 wrap-up
-
-### Day 2, Wednesday 22.10
-
-| Time         | Topic |
-| ----         | ----- |
-| 09:15-09:30  | Introduction to SYCL
-| 09:30-10:00  | Simple SYCL
-| 10:25-11:00  | SYCL Exercises 
-| 11:00-11:20  | Advanced SYCL
-| 11:20-12:00  | SYCL Exercises 
-| 12:00-13:00  | Lunch break
-| 13:00-13:30  | Other SYCL Features
-| 13:30-14:00  | SYCL Exercises
-| 14:00-15:00  | Memory Optimizations
-| 15:00-15:45  | SYCL and MPI 
-| 15:45-16:30  | Interoperability
-| 16:30-16:45  | Day 2 wrap-up
-
-### Day 3, Thursday 23.10
-
-| Time         | Topic |
-| ----         | ----- |
-| 09:15-12:00  | Kokkos I (with exercises)
-| 12:00-13:00  | Lunch break
-| 13:00-15:00  | Kokkos II (with exercises)
-| 15:00-16:30  | Kokkos III (with exercises)
-| 16:30-16:45  | Day 3 wrap-up
-
-### Day 4, Friday 24.10
-
-| Time         | Topic |
-| ----         | ----- |
-| 09:15-12:00  | OpenMP offload (with exercises)
-| 12:00-13:00  | Lunch break
-| 13:00-16:00  | OpenMP offload (with exercises)
-| 16:00-16:45  | Portable GPU programming frameworks wrap-up
-
-The lectures in this repository are published under [CC-BY-SA license](https://creativecommons.org/licenses/by-nc/4.0/). Some of the lectures and exercises are based on Intel copyrighted work and they have their own license ([MIT](https://spdx.org/licenses/MIT.html)).
-
-## SYCL Book
-
-[Data Parallel C++ Programming Accelerated Systems Using C++ and SYCL](https://link.springer.com/book/10.1007/978-1-4842-9691-2)
-
-[Book Examples](https://github.com/Apress/data-parallel-CPP.git)
+The slides are available in
+- GitHub Pages: https://csc-training.github.io/portable-gpu-programming/
 
 ## Exercises
 
-[General instructions](exercises_instructions.md)
+- Feel free to fork this repository to work through the exercises.
+- [General exercise instructions](exercise-instructions.md)
+- Session-specific material linked in the schedule below
 
-### [Intro Day](intro-day)
-### [SYCL](sycl/exercises)
-### [Kokkos](kokkos)
-### [OpenMP](openmp)
+## Schedule (draft)
 
+### Day 1, Tue 11.8.
+
+| Time  | Topic |
+| ----  | ----- |
+| 09:00 | Welcome
+| 09:15 | Introduction to Supercomputers
+| 10:00 | Roihu and LUMI Computing Platforms
+| 11:00 | Introduction to GPUs
+| 12:00 | Lunch
+| 13:00 | OpenMP offload
+| 16:45 | Day wrap-up
+
+### Day 2, Wed 12.8.
+
+| Time  | Topic |
+| ----  | ----- |
+| 09:00 | OpenMP offload
+| 12:00 | Lunch
+| 13:00 | C++ introduction
+| 14:00 | Kokkos
+| 16:45 | Day wrap-up
+
+### Day 3, Thu 13.8.
+
+| Time  | Topic |
+| ----  | ----- |
+| 09:00 | Kokkos
+| 12:00 | Lunch
+| 13:00 | Kokkos
+| 16:45 | Day wrap-up
+
+### Day 4, Fri 14.8.
+
+| Time  | Topic |
+| ----  | ----- |
+| 09:00 | Interoperability with CUDA/HIP libraries
+| 12:00 | Lunch
+| 13:00 | Multi-GPU programming with MPI
+| 16:30 | Course wrap-up
+
+## Previous years
+
+Material from previous years can be found in [releases](https://github.com/csc-training/portable-gpu-programming/releases).

@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # CSC Training: Portable GPU Programming
 
-This is the material repository for the Portable GPU Programming training organized by [CSC - IT Center for Science](https://csc.fi/en/).
+This is the material repository for the Portable GPU Programming training organized by [CSC – IT Center for Science](https://csc.fi/en/).
 
 ## Practical information
 

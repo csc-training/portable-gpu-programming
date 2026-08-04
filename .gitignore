@@ -11,3 +11,4 @@ core
 *.json
 *.stats.csv
 *.sysinfo.txt
+build/

@@ -16,53 +16,54 @@ The practical information is in the [wiki](../../wiki).
 
 The slides are available in
 - GitHub Pages: https://csc-training.github.io/portable-gpu-programming/
+- CSC Allas: https://a3s.fi/portable-gpu-programming/site/index.html
 
 ## Exercises
 
 - Feel free to fork this repository to work through the exercises.
-- [General exercise instructions](exercise-instructions.md)
+- General instructions: [Roihu](README_Roihu.md) and [LUMI](README_LUMI.md)
 - Session-specific material linked in the schedule below
 
-## Schedule (draft)
+## Schedule
 
 ### Day 1, Tue 11.8.
 
 | Time  | Topic |
 | ----  | ----- |
 | 09:00 | Welcome
-| 09:15 | Introduction to Supercomputers
-| 10:00 | Roihu and LUMI Computing Platforms
-| 11:00 | Introduction to GPUs
+| 09:15 | [Introduction to High-Performance Computing](intro)
+| 10:00 | [Roihu and LUMI Computing Platforms](intro)
+| 11:00 | [Introduction to GPUs](intro)
 | 12:00 | Lunch
-| 13:00 | OpenMP offload
+| 13:00 | [OpenMP offload](openmp)
 | 16:45 | Day wrap-up
 
 ### Day 2, Wed 12.8.
 
 | Time  | Topic |
 | ----  | ----- |
-| 09:00 | OpenMP offload
+| 09:00 | [OpenMP offload](openmp)
 | 12:00 | Lunch
 | 13:00 | C++ introduction
-| 14:00 | Kokkos
+| 14:00 | [Kokkos](kokkos)
 | 16:45 | Day wrap-up
 
 ### Day 3, Thu 13.8.
 
 | Time  | Topic |
 | ----  | ----- |
-| 09:00 | Kokkos
+| 09:00 | [Kokkos](kokkos)
 | 12:00 | Lunch
-| 13:00 | Kokkos
+| 13:00 | [Kokkos](kokkos)
 | 16:45 | Day wrap-up
 
 ### Day 4, Fri 14.8.
 
 | Time  | Topic |
 | ----  | ----- |
-| 09:00 | Interoperability with CUDA/HIP libraries
+| 09:00 | [Interoperability with CUDA/HIP libraries](interop)
 | 12:00 | Lunch
-| 13:00 | Multi-GPU programming with MPI
+| 13:00 | [Multi-GPU programming with MPI](mpi)
 | 16:30 | Course wrap-up
 
 ## Previous years

@@ -6,10 +6,13 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # General instructions for Roihu
 
-Roihu has different CPU architectures on Roihu-CPU (x86) and Roihu-GPU (ARM).
-Therefore, there are **separate login nodes for building CPU and GPU programs and submitting respective jobs**:
-- `roihu-cpu.csc.fi`
-- `roihu-gpu.csc.fi`
+> [!IMPORTANT]
+> Roihu has different CPU architectures on Roihu-CPU (x86) and Roihu-GPU (ARM).
+> Therefore, there are **separate login nodes for building CPU and GPU programs and submitting respective jobs**:
+> - `roihu-cpu.csc.fi`
+> - `roihu-gpu.csc.fi`
+> 
+> Roihu-CPU and Roihu-GPU share the disk areas (i.e., `/scratch` and `$HOME` have the same files on both Roihu-CPU and Roihu-GPU).
 
 ## Logging in via ssh
 
@@ -67,7 +70,8 @@ Other available editors include *emacs* and *vim*.
 
 ### CPU programming on Roihu-CPU
 
-**Note! For compiling CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`!**
+> [!IMPORTANT]
+> For compiling CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`.
 
 Roihu has several programming environments.
 
@@ -99,7 +103,8 @@ mpif90 -fopenmp -O3 -march=znver5 prog.F90 -o prog.x
 
 ### GPU programming on Roihu-GPU
 
-**Note! For compiling GPU programs, use Roihu-GPU accessed through `roihu-gpu.csc.fi`!**
+> [!IMPORTANT]
+> For compiling GPU programs, use Roihu-GPU accessed through `roihu-gpu.csc.fi`.
 
 Roihu has several programming environments and we recommend
 using different environments for CUDA and OpenMP offload.
@@ -183,7 +188,8 @@ See LUMI for available reservations.
 
 ### CPU jobs on Roihu-CPU
 
-**Note! For running CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`!**
+> [!IMPORTANT]
+> For running CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`.
 
 Example `job.sh` for running MPI+OpenMP program reserving 1 node, 4 tasks per node, and 2 CPU core per task, as well as 1 GB RAM per core, i.e., 8 CPU cores and 8 GB RAM within one node in total:
 
@@ -222,7 +228,8 @@ Some of such cases will be discussed in the exercises.
 
 ### GPU jobs on Roihu-GPU
 
-**Note! For running GPU programs, use Roihu-GPU accessed through `roihu-gpu.csc.fi`!**
+> [!IMPORTANT]
+> For running GPU programs, use Roihu-GPU accessed through `roihu-gpu.csc.fi`.
 
 Example `job.sh` for running a GPU program reserving 1 NVIDIA GH200 superchip:
 

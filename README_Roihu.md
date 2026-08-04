@@ -134,7 +134,7 @@ Xlinker="-Xlinker $(mpicxx --showme | tr ' ' '\n' | sed -n 's/^-Wl,//p' | paste 
 nvcc -O3 -gencode arch=compute_90a,code=sm_90a $Xcompiler $Xlinker prog.cu -o prog.x
 ```
 
-### OpenMP offload and MPI+OpenMP offload
+#### OpenMP offload and MPI+OpenMP offload
 
 For GPU programming with OpenMP offload use:
 ```bash

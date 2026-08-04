@@ -101,7 +101,7 @@ Compilation of HIP and multi-GPU MPI+HIP programs:
 CC -xhip -O3 prog.cpp -o prog.x
 ```
 
-### OpenMP offload and MPI+OpenMP offload
+#### OpenMP offload and MPI+OpenMP offload
 
 The compilation command is the same as in the CPU case:
 ```bash

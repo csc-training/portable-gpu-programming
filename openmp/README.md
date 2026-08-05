@@ -4,34 +4,24 @@ SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-# OpenMP Offload
+# OpenMP module
 
-## Getting started
+## Presentation slides
 
-- [First GPU kernel: axpy](01-axpy/)
+Presentation slides are available [here](https://csc-training.github.io/portable-gpu-programming/?open=openmp).
 
-## Controlling data movement
+## Demos
 
-- [The axpy kernel with dynamic arrays](02-axpy-dynamic/)
-- [Solving Poisson's equation with Jacobi iteration](03-poisson/)
-- [Data updates](04-poisson-io/)
+See [demos directory](demos/) for the demo codes referred to in the slides.
 
-## Asynchronous kernel execution
+## Exercises
 
-- [Asynchronous kernel execution](05-poisson-async/)
+See [exercises directory](exercises/) for exercises.
 
-## Reduction
+## Web resources
 
-- [Reduction operation](06-poisson-reduction/)
-
-## Unified shared memory
-
-- [Using unified shared memory](07-usm/)
-
-## Interoperability with libraries
-
-- [Interoperability with libraries](08-interop/)
-
-## Using multiple GPUs and MPI
-
-- [Using multiple GPUs and MPI](09-multi-gpu/)
+- OpenMP homepage: <http://openmp.org/>
+- Online tutorials: <http://openmp.org/wp/resources/#Tutorials>
+- Specifications and examples: <https://www.openmp.org/specifications/>
+  - [v5.2 API Specification](https://www.openmp.org/wp-content/uploads/OpenMP-API-Specification-5-2.pdf)
+  - [v5.2.2 Examples document](https://www.openmp.org/wp-content/uploads/openmp-examples-5.2.2-final.pdf)

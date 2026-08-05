@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Trying out Slurm
 
-Look into to the provided Slurm batch job scripts [job_lumi.sh](job_lumi.sh) / [job_mahti.sh](job_mahti.sh)
+Look into to the provided Slurm batch job scripts [job_roihu.sh](job_roihu.sh) / [job_lumi.sh](job_lumi.sh) 
 and make sure you understand them.
 
 1. Submit a job to the queue with `sbatch job_script.sh`

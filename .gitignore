@@ -12,3 +12,4 @@ core
 *.stats.csv
 *.sysinfo.txt
 build/
+slurm-*.out

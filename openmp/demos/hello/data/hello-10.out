@@ -1,0 +1,1 @@
+launch CUDA kernel file=/scratch/project_2019754/rossituo/portable-gpu-programming/openmp/demos/hello/hello-10.c function=main line=15 device=0 host-threadid=0 num_teams=0 thread_limit=0 kernelname=nvkernel_main_F1L15_2 grid=<<<1024,1,1>>> block=<<<128,1,1>>> shmem=0b

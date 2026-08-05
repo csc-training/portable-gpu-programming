@@ -18,12 +18,10 @@ These tasks should be done in Roihu-GPU, so start by logging into `roihu-gpu.csc
 
 1. Investigate the default set of modules with `module list` (or shorthand `ml`).
 
-2. Compile the [hello.cpp](hello.cpp) code with the GNU compiler `gcc`, run it and investigate the output:
+2. Compile the [hello.cpp](hello.cpp) code with the GNU compiler `gcc`, run the resulting binary (`hello_gcc`)
+   via Slurm and investigate the output:
 
      gcc -o hello_gcc hello.cpp
-     ./hello_gcc
-
-   Note: normally you should always run codes via the batch job system.
 
 3. Compile the code with NVIDIA HPC compiler `nvc`. 
 
@@ -36,10 +34,9 @@ These tasks should be done in Roihu-GPU, so start by logging into `roihu-gpu.csc
    Proceed then on compiling and running the code:
 
      nvc -o hello_nvc hello.cpp
-     ./hello_nvc
 
    Note that `gcc` is still available, however, this is the system default with version 11.5.0, and not the 14.3.0
-   that is available via module (you can try to run `gcc --version`).
+   that is available via module (you can see that by running `gcc --version`).
 
 4. Reset the default set of modules with `module reset`, and verify with `module list` and `gcc --version` that
    you have again the default set
@@ -54,12 +51,10 @@ used via common wrappers (`cc`, `CC`, `ftn`), and the specific underlying compil
      module load LUMI/25.09 partition/G
      module list
 
-2. Compiler the "hello" code with the (default) Cray compiler, and investigate output:
+2. Compiler the "hello" code with the (default) Cray compiler, run the resulting binary (`hello_cray`)
+   via Slurm and investigate the output:
 
      cc -o hello_cray hello.cpp
-     ./hello_cray
-
-   Note: normally you should always run codes via the batch job system.
 
 3. Change the compiler into AMD Clang
 
@@ -69,7 +64,6 @@ used via common wrappers (`cc`, `CC`, `ftn`), and the specific underlying compil
    Proceed then on compiling and running the code:
 
      cc -o hello_amd hello.cpp
-     ./hello_amd
 
    Note that we use still the same `cc` wrapper
 

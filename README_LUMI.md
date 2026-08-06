@@ -180,7 +180,7 @@ Example `job.sh` for running MPI+OpenMP program reserving 1 node, 4 tasks per no
 #SBATCH --ntasks-per-node=4
 #SBATCH --cpus-per-task=2
 #SBATCH --mem-per-cpu=1G
-#SBATCH --time=00:05:00
+#SBATCH --time=00:02:00
 
 # Set the number of threads based on cpus-per-task, which Slurm stores in the SLURM_CPUS_PER_TASK environment variable.
 # The following bash syntax evaluates to 1 if --cpus-per-task was not given.
@@ -217,7 +217,7 @@ Example `job.sh` for running a GPU program reserving 1 GPU (= 1 GCD of the AMD M
 #SBATCH --ntasks-per-node=1
 #SBATCH --cpus-per-task=4
 #SBATCH --gpus-per-node=1
-#SBATCH --time=00:05:00
+#SBATCH --time=00:02:00
 
 # Enable GPU-aware MPI by uncommenting the line below
 #export MPICH_GPU_SUPPORT_ENABLED=1

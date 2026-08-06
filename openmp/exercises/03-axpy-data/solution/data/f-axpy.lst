@@ -1,0 +1,10 @@
+axpy:
+     28, !$omp target teams distribute parallel do
+         28, Generating "nvkernel_MAIN__F1L28_2" GPU kernel
+     28, Generating implicit map(tofrom:y(:),x(:)) 
+     39, Generating update from(y(1:n),x(1:n))
+     44, !$omp target teams distribute parallel do
+         25, Generating map(from:y(1:n)) 
+             Generating map(alloc:x(1:n)) 
+         44, Generating "nvkernel_MAIN__F1L44_4" GPU kernel
+     44, Generating implicit map(tofrom:y(:),x(:)) 

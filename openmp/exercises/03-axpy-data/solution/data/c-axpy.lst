@@ -1,0 +1,10 @@
+main:
+     25, #omp target teams distribute parallel for
+         25, Generating "nvkernel_main_F1L25_2" GPU kernel
+         27, Loop parallelized across teams and threads(128), schedule(static)
+     37, Generating update from(y[:n],x[:n])
+     38, #omp target teams distribute parallel for
+         23, Generating map(alloc:x[:n]) 
+             Generating map(from:y[:n]) 
+         38, Generating "nvkernel_main_F1L38_4" GPU kernel
+         42, Loop parallelized across teams and threads(128), schedule(static)

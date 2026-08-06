@@ -1,0 +1,11 @@
+axpy:
+     25, Generating target enter data map(create: x(1:n),y(1:n))
+     29, !$omp target teams distribute parallel do
+         29, Generating "nvkernel_MAIN__F1L29_2" GPU kernel
+     29, Generating implicit map(tofrom:y(:),x(:)) 
+     40, Generating update from(y(1:n),x(1:n))
+     45, !$omp target teams distribute parallel do
+         45, Generating "nvkernel_MAIN__F1L45_4" GPU kernel
+     45, Generating implicit map(tofrom:y(:),x(:)) 
+     51, Generating target exit data map(from: y(1:n))
+         Generating target exit data map(delete: x(1:n)) finalize

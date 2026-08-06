@@ -1,0 +1,11 @@
+main:
+     25, #omp target teams distribute parallel for
+         25, Generating "nvkernel_main_F1L25_2" GPU kernel
+         27, Loop parallelized across teams and threads(128), schedule(static)
+     25, Generating target enter data map(create: y[:n],x[:n])
+     37, Generating update from(y[:n],x[:n])
+     38, #omp target teams distribute parallel for
+         38, Generating "nvkernel_main_F1L38_4" GPU kernel
+         42, Loop parallelized across teams and threads(128), schedule(static)
+     49, Generating target exit data map(from: y[:n])
+         Generating target exit data map(delete: x[:n]) finalize

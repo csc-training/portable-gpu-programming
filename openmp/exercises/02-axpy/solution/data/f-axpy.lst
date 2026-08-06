@@ -1,0 +1,5 @@
+axpy:
+     40, !$omp target teams distribute parallel do
+         40, Generating "nvkernel_MAIN__F1L40_2" GPU kernel
+     40, Generating map(tofrom:y(1:n)) 
+         Generating map(to:x(1:n)) 

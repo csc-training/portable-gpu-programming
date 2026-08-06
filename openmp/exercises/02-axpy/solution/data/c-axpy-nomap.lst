@@ -1,0 +1,4 @@
+main:
+     34, #omp target teams distribute parallel for
+         34, Generating "nvkernel_main_F1L34_2" GPU kernel
+         38, Loop parallelized across teams and threads(128), schedule(static)

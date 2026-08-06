@@ -144,9 +144,9 @@ module load nvhpc/26.3
 
 Compilation of OpenMP offload programs:
 ```bash
-nvc -mp=gpu -O3 -gpu=cc90 prog.c -o prog.x
-nvc++ -mp=gpu -O3 -gpu=cc90 prog.cpp -o prog.x
-nvfortran -mp=gpu -O3 -gpu=cc90 prog.F90 -o prog.x
+nvc -mp=gpu -O3 -gpu=cc90 -Wall prog.c -o prog.x
+nvc++ -mp=gpu -O3 -gpu=cc90 -Wall prog.cpp -o prog.x
+nvfortran -mp=gpu -O3 -gpu=cc90 -Wall prog.F90 -o prog.x
 ```
 
 To obtain compiler diagnostics:
@@ -158,9 +158,9 @@ nvfortran -mp=gpu -O3 -gpu=cc90 -Minfo=mp prog.F90 -o prog.x
 
 Compilation of MPI + OpenMP offload programs works with the usual wrappers in this environment:
 ```bash
-mpicc -mp=gpu -O3 -gpu=cc90 prog.c -o prog.x
-mpicxx -mp=gpu -O3 -gpu=cc90 prog.cpp -o prog.x
-mpif90 -mp=gpu -O3 -gpu=cc90 prog.F90 -o prog.x
+mpicc -mp=gpu -O3 -gpu=cc90 -Wall prog.c -o prog.x
+mpicxx -mp=gpu -O3 -gpu=cc90 -Wall prog.cpp -o prog.x
+mpif90 -mp=gpu -O3 -gpu=cc90 -Wall prog.F90 -o prog.x
 ```
 
 ## Running

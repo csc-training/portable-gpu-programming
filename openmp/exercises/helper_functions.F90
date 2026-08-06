@@ -61,38 +61,48 @@ module helper_functions
     write(*,*)
   end subroutine print_array
 
-  subroutine create_input(f)
+  subroutine create_input(u, Lx, Ly)
     implicit none
-    real(8), intent(out) :: f(:, :)
-    integer :: i, j, ind, nx, ny
-    real(8) :: cx, cy, sigma2, kx, ky, dx, dy, r2
+    real(8), intent(out) :: u(:, :)
+    real(8), intent(in) :: Lx, Ly
+    integer :: i, j
+    integer(kind=8) :: nx, ny
+    real(8) :: dx, dy, x, y, acsch
 
-    nx = size(f, 2)
-    ny = size(f, 1)
-
-    cx = real(nx, kind=8) / 2.0d0
-    cy = real(ny, kind=8) / 2.0d0
-    sigma2 = 0.05d0 * nx * ny
-    kx = 20.0d0 / nx
-    ky = 10.0d0 / ny
+    nx = size(u, 2)
+    ny = size(u, 1)
+    dx = Lx / (nx - 1)
+    dy = Ly / (ny - 1)
 
     do j = 1, nx
       do i = 1, ny
-        dx = j - cx
-        dy = i - cy
-        r2 = dx * dx + dy * dy
-        f(i,j) = cos(kx * dx + ky * dy) * exp(-r2 / sigma2)
+        x = (j - 1) * dx - 0.5d0 * Lx
+        y = (i - 1) * dy - 0.5d0 * Ly
+        acsch = asinh(1.0d0 / x)
+
+        if (acsch > y .and. y > 0 .and. y < -0.75d0 * x + 2.75d0) then
+          u(i,j) = 100.0d0
+        else if (acsch < y .and. y < 0 .and. y > -0.75d0 * x - 2.75d0) then
+          u(i,j) = -100.0d0
+        else
+          u(i,j) = 0.0d0
+        end if
       end do
     end do
   end subroutine create_input
 
-  subroutine write_array(filename, array, ierr)
+  subroutine write_array(filename, array, Lx, Ly, ierr)
     implicit none
     character(len=*), intent(in) :: filename
     real(8), intent(in) :: array(:, :)
+    real(8), intent(in) :: Lx, Ly
     integer, intent(out), optional :: ierr
     integer :: unit, ios, local_err
+    integer(c_size_t) :: nx, ny
     integer(c_int) :: level
+
+    nx = size(array, 2)
+    ny = size(array, 1)
 
     level = c_roctxRangePush(c_char_"write_array")
 
@@ -105,7 +115,14 @@ module helper_functions
       return
     end if
 
-    write(unit) size(array, kind=8)
+    write(unit) Lx
+    write(unit) Ly
+    write(unit) nx
+    write(unit) ny
+
+    ! Write the array layout (1 = column-major / Fortran order)
+    write(unit) int(1, kind=1)
+
     write(unit, iostat=ios) array
     close(unit)
 

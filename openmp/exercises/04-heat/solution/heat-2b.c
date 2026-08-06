@@ -13,46 +13,65 @@
 
 void run(const int n, const int niter)
 {
-    printf("Using n = %d, niter = %d\n", n, niter);
-
-    char filename[20];
+    // Grid size
     const int nx = n, ny = n;
     const int n2 = nx * ny;
 
-    double h2, *f, *u, *unew;
-    f = (double*)malloc(n2 * sizeof(double));
+    // Box size
+    const double Lx = 8.0;
+    const double Ly = 8.0;
+
+    // Diffusivity
+    const double alpha = 0.5;
+
+    // Grid spacing
+    const double dx = Lx / (nx - 1);
+    const double dy = Ly / (ny - 1);
+    const double dx2 = dx * dx;
+    const double dy2 = dy * dy;
+
+    // Largest stable time step
+    const double dt = dx2 * dy2 / (2.0 * alpha * (dx2 + dy2));
+
+    // Print inputs
+    printf("Inputs: n = %d, niter = %d\n", n, niter);
+    printf("Diffusivity: %.2f\n", alpha);
+    printf("Box: %.2f x %.2f discretized with grid spacing %.2e x %.2e\n", Lx, Ly, dx, dy);
+    printf("Time propagation until %.2e with time step %.2e\n", dt * niter, dt);
+
+    const double rx = alpha * dt / dx2;
+    const double ry = alpha * dt / dy2;
+
+    double *u, *unew;
     u = (double*)malloc(n2 * sizeof(double));
     unew = (double*)malloc(n2 * sizeof(double));
-    h2 = 1.0;
 
     // Initialize arrays
-    create_input(f, nx, ny);
-    memset(u, 0, n2 * sizeof(double));
+    create_input(u, nx, ny, Lx, Ly);
     memset(unew, 0, n2 * sizeof(double));
 
     // Write initial arrays
-    sprintf(filename, "u%06d.bin", 0);
-    write_array(filename, u, n2);
-    write_array("f.bin", f, n2);
+    write_array("u_initial.bin", u, nx, ny, Lx, Ly);
 
-    // Iterate
+    // Propagate in time
     double t0 = omp_get_wtime();
 
-#pragma omp target data map(to: f[0:nx*ny]) map(tofrom: u[0:nx*ny]) map(to: unew[0:nx*ny])
+#pragma omp target data map(tofrom: u[0:nx*ny]) map(to: unew[0:nx*ny])
 {
 
     for (int it = 1; it < niter + 1; it++) {
 
         // Stencil update
-        #pragma omp target teams distribute parallel for
+        #pragma omp target
+        #pragma omp teams distribute parallel for
         for (int i = 1; i < ny - 1; i++) {
             for (int j = 1; j < nx - 1; j++) {
-                int ind = i * nx + j;
+                int ij = i * nx + j;
                 int ip = (i + 1) * nx + j;
                 int im = (i - 1) * nx + j;
                 int jp = i * nx + j + 1;
                 int jm = i * nx + j - 1;
-                unew[ind] = 0.25 * (u[ip] + u[im] + u[jp] + u[jm] - h2 * f[ind]);
+                unew[ij] = u[ij] + rx * (u[jp] - 2 * u[ij] + u[jm]) + ry * (u[ip] - 2 * u[ij] + u[im]);
             }
         }
 
@@ -62,19 +81,18 @@ void run(const int n, const int niter)
         unew = tmp;
     }
 
-}
+} // implicit wait at the end of the data clause
 
     double t1 = omp_get_wtime();
 
     // Write final result
-    int i = ny / 2, j = nx / 2;
+    int i = (ny - 1) / 2, j = (nx - 1) / 2;
     printf("u[%d,%d] = %f\n", i, j, u[i * nx + j]);
     printf("Time spent: %.3f s\n", t1 - t0);
-    write_array("u_end.bin", u, n2);
+    write_array("u_final.bin", u, nx, ny, Lx, Ly);
 
     free(unew);
     free(u);
-    free(f);
 }
 
 
@@ -83,6 +101,7 @@ int main(int argc, char *argv[])
     // Default values
     int n = 1024;
     int niter = 500;
+    int nrep = 3;
 
     if (argc > 1) {
         n = atoi(argv[1]);
@@ -98,8 +117,19 @@ int main(int argc, char *argv[])
             return 1;
         }
     }
+    if (argc > 3) {
+        nrep = atoi(argv[3]);
+        if (nrep < 1) {
+            printf("Number of repetitions need to be greater than zero.\n");
+            return 1;
+        }
+    }
 
-    run(n, niter);
+    for (int i = 0; i < nrep; i++) {
+        printf("RUN %d\n", i);
+        run(n, niter);
+        fflush(stdout);
+    }
 
     return 0;
 }

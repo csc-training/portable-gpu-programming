@@ -32,29 +32,32 @@ void print_array(const char* name, const double* x, size_t n)
 
 
 static
-void create_input(double *f, int nx, int ny) {
-    double cx = nx / 2.0;
-    double cy = ny / 2.0;
-    double sigma2 = 0.05 * nx*ny;  // Width of the Gaussian
-    double kx = 20.0 / nx;  // Spatial frequency in x
-    double ky = 10.0 / ny;  // Spatial frequency in y
-
+void create_input(double *u, const int nx, const int ny, const double Lx, const double Ly)
+{
+    const double dx = Lx / (nx - 1);
+    const double dy = Ly / (ny - 1);
     for (int i = 0; i < ny; i++) {
         for (int j = 0; j < nx; j++) {
-            int ind = i * nx + j;
+            int ij = i * nx + j;
+            double x = j * dx - 0.5 * Lx;
+            double y = i * dy - 0.5 * Ly;
 
-            double dx = j - cx;
-            double dy = i - cy;
-            double r2 = dx * dx + dy * dy;
+            double acsch = asinh(1.0 / x);
 
-            f[ind] = cos(kx * dx + ky * dy) * exp(-r2 / sigma2);
+            if (acsch > y && y > 0 && y < -0.75 * x + 2.75) {
+                u[ij] = 100.0;
+            } else if (acsch < y && y < 0 && y > -0.75 * x - 2.75) {
+                u[ij] = -100.0;
+            } else {
+                u[ij] = 0.0;
+            }
         }
     }
 }
 
 
 static
-int write_array(const char *filename, const double *array, size_t count)
+int write_array(const char *filename, const double *array, const size_t nx, const size_t ny, const double Lx, const double Ly)
 {
     roctxRangePush(__func__);
 
@@ -65,10 +68,20 @@ int write_array(const char *filename, const double *array, size_t count)
         return 1;
     }
 
+    // Write the box size
+    fwrite(&Lx, sizeof(double), 1, file);
+    fwrite(&Ly, sizeof(double), 1, file);
+
     // Write the array size
-    fwrite(&count, sizeof(size_t), 1, file);
+    fwrite(&nx, sizeof(size_t), 1, file);
+    fwrite(&ny, sizeof(size_t), 1, file);
+
+    // Write the array layout (0 = row-major / C order)
+    const unsigned char layout = 0;
+    fwrite(&layout, 1, 1, file);
 
     // Write the array data
+    const size_t count = nx * ny;
     size_t written = fwrite(array, sizeof(double), count, file);
 
     fclose(file);

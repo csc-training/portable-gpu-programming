@@ -182,8 +182,17 @@ sbatch --time=00:10:00 job.sh
 
 ### Slurm reservations
 
-There is no dedicated slurm reservations on Roihu.
-See LUMI for available reservations.
+We have dedicated slurm reservations for the training days:
+- `--reservation=portableGPU-1`: Valid on 2026-08-11 from 09:00 to 17:00
+- `--reservation=portableGPU-2`: Valid on 2026-08-12 from 09:00 to 17:00
+- `--reservation=portableGPU-3`: Valid on 2026-08-13 from 09:00 to 17:00
+- `--reservation=portableGPU-4`: Valid on 2026-08-14 from 09:00 to 17:00
+
+The reservations give access up to 4 nodes in `gpumedium` partition.
+
+In order to activate the reservation, include the `--reservation=...` option in the job script.
+
+In addition to the reservations, you can also access all the general partitions available on Roihu.
 
 
 ### CPU jobs on Roihu-CPU

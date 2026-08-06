@@ -11,5 +11,6 @@ core
 *.json
 *.stats.csv
 *.sysinfo.txt
+*.nsys-rep
 build/
 slurm-*.out

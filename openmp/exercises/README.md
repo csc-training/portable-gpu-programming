@@ -4,34 +4,50 @@ SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-## OpenMP exercises
+# OpenMP exercises
+
+## Tuesday
 
 ### Getting started
 
-- [First GPU kernel: axpy](01-axpy/)
+- [Hello world](01-hello/)
+- [First GPU kernel: axpy](02-axpy/)
 
 ### Controlling data movement
 
-- [The axpy kernel with dynamic arrays](02-axpy-dynamic/)
-- [Solving Poisson's equation with Jacobi iteration](03-poisson/)
-- [Data updates](04-poisson-io/)
-
-### Asynchronous kernel execution
-
-- [Asynchronous kernel execution](05-poisson-async/)
+- [Data regions in the axpy code](03-axpy-data/)
+- [Heat equation](04-heat/)
 
 ### Reduction
 
-- [Reduction operation](06-poisson-reduction/)
+- [Parallel sum](05-reduction-sum/)
+- [Heat equation: Monitoring average temperature](06-heat-reduction/)
+
+
+## Wednesday
+
+### Asynchronous kernel execution
+
+- [Heat equation: Asynchronous GPU execution](07-heat-async/)
+- [Heat equation: Overlapping I/O with GPU execution](08-heat-io/)
+
+### Device functions
+
+- [Heat equation: Restructuring code](09-heat-kernels/)
 
 ### Unified shared memory
 
-- [Using unified shared memory](07-usm/)
+- [Using unified shared memory in axpy](10-axpy-usm/)
+
+
+## Friday
 
 ### Interoperability with libraries
 
-- [Interoperability with libraries](08-interop/)
+- [Examining pointers](11-interop/)
+- [Call axpy using GPU libraries](12-axpy-blas/)
 
-### Using multiple GPUs and MPI
+### Using multiple GPUs
 
-- [Using multiple GPUs and MPI](09-multi-gpu/)
+- [Send and receive messages between GPUs](13-mpi-send-recv/)
+- [Heat equation: Using multiple GPUs](14-heat-multi-gpu/)

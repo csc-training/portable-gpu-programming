@@ -99,7 +99,7 @@ LUMI supercomputer<br>
 # Parallel processing
 
 - Modern supercomputers (and regular computers) rely on multiple levels of parallel processing
-- Parallelization within a **GPU** and multicore CPU
+- **Parallelization within a GPU and multicore CPU**
 - Parallelizetation over GPUs and multicore CPUs within a node
 - Parallelization over nodes
 
@@ -169,6 +169,19 @@ Top500 supercomputers grouped by the accelator type (Nov 2024 list)<br>
 Top500 supercomputers grouped by the accelator type (Nov 2025 list)<br>
 <small>Image: <https://top500.org/statistics/treemaps/></small>
 </center>
+
+# Why GPUs have become a norm?
+
+- Very high performance for certain workloads
+    - With theoretical double precision (FP64) performance specs, 
+      LUMI GPU node is **38** times more powerful than LUMI CPU node
+- GPUs are also more energy efficient
+    - With theoretical double precision (FP64) performance flop per Watt, 
+      LUMI GPU node is **10** times more efficient than LUMI CPU node
+- For AI workloads with low precision the differences are even higher
+- For traditional HPC workloads future trend is not so clear
+    - Roihu-GPU node is only **2-4** times more energy effiecient than Roihu-CPU
+    - In June 2026, the most powerful supercomputer is based on CPUs
 
 
 # Parallel computing and programming {.section}
@@ -352,16 +365,6 @@ Tree
 
 # Parallel programming models {.section}
 
-# Programming languages
-
-- The de-facto standard programming languages in HPC are (still)
-  C/C++ and Fortran
-- Higher level languages like Python and Julia are gaining popularity
-  - Often computationally intensive parts are still written in C/C++ or Fortran
-- Directive based approaches: OpenMP, OpenACC
-- Low level GPU programming with CUDA or HIP
-- Performance portability (C++) libraries: Kokkos, SYCL, Alpaka, ...
-- Deep learning libraries: PyTorch, TensorFlow, JAX, ...
 
 # Parallel programming models
 
@@ -413,6 +416,26 @@ Tree
 - Kernel execution is normally asynchronous
     - CPU remains active
 - Multiple kernels may run concurrently on same GPU
+
+# Programming languages
+
+- The de-facto standard programming languages in HPC are (still)
+  C/C++ and Fortran
+- Higher level languages like Python and Julia are gaining popularity
+  - Often computationally intensive parts are still written in C/C++ or Fortran
+- Directive based approaches: OpenMP, OpenACC
+- Low level GPU programming with CUDA or HIP
+- Performance portability (C++) libraries: Kokkos, SYCL, Alpaka, ...
+- Deep learning libraries: PyTorch, TensorFlow, JAX, ...
+
+# Performance, portability, and productivity
+
+- With the heterogenous (x86 and ARM CPUs, NVIDIA and AMD GPUs, ...) and constantly evolving
+  HPC landscape, how do we ensure well performing applications with modest development and
+  maintenance effort? 
+- The 3-P (performance, portability, and productivity) challenge in HPC is active research field
+    - various metrics have been proposed for quantifying performance portability and productivity
+- The rise of AI coding tools may have a major impact for the porting challenges
 
 # Summary {.section}
 

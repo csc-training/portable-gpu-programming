@@ -2,10 +2,8 @@
 //
 // SPDX-License-Identifier: MIT
 
-#include <cstdio>
-#include <cstdlib>
-#include <array>
-#include <vector>
+#include <stdio.h>
+#include <stdlib.h>
 
 int main(int argc, char *argv[]) {
 
@@ -49,24 +47,6 @@ int main(int argc, char *argv[]) {
 
     // Free the block of bytes
     free(arr);
-  }
-
-  {
-    printf("Case 3\n");
-
-    int *p; // declaration of a raw pointer
-    std::vector<int> a(5);  // allocated from heap
-    // std::array<int, 5> a;   // allocated from stack
-
-    p = a.data();  // memory address of the first element
-    p = &a[0];     // equivalent to the line above
-
-    p = a.data() + 2;  // memory address of the third element
-    p = &a[2];         // equivalent to the line above
-
-    printf("address of first  = %p\n", a.data());
-    printf("alternative       = %p\n", &a[0]);
-    printf("\n");
   }
 }
 

@@ -58,20 +58,6 @@ chmod u+x omnitrace-1.13.0-opensuse-15.4-ROCm-60000-PAPI-OMPT-Python3.sh
 ./omnitrace-1.13.0-opensuse-15.4-ROCm-60000-PAPI-OMPT-Python3.sh --prefix=/some/path/to/install
 ```
 
-### Using Nsight Systems in Mahti
-
-Simple usage:
-```
-module load gcc/10.4.0 cuda/12.6.1
-srun nsys profile my_exe
-```
-The GUI does not work properly in Mahti, so for the visual analysis one should install Nsight systems on a local workstation:
-<https://developer.nvidia.com/nsight-systems/get-started>
-
-The trace is by default in the file `report1.nsys-rep`, which can be copied to local workstation following similar steps as with
-`rocprof` above. Once copied, one can launch `nsys-ui` application and open the file.
-
-
 
 
 ## Installing and using Kokkos

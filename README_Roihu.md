@@ -294,6 +294,33 @@ with the environment cleaned so that submitting slurm jobs works from the shell
 in the same way as from the login node.
 
 
+### Performance analysis tools
+
+[NVIDIA Nsight Systems](https://developer.nvidia.com/nsight-systems) is a performance analysis tool for tracing GPU and CPU workloads.
+Profiling is done in two steps:
+
+1. Collect profiling data by running the application under `nsys` command line tool
+2. Analyze the results with `nsys-ui` GUI.
+
+The first step is done by replacing `srun ./prog.x` in the job script by:
+```bash
+srun --argos=no nsys profile -t cuda,nvtx,openmp -o report ./prog.x
+```
+This creates a file `report.nsys-rep`.
+
+The second step, analysis, can be done in two ways:
+
+1. Transfer the report file to the local computer and open it with locally installed GUI application.
+2. Launch a desktop application through the [Roihu web interface](https://www.roihu.csc.fi/) and launch GUI
+   through a terminal in the desktop:
+   ```bash
+   source /projappl/project_2019754/appl.sh
+   nsys-ui report.nsys-rep
+   ```
+
+For more information, see [CSC documentation](https://docs.csc.fi/apps/nsys/).
+
+
 ## Resources
 
 - [CSC documentation: Roihu supercomputer](https://docs.csc.fi/computing/systems-roihu/)

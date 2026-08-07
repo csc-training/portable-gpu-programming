@@ -7,11 +7,19 @@
 #include <stdio.h>
 #include <math.h>
 
-#ifdef TRACE
-#include <roctx.h>
+#if defined(TRACE)
+  #if defined(__NVCOMPILER) || defined(__CUDACC__)
+    #include <nvtx3/nvToolsExt.h>
+    #define TRACE_PUSH(name) nvtxRangePushA(name)
+    #define TRACE_POP()      nvtxRangePop()
+  #else
+    #include <roctx.h>
+    #define TRACE_PUSH(name) roctxRangePush(name)
+    #define TRACE_POP()      roctxRangePop()
+  #endif
 #else
-#define roctxRangePush(...) ((void)0)
-#define roctxRangePop(...) ((void)0)
+  #define TRACE_PUSH(...) ((void)0)
+  #define TRACE_POP(...)  ((void)0)
 #endif
 
 
@@ -59,12 +67,12 @@ void create_input(double *u, const int nx, const int ny, const double Lx, const 
 static
 int write_array(const char *filename, const double *array, const size_t nx, const size_t ny, const double Lx, const double Ly)
 {
-    roctxRangePush(__func__);
+    TRACE_PUSH(__func__);
 
     FILE *file = fopen(filename, "wb");
     if (file == NULL) {
         perror("Failed to open file");
-        roctxRangePop();
+        TRACE_POP();
         return 1;
     }
 
@@ -88,11 +96,11 @@ int write_array(const char *filename, const double *array, const size_t nx, cons
 
     if (written != count) {
         fprintf(stderr, "Failed to write all elements to file\n");
-        roctxRangePop();
+        TRACE_POP();
         return 2;
     }
 
-    roctxRangePop();
+    TRACE_POP();
 
     return 0;
 }

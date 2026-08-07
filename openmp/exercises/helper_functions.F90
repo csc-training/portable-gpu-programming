@@ -8,38 +8,41 @@ module helper_functions
 
 #ifdef TRACE
   interface
-#else
-  contains
-#endif
 
-#ifdef TRACE
-  function c_roctxRangePush(message) result(level) bind(C, name="roctxRangePushA")
-    import :: c_int, c_char
+#if defined(__NVCOMPILER) || defined(__CUDACC__)
+  function c_trace_push(message) result(level) bind(C, name="nvtxRangePushA")
 #else
-  function c_roctxRangePush(message) result(level)
+  function c_trace_push(message) result(level) bind(C, name="roctxRangePushA")
 #endif
+    import :: c_int, c_char
     character(kind=c_char), intent(in) :: message(*)
     integer(c_int) :: level
-#ifndef TRACE
-    level = 0
-#endif
-  end function c_roctxRangePush
+  end function c_trace_push
 
-#ifdef TRACE
-  function c_roctxRangePop() result(level) bind(C, name="roctxRangePop")
-    import :: c_int
+#if defined(__NVCOMPILER) || defined(__CUDACC__)
+  function c_trace_pop() result(level) bind(C, name="nvtxRangePop")
 #else
-  function c_roctxRangePop() result(level)
+  function c_trace_pop() result(level) bind(C, name="roctxRangePop")
 #endif
+    import :: c_int
     integer(c_int) :: level
-#ifndef TRACE
-    level = 0
-#endif
-  end function c_roctxRangePop
+  end function c_trace_pop
 
-#ifdef TRACE
   end interface
   contains
+#else
+  contains
+
+  function c_trace_push(message) result(level)
+    character(kind=c_char), intent(in) :: message(*)
+    integer(c_int) :: level
+    level = 0
+  end function c_trace_push
+
+  function c_trace_pop() result(level)
+    integer(c_int) :: level
+    level = 0
+  end function c_trace_pop
 #endif
 
   subroutine print_array(name, x)
@@ -104,14 +107,14 @@ module helper_functions
     nx = size(array, 2)
     ny = size(array, 1)
 
-    level = c_roctxRangePush(c_char_"write_array")
+    level = c_trace_push(c_char_"write_array")
 
     open(newunit=unit, file=filename, form='unformatted', access='stream', status='replace', action='write', iostat=ios)
     if (ios /= 0) then
       write(0,*) "Failed to open file"
       local_err = 1
       if (present(ierr)) ierr = local_err
-      level = c_roctxRangePop()
+      level = c_trace_pop()
       return
     end if
 
@@ -134,7 +137,7 @@ module helper_functions
     end if
 
     if (present(ierr)) ierr = local_err
-    level = c_roctxRangePop()
+    level = c_trace_pop()
   end subroutine write_array
 
 end module helper_functions

@@ -6,8 +6,8 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ---
 title: Introduction to <br>high-performance computing
-event: Portable GPU Programming
-lang:   en
+event: Portable GPU Programming 2026
+lang:  en
 ---
 
 # Outline
@@ -53,7 +53,7 @@ lang:   en
 </div>
 <div class=column>
 <center>
-![](https://a3s.fi/summerschool/assets/images/cray-x-mp.jpg){.center width=100%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/cray-x-mp.jpg){.center width=100%}
 Cray X-MP at CSC (1989)<br>
 <small>Image: CSC Archives</small>
 </center>
@@ -71,7 +71,7 @@ Cray X-MP at CSC (1989)<br>
 </div>
 <div class=column>
 <center>
-![](https://a3s.fi/summerschool/assets/images/lumi.jpg){.center width=100%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/lumi.jpg){.center width=100%}
 EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)<br>
 <small>Image: Mikael Kanerva (CSC)</small>
 </center>
@@ -80,7 +80,7 @@ EuroHPC JU LUMI (HPE Cray EX) <br>at CSC (2021–)<br>
 # Anatomy of a supercomputer
 
 <center>
-![](https://a3s.fi/summerschool/assets/images/lumi-racks.jpg){.center width=55%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/lumi-racks.jpg){.center width=55%}
 LUMI supercomputer<br>
 <small>Image: Mikael Kanerva (CSC)</small>
 </center>
@@ -119,7 +119,7 @@ LUMI supercomputer<br>
 </div>
 <div class=column style=width:39%>
 <center>
-![](https://a3s.fi/summerschool/assets/images/top500_perfdevel_nov25.png){.center width=100%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/top500_perfdevel_nov25.png){.center width=100%}
 <small>Image: <https://top500.org/statistics/perfdevel/></small>
 </center>
 </div>
@@ -128,7 +128,7 @@ LUMI supercomputer<br>
 # GPUs have become the norm
 
 <center>
-![](https://a3s.fi/summerschool/assets/images/top500_nov21.svg){.center width=60%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/top500_nov21.svg){.center width=60%}
 
 Top500 supercomputers grouped by the accelator type (Nov 2021 list)<br>
 <small>Image: <https://top500.org/statistics/treemaps/></small>
@@ -137,7 +137,7 @@ Top500 supercomputers grouped by the accelator type (Nov 2021 list)<br>
 # GPUs have become the norm
 
 <center>
-![](https://a3s.fi/summerschool/assets/images/top500_nov22.svg){.center width=60%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/top500_nov22.svg){.center width=60%}
 
 Top500 supercomputers grouped by the accelator type (Nov 2022 list)<br>
 <small>Image: <https://top500.org/statistics/treemaps/></small>
@@ -146,7 +146,7 @@ Top500 supercomputers grouped by the accelator type (Nov 2022 list)<br>
 # GPUs have become the norm
 
 <center>
-![](https://a3s.fi/summerschool/assets/images/top500_nov23.svg){.center width=60%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/top500_nov23.svg){.center width=60%}
 
 Top500 supercomputers grouped by the accelator type (Nov 2023 list)<br>
 <small>Image: <https://top500.org/statistics/treemaps/></small>
@@ -155,7 +155,7 @@ Top500 supercomputers grouped by the accelator type (Nov 2023 list)<br>
 # GPUs have become the norm
 
 <center>
-![](https://a3s.fi/summerschool/assets/images/top500_nov24.svg){.center width=60%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/top500_nov24.svg){.center width=60%}
 
 Top500 supercomputers grouped by the accelator type (Nov 2024 list)<br>
 <small>Image: <https://top500.org/statistics/treemaps/></small>
@@ -164,7 +164,7 @@ Top500 supercomputers grouped by the accelator type (Nov 2024 list)<br>
 # GPUs have become the norm
 
 <center>
-![](https://a3s.fi/summerschool/assets/images/top500_nov25.svg){.center width=60%}
+![](https://a3s.fi/portable-gpu-programming/assets/images/top500_nov25.svg){.center width=60%}
 
 Top500 supercomputers grouped by the accelator type (Nov 2025 list)<br>
 <small>Image: <https://top500.org/statistics/treemaps/></small>

@@ -5,14 +5,14 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 ---
-title:  Working in supercomputers
-event: Portable GPU Programming
-lang:   en
+title: Working in supercomputers
+event: Portable GPU Programming 2026
+lang:  en
 ---
 
 # Outline
 
-- Introduction to Roihu and LUMI
+- Introduction to Roihu and LUMI supercomputers
 - Connecting to Roihu and LUMI supercomputers
 - File system in Roihu and LUMI supercomputers
 - Module system
@@ -21,15 +21,22 @@ lang:   en
 
 # Roihu supercomputer
 
+<div class=column style=width:60%>
 - Current national flagship system
-- Two parts, Roihu-CPU and Roihu-GPU
 - Roihu-GPU
     - 132 nodes with 4 NVIDIA GH200 Grace Hopper superchips per node
-    - Each superchip comprises one H100 GPU and Grace CPU with 72 ARM cores
-    - 120 GiB of CPU memory and 96 GiB of GPU memory per superchip
+    - Each superchip comprises a Hopper H100 GPU (96 GiB memory) and a Grace CPU (72 cores (ARM), 120 GiB memory)
 - Roihu-CPU
     - 486 nodes with AMD Turin CPUs
-    - 384 x86 cores and 768 or 1536 GiB of memory per node
+    - 384 cores (x86_64) and 768 or 1536 GiB of memory per node
+</div>
+<div class=column style=width:38%>
+<center>
+![](https://a3s.fi/portable-gpu-programming/assets/images/roihu.jpg){.center width=90%}
+<small>Image: Pekka Agarth</small>
+</center>
+</div>
+
 
 # LUMI supercomputer
 
@@ -42,7 +49,10 @@ lang:   en
 - auxiliary partition for data-analytics with lots of memory (32 TB per node)
 </div>
 <div class=column style=width:38%>
-![](img/lumi2.jpg){.center width=90%}
+<center>
+![](https://a3s.fi/portable-gpu-programming/assets/images/lumi.jpg){.center width=90%}
+<small>Image: Mikael Kanerva (CSC)</small>
+</center>
 </div>
 
 # Connecting to Roihu and LUMI supercomputers {.section}

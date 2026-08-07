@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ---
 title: Reduction
-event: Portable GPU Programming 2025
+event: Portable GPU Programming 2026
 lang:  en
 ---
 
@@ -24,16 +24,63 @@ lang:  en
   the reduction efficiently without manual implementation
   and/or synchronization within the target region
 
-# Reduction
+# Reduction clause
 
-`reduction(operation:list)`
-  : `-`{.ghost}
+**`reduction(operator:var1, var2, ...)`**
 
-- Applies the *operation* on the variables in *list* to reduce them to a single value
-  - Local private copies of the variables are created for each thread
-  - Initialisation depends on the *operation*
-- Variables need to be shared in the enclosing parallel region
-  - At the end, all local copies are reduced and combined with the original shared variable
+- Performs reduction on the (scalar) variables
+
+This is what happens under the hood:
+
+- A private reduction variable is created for each thread's partial result
+- This private variable is initialized to the operator's initial value
+- The compiler generates a reduction code to aggregate the partial results
+  to the global variable
+
+# Example
+
+::::::{.columns}
+:::{.column}
+```c++
+int n=1000;
+double total=0.0;
+double x[n*n], y[n*n];
+// some code to initialise x and y
+
+#pragma omp target map(tofrom: total)
+#pragma omp teams distribute reduction(+:total)
+for (int i = 0; i < n; i++) {
+    #pragma omp parallel for reduction(+:total)
+    for (int j = 0; j < n; j++) {
+        total += x[i*n + j] * y[i*n + j];
+    }
+}
+```
+:::
+:::{.column}
+```fortranfree
+integer :: n = 1000
+real(8) :: total = 0.0
+real(8), dimension(n, n) :: x, y
+! some code to initialise x and y
+
+!$omp target map(tofrom: total)
+!$omp teams distribute reduction(+:total)
+do j = 1, n
+  !$omp parallel do reduction(+:total)
+  do i = 1, n
+      total = total + x(i,j) * y(i,j)
+  end do
+  !$omp end parallel do
+end do
+!$omp end teams distribute
+!$omp end target
+```
+:::
+::::::
+
+- Note! The scalar `total` needs to be mapped tofrom the device!
+
 
 
 # Reduction operators in C/C++ and Fortran
@@ -84,46 +131,6 @@ lang:  en
 | `ieor`           | `0`           |
 </div>
 
-
-# Example
-
-<div class=column>
-```c++
-int n=1000;
-double sum=0.0;
-double x[n*n], y[n*n];
-// some code to initialise x and y
-
-#pragma omp target map(tofrom: sum)
-#pragma omp teams distribute reduction(+:sum)
-for (int i = 0; i < n; i++) {
-    #pragma omp parallel for reduction(+:sum)
-    for (int j = 0; j < n; j++) {
-        sum += x[i*n + j] * y[i*n + j];
-    }
-}
-```
-</div>
-<div class=column>
-```fortranfree
-integer :: n = 1000
-real(8) :: sum = 0.0
-real(8), dimension(n, n) :: x, y
-! some code to initialise x and y
-
-!$omp target map(tofrom: sum)
-!$omp teams distribute reduction(+:sum)
-do j = 1, n
-  !$omp parallel do reduction(+:sum)
-  do i = 1, n
-      sum = sum + x(i,j) * y(i,j)
-  end do
-  !$omp end parallel do
-end do
-!$omp end teams distribute
-!$omp end target
-```
-</div>
 
 
 

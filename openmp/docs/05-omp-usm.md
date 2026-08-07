@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ---
 title: Unified shared memory
-event: Portable GPU Programming 2025
+event: Portable GPU Programming 2026
 lang:  en
 ---
 

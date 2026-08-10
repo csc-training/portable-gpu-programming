@@ -91,9 +91,9 @@ contains
   subroutine blas_daxpy(handle, n, alpha, x, incx, y, incy, ierr)
     type(c_ptr), value :: handle
     integer, value :: n, incx, incy
-    real(8), intent(in) :: alpha
-    real(8), intent(in) :: x(:)
-    real(8), intent(inout) :: y(:)
+    real(8), target, intent(in) :: alpha
+    real(8), target, intent(in) :: x(:)
+    real(8), target, intent(inout) :: y(:)
     integer, optional, intent(out) :: ierr
     integer(c_int) :: errcode
 

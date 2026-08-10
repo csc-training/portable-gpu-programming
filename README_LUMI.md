@@ -202,6 +202,29 @@ For multi-GPU jobs using MPI:
 - Change the number of MPI tasks and GPUs per node: `--ntasks-per-node=<number_of_mpi_tasks_per_node>` and `--gpus-per-node=<number_of_gpus_per_node>`
 - Uncomment `export MPICH_GPU_SUPPORT_ENABLED=1` to enable GPU-aware MPI
 
+#### OpenMP offload runtime debug
+
+Enable runtime debug information for Cray compiler:
+```bash
+export CRAY_ACC_DEBUG=2
+```
+
+Most verbose setting: `CRAY_ACC_DEBUG=3`.
+
+Enable runtime debug information for AMD Clang compiler ([documentation](https://openmp.llvm.org/design/Runtimes.html#libomptarget-info)):
+```bash
+export LIBOMPTARGET_INFO=$((0x10 | 0x20))
+```
+
+Most verbose setting: `LIBOMPTARGET_INFO=-1`.
+
+Alternatively ([documentation](https://rocm.docs.amd.com/projects/llvm-project/en/latest/conceptual/openmp.html#environment-variables)):
+```bash
+export LIBOMPTARGET_KERNEL_TRACE=1
+export LIBOMPTARGET_KERNEL_TRACE=2
+```
+
+
 ### CPU jobs
 
 Example `job.sh` for running CPU program reserving 1 node, 1 MPI task per node, and 4 CPU cores per task, as well as 1 GB RAM per core:

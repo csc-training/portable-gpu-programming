@@ -226,6 +226,16 @@ These extra CPU cores are especially useful for OpenMP runtime.
 For multi-GPU jobs using MPI:
 - Change the number of MPI tasks and GPUs per node: `--ntasks-per-node=<number_of_mpi_tasks_per_node>` and `--gres=gpu:gh200:<number_of_gpus_per_node>`
 
+#### OpenMP offload runtime debug
+
+Enable runtime debug information for NVIDIA HPC compiler ([documentation](https://docs.nvidia.com/hpc-sdk/archive/25.1/compilers/hpc-compilers-user-guide/index.html#using-openmp)):
+```bash
+export NVCOMPILER_ACC_NOTIFY=3
+```
+
+Note, this is equivalent to `NVCOMPILER_ACC_NOTIFY=$((0x1 | 0x2))`.
+Most verbose setting: `NVCOMPILER_ACC_NOTIFY=$((0x1F))`.
+
 
 ### CPU jobs on Roihu-CPU
 

@@ -98,6 +98,10 @@ amdclang -fopenmp -O3 --offload-arch=gfx90a prog.c -o prog.x
 amdclang++ -fopenmp -O3 --offload-arch=gfx90a prog.cpp -o prog.x
 ```
 
+#### Kokkos
+
+See Kokkos instructions in [separate document](kokkos/installing-using.md)
+
 #### HIP and MPI+HIP
 
 Compilation of HIP and multi-GPU MPI+HIP programs:

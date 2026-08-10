@@ -106,6 +106,10 @@ mpicxx -mp=gpu -O3 -gpu=cc90 -Wall prog.cpp -o prog.x
 mpif90 -mp=gpu -O3 -gpu=cc90 -Wall prog.F90 -o prog.x
 ```
 
+#### Kokkos
+
+See Kokkos instructions in [separate document](kokkos/installing-using.md)
+
 #### CUDA and MPI+CUDA
 
 For GPU programming with CUDA use:

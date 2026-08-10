@@ -207,11 +207,11 @@ for (int i = 0; i < n; i++) {
 
 # Thread blocks and grids of blocks
 
-- Threads are grouped in blocks
+- Threads are grouped in *blocks*
   - Each block is executed by a single hardware unit (compute unit / streaming multiprocessor)
   - Maximum number of threads in a block limited by hardware
   - Good block size is typically a multiple of warp size (e.g., 128 or 256)
-- Thread blocks are organized into a grid
+- Thread blocks are organized into a *grid*
   - Total number of threads = number of blocks × threads per block
   - In order to hide latencies, the code should execute more blocks than the hardware has compute units
 

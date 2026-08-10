@@ -20,7 +20,7 @@ lang:  en
 
 # What is OpenMP?
 
-- OpenMP is an application programming interface (API) for creating parallel programs using **shared-memory multithreading** and/or **accelerator offloading** (GPUs)
+- OpenMP is an application programming interface (API) for creating parallel programs in C, C++, and Fortran using **shared-memory multithreading** and/or **accelerator offloading** (GPUs)
 - OpenMP is a standard
   - First version (1.0) published in 1997
   - Version 4.0 introduced OpenMP offload in 2013
@@ -30,7 +30,7 @@ lang:  en
 
 # Compilers implement OpenMP
 
-- The OpenMP standard is implemented by different compilers for C, C++, and Fortran
+- The OpenMP standard is implemented by different compilers
   - [GCC](https://gcc.gnu.org/) 15 supports all of OpenMP 4.5, most of 5.0, 5.1, and 5.2, and the first 6.0 features for C, C++, and Fortran
   - [Clang](https://www.llvm.org/) 21 supports all of OpenMP 4.5, almost all of 5.0 and most of 5.1 and 5.2 features for C and C++
   - [NVIDIA HPC](https://developer.nvidia.com/hpc-sdk) 26.3 supports all of OpenMP 3.1 and a subset of OpenMP 5.1 in C, C++, and Fortran
@@ -97,8 +97,8 @@ lang:  en
   - Host manages memory of the device
   - Host copies data to/from the device
 - When memories are not separate, no copies are needed (difference is transparent to the user)
-  - With unified shared memory, the physically separate memories can be viewed by OpenMP / programmer
-    as if they were the same memory (copies take place in lower place)
+  - With unified shared memory, physically separate memories can also be used
+    as if they were the same memory (copies take place under the hood nevertheless)
 
 
 # Programming OpenMP
@@ -250,6 +250,7 @@ lang:  en
 :::
 ::::::
 
+- Useful API functions: `omp_get_team_num()`, `omp_get_thread_num()`, `omp_get_num_teams()`, `omp_get_num_threads()`
 
 - Demo: `hello`
 
@@ -399,7 +400,7 @@ end do
 
 - Tells the compiler/runtime only that the loop iterations are independent and can be executed in parallel
   - Leaves more freedom to the implementation to do the work division
-- Compiler support might be buggy, check that you get **correct results** and **expected performance**!
+- Compiler support **might be buggy**, check that you get correct results and expected performance!
 
 <div class=column>
 ```c++

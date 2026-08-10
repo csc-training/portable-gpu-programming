@@ -297,12 +297,8 @@ srun --ntasks-per-node=2 --cpus-per-task=2 ./prog.x
 Create an interactive shell on a compute node:
 
 ```bash
-srun --job-name=cn-shell --account=project_2019754 --partition=small --nodes=1 --ntasks-per-node=1 --cpus-per-task=2 --time=01:00:00 --pty ./tools/launch-cn-shell.sh
+srun --job-name=cn-shell --account=project_2019754 --partition=small --nodes=1 --ntasks-per-node=1 --cpus-per-task=2 --time=01:00:00 --pty env -i HOME="$HOME" TERM="$TERM" bash -l
 ```
-
-The script [launch-cn-shell.sh](tools/launch-cn-shell.sh) launches a bash shell
-with the environment cleaned so that submitting slurm jobs works from the shell
-in the same way as from the login node.
 
 
 ### Performance analysis tools

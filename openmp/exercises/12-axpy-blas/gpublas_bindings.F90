@@ -2,31 +2,51 @@
 !
 ! SPDX-License-Identifier: MIT
 
-module hipblas_bindings
+module gpublas_bindings
   use, intrinsic :: iso_c_binding
   implicit none
 
-  integer(c_int), parameter :: HIPBLAS_POINTER_MODE_HOST = 0
-  integer(c_int), parameter :: HIPBLAS_POINTER_MODE_DEVICE = 1
+  integer(c_int), parameter :: BLAS_POINTER_MODE_HOST   = 0
+  integer(c_int), parameter :: BLAS_POINTER_MODE_DEVICE = 1
 
   interface
-    integer(c_int) function c_hipblasCreate(handle) bind(C, name="hipblasCreate")
+    integer(c_int) function c_blasCreate(handle) &
+#ifdef CUDA
+        bind(C, name="cublasCreate_v2")
+#else
+        bind(C, name="hipblasCreate")
+#endif
       import :: c_ptr, c_int
       type(c_ptr) :: handle
-    end function c_hipblasCreate
+    end function c_blasCreate
 
-    integer(c_int) function c_hipblasDestroy(handle) bind(C, name="hipblasDestroy")
+    integer(c_int) function c_blasDestroy(handle) &
+#ifdef CUDA
+        bind(C, name="cublasDestroy_v2")
+#else
+        bind(C, name="hipblasDestroy")
+#endif
       import :: c_ptr, c_int
       type(c_ptr), value :: handle
-    end function c_hipblasDestroy
+    end function c_blasDestroy
 
-    integer(c_int) function c_hipblasSetPointerMode(handle, mode) bind(C, name="hipblasSetPointerMode")
+    integer(c_int) function c_blasSetPointerMode(handle, mode) &
+#ifdef CUDA
+        bind(C, name="cublasSetPointerMode_v2")
+#else
+        bind(C, name="hipblasSetPointerMode")
+#endif
       import :: c_ptr, c_int
       type(c_ptr), value :: handle
       integer(c_int), value :: mode
-    end function c_hipblasSetPointerMode
+    end function c_blasSetPointerMode
 
-    integer(c_int) function c_hipblasDaxpy(handle, n, alpha, x, incx, y, incy) bind(C, name="hipblasDaxpy")
+    integer(c_int) function c_blasDaxpy(handle, n, alpha, x, incx, y, incy) &
+#ifdef CUDA
+        bind(C, name="cublasDaxpy_v2")
+#else
+        bind(C, name="hipblasDaxpy")
+#endif
       import :: c_ptr, c_int
       type(c_ptr), value :: handle
       integer(c_int), value :: n
@@ -35,40 +55,40 @@ module hipblas_bindings
       integer(c_int), value :: incx
       type(c_ptr), value :: y
       integer(c_int), value :: incy
-    end function c_hipblasDaxpy
+    end function c_blasDaxpy
   end interface
 
 contains
 
-  subroutine hipblasCreate(handle, ierr)
+  subroutine blas_create(handle, ierr)
     type(c_ptr) :: handle
     integer, optional, intent(out) :: ierr
     integer(c_int) :: errcode
 
-    errcode = c_hipblasCreate(handle)
+    errcode = c_blasCreate(handle)
     if (present(ierr)) ierr = errcode
-  end subroutine hipblasCreate
+  end subroutine blas_create
 
-  subroutine hipblasDestroy(handle, ierr)
+  subroutine blas_destroy(handle, ierr)
     type(c_ptr), value :: handle
     integer, optional, intent(out) :: ierr
     integer(c_int) :: errcode
 
-    errcode = c_hipblasDestroy(handle)
+    errcode = c_blasDestroy(handle)
     if (present(ierr)) ierr = errcode
-  end subroutine hipblasDestroy
+  end subroutine blas_destroy
 
-  subroutine hipblasSetPointerMode(handle, mode, ierr)
+  subroutine blas_set_pointer_mode(handle, mode, ierr)
     type(c_ptr), value :: handle
     integer(c_int), value :: mode
     integer, optional, intent(out) :: ierr
     integer(c_int) :: errcode
 
-    errcode = c_hipblasSetPointerMode(handle, mode)
+    errcode = c_blasSetPointerMode(handle, mode)
     if (present(ierr)) ierr = errcode
-  end subroutine hipblasSetPointerMode
+  end subroutine blas_set_pointer_mode
 
-  subroutine hipblasDaxpy(handle, n, alpha, x, incx, y, incy, ierr)
+  subroutine blas_daxpy(handle, n, alpha, x, incx, y, incy, ierr)
     type(c_ptr), value :: handle
     integer, value :: n, incx, incy
     real(8), intent(in) :: alpha
@@ -85,9 +105,8 @@ contains
        stop "Error: integer is not compatible with C int"
     end if
 
-    errcode = c_hipblasDaxpy(handle, n, c_loc(alpha), c_loc(x), incx, c_loc(y), incy)
+    errcode = c_blasDaxpy(handle, n, c_loc(alpha), c_loc(x), incx, c_loc(y), incy)
     if (present(ierr)) ierr = errcode
-  end subroutine hipblasDaxpy
+  end subroutine blas_daxpy
 
-
-end module hipblas_bindings
+end module gpublas_bindings

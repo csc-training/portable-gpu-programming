@@ -68,38 +68,6 @@ Other available editors include *emacs* and *vim*.
 
 ## Compiling
 
-### CPU programming on Roihu-CPU
-
-> [!IMPORTANT]
-> For compiling CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`.
-
-Roihu has several programming environments.
-
-For CPU programming use (this is the default environment activated without loading any modules):
-```bash
-module load gcc/15.2.0 openmpi/5.0.10
-```
-
-#### MPI
-
-Compilation of MPI programs in C, C++, and Fortran:
-```bash
-mpicc -O3 -march=znver5 -Wall prog.c -o prog.x
-mpicxx -O3 -march=znver5 -Wall prog.cpp -o prog.x
-mpif90 -O3 -march=znver5 prog.F90 -o prog.x
-```
-
-The wrapper commands include automatically all the flags needed for building MPI programs.
-
-#### MPI+OpenMP and pure OpenMP (threading with CPUs)
-
-Both pure OpenMP and hybrid MPI+OpenMP programs can be compiled with the same wrappers
-by including `-fopenmp` flag:
-```bash
-mpicc -fopenmp -O3 -march=znver5 -Wall prog.c -o prog.x
-mpicxx -fopenmp -O3 -march=znver5 -Wall prog.cpp -o prog.x
-mpif90 -fopenmp -O3 -march=znver5 prog.F90 -o prog.x
-```
 
 ### GPU programming on Roihu-GPU
 
@@ -108,6 +76,35 @@ mpif90 -fopenmp -O3 -march=znver5 prog.F90 -o prog.x
 
 Roihu has several programming environments and we recommend
 using different environments for CUDA and OpenMP offload.
+
+#### OpenMP offload and MPI+OpenMP offload
+
+For GPU programming with OpenMP offload use:
+```bash
+module purge
+module load nvhpc/26.3
+```
+
+Compilation of OpenMP offload programs:
+```bash
+nvc -mp=gpu -O3 -gpu=cc90 -Wall prog.c -o prog.x
+nvc++ -mp=gpu -O3 -gpu=cc90 -Wall prog.cpp -o prog.x
+nvfortran -mp=gpu -O3 -gpu=cc90 -Wall prog.F90 -o prog.x
+```
+
+To obtain compiler diagnostics:
+```bash
+nvc -mp=gpu -O3 -gpu=cc90 -Minfo=mp prog.c -o prog.x
+nvc++ -mp=gpu -O3 -gpu=cc90 -Minfo=mp prog.cpp -o prog.x
+nvfortran -mp=gpu -O3 -gpu=cc90 -Minfo=mp prog.F90 -o prog.x
+```
+
+Compilation of MPI + OpenMP offload programs works with the `mpi*` wrappers:
+```bash
+mpicc -mp=gpu -O3 -gpu=cc90 -Wall prog.c -o prog.x
+mpicxx -mp=gpu -O3 -gpu=cc90 -Wall prog.cpp -o prog.x
+mpif90 -mp=gpu -O3 -gpu=cc90 -Wall prog.F90 -o prog.x
+```
 
 #### CUDA and MPI+CUDA
 
@@ -134,33 +131,33 @@ Xlinker="-Xlinker $(mpicxx --showme | tr ' ' '\n' | sed -n 's/^-Wl,//p' | paste 
 nvcc -O3 -gencode arch=compute_90a,code=sm_90a $Xcompiler $Xlinker prog.cu -o prog.x
 ```
 
-#### OpenMP offload and MPI+OpenMP offload
 
-For GPU programming with OpenMP offload use:
+### CPU programming on Roihu-CPU
+
+> [!IMPORTANT]
+> For compiling CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`.
+
+Roihu has several programming environments.
+
+For CPU programming use (this is the default environment activated without loading any modules):
 ```bash
-module purge
-module load nvhpc/26.3
+module load gcc/15.2.0 openmpi/5.0.10
 ```
 
-Compilation of OpenMP offload programs:
+#### OpenMP (threading with CPUs) and MPI+OpenMP
+
+Compilation of OpenMP and OpenMP offload programs for CPU threading:
 ```bash
-nvc -mp=gpu -O3 -gpu=cc90 -Wall prog.c -o prog.x
-nvc++ -mp=gpu -O3 -gpu=cc90 -Wall prog.cpp -o prog.x
-nvfortran -mp=gpu -O3 -gpu=cc90 -Wall prog.F90 -o prog.x
+gcc -fopenmp -O3 -march=znver5 -Wall prog.c -o prog.x
+g++ -fopenmp -O3 -march=znver5 -Wall prog.cpp -o prog.x
+gfortran -fopenmp -O3 -march=znver5 prog.F90 -o prog.x
 ```
 
-To obtain compiler diagnostics:
+Compilation of MPI+OpenMP programs works with the `mpi*` wrappers:
 ```bash
-nvc -mp=gpu -O3 -gpu=cc90 -Minfo=mp prog.c -o prog.x
-nvc++ -mp=gpu -O3 -gpu=cc90 -Minfo=mp prog.cpp -o prog.x
-nvfortran -mp=gpu -O3 -gpu=cc90 -Minfo=mp prog.F90 -o prog.x
-```
-
-Compilation of MPI + OpenMP offload programs works with the usual wrappers in this environment:
-```bash
-mpicc -mp=gpu -O3 -gpu=cc90 -Wall prog.c -o prog.x
-mpicxx -mp=gpu -O3 -gpu=cc90 -Wall prog.cpp -o prog.x
-mpif90 -mp=gpu -O3 -gpu=cc90 -Wall prog.F90 -o prog.x
+mpicc -fopenmp -O3 -march=znver5 -Wall prog.c -o prog.x
+mpicxx -fopenmp -O3 -march=znver5 -Wall prog.cpp -o prog.x
+mpif90 -fopenmp -O3 -march=znver5 prog.F90 -o prog.x
 ```
 
 ## Running
@@ -195,46 +192,6 @@ In order to activate the reservation, include the `--reservation=...` option in 
 In addition to the reservations, you can also access all the general partitions available on Roihu.
 
 
-### CPU jobs on Roihu-CPU
-
-> [!IMPORTANT]
-> For running CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`.
-
-Example `job.sh` for running MPI+OpenMP program reserving 1 node, 4 tasks per node, and 2 CPU core per task, as well as 1 GB RAM per core, i.e., 8 CPU cores and 8 GB RAM within one node in total:
-
-```bash
-#!/bin/bash
-#SBATCH --job-name=test
-#SBATCH --account=project_2019754
-#SBATCH --partition=small
-#SBATCH --nodes=1
-#SBATCH --ntasks-per-node=4
-#SBATCH --cpus-per-task=2
-#SBATCH --mem-per-cpu=1G
-#SBATCH --time=00:02:00
-
-# Set the number of threads based on cpus-per-task, which Slurm stores in the SLURM_CPUS_PER_TASK environment variable.
-# The following bash syntax evaluates to 1 if --cpus-per-task was not given.
-export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
-
-# Place and bind threads to single hardware threads
-# Comment the following lines if binding is not desired
-export OMP_PLACES=cores
-export OMP_PROC_BIND=spread
-
-# Run the program
-srun ./prog.x
-```
-
-Rules of thumb for choosing the resources based on the parallelization type:
-- MPI only: `--ntasks-per-node=<number_of_mpi_tasks>` and `--cpus-per-task=1`
-- OpenMP only: `--ntasks-per-node=1` and `--cpus-per-task=<number_of_threads>`
-- MPI+OpenMP: `--ntasks-per-node=<number_of_mpi_tasks>` and `--cpus-per-task=<number_of_threads_per_mpi_task>`
-
-Note that other ways might be reasonable in some cases too.
-Some of such cases will be discussed in the exercises.
-
-
 ### GPU jobs on Roihu-GPU
 
 > [!IMPORTANT]
@@ -264,6 +221,46 @@ These extra CPU cores are especially useful for OpenMP runtime.
 
 For multi-GPU jobs using MPI:
 - Change the number of MPI tasks and GPUs per node: `--ntasks-per-node=<number_of_mpi_tasks_per_node>` and `--gres=gpu:gh200:<number_of_gpus_per_node>`
+
+
+### CPU jobs on Roihu-CPU
+
+> [!IMPORTANT]
+> For running CPU programs, use Roihu-CPU accessed through `roihu-cpu.csc.fi`.
+
+Example `job.sh` for running CPU program reserving 1 node, 1 MPI task per node, and 4 CPU cores per task, as well as 1 GB RAM per core:
+
+```bash
+#!/bin/bash
+#SBATCH --job-name=test
+#SBATCH --account=project_2019754
+#SBATCH --partition=small
+#SBATCH --nodes=1
+#SBATCH --ntasks-per-node=1
+#SBATCH --cpus-per-task=4
+#SBATCH --mem-per-cpu=1G
+#SBATCH --time=00:02:00
+
+# Set the number of threads based on cpus-per-task, which Slurm stores in the SLURM_CPUS_PER_TASK environment variable.
+# The following bash syntax evaluates to 1 if --cpus-per-task was not given.
+export OMP_NUM_THREADS=${SLURM_CPUS_PER_TASK:-1}
+
+# Place and bind threads to single hardware threads
+# Comment the following lines if binding is not desired
+export OMP_PLACES=cores
+export OMP_PROC_BIND=spread
+
+# Run the program
+srun ./prog.x
+```
+
+Rules of thumb for choosing the resources based on the parallelization type:
+- MPI only: `--ntasks-per-node=<number_of_mpi_tasks>` and `--cpus-per-task=1`
+- OpenMP only: `--ntasks-per-node=1` and `--cpus-per-task=<number_of_threads>`
+- MPI+OpenMP: `--ntasks-per-node=<number_of_mpi_tasks>` and `--cpus-per-task=<number_of_threads_per_mpi_task>`
+
+Note that other ways might be reasonable in some cases too.
+Some of such cases will be discussed in the exercises.
 
 
 ### Interactive jobs

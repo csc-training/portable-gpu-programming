@@ -8,4 +8,8 @@ set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type")
 
 project(Hello LANGUAGES CXX)
 
+find_package(Kokkos REQUIRED CONFIG)
+
 add_executable(hello hello.cpp)
+
+target_link_libraries(hello PRIVATE Kokkos::kokkos)

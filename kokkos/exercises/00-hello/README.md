@@ -6,44 +6,46 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Building and running Kokkos programs
 
-In this exercise you can practice how to build and install Kokkos, and how to build
-applications utilizing Kokkos.
-
-## Task: installing Kokkos
-
-Start by installing Kokkos at least on one system and with the one backend along following
-instructions in [installing-using.md](../installing-using.md). It is strongly suggested to try
-to install Kokkos also on your local workstation.
-
-For systems/backends you did not perform the installation yourself, you may use the modules:
-
-In LUMI
-```bash
-module use /scratch/project_462001074/modulefiles
-module load kokkos/omp # or module load kokkos/hip
-```
-
-In Mahti
-```bash
-module use /scratch/project_2015315/modulefiles
-module load kokkos/omp # or module load kokkos/cuda
-```
+In this exercise you can practice and how to build
+applications utilizing Kokkos, and how to build and install Kokkos,
 
 ## Task: building Kokkos applications
 
-Build the [hello.cpp](hello.cpp) code with the provided `CMakeList.txt`.
-Try to test HIP and CUDA backends, as well as OpenMP backend (on either of the
-supercomputers or on your own laptop).
+Build the [hello.cpp](hello.cpp) code by adding the necessary Kokkos
+definitions to the provided `CMakeList.txt`.
+
+Try to test CUDA and HIP backends, as well as OpenMP backend (on either of the
+supercomputers).
+
+You can start with the existing installations by using the following modules:
+
+In Roihu
+```bash
+module use /projappl/project_2019754/modulefiles
+module load kokkos/cuda # or module load kokkos/omp
+```
+
+In LUMI
+```bash
+module use /projappl/project_462001610/modulefiles
+module load kokkos/omp # or module load kokkos/hip
+```
+
+Once the `CMakeList.txt` is completed, the code can be configured and build with:
+```
+cmake -Bbuild-mybackend
+cmake --build build-mybackend
+```
 
 Note that in LUMI you need to specify the CXX compiler both for HIP and OpenMP.
 
 For HIP:
 ```
-cmake -Bbuild-hip -DCMAKE_CXX_COMPILER=hipcc  # add -DKokkos_ROOT if not using module
+cmake -Bbuild-hip -DCMAKE_CXX_COMPILER=hipcc
 cmake --build build-hip
 ```
 
-For LUMI:
+For OpenMP in LUMI:
 ```
 cmake -Bbuild-omp -DCMAKE_CXX_COMPILER=CC  # add -DKokkos_ROOT if not using module
 cmake --build build-omp
@@ -59,4 +61,16 @@ srun ./build-xxx/hello --kokkos-print-configuration
 ```
 
 See how the output differs between backends
+
+## Bonus task: installing Kokkos
+
+Try to install Kokkos at least on one system and with the one backend along following
+instructions in [installing-using.md](../installing-using.md). It is strongly suggested to try
+to install Kokkos also on your local workstation.
+
+In order to use your own installation, provide -DKokkos_ROOT when configuring the application:
+```
+cmake -Bbuild-mycuda -DKokkos_ROOT=/scratch/project_2015315/$USER/kokkos-cuda
+cmake --build build-mycuda
+```
 

@@ -4,7 +4,7 @@
 
 #include <stdio.h>
 #include <stdlib.h>
-#include "helper_functions.h"
+#include "axpy_helper_functions.h"
 #include "kernels.h"
 
 

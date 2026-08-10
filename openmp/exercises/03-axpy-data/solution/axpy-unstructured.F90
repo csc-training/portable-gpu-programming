@@ -2,10 +2,10 @@
 !
 ! SPDX-License-Identifier: MIT
 
-#include "helper_functions.F90"
+#include "axpy_helper_functions.F90"
 
 program axpy
-  use helper_functions
+  use axpy_helper_functions
   implicit none
   character(len=32) :: arg
   integer :: i, n

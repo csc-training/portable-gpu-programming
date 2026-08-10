@@ -2,11 +2,11 @@
 !
 ! SPDX-License-Identifier: MIT
 
-#include "helper_functions.F90"
+#include "heat_helper_functions.F90"
 
 subroutine run(n, niter)
   use omp_lib
-  use helper_functions
+  use heat_helper_functions
   implicit none
   integer, intent(in) :: n, niter
   integer(kind=8) :: nx, ny

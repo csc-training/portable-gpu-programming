@@ -35,7 +35,7 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
 1. Study, compile, and run the provided code. You can provide the array size as a command line argument, e.g., `./axpy.x 1024`.
 
-   Note: the code includes a separate `helper_functions.{h,F90}` file that provides the `print_array()`
+   Note: the code includes a separate `axpy_helper_functions.{h,F90}` file that provides the `print_array()`
    helper function. You don't need to study the contents of the helper file, but you can use it as such.
 
 2. Offload the axpy loop to GPU by adding suitable OpenMP directives (see 'TODO' in the code).

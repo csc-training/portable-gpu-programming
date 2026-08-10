@@ -29,7 +29,7 @@ for f in *.c; do
     mv ${f%.c}.lst data/c-${f%.c}.lst
 done
 for f in *.F90; do
-    [[ $(basename "$f") == "helper_functions.F90" ]] && continue
+    [[ $(basename "$f") == "axpy_helper_functions.F90" ]] && continue
     $ft "$f" -o "f-${f%.F90}.x"
     sed "s|$(dirname $(readlink -f $f))/||g" ${f%.F90}.lst > data/f-${f%.F90}.lst
 done

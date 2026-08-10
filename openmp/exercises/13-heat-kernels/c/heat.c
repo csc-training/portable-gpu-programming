@@ -9,7 +9,7 @@
 #include <string.h>
 #include <omp.h>
 #include "kernels.h"
-#include "helper_functions.h"
+#include "heat_helper_functions.h"
 
 
 void run(const int n, const int niter)

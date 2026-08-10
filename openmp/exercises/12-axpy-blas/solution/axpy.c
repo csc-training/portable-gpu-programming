@@ -7,7 +7,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include "gpublas.h"
-#include "helper_functions.h"
+#include "axpy_helper_functions.h"
 
 
 int main(int argc, char* argv[]) {

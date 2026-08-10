@@ -2,12 +2,12 @@
 !
 ! SPDX-License-Identifier: MIT
 
-#include "helper_functions.F90"
+#include "axpy_helper_functions.F90"
 #include "gpublas_bindings.F90"
 
 program axpy
   use, intrinsic :: iso_c_binding
-  use helper_functions
+  use axpy_helper_functions
   use gpublas_bindings
   implicit none
   character(len=32) :: arg

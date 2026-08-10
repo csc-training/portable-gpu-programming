@@ -28,7 +28,7 @@ for f in *.c; do
     $cc "$f" -o "c-${f%.c}.x" 2> "data/c-${f%.c}.lst"
 done
 for f in *.F90; do
-    [[ $(basename "$f") == "helper_functions.F90" ]] && continue
+    [[ $(basename "$f") == "axpy_helper_functions.F90" ]] && continue
     $ft "$f" -o "f-${f%.F90}.x" 2> "data/f-${f%.F90}.lst"
 done
 

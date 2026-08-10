@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ---
 title: Performance portable memory access patterns 
-event: Portable GPU Programming 2025
+event: Portable GPU Programming 2026
 lang:  en
 ---
 

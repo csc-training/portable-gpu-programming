@@ -80,20 +80,49 @@ void run(const int n, const int niter)
         u = unew;
         unew = tmp;
 
-        // Calculate average
+        // Calculate average per quadrant
         if (it % 100 == 0) {
-            double average = 0.0;
-            #pragma omp target map(tofrom: average) depend(in: u[0:nx*ny])
-            #pragma omp teams distribute parallel for collapse(2) reduction(+:average)
-            for (int i = 0; i < ny; i++) {
-                for (int j = 0; j < nx; j++) {
-                    int ij = i * nx + j;
-                    average += u[ij];
+            const int nx2 = nx / 2;
+            const int ny2 = ny / 2;
+            double avg[4] = {0.0, 0.0, 0.0, 0.0};
+
+            #pragma omp target map(tofrom: avg[0]) depend(in: u[0:nx*ny])
+            #pragma omp teams distribute parallel for collapse(2) reduction(+:avg[0])
+            for (int i = 0; i < ny2; i++) {
+                for (int j = 0; j < nx2; j++) {
+                    avg[0] += u[i * nx + j];
                 }
             }
-            average /= (nx * ny);
 
-            printf("%06d: %+e\n", it, average);
+            #pragma omp target map(tofrom: avg[1]) depend(in: u[0:nx*ny])
+            #pragma omp teams distribute parallel for collapse(2) reduction(+:avg[1])
+            for (int i = 0; i < ny2; i++) {
+                for (int j = nx2; j < nx; j++) {
+                    avg[1] += u[i * nx + j];
+                }
+            }
+
+            #pragma omp target map(tofrom: avg[2]) depend(in: u[0:nx*ny])
+            #pragma omp teams distribute parallel for collapse(2) reduction(+:avg[2])
+            for (int i = ny2; i < ny; i++) {
+                for (int j = 0; j < nx2; j++) {
+                    avg[2] += u[i * nx + j];
+                }
+            }
+
+            #pragma omp target map(tofrom: avg[3]) depend(in: u[0:nx*ny])
+            #pragma omp teams distribute parallel for collapse(2) reduction(+:avg[3])
+            for (int i = ny2; i < ny; i++) {
+                for (int j = nx2; j < nx; j++) {
+                    avg[3] += u[i * nx + j];
+                }
+            }
+
+            printf("%06d:  %+9.4f  %+9.4f  %+9.4f  %+9.4f\n", it,
+                   avg[0] / (ny2 * nx2),
+                   avg[1] / (ny2 * (nx - nx2)),
+                   avg[2] / ((ny - ny2) * nx2),
+                   avg[3] / ((ny - ny2) * (nx - nx2)));
         }
 
         // Write data

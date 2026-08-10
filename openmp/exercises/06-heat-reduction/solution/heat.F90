@@ -13,7 +13,8 @@ subroutine run(n, niter)
   integer :: i, j, it
   real(8), pointer :: u(:,:), unew(:,:), tmp(:,:)
   real(8) :: Lx, Ly, alpha, dx, dy, dx2, dy2, dt, rx, ry, t0, t1
-  real(8) :: average
+  real(8) :: avg1, avg2, avg3, avg4
+  integer(kind=8) :: nx2, ny2
 
   ! Grid size
   nx = n
@@ -80,20 +81,57 @@ subroutine run(n, niter)
     u => unew
     unew => tmp
 
-    ! Calculate average
+    ! Calculate average per quadrant
     if (mod(it, 100) == 0) then
-      average = 0.0d0
-      !$omp target map(tofrom: average)
-      !$omp teams distribute parallel do collapse(2) reduction(+:average)
-      do j = 1, nx
-        do i = 1, ny
-          average = average + u(i,j)
+      nx2 = nx / 2
+      ny2 = ny / 2
+      avg1 = 0.0d0; avg2 = 0.0d0; avg3 = 0.0d0; avg4 = 0.0d0
+
+      !$omp target map(tofrom: avg1)
+      !$omp teams distribute parallel do collapse(2) reduction(+:avg1)
+      do j = 1, nx2
+        do i = 1, ny2
+          avg1 = avg1 + u(i,j)
         end do
       end do
       !$omp end teams distribute parallel do
       !$omp end target
-      average = average / (nx * ny)
-      print '(I6.6, A, SP, ES0.6)', it, ": ", average
+
+      !$omp target map(tofrom: avg2)
+      !$omp teams distribute parallel do collapse(2) reduction(+:avg2)
+      do j = nx2 + 1, nx
+        do i = 1, ny2
+          avg2 = avg2 + u(i,j)
+        end do
+      end do
+      !$omp end teams distribute parallel do
+      !$omp end target
+
+      !$omp target map(tofrom: avg3)
+      !$omp teams distribute parallel do collapse(2) reduction(+:avg3)
+      do j = 1, nx2
+        do i = ny2 + 1, ny
+          avg3 = avg3 + u(i,j)
+        end do
+      end do
+      !$omp end teams distribute parallel do
+      !$omp end target
+
+      !$omp target map(tofrom: avg4)
+      !$omp teams distribute parallel do collapse(2) reduction(+:avg4)
+      do j = nx2 + 1, nx
+        do i = ny2 + 1, ny
+          avg4 = avg4 + u(i,j)
+        end do
+      end do
+      !$omp end teams distribute parallel do
+      !$omp end target
+
+      print '(I6.6, A, SP, 4(F10.4, 2X))', it, ": ", &
+        avg1 / (ny2 * nx2), &
+        avg2 / (ny2 * (nx - nx2)), &
+        avg3 / ((ny - ny2) * nx2), &
+        avg4 / ((ny - ny2) * (nx - nx2))
     end if
 
   end do

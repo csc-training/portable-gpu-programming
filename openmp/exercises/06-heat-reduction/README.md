@@ -9,9 +9,9 @@ SPDX-License-Identifier: CC-BY-4.0
 In this exercise we practise reduction operations.
 
 We extend the heat equation code from the previous exercise to monitor the average
-temperature across the grid every 100th iteration.
+temperature across the four quadrants of the grid every 100th iteration.
 
-The current code attempts to calculate the average on the CPU, but since the data
+The current code attempts to calculate the averages on the CPU, but since the data
 resides on the GPU, it is reading stale data as
 the average is computed from the CPU copy which is not up to date.
 

@@ -25,8 +25,8 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
    On Roihu (NVIDIA), the code can be compiled with
 
-       nvc -mp=gpu -O3 -gpu=cc90 -Wall axpy.c -L${NVHPC_ROOT}/math_libs/13.1/lib64 -lcublas -o axpy.x
-       nvfortran -mp=gpu -O3 -gpu=cc90 -Wall axpy.F90 -L${NVHPC_ROOT}/math_libs/13.1/lib64 -lcublas -o axpy.x
+       nvc -mp=gpu -O3 -gpu=cc90 -Wall axpy.c -lcublas -o axpy.x
+       nvfortran -mp=gpu -O3 -gpu=cc90 -Wall axpy.F90 -lcublas -o axpy.x
 
    On LUMI (AMD), the code can be compiled with
 

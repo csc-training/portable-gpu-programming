@@ -5,3 +5,4 @@ modules:
   - openmp
   - kokkos
   - interop
+  - multi-gpu

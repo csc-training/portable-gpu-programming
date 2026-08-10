@@ -13,7 +13,7 @@ b. I know the basics of Linux command line
 c. I can write bash scripts and know some magic one liners
 d. I contribute to Linux kernel development
 
-2. My previous experiene with git
+2. My previous experience with git
 
 a. I know how to use github
 b. I know how to clone, commit, push, and pull

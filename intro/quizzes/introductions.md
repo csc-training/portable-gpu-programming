@@ -19,11 +19,19 @@ d. nano
 e. I've written my editor
 f. other
 
-3. Programming languages I'm comfortable with
+3. My previous programming experience
+
+a. No previous programming experience
+b. I've completed introductory programming course at the university
+c. I can reason about complex C++ / Fortran programs
+d. I am contributing to a scientific software
+e. I read PTX assembly with my morning coffee
+
+4. Programming languages I'm comfortable with
 
 Open answer, results in word cloud
 
-4. My favourite programming language
+5. My favourite programming language
 
 a. C
 b. C++
@@ -33,16 +41,16 @@ e. Rust
 f. Julia
 g. other
 
+6. I am currently working on software project that uses
 
-5. My previous programming experience
+a. C
+b. C++
+c. Fortran
+d. other
+e. I am not working on a software project
 
-a. No previous programming experience
-b. I've completed introductory programming course at the university
-c. I can reason about complex C++ / Fortran programs
-d. I am contributing to a scientific software
-e. I read PTX assembly with my morning coffee
 
-6. My previous parallel computing experience
+7. My previous parallel computing experience
 
 a. No previous experience
 b. I've been using parallel programs in supercomputers

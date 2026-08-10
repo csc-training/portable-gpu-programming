@@ -6,6 +6,11 @@
 
 #pragma once
 
+// Auto-detect NVIDIA HPC SDK compilers (nvc, nvc++)
+#if defined(__NVCOMPILER) && !defined(CUDA)
+  #define CUDA
+#endif
+
 #if defined(CUDA)
   #include <cublas_v2.h>
   typedef cublasHandle_t          blas_handle_t;

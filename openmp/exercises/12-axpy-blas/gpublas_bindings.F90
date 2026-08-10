@@ -2,6 +2,11 @@
 !
 ! SPDX-License-Identifier: MIT
 
+! Auto-detect NVIDIA HPC SDK compilers (nvfortran)
+#if defined(__NVCOMPILER) && !defined(CUDA)
+#  define CUDA
+#endif
+
 module gpublas_bindings
   use, intrinsic :: iso_c_binding
   implicit none

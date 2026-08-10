@@ -2,27 +2,36 @@
 !
 ! SPDX-License-Identifier: MIT
 
-subroutine run(n)
+#include "helper_functions.F90"
+
+program axpy
   use helper_functions
   implicit none
   !$omp requires unified_shared_memory
-  integer, intent(in) :: n
+  character(len=32) :: arg
+  integer :: i, n
+  real(8) :: alpha, frac, t0, t1
   real(8), allocatable :: x(:), y(:)
-  real(8) :: alpha
-  integer :: i
-  real(8) :: frac
 
-  print '(A, I0)', "Using N = ", n
+  ! Array size
+  n = 102400
+  call get_command_argument(1, arg)
+  if (len_trim(arg) > 0) then
+    read(arg, *) n
+  end if
+  print '(A, I0)', "Array size n = ", n
 
   allocate(x(n), y(n))
 
   ! Initialization
   alpha = 3.0d0
+  !$omp target teams distribute parallel do
   do i = 1, n
     frac = 1.0d0 / real(n - 1, kind=8)
     x(i) = real(i - 1, kind=8) * frac
     y(i) = real(i - 1, kind=8) * frac * 100.0d0
   end do
+  !$omp end target teams distribute parallel do
 
   ! Print input values
   print '(A)', "Input:"
@@ -31,7 +40,7 @@ subroutine run(n)
   call print_array("y", y)
 
   ! Calculate axpy
-  !$omp target teams distribute parallel do map(to: x(1:n)) map(tofrom: y(1:n))
+  !$omp target teams distribute parallel do
   do i = 1, n
     y(i) = y(i) + alpha * x(i)
   end do
@@ -43,27 +52,5 @@ subroutine run(n)
 
   deallocate(x, y)
 
-end subroutine run
-
-
-program axpy
-  implicit none
-  integer :: n, arg_len, iostat
-  character(len=32) :: arg
-
-  ! Default value
-  n = 102400
-
-  ! Get command line argument if provided
-  call get_command_argument(1, arg)
-  if (len_trim(arg) > 0) then
-    read(arg, *, iostat=iostat) n
-    if (iostat /= 0 .or. n < 1) then
-      print *, 'Size needs to be greater than zero.'
-      stop 1
-    end if
-  end if
-
-  call run(n)
-
 end program axpy
+

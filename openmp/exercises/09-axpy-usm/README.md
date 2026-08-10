@@ -4,22 +4,22 @@ SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
 SPDX-License-Identifier: CC-BY-4.0
 -->
 
-## Using unified shared memory
+# Exercise: Using unified shared memory
 
 In this exercise we practise the use of unified shared memory in OpenMP.
 
-We try axpy and Poisson codes from previous exercises with unified shared memory.
+We try the axpy code from previous exercises with unified shared memory.
 
 The sample codes here are the latest model codes for both cases, with
 `omp requires unified_shared_memory` inserted at the top of the files.
 
 The [solution directory](solution/) contains a model solution and discussion on the exercises below.
 
-### Exercises for axpy
+## Tasks
 
 1. Try compiling and running the axpy code.
 
-   It's expected to see the error
+   On LUMI, it's expected to see the error
 
        ACC: CRAY_ACC_ERROR - OpenMP program 'requires unified_shared_memory', but the current device does not support unified shared memory
 
@@ -28,15 +28,5 @@ The [solution directory](solution/) contains a model solution and discussion on 
 
        export HSA_XNACK=1
 
-   Try then running the code. Set also `CRAY_ACC_DEBUG=2` and compare the output to previous cases.
-
    Remove all data mapping statments from the USM version of the code. Does it still run?
    What happened with the previous version of the code without USM?
-
-### Exercises for Poisson
-
-1. Try compiling and running the code.
-
-   How does the runtime compare to previous cases?
-
-   Do you get correct results and correct output files?

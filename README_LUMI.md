@@ -286,6 +286,28 @@ srun --job-name=cn-shell --account=project_462001610 --partition=small --nodes=1
 ```
 
 
+### Performance analysis tools
+
+[Rocprofv3](https://rocm.docs.amd.com/projects/rocprofiler-sdk/en/latest/how-to/using-rocprofv3.html) is a performance analysis tool for tracing GPU workloads.
+Profiling is done in two steps:
+
+1. Collect profiling data by running the application under `rocprofv3` command line tool
+2. Analyze the results with <https://ui.perfetto.dev> GUI
+
+The first step is done by replacing `srun ./prog.x` in the job script by:
+```bash
+srun rocprofv3 --runtime-trace --marker-trace --output-format pftrace -- ./prog.x
+```
+This creates a file `nidXXXX/XXXX_results.pftrace`.
+
+The second step, analysis:
+
+1. Transfer the file to the local computer:
+   ```bash
+   scp <your_username>@lumi.csc.fi:<full_path>/nidXXXX/XXXX_results.pftrace .
+   ```
+2. Open the file in  <https://ui.perfetto.dev> (Chromium recommended).
+
 
 ## Resources
 

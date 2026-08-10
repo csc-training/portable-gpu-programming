@@ -65,9 +65,9 @@ For GPU programming use:
 module load LUMI/25.03 partition/G rocm/6.3.4
 ```
 
-#### OpenMP offload and MPI+OpenMP offload with Cray compiler
+#### OpenMP offload and MPI+OpenMP offload
 
-The compilation command is the same as in the CPU case:
+Compilation of OpenMP offload and MPI+OpenMP offload programs:
 ```bash
 cc -fopenmp -O3 -Wall prog.c -o prog.x
 CC -fopenmp -O3 -Wall prog.cpp -o prog.x
@@ -92,15 +92,18 @@ See [HPE Cray Clang C and C++ Quick Reference (17.0.1)](https://support.hpe.com/
 and [ftn man pages](https://cpe.ext.hpe.com/docs/24.03/cce/man1/crayftn.1.html)
 for further information.
 
-Alternatively to Cray compilers above, the C and C++ codes can also be compiled with AMD Clang:
+Alternatively to Cray compilers above, you can activate AMD Clang
+on top of the earlierly loaded GPU programming modules:
 ```bash
-amdclang -fopenmp -O3 --offload-arch=gfx90a prog.c -o prog.x
-amdclang++ -fopenmp -O3 --offload-arch=gfx90a prog.cpp -o prog.x
+module load PrgEnv-amd
 ```
+
+Then `cc` and `CC` compiler wrappers correspond to `amdclang` and `amdclang++`,
+respectively.
 
 #### Kokkos
 
-See Kokkos instructions in [separate document](kokkos/installing-using.md)
+See Kokkos instructions in [separate document](kokkos/installing-using.md).
 
 #### HIP and MPI+HIP
 

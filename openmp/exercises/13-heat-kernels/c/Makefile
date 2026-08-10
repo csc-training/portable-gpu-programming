@@ -6,7 +6,7 @@ cc=nvc -mp=gpu -O3 -gpu=cc90 -Wall -Minfo=mp
 nvcc=nvcc -O3 -arch=sm_90
 
 heat.x: heat.o kernels.o
-	$(cc) $^ -L${NVHPC_ROOT}/cuda/13.1/targets/sbsa-linux/lib -lcudart -lstdc++ -o $@
+	$(cc) $^ -L${NVHPC_ROOT}/cuda/13.1/lib64 -lcudart -lstdc++ -o $@
 
 heat.o: heat.c
 	$(cc) -c $<

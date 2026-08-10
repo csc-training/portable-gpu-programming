@@ -31,23 +31,24 @@ SPDX-License-Identifier: CC-BY-4.0
 - [Heat equation: Asynchronous GPU execution](07-heat-async/)
 - [Heat equation: Overlapping I/O with GPU execution](08-heat-io/)
 
-### Device functions
-
-- [Heat equation: Restructuring code](09-heat-kernels/)
-
 ### Unified shared memory
 
-- [Using unified shared memory in axpy](10-axpy-usm/)
+- [Using unified shared memory in axpy](09-axpy-usm/)
+
+### Device functions
+
+- [Declaring device functions for OpenMP offload](10-axpy-device-functions/)
 
 
 ## Friday
 
-### Interoperability with libraries
+### Interoperability with CUDA/HIP and libraries
 
 - [Examining pointers](11-interop/)
-- [Call axpy using GPU libraries](12-axpy-blas/)
+- [Calculate axpy using GPU BLAS libraries](12-axpy-blas/)
+- [Heat equation: Integrate custom CUDA/HIP kernels](13-heat-kernels/)
 
 ### Using multiple GPUs
 
-- [Send and receive messages between GPUs](13-mpi-send-recv/)
-- [Heat equation: Using multiple GPUs](14-heat-multi-gpu/)
+- [Send and receive messages between GPUs](14-mpi-send-recv/)
+- [Heat equation: Using multiple GPUs](15-heat-multi-gpu/)

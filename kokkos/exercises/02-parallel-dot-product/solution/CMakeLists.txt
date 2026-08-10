@@ -4,9 +4,11 @@
 
 cmake_minimum_required(VERSION 3.20)
 
+set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type")
+
 project(AXPY LANGUAGES CXX)
 
-include(../../common.cmake)
+find_package(Kokkos REQUIRED CONFIG)
 
 add_executable(dot-product dot-product.cpp)
 

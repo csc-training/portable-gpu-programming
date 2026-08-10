@@ -6,12 +6,10 @@ cmake_minimum_required(VERSION 3.20)
 
 set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type")
 
-project(Hello LANGUAGES CXX)
+project(poisson LANGUAGES CXX)
 
-find_package(MPI REQUIRED)
 find_package(Kokkos REQUIRED CONFIG)
 
-add_executable(hello hello.cpp)
+add_executable(poisson poisson.cpp)
 
-target_link_libraries(hello PRIVATE Kokkos::kokkos)
-target_link_libraries(hello PRIVATE MPI::MPI_CXX)
+target_link_libraries(poisson PRIVATE Kokkos::kokkos)

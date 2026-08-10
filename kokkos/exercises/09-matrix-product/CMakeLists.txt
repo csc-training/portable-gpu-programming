@@ -4,6 +4,8 @@
 
 cmake_minimum_required(VERSION 3.20)
 
+set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type")
+
 project(Gemm LANGUAGES CXX)
 
 find_package(KokkosKernels REQUIRED)

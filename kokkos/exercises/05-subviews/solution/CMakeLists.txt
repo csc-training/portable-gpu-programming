@@ -4,9 +4,11 @@
 
 cmake_minimum_required(VERSION 3.20)
 
+set(CMAKE_BUILD_TYPE "Release" CACHE STRING "Build type")
+
 project(subviews LANGUAGES CXX)
 
-include(../../common.cmake)
+find_package(Kokkos REQUIRED CONFIG)
 
 add_executable(subviews subviews.cpp)
 

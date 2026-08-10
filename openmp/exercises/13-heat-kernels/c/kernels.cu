@@ -2,6 +2,14 @@
 //
 // SPDX-License-Identifier: MIT
 
+#ifdef __CUDACC__
+#include <cuda_runtime.h>
+#else
+#include <hip/hip_runtime.h>
+#define cudaDeviceSynchronize hipDeviceSynchronize
+#endif
+
+
 __global__ static
 void evolve_kernel(double *unew, const double *u,
                    const int nx, const int ny,

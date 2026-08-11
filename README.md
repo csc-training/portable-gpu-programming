@@ -33,9 +33,9 @@ The slides are available in
 | 09:00 | Welcome
 | 09:15 | [Introduction to High-Performance Computing](intro)
 | 10:00 | [Roihu and LUMI Computing Platforms](intro)
-| 11:00 | [Introduction to GPUs](intro)
 | 12:00 | Lunch
-| 13:00 | [OpenMP offload](openmp)
+| 13:00 | [Introduction to GPUs](intro)
+| 14:00 | [OpenMP offload](openmp)
 | 16:45 | Day wrap-up
 
 ### Day 2, Wed 12.8.

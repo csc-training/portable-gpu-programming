@@ -28,13 +28,13 @@ double stop_time = timer.seconds()
 In Roihu-GPU Kokkos Kernels is available (only for the CUDA backend) with
 ```
 ml use /projappl/project_2019754/modules
-ml kokkos-kernels
+ml kokkos-kernels/5.2.0/cuda
 ```
 
 In LUMI Kokkos Kernels is available (only for the HIP backend) with
 ```
-ml use /scratch/project_462001074/modules
-ml kokkos-kernels
+ml use /projappl/project_462001610/modules
+ml kokkos-kernels/5.2.0/hip
 ```
 
 

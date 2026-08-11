@@ -2,7 +2,7 @@
 #SBATCH --job-name=mpi-hello
 #SBATCH --output=%x.%j.out
 #SBATCH --error=%x.%j.err
-#SBATCH --account=project_462001074
+#SBATCH --account=project_462001610
 #SBATCH --partition=debug
 #SBATCH --time=00:05:00
 #SBATCH --nodes=1

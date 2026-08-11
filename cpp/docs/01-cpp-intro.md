@@ -81,7 +81,6 @@ int x = 0;
 int *x_ptr = &x;
 foo1(x_ptr);
 std::cout << x << std::endl;
-
 ```
 
 - Reference: Alias of another variable
@@ -89,43 +88,10 @@ std::cout << x << std::endl;
 ```cpp
 void foo2(int &a) { a = 42; }
 
-
 int y = 0;
 foo2(y);
 std::cout << y << std::endl;
-
 ```
-
-# Containers
-
-- C++ standard library provides `std::array` and `std::vector` containers for data
-  - Follows [RAII](https://en.cppreference.com/w/cpp/language/raii) principle
-  - Prefer over explicit memory management via raw pointers
-
-```cpp
-#include <vector>
-
-std::vector<double> a(10);
-a[0] = 5;
-a[1] = 7;
-```
-
-# Obtaining pointers in C++ (aka raw pointers)
-
-- For getting raw pointer to the data in `std::array` and `std::vector` containers, use `array.data()` or `&array[i]`
-
-```cpp
-int *p; // declaration of a raw pointer
-std::vector<int> a(5);
-
-p = a.data();  // memory address of the first element
-p = &a[0];     // equivalent to the line above
-
-p = a.data() + 2;  // memory address of the third element
-p = &a[2];         // equivalent to the line above
-```
-
-- Demo: `pointers.cpp`
 
 
 # Classes
@@ -172,6 +138,7 @@ p.print();
 # Functors 
 
 - Functors (function objects) behave like functions after initialization
+- Functors have a state which is determined at runtime
 
 ```cpp
 class Adder {
@@ -185,13 +152,13 @@ public:
 Adder add{5};
 int sum = add(2);
 std::cout << "The sum is: " << sum << std::endl;
-
 ```
 
 
 # Lambda expressions
 
-- Unnamed function objects that can capture variables in scope
+- Lambda expressions create unnamed function objects 
+- Resulting functor gets it state by capturing variables from the scope
 - Syntax: `[ captures ] (parameters) -> return-type { body }`
 
 ```cpp
@@ -207,7 +174,6 @@ c = func1(4);  // 5
 // Capture to a new variable
 auto func2 = [d = 2*a](int x) { return d + x; };
 c = func2(4);  // 2
-
 ```
 
 # Lambda expressions cont'd
@@ -272,5 +238,4 @@ c = func6(4);  // 8
 - Modern C++ allows generic programming
 - Classes, templates, lambdas, ...
 - Reusable, expressive, and efficient code
-
 

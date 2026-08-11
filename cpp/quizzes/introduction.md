@@ -9,11 +9,12 @@ SPDX-License-Identifier: CC-BY-4.0
 a. Pointers and references
 b. auto keyword
 c. Templates
-d. Lambdas and functor
+d. Lambdas and functors
 c. standard algorithms
 
 # My experience with CMake
 
-a. I can config and build programs with CMake
-b. I can modify simple CMakeLists.txt 
-c. I can implement CMake based build system for complex project 
+a. I have never used CMake
+b. I can config and build programs with CMake
+c. I can modify simple CMakeLists.txt 
+d. I can implement CMake based build system for complex project 

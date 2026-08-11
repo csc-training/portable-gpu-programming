@@ -25,14 +25,14 @@ SPDX-License-Identifier: CC-BY-4.exercises/0
 - [Playing with subviews](exercises/05-subviews)
 - [Poisson equation](exercises/06-poisson)
 
+## Kokkos Kernels
+
+- [Matrix multiplication](exercises/09-matrix-product)
+
 ## Using MPI with Kokkos
 
 - [MPI hello world](exercises/07-mpi-hello)
 - [Message exchange](exercises/08-mpi-message-exchange)
-
-## Kokkos Kernels
-
-- [Matrix multiplication](exercises/09-matrix-product)
 
 ## Bonus exercises
 

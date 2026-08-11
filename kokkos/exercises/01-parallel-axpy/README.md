@@ -19,21 +19,21 @@ and the computational body by lambda function.
 1. Build and run the code in Roihu with cuda backend. You can use your own Kokkos installation
 or use the module
 ```
-module use /projappl/project_2019754/modulefiles
+module use /projappl/project_2019754/modules
 module load kokkos/5.2.0/cuda
 ```
 
 2. Build and run the code in LUMI with OpenMP backend. You can use your own Kokkos installation
 or use the module
 ```
-module use /projappl/project_462001610/modulefiles
+module use /projappl/project_462001610/modules
 module load kokkos/5.2.0/omp 
 ```
 
 3. Build and run the code in LUMI with HIP backend. You can use your own Kokkos installation
 or use the module
 ```
-module use /projappl/project_462001610/modulefiles
+module use /projappl/project_462001610/modules
 module load kokkos/5.2.0/hip 
 ```
    - Can you explain why the code fails at run time?

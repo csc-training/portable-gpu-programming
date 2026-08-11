@@ -21,13 +21,13 @@ You can start with the existing installations by using the following modules:
 
 In Roihu
 ```bash
-module use /projappl/project_2019754/modulefiles
+module use /projappl/project_2019754/modules
 module load kokkos/5.2.0/cuda # or module load kokkos/5.2.0/omp
 ```
 
 In LUMI
 ```bash
-module use /projappl/project_462001610/modulefiles
+module use /projappl/project_462001610/modules
 module load kokkos/5.2.0/omp # or module load kokkos/5.2.0/hip
 ```
 

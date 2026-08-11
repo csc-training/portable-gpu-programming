@@ -25,15 +25,16 @@ double start_time = timer.seconds()
 double stop_time = timer.seconds()
 ```
 
-In LUMI Kokkos Kernels is available (only for the HIP backend) with
+In Roihu-GPU Kokkos Kernels is available (only for the CUDA backend) with
 ```
-ml use /scratch/project_462001074/modulefiles
+ml use /projappl/project_2019754/modules
 ml kokkos-kernels
 ```
 
-In Mahti Kokkos Kernels is available (only for the CUDA backend) with
+In LUMI Kokkos Kernels is available (only for the HIP backend) with
 ```
-ml use /scratch/project_2015315/modulefiles
+ml use /scratch/project_462001074/modules
 ml kokkos-kernels
 ```
+
 

@@ -1,10 +1,5 @@
 # Exercises
 
-- [Using Slurm](using-slurm)
-- [Using modules](using-modules)
-- [GPU performance analysis](gpu-performance-analysis)
+- [Using Slurm](exercises/using-slurm)
+- [Using modules](exercises/using-modules)
 
-## MPI
-
-- [Hello world](mpi-hello)
-- [Simple communication](mpi-message-exchange)

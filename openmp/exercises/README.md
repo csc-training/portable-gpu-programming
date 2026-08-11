@@ -18,13 +18,13 @@ SPDX-License-Identifier: CC-BY-4.0
 - [Data regions in the axpy code](03-axpy-data/)
 - [Heat equation](04-heat/)
 
+
+## Wednesday
+
 ### Reduction
 
 - [Parallel sum](05-reduction-sum/)
 - [Heat equation: Monitoring average temperature](06-heat-reduction/)
-
-
-## Wednesday
 
 ### Asynchronous kernel execution
 

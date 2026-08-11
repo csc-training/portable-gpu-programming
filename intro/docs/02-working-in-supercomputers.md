@@ -83,7 +83,7 @@ lang:  en
 |**projappl**|Project |Not available       |`/projappl/<project>`|
 |**scratch** |Project |Not available       |`/scratch/<project>` |
 
-- See ``csc-workspaces` on Roihu or lumi-workspaces` on LUMI
+- See `csc-workspaces` on Roihu or `lumi-workspaces` on LUMI
 
 # Using project-level storage space
 

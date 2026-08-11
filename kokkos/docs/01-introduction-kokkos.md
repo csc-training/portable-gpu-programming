@@ -33,6 +33,12 @@ lang:  en
 - Kokkos tries to enable a single source performance portable programming on a node level
     - Same program code can be compiled for different hardware architectures
 
+# What is needed for performance portable programming
+
+- How to deal with possibly separate memories
+- How to deal with possibly different optimal memory access patterns 
+- How to deal with possibly different optimal thread configurations
+
 # Kokkos overview
 
 - Kokkos is a C++ ecosystem
@@ -96,7 +102,7 @@ lang:  en
     - At most single device backend can be used
 - Add to the project's `CMakeLists.txt` 
 ```
-find_package(Kokkos 4.7 REQUIRED CONFIG) # Find Kokkos version 4.7 or later
+find_package(Kokkos REQUIRED CONFIG)
 # ...
 target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 ```
@@ -104,6 +110,7 @@ target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 ```
 cmake -DKokkos_ROOT=/path/to/kokkos/installation/ ...
 ```
+- Location of Kokkos can be given also via `CMAKE_PREFIX_PATH` environment variable
 - Generally, each backend requires a separate installation
 
 # Embedding Kokkos as part of the project

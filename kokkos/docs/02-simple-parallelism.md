@@ -18,7 +18,7 @@ lang:  en
 
 # Programming Kokkos
 
-- Kokkos (like SYCL) utilizes heavily modern C++ features like lambdas/functors and templates
+- Kokkos utilizes heavily modern C++ features like lambdas/functors and templates
 - The Kokkos API is accessed through `Kokkos_Core.hpp` header file
 - Kokkos code starts with Kokkos initialization and ends with finalization
 <small>
@@ -85,6 +85,14 @@ Kokkos::parallel_for(N,
    });
 ```
 </div>
+
+# Asynchronous execution
+
+- Parallel operation may be executed asynchronously on device
+- `Kokkos::fence()` synchronizes between host and device
+- Lambda capture is carried out when program encounters the lambda
+- With asynchronous execution, lambda might be executed later
+    - Capture needs to be by value
 
 # Portability macros for functors
 
@@ -182,8 +190,6 @@ Kokkos::parallel_for(N,
 # Parallel dispatch operators in Kokkos
 
 - `parallel_for`, `parallel_reduce`, and `parallel_scan` (prefix sum)
-- Parallel operation may be executed asynchronously
-    - `Kokkos::fence()` can be used for synchronization
 - Operators have an optional "name" argument
 ```c++
   parallel_for("axpy", N, ...)

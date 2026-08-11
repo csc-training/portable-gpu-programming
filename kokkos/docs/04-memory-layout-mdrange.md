@@ -152,7 +152,7 @@ parallel_for(Kokkos::MDRangePolicy<Kokkos::Rank<3>>({1, 1, 1,}, {nx -1, ny -1 , 
 
 # Summary
 
-- Memory access pattern may have large impack on performance
+- Memory access pattern may have large impact on performance
     - *cached* for CPUs
     - *coalesced* for GPUs
 - Kokkos provides performance portable memory access by having different execution policy 

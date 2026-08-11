@@ -1,40 +1,40 @@
 <!--
-SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
+SPDX-FileCopyrightText: 2exercises/025 CSC - IT Center for Science Ltd. <www.csc.fi>
 
-SPDX-License-Identifier: CC-BY-4.0
+SPDX-License-Identifier: CC-BY-4.exercises/0
 -->
 
 # Kokkos exercises
 
 ## Installing and using Kokkos
 
-- [Hello world](00-hello)
+- [Hello world](exercises/00-hello)
 
 ## Parallel dispatch
 
-- [axpy](01-parallel-axpy)
-- [Dot product](02-parallel-dot-product)
+- [axpy](exercises/01-parallel-axpy)
+- [Dot product](exercises/02-parallel-dot-product)
 
 ## Kokkos Views
 
-- [Playing with Views](03-views)
-- [axpy with Views](04-axpy-view)
+- [Playing with Views](exercises/03-views)
+- [axpy with Views](exercises/04-axpy-view)
 
 ## Subviews, layouts and nested loops
 
-- [Playing with subviews](05-subviews)
-- [Poisson equation](06-poisson)
+- [Playing with subviews](exercises/05-subviews)
+- [Poisson equation](exercises/06-poisson)
 
 ## Using MPI with Kokkos
 
-- [MPI hello world](07-mpi-hello)
-- [Message exchange](08-mpi-message-exchange)
+- [MPI hello world](exercises/07-mpi-hello)
+- [Message exchange](exercises/08-mpi-message-exchange)
 
 ## Kokkos Kernels
 
-- [Matrix multiplication](09-matrix-product)
+- [Matrix multiplication](exercises/09-matrix-product)
 
 ## Bonus exercises
 
-- [Parallel heat equation](10-heat-equation)
+- [Parallel heat equation](exercises/10-heat-equation)
 

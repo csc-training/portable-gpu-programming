@@ -1,5 +1,5 @@
 <!--
-SPDX-FileCopyrightText: 2exercises/025 CSC - IT Center for Science Ltd. <www.csc.fi>
+SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
 
 SPDX-License-Identifier: CC-BY-4.exercises/0
 -->

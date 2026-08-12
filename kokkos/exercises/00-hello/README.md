@@ -65,7 +65,7 @@ See how the output differs between backends
 ## Bonus task: installing Kokkos
 
 Try to install Kokkos at least on one system and with the one backend along following
-instructions in [installing-using.md](../installing-using.md). It is strongly suggested to try
+instructions in [installing-using.md](../../installing-using.md). It is strongly suggested to try
 to install Kokkos also on your local workstation.
 
 In order to use your own installation, provide -DKokkos_ROOT when configuring the application:

@@ -110,7 +110,6 @@ target_link_libraries(MyTarget PRIVATE Kokkos::kokkos)
 ```
 cmake -DKokkos_ROOT=/path/to/kokkos/installation/ ...
 ```
-- Location of Kokkos can be given also via `CMAKE_PREFIX_PATH` environment variable
 - Generally, each backend requires a separate installation
 
 # Embedding Kokkos as part of the project

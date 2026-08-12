@@ -170,16 +170,17 @@ c = func1(4);  // 5
 
 a = -1;
 c = func1(4);  // 5
-
-// Capture to a new variable
-auto func2 = [d = 2*a](int x) { return d + x; };
-c = func2(4);  // 2
 ```
 
 # Lambda expressions cont'd
 
 ```cpp
 ...
+
+// Capture to a new variable
+auto func2 = [d = 2*a](int x) { return d + x; };
+c = func2(4);  // 2
+
 b = 2;
 
 // This will fail; `b` not captured

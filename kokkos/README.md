@@ -1,40 +1,26 @@
 <!--
 SPDX-FileCopyrightText: 2025 CSC - IT Center for Science Ltd. <www.csc.fi>
 
-SPDX-License-Identifier: CC-BY-4.exercises/0
+SPDX-License-Identifier: CC-BY-4.0
 -->
 
-# Kokkos exercises
+# Kokkos module
 
-## Installing and using Kokkos
+## Presentation slides
 
-- [Hello world](exercises/00-hello)
+Presentation slides are available [here](https://csc-training.github.io/portable-gpu-programming/?open=kokkos).
 
-## Parallel dispatch
+## Demos
 
-- [axpy](exercises/01-parallel-axpy)
-- [Dot product](exercises/02-parallel-dot-product)
+See [demos directory](demos/) for the demo codes referred to in the slides.
 
-## Kokkos Views
+## Exercises
 
-- [Playing with Views](exercises/03-views)
-- [axpy with Views](exercises/04-axpy-view)
+See [exercises directory](exercises/) for exercises.
 
-## Subviews, layouts and nested loops
+## Web resources
 
-- [Playing with subviews](exercises/05-subviews)
-- [Poisson equation](exercises/06-poisson)
-
-## Kokkos Kernels
-
-- [Matrix multiplication](exercises/09-matrix-product)
-
-## Using MPI with Kokkos
-
-- [MPI hello world](exercises/07-mpi-hello)
-- [Message exchange](exercises/08-mpi-message-exchange)
-
-## Bonus exercises
-
-- [Parallel heat equation](exercises/10-heat-equation)
-
+- Primary GitHub: <https://github.com/kokkos>
+- Lectures: <br>  <https://github.com/kokkos/kokkos-tutorials/wiki/Kokkos-Lecture-Series>
+- Wiki with API reference: <https://kokkos.org/kokkos-core-wiki/>
+- Slack: <https://kokkosteam.slack.com>

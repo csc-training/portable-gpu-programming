@@ -3,6 +3,7 @@ title: Portable GPU Programming
 modules:
   - intro
   - openmp
+  - cpp
   - kokkos
   - interop
   - multi-gpu

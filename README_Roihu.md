@@ -311,7 +311,7 @@ Profiling is done in two steps:
 
 The first step is done by replacing `srun ./prog.x` in the job script by:
 ```bash
-srun --argos=no nsys profile -t cuda,nvtx,openmp -o report ./prog.x
+srun nsys profile -t cuda,nvtx,openmp -o report ./prog.x
 ```
 This creates a file `report.nsys-rep`.
 

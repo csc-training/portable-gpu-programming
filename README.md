@@ -44,7 +44,7 @@ The slides are available in
 | ----  | ----- |
 | 09:00 | [OpenMP offload](openmp)
 | 12:00 | Lunch
-| 13:00 | [C++ introduction](kokkos)
+| 13:00 | [C++ introduction](cpp)
 | 14:00 | [Kokkos](kokkos)
 | 16:45 | Day wrap-up
 

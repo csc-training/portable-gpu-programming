@@ -9,10 +9,27 @@ SPDX-License-Identifier: CC-BY-4.0
 In this exercise you can practice building and running a program combining Kokkos
 and MPI. You will also see how Kokkos is mapping MPI tasks to GPUs.
 
-This exercise should be done only in LUMI as course reservation in Mahti allows only single GPU
-runs.
+## Tasks for Roihu-GPU
 
-## Tasks
+Build the [hello.cpp](hello.cpp) code with the provided `CMakeList.txt` using the CUDA backend.
+Run the program on two nodes with two tasks and two GPUs on each node i.e.
+```
+...
+#SBATCH --nodes=2
+#SBATCH --ntasks-per-node=2
+#SBATCH --gres=gpu:gh200:2
+...
+
+srun ./build-cuda/hello
+```
+
+The output is pretty verbose, as all MPI tasks print information about all the GPUs available in their nodes.
+You can, however, see which GPU was selected for each MPI tasks by grepping both the MPI rank and "selected":
+```
+egrep 'rank|Selected' slurm-xxxx.out
+```
+
+## Tasks for LUMI
 
 Build the [hello.cpp](hello.cpp) code with the provided `CMakeList.txt` using the HIP backend.
 Run the program on two nodes with two tasks and two GPUs on each node i.e.

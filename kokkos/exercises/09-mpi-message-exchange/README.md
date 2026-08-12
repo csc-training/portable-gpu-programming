@@ -8,10 +8,14 @@ SPDX-License-Identifier: CC-BY-4.0
 
 In this exercise you practice how to perform MPI communication to/from Kokkos Views.
 
-This exercise should be done only in LUMI as course reservation in Mahti allows only single GPU
-runs.
+## Tasks for Roihu
 
-## Tasks
+Port the [exchange.cpp](exchange.cpp) code to Kokkos, *i.e.* use Kokkos Views for
+message and buffer data structures.
+
+Run the code with two MPI tasks.
+
+## Tasks for LUMI
 
 Port the [exchange.cpp](exchange.cpp) code to Kokkos, *i.e.* use Kokkos Views for
 message and buffer data structures.

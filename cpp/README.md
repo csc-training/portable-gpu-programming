@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## Presentation slides
 
-Presentation slides are available [here](https://csc-training.github.io/portable-gpu-programming/?cpp).
+Presentation slides are available [here](https://csc-training.github.io/portable-gpu-programming/?open=cpp).
 
 ## Demos
 

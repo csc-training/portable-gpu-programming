@@ -96,7 +96,7 @@ MPI_Comm_split_type(MPI_COMM_WORLD, MPI_COMM_TYPE_SHARED, 0, MPI_INFO_NULL, &com
 MPI_Comm_rank(commNode, &nodeRank);
 
 deviceCount = omp_get_num_devices();
-omp_set_default_device((nodeRank % deviceCount);
+omp_set_default_device(nodeRank % deviceCount);
 
 #pragma omp target data use_device_ptr(x)
 {

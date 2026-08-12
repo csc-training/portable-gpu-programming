@@ -17,10 +17,11 @@ int main(int argc, char** argv)
 
   // Initialize x and y
   Kokkos::parallel_for(N,
-    KOKKOS_LAMBDA (const size_t i) {
+    [=] (const size_t i) {
       x[i] = (i + 1) * 2.4;
       y[i] = (i + 1) * -1.2;
     });
+  Kokkos::fence();
 
   std::cout << "First and last elements before axpy: " << std::endl 
             << "x: " << x[0] << "," << x[N-1] << std::endl
@@ -28,9 +29,10 @@ int main(int argc, char** argv)
 
   // Apply axpy operation
   Kokkos::parallel_for(N,
-     KOKKOS_LAMBDA (const size_t i) {
+     [=] (const size_t i) {
           y[i] += a * x[i];
      });
+  Kokkos::fence();
 
   // Check results
   std::cout << "First and last element (both should be zero):" << std::endl 

@@ -1,5 +1,5 @@
 FACTORY=slidefactory.sif
-OPTIONS=slides
+OPTIONS=slides --pandoc-args='--strip-comments'
 
 SRC=$(wildcard ??-*.md)
 HTML=$(patsubst %.md,%.html,$(SRC))

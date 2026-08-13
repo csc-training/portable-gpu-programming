@@ -21,6 +21,7 @@ int main(int argc, char** argv)
     x[i] = cos(i * 2*M_PI / (N-1) );
     y[i] = sin(i * 2*M_PI / (N-1) );
   });
+  Kokkos::fence();
  
   std::cout << "First and last elements before dot product: " << std::endl
             << "x: " << x[0] << "," << x[N-1] << std::endl
@@ -32,6 +33,7 @@ int main(int argc, char** argv)
     KOKKOS_LAMBDA (const size_t i, double &local_result) {
     local_result += x[i] * y[i];
   }, result);
+  Kokkos::fence();
 
   // Check results
   std::cout << "Result (should be 0): " << result << std::endl;

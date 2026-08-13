@@ -50,5 +50,6 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ### Using multiple GPUs
 
-- [Send and receive messages between GPUs](14-mpi-send-recv/)
-- [Heat equation: Using multiple GPUs](15-heat-multi-gpu/)
+- [Using GPUs and MPI with OpenMP offload](14-mpi-hello/)
+- [Send and receive messages between GPUs](15-mpi-send-recv/)
+- [Heat equation: Using multiple GPUs](16-heat-multi-gpu/)

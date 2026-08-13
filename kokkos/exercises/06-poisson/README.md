@@ -55,11 +55,12 @@ The algorithm comprises of the following steps:
 
 The existing serial non-Kokkos code can be build with CMake, or just by
 
-    cc -O3 -fopenmp poisson.c -o poisson
+    g++ -O3 poisson.cpp -o poisson  # Roihu
+    CC -O3 poisson.cpp -o poisson   # LUMI
 
 Run the program on a single CPU core for a an 1024x1024 array for 500 iterations:
 
-    srun -p debug --nodes=1 --ntasks-per-node=1 --cpus-per-task=1 -t 0:10:00 ./poisson 1024 500
+    srun ./poisson 1024 500
 
 Expected output:
 
@@ -73,15 +74,15 @@ Expected output:
 ## Task: port the code to Kokkos
 
 1. Replace appropriate data structures with Kokkos Views
-   
+
 2. Use parallel dispatch for all the loops (initialization, computation, error checking)
 
-3. Copy data between device and host when necessary   
+3. Copy data between device and host when necessary
 
-4. Build and run the code both with OpenMP and HIP/CUDA backend. Please ensure that the result remains 
+4. Build and run the code both with OpenMP and HIP/CUDA backend. Please ensure that the result remains
    same as with the serial non Kokkos version. Run the OpenMP version with different number of
    CPU cores / threads, does the performance improve when using more threads?
 
-5. Compare the performance to serial version as well as the difference between OpenMP and GPU versions. 
+5. Compare the performance to serial version as well as the difference between OpenMP and GPU versions.
 
 6. Try to specify the layout explicitly as LayoutLeft and LayoutRight, and investigate how that affects performance both on OpenMP and device (CUDA/HIP)

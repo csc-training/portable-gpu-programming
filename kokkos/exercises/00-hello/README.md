@@ -33,7 +33,7 @@ module load kokkos/5.2.0/omp # or module load kokkos/5.2.0/hip
 
 Once the `CMakeList.txt` is completed, the code can be configured and build with:
 ```
-cmake -Bbuild-mybackend
+cmake -Bbuild-mybackend -DCMAKE_CXX_COMPILER=<compiler>
 cmake --build build-mybackend
 ```
 

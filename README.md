@@ -62,6 +62,7 @@ The slides are available in
 | Time  | Topic |
 | ----  | ----- |
 | 09:00 | [Interoperability with CUDA/HIP and libraries](interop)
+| 10:30 | [Multi-GPU programming with MPI](multi-gpu)
 | 12:00 | Lunch
 | 13:00 | [Multi-GPU programming with MPI](multi-gpu)
 | 16:30 | Course wrap-up

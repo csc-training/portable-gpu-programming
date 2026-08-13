@@ -20,7 +20,7 @@ def read_array(filename):
         # Read the array
         array = np.fromfile(f, dtype=np.float64, count=nx * ny)
 
-    array = array.reshape(nx, ny)
+    array = array.reshape(ny, nx)
     if layout == 1:
         array = array.T
 
@@ -32,13 +32,19 @@ parser.add_argument("file", type=str, help="Path to the file")
 args = parser.parse_args()
 
 u, Lx, Ly = read_array(args.file)
+ny, nx = u.shape
+dx = Lx / (nx - 1)
+dy = Ly / (ny - 1)
+
+x = np.linspace(-Lx/2, Lx/2, nx)
+y = np.linspace(-Ly/2, Ly/2, ny)
+X, Y = np.meshgrid(x, y)
+
+vmax = max(u.max(), -u.min())
 
 plt.figure(1)
-
-x = np.linspace(0, Lx, u.shape[0]) - Lx * 0.5
-y = np.linspace(0, Ly, u.shape[1]) - Ly * 0.5
-X, Y = np.meshgrid(x, y)
-plt.pcolormesh(X, Y, u, shading='nearest', cmap='PiYG_r')
+plt.imshow(u, cmap='PiYG_r', origin='lower', extent=[-dx/2-Lx/2, Lx/2+dx/2, -dy/2-Ly/2, Ly/2+dy/2], vmin=-vmax, vmax=vmax)
+#plt.scatter(X, Y, color='k')
 plt.gca().set_aspect('equal', adjustable='box')
 plt.xlabel('x')
 plt.ylabel('y')

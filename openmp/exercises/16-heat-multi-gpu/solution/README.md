@@ -10,4 +10,4 @@ SPDX-License-Identifier: CC-BY-4.0
 
 1. The code gives incorrect results and does not utilize all GPUs on the node.
 
-2. See `heat.c`. The simulation gets faster for large enough grids.
+2. See `heat.{c,F90}`. The simulation gets faster for large enough grids.

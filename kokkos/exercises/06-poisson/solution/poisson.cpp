@@ -7,9 +7,6 @@
 #include <cstdio>
 #include <cmath>
 
-#define NX 1024
-#define NY 1024
-
 // Initialize 2d array with Gaussian
 template <typename T>
 void init(T x)
@@ -89,6 +86,10 @@ void run(const int n, const int niter)
   printf("u[%d,%d] = %f\n", i, j, u_host(i, j));
   printf("Mean u = %f\n", mean);
   printf("Time spent: %6.3f s\n", elapsed_seconds);
+  // Two arrays read, one written
+  double total_bytes = 3.0 * count * sizeof(double);
+  double bandwidth = niter * total_bytes / elapsed_seconds * 1.0e-9;
+  printf("Performance: %5f GB/s\n", bandwidth);
 
 }
 

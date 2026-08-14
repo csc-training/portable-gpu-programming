@@ -8,7 +8,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## Tasks
 
-1. Running the code fails with
+1. Running the code on Roihu gives wrong results and on LUMI it fails with
 
        Memory access fault by GPU node-4 (Agent handle: 0xb60410) on address 0xe83000. Reason: Unknown.
 

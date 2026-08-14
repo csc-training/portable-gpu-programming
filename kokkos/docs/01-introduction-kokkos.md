@@ -36,7 +36,7 @@ lang:  en
 # What is needed for performance portable programming
 
 - How to deal with possibly separate memories
-- How to deal with possibly different optimal memory access patterns 
+- How to deal with possibly different optimal memory access patterns
 - How to deal with possibly different optimal thread configurations
 
 # Kokkos overview
@@ -50,7 +50,7 @@ lang:  en
 
 # Kokkos overview
 
-- Implemented as a C++ template library on top CUDA, HIP, OpenMP, ... 
+- Implemented as a C++ template library on top CUDA, HIP, OpenMP, ...
     - Kokkos is **not** a new language or language extension
     - Works with standard compilers (GCC, Clang, nvcc, hipcc, ...)
 - Aims to be descriptive not prescriptive
@@ -100,7 +100,7 @@ lang:  en
 
 - Build and install Kokkos with chosen backends
     - At most single device backend can be used
-- Add to the project's `CMakeLists.txt` 
+- Add to the project's `CMakeLists.txt`
 ```
 find_package(Kokkos REQUIRED CONFIG)
 # ...

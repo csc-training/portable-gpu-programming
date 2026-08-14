@@ -151,7 +151,7 @@ lang:  en
     - No label
 
 ```cpp
-Kokkos::View<double**, Kokkos::LayoutRight, 
+Kokkos::View<double**, Kokkos::LayoutRight,
              Kokkos::HostSpace, Kokkos::MemoryUnmanaged> a(a_ptr, n, m);
 ```
 

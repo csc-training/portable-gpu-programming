@@ -13,10 +13,10 @@ parallel dispatch, the proper way to manage memory with Kokkos is not considered
 
 ## Tasks
 
-The code [dot-product.cpp](dot-product.cpp) implements dot product $x \cdot y = \sum_i x[i] * y[i]$ 
-in standard C/C++. 
+The code [dot-product.cpp](dot-product.cpp) implements dot product $x \cdot y = \sum_i x[i] * y[i]$
+in standard C/C++.
 
-The code has two `for` loops, the first for initializing the input data and the second for evaluating 
-the dot product. Create lambda functions for both loop bodies outside the loops, and call the 
-lambda function within the loop. Try different capture clauses (by value and by reference), do you 
+The code has two `for` loops, the first for initializing the input data and the second for evaluating
+the dot product. Create lambda functions for both loop bodies outside the loops, and call the
+lambda function within the loop. Try different capture clauses (by value and by reference), do you
 see difference in the behaviour of the code?

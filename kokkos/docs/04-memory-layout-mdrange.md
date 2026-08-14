@@ -5,7 +5,7 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 ---
-title: Performance portable memory access patterns 
+title: Performance portable memory access patterns
 event: Portable GPU Programming 2026
 lang:  en
 ---
@@ -19,7 +19,7 @@ lang:  en
 
 # Performance aspects of memory access
 
-- Optimal memory access pattern is different in CPUs and in GPUs 
+- Optimal memory access pattern is different in CPUs and in GPUs
 - CPU benefits from cached access
     - if thread t’s current access is at position i,
 thread t’s next access should be at position i+1
@@ -36,7 +36,7 @@ thread t+1’s current access should be at position i+1
 parallel_for(N, KOKKOS_LAMBDA (const int idx) {...})
 ```
 - On CPU execution spaces indices are given to threads in contiguous chunks:
-    - Thread 0 gets idx=0, 1, 2, 3, ..., 
+    - Thread 0 gets idx=0, 1, 2, 3, ...,
 - On GPU execution spaces indices are given to threads strided:
     - idx=0 goes to thread 0, idx to thread 1, ...
 
@@ -155,7 +155,7 @@ parallel_for(Kokkos::MDRangePolicy<Kokkos::Rank<3>>({1, 1, 1,}, {nx -1, ny -1 , 
 - Memory access pattern may have large impact on performance
     - *cached* for CPUs
     - *coalesced* for GPUs
-- Kokkos provides performance portable memory access by having different execution policy 
+- Kokkos provides performance portable memory access by having different execution policy
   and default memory layout for CPUs and GPUs
     - LayoutRight for CPUs
     - LayoutLeft for GPUs

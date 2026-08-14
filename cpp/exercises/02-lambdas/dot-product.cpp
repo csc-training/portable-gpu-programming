@@ -16,7 +16,7 @@ int main(int argc, char** argv)
   // Initialize x and y
   // TODO: create here a lambda function for the loop body below, and
   // call it within the loop
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     x[i] = cos(i * 2*M_PI / (N-1) );
     y[i] = sin(i * 2*M_PI / (N-1) );
@@ -30,7 +30,7 @@ int main(int argc, char** argv)
   double result = 0.0;
   // TODO: create here a lambda function for the loop body below, and
   // call it within the loop
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     result += x[i] * y[i];
   }

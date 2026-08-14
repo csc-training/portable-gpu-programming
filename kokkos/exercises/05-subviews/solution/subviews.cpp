@@ -14,7 +14,7 @@ int main(int argc, char* argv[]) {
     int n = 20;
     int m = 20;
 
-    Kokkos::View<int**> a("a", n, m); // 1D array with runtime dimension 
+    Kokkos::View<int**> a("a", n, m); // 1D array with runtime dimension
 
     // Subviews of boundaries
     auto top_slice = Kokkos::subview(a, 0, Kokkos::ALL());
@@ -43,7 +43,7 @@ int main(int argc, char* argv[]) {
     Kokkos::deep_copy(left, left_slice);
     Kokkos::View<int*> right("right", right_slice.extent(0));
     Kokkos::deep_copy(right, right_slice);
-    
+
 
     // Create mirror views
     auto h_top = Kokkos::create_mirror(top);

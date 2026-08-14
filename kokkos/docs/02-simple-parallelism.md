@@ -61,7 +61,7 @@ for (int i=0; i < N; i++) // Iteration range
 Using an explicit functor
 ```c++
 class axpy {
-  const double *_x, 
+  const double *_x,
   double *_y;
   const double _a;
 public:
@@ -97,7 +97,7 @@ Kokkos::parallel_for(N,
 # Portability macros for functors
 
 - Compiling functions for CUDA and HIP requires special annotations (`__device__`)
-- In order to ensure single source both for host and device backends, Kokkos provides special 
+- In order to ensure single source both for host and device backends, Kokkos provides special
   portability macros
 - `KOKKOS_INLINE_FUNCTION` for functions (e.g. functor operators)
 - `KOKKOS_LAMBDA` for lambdas
@@ -109,7 +109,7 @@ Kokkos::parallel_for(N,
 Using an explicit functor
 ```c++
 class axpy {
-  const double *_x, 
+  const double *_x,
   double *_y;
   const double _a;
 public:
@@ -185,7 +185,7 @@ Kokkos::parallel_for(N,
     local_result += x[i] * y[i];
   }, result);
 ```
-- Default reduction operator is sum, by replacing `result` with a "Reducer" other reductions can be carried out 
+- Default reduction operator is sum, by replacing `result` with a "Reducer" other reductions can be carried out
 
 # Parallel dispatch operators in Kokkos
 

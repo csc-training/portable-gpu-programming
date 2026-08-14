@@ -14,18 +14,18 @@ int main(int argc, char* argv[]) {
   int rank, size;
   MPI_Comm_rank(MPI_COMM_WORLD, &rank);
   MPI_Comm_size(MPI_COMM_WORLD, &size);
- 
-  std::ostringstream configuration;  
+
+  std::ostringstream configuration;
   Kokkos::DefaultExecutionSpace().print_configuration(configuration);
 
 // Try to print in synchronized manner
   for (int i=0; i < size; i++) {
     if (rank == i)
       std::cout << "MPI rank " << rank << " : " << configuration.str() << std::flush;
-    
+
     MPI_Barrier(MPI_COMM_WORLD);
   }
-  
+
   Kokkos::finalize();
 
   return 0;

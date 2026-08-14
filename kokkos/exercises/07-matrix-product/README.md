@@ -17,7 +17,7 @@ kernels.
 
 Try to evaluate the efficieny of the function by calculating the TFLOP/s
 performance.  For $N x N$ matrices there are $2N^3$ operations, and you
-can measure the time spent using `Kokkos::Timer`: 
+can measure the time spent using `Kokkos::Timer`:
 ```
 Kokkos::Timer timer
 double start_time = timer.seconds()

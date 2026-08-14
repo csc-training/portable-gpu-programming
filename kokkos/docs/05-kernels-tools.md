@@ -15,14 +15,14 @@ lang:  en
 
 - Mathematical kernels for common dense and sparse linear algebra, and graph problems
 - Portable interface to vendor libraries operating on Kokkos views
-    - MKL, cuBLAS, rocBLAS, ...  
-- Custom implementation for special cases e.g. skinny matrices 
+    - MKL, cuBLAS, rocBLAS, ...
+- Custom implementation for special cases e.g. skinny matrices
 - Batched operations for small problem sizes
 - Needs to be installed separately from Kokkos Core
 - See <https://kokkos.org/kokkos-kernels/docs> for available kernels
 
 # Dot product with Kokkos Kernels
- 
+
 ```
 #include <KokkosBlas1_dot.hpp>
 
@@ -37,8 +37,8 @@ find_package(KokkosKernels REQUIRED)
 
 target_link_libraries(gemm Kokkos::kokkoskernels)
 ```
-- No separate CMake setting is needed for Kokkos core (i.e. `find_package(Kokkos)` 
- 
+- No separate CMake setting is needed for Kokkos core (i.e. `find_package(Kokkos)`
+
 # Kokkos Tools {.section}
 
 # Kokkos Tools
@@ -50,13 +50,13 @@ target_link_libraries(gemm Kokkos::kokkoskernels)
     - Intel VTune, NVIDIA tools, AMD tools, TAU, ...
 - Implemented as set of shared libraries, used by setting `KOKKOS_TOOLS_LIBS` environment variable
 - Provides also explicit instrumentation API to be used in application
-- Documentation at <https://github.com/kokkos/kokkos-tools/wiki> 
+- Documentation at <https://github.com/kokkos/kokkos-tools/wiki>
 
 # Debugging
 
 - Due to asynchronous nature of parallel dispatch it is not always clear where application crashes
 - Kernel Logger prints start and ends of kernels
-    - Also synchronizes at the end of the kernels 
+    - Also synchronizes at the end of the kernels
 - Usage:
 
 ```
@@ -84,13 +84,13 @@ kp_reader nid002275-210818.dat
 # Profiling
 
 - Kokkos kernels show up in external profiling tools as long hard-to-interpret Kokkos function calls
-- Kokkos tools provides "hooks" which insert e.g. roctx and nvtx markers show that Kokkos kernels show up 
+- Kokkos tools provides "hooks" which insert e.g. roctx and nvtx markers show that Kokkos kernels show up
   with the "name"s they were given
 - AMD GPUs (Roctx): `libkp_roctx_connector.so`
     - Need to include roctx trace, e.g. by using `--roctx-trace` option for `rocprof`
 - NVIDIA GPUs (Nvtx): `libkp_nvtx_focused_connector.so`
 - Note: the library names ("\*so")in documentation seem to miss the "lib"-prefix,
-  check PATH_TO_TOOL_DIRECTORY for available tools 
+  check PATH_TO_TOOL_DIRECTORY for available tools
 
 # Summary
 
@@ -113,7 +113,7 @@ kp_reader nid002275-210818.dat
 
 # Further topics
 
-- Algorithms (random numbers, sorting, std algorithms, ...) 
+- Algorithms (random numbers, sorting, std algorithms, ...)
 - Task graphs
 - ...
 

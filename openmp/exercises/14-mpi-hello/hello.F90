@@ -19,7 +19,7 @@ program hello
   call mpi_get_processor_name(procname, namelen, rc)
 
   ! Determine the node local rank
-  call mpi_comm_split_type(MPI_COMM_WORLD, MPI_COMM_TYPE_SHARED, 0, MPI_INFO_NULL, commnode, rc);  
+  call mpi_comm_split_type(MPI_COMM_WORLD, MPI_COMM_TYPE_SHARED, 0, MPI_INFO_NULL, commnode, rc);
   call mpi_comm_rank(commnode, noderank, rc)
 
   devicecount = omp_get_num_devices()

@@ -11,7 +11,7 @@ SPDX-License-Identifier: CC-BY-4.0
 > Therefore, there are **separate login nodes for building CPU and GPU programs and submitting respective jobs**:
 > - `roihu-cpu.csc.fi`
 > - `roihu-gpu.csc.fi`
-> 
+>
 > Roihu-CPU and Roihu-GPU share the disk areas (i.e., `/scratch` and `$HOME` have the same files on both Roihu-CPU and Roihu-GPU).
 
 ## Logging in via ssh

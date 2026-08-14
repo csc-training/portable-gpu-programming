@@ -20,7 +20,7 @@ class AxpyFunctor {
     Kokkos::View<DT, DP...> _y;
     typename Kokkos::ViewTraits<DT, DP...>::const_value_type _a;
   public:
-    AxpyFunctor(Kokkos::View<DT, DP...> x, Kokkos::View<DT, DP...> y, 
+    AxpyFunctor(Kokkos::View<DT, DP...> x, Kokkos::View<DT, DP...> y,
                 typename Kokkos::ViewTraits<DT, DP...>::const_value_type a) :
                 _x(x), _y(y), _a(a) {};
 
@@ -32,8 +32,8 @@ class AxpyFunctor {
 // The same template programming techniques are used for defining a function
 // that takes Views as arguments
 template <typename DT, typename... DP>
-void axpy(Kokkos::View<DT, DP...> x, Kokkos::View<DT, DP...> y, 
-          typename Kokkos::ViewTraits<DT, DP...>::const_value_type a) 
+void axpy(Kokkos::View<DT, DP...> x, Kokkos::View<DT, DP...> y,
+          typename Kokkos::ViewTraits<DT, DP...>::const_value_type a)
 {
   int N = x.extent(0);
   Kokkos::parallel_for(N, AxpyFunctor(x, y, a));
@@ -64,9 +64,9 @@ int main(int argc, char** argv)
   Kokkos::deep_copy(h_x, x);
   Kokkos::deep_copy(h_y, y);
 
-  std::cout << "First and last elements before axpy: " << std::endl 
+  std::cout << "First and last elements before axpy: " << std::endl
             << "x: " << h_x[0] << "," << h_x[N-1] << std::endl
-            << "y: " << h_y[0] << "," << h_y[N-1] << std::endl;  
+            << "y: " << h_y[0] << "," << h_y[N-1] << std::endl;
 
   // Apply axpy operation
   axpy(x, y, a);
@@ -75,8 +75,8 @@ int main(int argc, char** argv)
   Kokkos::deep_copy(h_y, y);
 
   // Check results
-  std::cout << "First and last element (both should be zero):" << std::endl 
-            << h_y[0] << "," << h_y[N-1] << std::endl;  
+  std::cout << "First and last element (both should be zero):" << std::endl
+            << h_y[0] << "," << h_y[N-1] << std::endl;
 
   }
   Kokkos::finalize();

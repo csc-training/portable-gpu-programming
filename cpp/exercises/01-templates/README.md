@@ -13,9 +13,9 @@ with multiple types.
 ## Tasks
 
 The code `axpy.cpp` performs the basic "axpy" operation
-$y = a \times x + y$ both for double and single precision 
+$y = a \times x + y$ both for double and single precision
 floating point values. Current code implements `axpy` function
-separately for both types. 
+separately for both types.
 
 1. Avoid the repetition and make the code more generic by using
 templated function

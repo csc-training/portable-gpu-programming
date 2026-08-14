@@ -66,7 +66,7 @@ lang:  en
 - By default, each process sees all the GPUs
 - In order to use different GPUs for different processes one needs to
   make a process specific selection
-- If MPI implementation supports GPU aware communication (nowadays most do), one can pass 
+- If MPI implementation supports GPU aware communication (nowadays most do), one can pass
   device pointers directly to MPI routines
     - Otherwise, data has to be explicitly copied between host and device for communication
 
@@ -104,7 +104,7 @@ omp_set_default_device(nodeRank % deviceCount);
 
 # Using Kokkos together with MPI
 
-- Kokkos does not provide specific interfaces for device management 
+- Kokkos does not provide specific interfaces for device management
 - Kokkos automatically selects device based on the environment
     - Node local processes are assigned to available GPUs in a round robin fashion
 - MPI should be initialized before Kokkos

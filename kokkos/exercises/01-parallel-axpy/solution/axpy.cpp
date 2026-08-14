@@ -23,9 +23,9 @@ int main(int argc, char** argv)
     });
   Kokkos::fence();
 
-  std::cout << "First and last elements before axpy: " << std::endl 
+  std::cout << "First and last elements before axpy: " << std::endl
             << "x: " << x[0] << "," << x[N-1] << std::endl
-            << "y: " << y[0] << "," << y[N-1] << std::endl;  
+            << "y: " << y[0] << "," << y[N-1] << std::endl;
 
   // Apply axpy operation
   Kokkos::parallel_for(N,
@@ -35,8 +35,8 @@ int main(int argc, char** argv)
   Kokkos::fence();
 
   // Check results
-  std::cout << "First and last element (both should be zero):" << std::endl 
-            << y[0] << "," << y[N-1] << std::endl;  
+  std::cout << "First and last element (both should be zero):" << std::endl
+            << y[0] << "," << y[N-1] << std::endl;
 
   Kokkos::finalize();
 }

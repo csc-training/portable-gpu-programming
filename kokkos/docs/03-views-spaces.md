@@ -5,7 +5,7 @@ SPDX-License-Identifier: CC-BY-4.0
 -->
 
 ---
-title: Spaces and Views 
+title: Spaces and Views
 event: Portable GPU Programming 2026
 lang:     en
 ---
@@ -58,17 +58,17 @@ Kokkos::parallel_for(N,
 # Program execution
 
 - Three kinds of code in a Kokkos program
-    1. Code that has nothing to do with Kokkos 
+    1. Code that has nothing to do with Kokkos
          - runs always on a host
-    2. Code outside of a Kokkos parallel operation that asks Kokkos to do something (e.g., parallel dispatch itself) 
+    2. Code outside of a Kokkos parallel operation that asks Kokkos to do something (e.g., parallel dispatch itself)
          - runs always on a host
     3. Code executing inside of a Kokkos parallel operation
          - runs on a default execution space or on specified execution space
 
 # Choosing execution space
 
-- Default execution space is defined when building Kokkos, *i.e.* when selecting the backends 
-- Parallel dispatch operations take a "policy" argument 
+- Default execution space is defined when building Kokkos, *i.e.* when selecting the backends
+- Parallel dispatch operations take a "policy" argument
 ```c++
 parallel_for(N, ...)
 ```
@@ -82,11 +82,11 @@ parallel_for(RangePolicy<Kokkos::DefaultHostExecutionSpace>,(0, N),  ...)
 ```
 - In basic cases one most often uses just the default execution space
 
-# Management memory with Kokkos View 
+# Management memory with Kokkos View
 
 - Kokkos View is a multidimensional array
 - Lightweight C++ class with a pointer to data and some metadata
-- Datatype, number of dimensions etc. are template parameters 
+- Datatype, number of dimensions etc. are template parameters
 - Number of dimensions is fixed at compile time
 - Extent of a dimension can be specified at compile time or at runtime
 
@@ -157,5 +157,5 @@ Kokkos::deep_copy(h_b, b) // Works even if b is in device (CUDA or HIP) space
 - Parallel code runs on default or user specified execution space
 - Kokkos provides a View data structure for multidimensional arrays
 - The data in View is stored on default or user specified memory space
-- Kokkos never copies the data between Views implicitly, but user needs to use 
+- Kokkos never copies the data between Views implicitly, but user needs to use
   `deep_copy()` function

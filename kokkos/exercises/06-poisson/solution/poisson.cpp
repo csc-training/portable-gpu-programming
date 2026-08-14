@@ -28,7 +28,7 @@ void init(T x)
         x(i, j) = cos(kx * dx + ky * dy) * exp(-r2 / sigma2);
       });
 }
- 
+
 void run(const int n, const int niter)
 {
 

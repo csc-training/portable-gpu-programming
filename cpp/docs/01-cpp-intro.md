@@ -135,7 +135,7 @@ p.print();
 - With `struct` members are public by default
 
 
-# Functors 
+# Functors
 
 - Functors (function objects) behave like functions after initialization
 - Functors have a state which is determined at runtime
@@ -157,7 +157,7 @@ std::cout << "The sum is: " << sum << std::endl;
 
 # Lambda expressions
 
-- Lambda expressions create unnamed function objects 
+- Lambda expressions create unnamed function objects
 - Resulting functor gets it state by capturing variables from the scope
 - Syntax: `[ captures ] (parameters) -> return-type { body }`
 

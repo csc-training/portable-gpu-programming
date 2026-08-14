@@ -37,7 +37,7 @@ int main(int argc, char *argv[])
     int src = (rank - 1 + ntasks) % ntasks;
 
     MPI_Sendrecv(message.data(), msgsize, MPI_INT, dst, tag,
-                 receiveBuffer.data(), msgsize, MPI_INT, src, tag, 
+                 receiveBuffer.data(), msgsize, MPI_INT, src, tag,
                  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
     printf("Rank %i received %i elements, first %i\n", rank, msgsize, receiveBuffer[0]);

@@ -14,7 +14,7 @@ int main(int argc, char** argv)
   double *y = (double *) malloc(N * sizeof(double));
 
   // Initialize x and y
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     x[i] = cos(i * 2*M_PI / (N-1) );
     y[i] = sin(i * 2*M_PI / (N-1) );
@@ -26,7 +26,7 @@ int main(int argc, char** argv)
 
   // Perform dot product
   double result = 0.0;
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     result += x[i] * y[i];
   }

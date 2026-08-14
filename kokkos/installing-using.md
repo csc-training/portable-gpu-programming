@@ -107,7 +107,7 @@ cmake -Bbuild-hip -DKokkos_ROOT=/scratch/project_462001610/$USER/kokkos-hip \
 ...
 ```
 
-Note that GPU modules cannot be loaded when building with OpenMP 
+Note that GPU modules cannot be loaded when building with OpenMP
 backends, *i.e.* if you want to move from HIP to OpenMP you must do
 ```
 module unload rocm craype-accel-amd-gfx90a

@@ -22,7 +22,7 @@ int main(int argc, char** argv)
     y[i] = sin(i * 2*M_PI / (N-1) );
   });
   Kokkos::fence();
- 
+
   std::cout << "First and last elements before dot product: " << std::endl
             << "x: " << x[0] << "," << x[N-1] << std::endl
             << "y: " << y[0] << "," << y[N-1] << std::endl;

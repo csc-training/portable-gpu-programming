@@ -41,7 +41,7 @@ int main(int argc, char *argv[])
     int src = (rank - 1 + ntasks) % ntasks;
 
     MPI_Sendrecv(message.data(), msgsize, MPI_INT, dst, tag,
-                 receiveBuffer.data(), msgsize, MPI_INT, src, tag, 
+                 receiveBuffer.data(), msgsize, MPI_INT, src, tag,
                  MPI_COMM_WORLD, MPI_STATUS_IGNORE);
 
     auto h_receiveBuffer = Kokkos::create_mirror_view_and_copy(Kokkos::HostSpace(), receiveBuffer);

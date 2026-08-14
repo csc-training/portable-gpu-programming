@@ -29,9 +29,9 @@ int main(int argc, char** argv)
   Kokkos::deep_copy(h_x, x);
   Kokkos::deep_copy(h_y, y);
 
-  std::cout << "First and last elements before axpy: " << std::endl 
+  std::cout << "First and last elements before axpy: " << std::endl
             << "x: " << h_x[0] << "," << h_x[N-1] << std::endl
-            << "y: " << h_y[0] << "," << h_y[N-1] << std::endl;  
+            << "y: " << h_y[0] << "," << h_y[N-1] << std::endl;
 
   // Apply axpy operation
   Kokkos::parallel_for(N,
@@ -43,8 +43,8 @@ int main(int argc, char** argv)
   Kokkos::deep_copy(h_y, y);
 
   // Check results
-  std::cout << "First and last element (both should be zero):" << std::endl 
-            << h_y[0] << "," << h_y[N-1] << std::endl;  
+  std::cout << "First and last element (both should be zero):" << std::endl
+            << h_y[0] << "," << h_y[N-1] << std::endl;
   }
   Kokkos::finalize();
 }

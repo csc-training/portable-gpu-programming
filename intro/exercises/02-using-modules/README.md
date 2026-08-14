@@ -6,9 +6,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Exercise: Using modules and compiling
 
-In this exercise we practice how to select compiler with the module system. 
+In this exercise we practice how to select compiler with the module system.
 
-Typically, supercomputers have set of compilers available via the module system. Certain programming paradigms 
+Typically, supercomputers have set of compilers available via the module system. Certain programming paradigms
 (e.g. OpenMP offloading) might be supported only by some compilers, or particular application performs
 better with certain compiler (e.g. Cray vs. GCC vs. AMD).
 
@@ -23,12 +23,12 @@ These tasks should be done in Roihu-GPU, so start by logging into `roihu-gpu.csc
 
      gcc -o hello_gcc hello.cpp
 
-3. Compile the code with NVIDIA HPC compiler `nvc`. 
+3. Compile the code with NVIDIA HPC compiler `nvc`.
 
-   If you try to use `nvc` as such (e.g. `nvc --version`) you will notice that command is not available. 
+   If you try to use `nvc` as such (e.g. `nvc --version`) you will notice that command is not available.
    Thus, load first the correct module
 
-     module load nvhpc 
+     module load nvhpc
      module list
 
    Proceed then on compiling and running the code:
@@ -59,7 +59,7 @@ used via common wrappers (`cc`, `CC`, `ftn`), and the specific underlying compil
 3. Change the compiler into AMD Clang
 
      module load PrgEnv-amd
-     module list 
+     module list
 
    Proceed then on compiling and running the code:
 

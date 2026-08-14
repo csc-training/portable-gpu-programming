@@ -6,7 +6,7 @@ SPDX-License-Identifier: CC-BY-4.0
 
 # Exercise: Using GPUs and MPI with OpenMP offload
 
-In this exercise you can practice building and running a program combining OpenMP offload 
+In this exercise you can practice building and running a program combining OpenMP offload
 and MPI. You will see also demonstration on how to map tasks to GPUs.
 
 ## Tasks for Roihu

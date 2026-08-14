@@ -16,11 +16,11 @@ int main(int argc, char* argv[]) {
     // create a raw host pointer with malloc
     double *x_ptr = (double *) malloc(N * sizeof(double));
 
-    // Initialize x 
+    // Initialize x
     for (size_t i = 0; i < N; i++)
     {
       x_ptr[i] = (i + 1) * 2.4;
-    }     
+    }
 
     // print out through pointer
     std::cout << "First and last elements via ptr: " << std::endl

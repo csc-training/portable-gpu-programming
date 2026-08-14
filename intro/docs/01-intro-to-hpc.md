@@ -173,10 +173,10 @@ Top500 supercomputers grouped by the accelator type (Nov 2025 list)<br>
 # Why GPUs have become a norm?
 
 - Very high performance for certain workloads
-    - With theoretical double precision (FP64) performance specs, 
+    - With theoretical double precision (FP64) performance specs,
       LUMI GPU node is **38** times more powerful than LUMI CPU node
 - GPUs are also more energy efficient
-    - With theoretical double precision (FP64) performance flop per Watt, 
+    - With theoretical double precision (FP64) performance flop per Watt,
       LUMI GPU node is **10** times more efficient than LUMI CPU node
 - For AI workloads with low precision the differences are even higher
 - For traditional HPC workloads future trend is not so clear
@@ -432,7 +432,7 @@ Tree
 
 - With the heterogenous (x86 and ARM CPUs, NVIDIA and AMD GPUs, ...) and constantly evolving
   HPC landscape, how do we ensure well performing applications with modest development and
-  maintenance effort? 
+  maintenance effort?
 - The 3-P (performance, portability, and productivity) challenge in HPC is active research field
     - various metrics have been proposed for quantifying performance portability and productivity
 - The rise of AI coding tools may have a major impact for the porting challenges

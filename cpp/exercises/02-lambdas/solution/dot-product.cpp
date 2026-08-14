@@ -18,7 +18,7 @@ int main(int argc, char** argv)
     x[i] = cos(i * 2*M_PI / (N-1) );
     y[i] = sin(i * 2*M_PI / (N-1) );
   };
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     init(i);
   }
@@ -33,11 +33,11 @@ int main(int argc, char** argv)
     result += x[i] * y[i];
   };
 
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     reduction(i);
   }
-  
+
 
   // Check results
   std::cout << "Result (should be 0): " << result << std::endl;

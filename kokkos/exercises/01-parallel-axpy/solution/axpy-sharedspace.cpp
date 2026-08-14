@@ -14,7 +14,7 @@ int main(int argc, char** argv)
 
   // kokkos_malloc is drop-in replacement for standard malloc, which can allocate
   // memory either from host, device, or use shared (= unified/managed) memory.
-  // Here we allocate memory which is shared between host and device 
+  // Here we allocate memory which is shared between host and device
   // (hardware takes care of moving data between physical CPU and GPU memories)
   // Generally, using kokkos_malloc is not recommended, but one should rather use
   // Kokkos Views that will be discussed shortly
@@ -27,7 +27,7 @@ int main(int argc, char** argv)
       x[i] = (i + 1) * 2.4;
       y[i] = (i + 1) * -1.2;
     });
-  // Due to asynchronous execution, kernel could still be running when program gets to 
+  // Due to asynchronous execution, kernel could still be running when program gets to
   // printing, so we synchronize the device
   Kokkos::fence();
 
@@ -43,8 +43,8 @@ int main(int argc, char** argv)
   Kokkos::fence();
 
   // Check results
-  std::cout << "First and last element (both should be zero):" << std::endl 
-            << y[0] << "," << y[N-1] << std::endl;  
+  std::cout << "First and last element (both should be zero):" << std::endl
+            << y[0] << "," << y[N-1] << std::endl;
 
   Kokkos::finalize();
 }

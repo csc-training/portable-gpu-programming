@@ -25,7 +25,7 @@ different data layouts are treated in the context of MPI communication (`core.cp
 Try to build and run the code in the system of your choice (or in both Roihu and LUMI).
 Try different number of GPUs and investigate the performance.
 
-Note: the code relies on GPU-aware MPI communication, so in LUMI `MPICH_GPU_SUPPORT_ENABLED` 
+Note: the code relies on GPU-aware MPI communication, so in LUMI `MPICH_GPU_SUPPORT_ENABLED`
 needs to be set when running, *i.e.*
 ```
 export MPICH_GPU_SUPPORT_ENABLED=true

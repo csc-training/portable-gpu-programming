@@ -12,7 +12,7 @@ parallel dispatch, the proper way to manage memory with Kokkos is not considered
 
 ## Tasks
 
-The code [dot-product.cpp](dot-product.cpp) implements dot product in standard C/C++. 
+The code [dot-product.cpp](dot-product.cpp) implements dot product in standard C/C++.
 Replace the `for` loops by corresponding Kokkos parallel operation and the computational body by
 lambda function.
 

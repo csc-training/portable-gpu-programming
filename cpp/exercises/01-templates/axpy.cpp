@@ -7,18 +7,18 @@
 void axpy(double *x, double *y, double a, size_t n)
 {
   // Apply axpy operation
-  for (size_t i = 0; i < n; i++) 
+  for (size_t i = 0; i < n; i++)
   {
-    y[i] += a * x[i]; 
+    y[i] += a * x[i];
   }
 }
 
 void axpy(float *x, float *y, float a, size_t n)
 {
   // Apply axpy operation
-  for (size_t i = 0; i < n; i++) 
+  for (size_t i = 0; i < n; i++)
   {
-    y[i] += a * x[i]; 
+    y[i] += a * x[i];
   }
 }
 
@@ -36,21 +36,21 @@ int main(int argc, char** argv)
   double *yd = (double *) malloc(N * sizeof(double));
 
   // Initialize x and y
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     xd[i] = (i + 1) * 2.4;
     yd[i] = (i + 1) * -1.2;
   }
-  
+
   std::cout << "First and last elements before axpy: " << std::endl
             << "x: " << xd[0] << "," << xd[N-1] << std::endl
             << "y: " << yd[0] << "," << yd[N-1] << std::endl;
 
   axpy(xd, yd, ad, N);
- 
+
   // Check results
-  std::cout << "First and last element (both should be zero):" << std::endl 
-            << yd[0] << "," << yd[N-1] << std::endl;  
+  std::cout << "First and last element (both should be zero):" << std::endl
+            << yd[0] << "," << yd[N-1] << std::endl;
 
   // single precision version
   const float af = 0.5;
@@ -61,20 +61,20 @@ int main(int argc, char** argv)
   float *yf = (float *) malloc(N * sizeof(float));
 
   // Initialize x and y
-  for (size_t i = 0; i < N; i++) 
+  for (size_t i = 0; i < N; i++)
   {
     xf[i] = (i + 1) * 2.4;
     yf[i] = (i + 1) * -1.2;
   }
-  
+
   std::cout << "First and last elements before axpy: " << std::endl
             << "x: " << xf[0] << "," << xf[N-1] << std::endl
             << "y: " << yf[0] << "," << yf[N-1] << std::endl;
 
   axpy(xf, yf, af, N);
- 
+
   // Check results
-  std::cout << "First and last element (both should be zero):" << std::endl 
-            << yf[0] << "," << yf[N-1] << std::endl;  
+  std::cout << "First and last element (both should be zero):" << std::endl
+            << yf[0] << "," << yf[N-1] << std::endl;
 
 }

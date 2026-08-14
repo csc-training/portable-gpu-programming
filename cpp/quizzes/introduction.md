@@ -16,5 +16,5 @@ c. standard algorithms
 
 a. I have never used CMake
 b. I can config and build programs with CMake
-c. I can modify simple CMakeLists.txt 
-d. I can implement CMake based build system for complex project 
+c. I can modify simple CMakeLists.txt
+d. I can implement CMake based build system for complex project

@@ -24,12 +24,12 @@ void gemm(const int M, const int N, const int K, const int iterations) {
 
     Kokkos::Timer timer;
     double gemm_time;
-    
+
     for (int iter = 0; iter<=iterations; iter++) {
 
       // One warm-up iteration
       if (iter==1) gemm_time = timer.seconds();
- 
+
       KokkosBlas::gemm("N", "N", alpha, A, B, beta, C);
       Kokkos::fence();
 
@@ -41,8 +41,8 @@ void gemm(const int M, const int N, const int K, const int iterations) {
     double nflops = 2.0 * M * N * K;
     std::cout << "Performance with random matrices (TF/s): " << 1.0e-12 * nflops/avgtime
               << std::endl;
- 
-   
+
+
     // Fill matrices with "nice" integers
     // In some GPU hardware the performance is much higher than with the
     // random numbers due to fact the with integers there are fewer bits to flip
@@ -70,7 +70,7 @@ void gemm(const int M, const int N, const int K, const int iterations) {
 
       // One warm-up iteration
       if (iter==1) gemm_time = timer.seconds();
- 
+
       KokkosBlas::gemm("N", "N", alpha, A, B, beta, C);
       Kokkos::fence();
 
@@ -80,7 +80,7 @@ void gemm(const int M, const int N, const int K, const int iterations) {
 
     avgtime = gemm_time / (double) iterations;
     nflops = 2.0 * M * N * K;
-    std::cout << "Performance with integer matrices (TF/s): " << 1.0e-12 * nflops/avgtime 
+    std::cout << "Performance with integer matrices (TF/s): " << 1.0e-12 * nflops/avgtime
               << std::endl;
 }
 
@@ -117,9 +117,9 @@ int main(int argc, char** argv) {
     std::cout << "Memory Space: " <<
       Kokkos::DefaultExecutionSpace::memory_space::name() << std::endl;
 
-    const int M = n;  
-    const int N = n;  
-    const int K = n;  
+    const int M = n;
+    const int N = n;
+    const int K = n;
 
     gemm(M, N, K, niter);
 

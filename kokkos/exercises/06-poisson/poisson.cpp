@@ -28,7 +28,7 @@ void init(T &x, int nx, int ny)
   auto idx = Idx(nx);
 
   for (int i=0; i < nx; i++)
-    for (int j=0; j < ny; j++) 
+    for (int j=0; j < ny; j++)
       {
         double dx = j - cx;
         double dy = i - cy;
@@ -36,7 +36,7 @@ void init(T &x, int nx, int ny)
         x[idx(i,j)] = cos(kx * dx + ky * dy) * exp(-r2 / sigma2);
       }
 }
- 
+
 void run(const int n, const int niter)
 {
   printf("Using n = %d, niter = %d\n", n, niter);
@@ -58,7 +58,7 @@ void run(const int n, const int niter)
   #pragma nounroll
   for (int iter = 1; iter < niter + 1; iter++) {
     for (int i=1; i < nx-1; i++)
-      for (int j=1; j < ny-1; j++) 
+      for (int j=1; j < ny-1; j++)
         {
           unew[idx(i,j)] = 0.25 * (u[idx(i-1,j)] + u[idx(i+1,j)] + u[idx(i, j-1)] + u[idx(i,j+1)] - h2 * f[idx(i,j)]);
         }
@@ -76,7 +76,7 @@ void run(const int n, const int niter)
   // Check the result
   double mean = 0.0;
     for (int i=1; i < nx-1; i++)
-      for (int j=1; j < ny-1; j++) 
+      for (int j=1; j < ny-1; j++)
         {
            mean += u[idx(i,j)];
         }

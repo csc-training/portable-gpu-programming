@@ -119,7 +119,7 @@ We suggest that you try installing at least one backend yourself, but during the
 course it is possible to use also existing installation:
 
 ```bash
-module use /scratch/project_462001074/modulefiles
+module use /projappl/project_462001610/modules
 module load kokkos/5.2.0/omp # or module load kokkos/5.2.0/hip
 ```
 With the modules, `-DKokkos_ROOT` does not need to be specified when building applications.

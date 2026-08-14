@@ -35,17 +35,6 @@ int calculate_comm_count(const int nx_full, const int ny_full, const int rank, c
     return comm_count;
 }
 
-static inline
-int calculate_comm_displ(const int nx, const int rank, const int ntasks) {
-    if (rank == 0) {
-        // Communicate also first line (global boundary) in first rank
-        return 0;
-    } else {
-        // Skip first line (halo) in other ranks
-        return nx;
-    }
-}
-
 
 void run(const int n, const int niter)
 {
@@ -99,7 +88,14 @@ void run(const int n, const int niter)
     // Prepare communication pointers and sizes
     int *comm_counts = NULL;
     int *comm_displs = NULL;
-    double *u_comm = u + calculate_comm_displ(nx, rank, ntasks);
+    double *u_comm;
+    if (rank == 0) {
+        // Communicate also first line (global boundary) in first rank
+        u_comm = u;
+    } else {
+        // Skip first line (halo) in other ranks
+        u_comm = u + nx;
+    }
     int comm_count = calculate_comm_count(nx_full, ny_full, rank, ntasks);
 
     // Debug printing for communication
@@ -123,7 +119,7 @@ void run(const int n, const int niter)
         // Calculate sizes to communicate to each rank
         comm_counts = (int*)malloc(ntasks * sizeof(int));
         comm_displs = (int*)malloc(ntasks * sizeof(int));
-        comm_displs[0] = calculate_comm_displ(nx_full, 0, ntasks);
+        comm_displs[0] = 0;
         for (int r = 0; r < ntasks; r++) {
             comm_counts[r] = calculate_comm_count(nx_full, ny_full, r, ntasks);
             if (r > 0) {

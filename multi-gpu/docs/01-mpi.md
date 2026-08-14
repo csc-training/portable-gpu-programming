@@ -175,8 +175,6 @@ MPI has a built-in error checker with (mostly) useful error messages.
   - Rarely needed and not covered on these slides
   - Spec **does not** guarantee that any error can be recovered from
 
-<small>See eg. `message-length` exercise</small>
-
 # Warning on old Fortran codes!
 
 - Older Fortran codes might have `use mpi` or `include 'mpif.h'`
@@ -208,7 +206,7 @@ MPI_Finalize()
   : Terminates the MPI execution environment
 
 <p>
-- Demo: `hello.c`
+- Demo: `hello`
 
 
 # Compiling an MPI program
@@ -243,7 +241,7 @@ ftn -o my_mpi_prog my_mpi_code.F90
 
 - MPI program needs to be launched with a process launcher (typically `mpiexec` or `mpirun` in a standalone MPI installation)
   - This launches the requested number of processes, initializes their state (e.g., rank), and the MPI communication framework
-- On LUMI and Mahti, use the `srun` launcher command instead
+- On Roihu and LUMI, use the `srun` launcher command instead
   - This integrates with SLURM (understands allocated resources, knows where and how to distribute the processes, ...)
 - In general, the launcher command to use changes from supercomputer to supercomputer
   - Check the user documentation of your system
@@ -262,13 +260,13 @@ ftn -o my_mpi_prog my_mpi_code.F90
 # Information about the MPI communicator
 
 MPI_Comm_size(`comm`{.input}, `size`{.output})
-  : Determines the size of the group associated with a communicator
+  : Determines the number of processes associated with the communicator
 
 MPI_Comm_rank(`comm`{.input}, `rank`{.output})
   : Determines the rank of the calling process in the communicator
 
 <p>
-- Demo: `hello_rank.c`
+- Demo: `hello_rank`
 
 # Synchronization
 
@@ -276,7 +274,7 @@ MPI_Barrier(`comm`{.input})
   : Waits until all ranks within the communicator reaches the call
 
 <p>
-- Demo: `barrier.c`
+- Demo: `barrier`
 
 # Point-to-point communication in MPI {.section}
 
@@ -322,7 +320,7 @@ MPI_Recv(`buffer`{.output}, `count`{.input}, `datatype`{.input}, `source`{.input
   : The `status` parameter is discussed later; use special `MPI_STATUS_IGNORE` for now
 
 <p>
-- Demo: `send_and_recv.c`
+- Demo: `send_and_recv`
 
 
 # Buffers in MPI
@@ -363,7 +361,7 @@ MPI_Recv(`buffer`{.output}, `count`{.input}, `datatype`{.input}, `source`{.input
 <div class=column>
 ![](img/case_study_left-01.png){.center width=45%}
 <p>
-- Demo: `parallel_sum.c`
+- Demo: `parallel_sum`
 </div>
 <div class=column>
 - Array initially on process #0 (P0)
@@ -385,7 +383,7 @@ MPI_Recv(`buffer`{.output}, `count`{.input}, `datatype`{.input}, `source`{.input
 <div class=column>
 ![](img/case_study_left-03.png){.center width=45%}
 <p>
-- Demo: `parallel_sum.c`
+- Demo: `parallel_sum`
 </div>
 <div class=column>
 **Step 1**: Scatter array
@@ -398,7 +396,7 @@ MPI_Recv(`buffer`{.output}, `count`{.input}, `datatype`{.input}, `source`{.input
 <div class=column>
 ![](img/case_study_left-04.png){.center width=45%}
 <p>
-- Demo: `parallel_sum.c`
+- Demo: `parallel_sum`
 </div>
 <div class=column>
 **Step 2**: Compute the sum in parallel
@@ -411,7 +409,7 @@ MPI_Recv(`buffer`{.output}, `count`{.input}, `datatype`{.input}, `source`{.input
 <div class=column>
 ![](img/case_study_left-06.png){.center width=45%}
 <p>
-- Demo: `parallel_sum.c`
+- Demo: `parallel_sum`
 </div>
 <div class=column>
 **Step 3.1**: Gather partial sums
@@ -424,7 +422,7 @@ MPI_Recv(`buffer`{.output}, `count`{.input}, `datatype`{.input}, `source`{.input
 <div class=column>
 ![](img/case_study_left-07.png){.center width=45%}
 <p>
-- Demo: `parallel_sum.c`
+- Demo: `parallel_sum`
 </div>
 <div class=column>
 **Step 3.2**: Compute the total sum
@@ -438,7 +436,6 @@ MPI_Recv(`buffer`{.output}, `count`{.input}, `datatype`{.input}, `source`{.input
 - `MPI_Send` and `MPI_Recv` are *blocking* routines
 - `MPI_Send` returns once the send buffer can be safely read and written to
   - **Note!** This does not necessarily mean that the communication has taken place when `MPI_Send` returns <br>
-    → See exercise
 - `MPI_Recv` returns once it has received the message in the receive buffer
 - In general, the completion may depend on other processes → risk for *deadlocks*
   - For example, all processes are waiting in `MPI_Recv` but no-one is sending <br>

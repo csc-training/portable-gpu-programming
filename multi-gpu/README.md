@@ -16,4 +16,4 @@ The related demos are in the [OpenMP](../openmp/demos) and [Kokkos](../kokkos/de
 
 ## Exercises
 
-See [exercises directory](exercises/) for exercises.
+The related exercises are in the [OpenMP](../openmp/exercises) and [Kokkos](../kokkos/exercises) directories.

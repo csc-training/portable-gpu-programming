@@ -72,19 +72,14 @@ lang:  en
 
 # Using OpenMP offloading with MPI
 
-- OpenMP provides interfaces for device management
-
-<small>
-
-| Description | API Call |
-|-|-|
-| Query the number of devices within a node | `int omp_get_num_devices()` |
-| Set `device` as the current device for the calling host thread | `void omp_set_default_device(device)` |
-| Query the current device for the calling host thread| `int omp_get_default_device()`  |
-
-</small>
-
-- GPU aware communication can be done with the help of `use_device_ptr` / `use_device_addr` directives
+- OpenMP provides functions for device management
+  - `int omp_get_num_devices()`
+    - Get the number of devices within a node
+  - `void omp_set_default_device(int device)`
+    - Set `device` (id) as the current device for the calling host thread
+  - `int omp_get_default_device()`
+    - Get the current device (id) for the calling host thread
+- GPU-aware communication can be done with the help of `use_device_ptr` / `use_device_addr` directives
     - Note that the data needs to be contiguous in memory
 
 # Using OpenMP offloading with MPI
@@ -105,7 +100,7 @@ omp_set_default_device(nodeRank % deviceCount);
 }
 ```
 
-- Program needs to compiled with MPI wrappers (e.g. `nvc` -> `mpicc`)
+- Program needs to compiled with MPI wrappers (e.g. `nvc` &rarr; `mpicc`)
 
 # Using Kokkos together with MPI
 

@@ -17,7 +17,7 @@ int main(int argc, char** argv)
 
   // Initialize x and y
   Kokkos::parallel_for(N,
-    [=] (const size_t i) {
+    KOKKOS_LAMBDA (const size_t i) {
       x[i] = (i + 1) * 2.4;
       y[i] = (i + 1) * -1.2;
     });
@@ -29,7 +29,7 @@ int main(int argc, char** argv)
 
   // Apply axpy operation
   Kokkos::parallel_for(N,
-     [=] (const size_t i) {
+     KOKKOS_LAMBDA (const size_t i) {
           y[i] += a * x[i];
      });
   Kokkos::fence();

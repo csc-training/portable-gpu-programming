@@ -15,3 +15,5 @@ core
 *.nsys-rep
 build/
 slurm-*.out
+*.html
+*.pdf

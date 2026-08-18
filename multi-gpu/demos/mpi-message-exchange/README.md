@@ -6,10 +6,9 @@ SPDX-License-Identifier: CC-BY-4.0
 
 ## Message exchange
 
-In this exercise we practice message (data) passing between MPI processes.
+This code demonstrates message (data) passing between MPI processes.
 The provided [exchange.cpp](exchange.cpp) code sends `msgsize` integers from
-one MPI task to another (from rank 0 to 1) and vice versa. Investigate the code
-and try to understand how it is working.
+one MPI task to another (from rank 0 to 1) and vice versa.
 
 1. Compile the code (with `CC` or `mpicxx`) and run it with two MPI tasks. Investigate
    the output.

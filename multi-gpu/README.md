@@ -12,7 +12,7 @@ Presentation slides are available [here](https://csc-training.github.io/portable
 
 ## Demos
 
-The related demos are in the [OpenMP](../openmp/demos) and [Kokkos](../kokkos/demos) directories.
+See [demos directory](demos/) for the demo codes.
 
 ## Exercises
 

@@ -35,7 +35,7 @@ lang:  en
 
 <div class="column">
 
-**CPU** 🐆<br> *How fast can a single worker finish<br> a single task?* <br>
+**CPU** <br> *How fast can a single worker finish<br> a single task?* <br>
 
 - General purpose, good for serial processing
 - Few powerful cores with large cache and complex control logic
@@ -48,7 +48,7 @@ lang:  en
 
 <div class="column">
 
-**GPU** 🐜🐜🐜<br> *How fast can all the workers finish<br> all the tasks together?*<br>
+**GPU** <br> *How fast can all the workers finish<br> all the tasks together?*<br>
 
 - Highly specialized for parallel processing
 - Thousands of simpler cores for arithmetic computations
